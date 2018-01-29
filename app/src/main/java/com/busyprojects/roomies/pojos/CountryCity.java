@@ -16,7 +16,7 @@ public class CountryCity
 
 
 
-    
+
     public CountryCity() {
     }
 
