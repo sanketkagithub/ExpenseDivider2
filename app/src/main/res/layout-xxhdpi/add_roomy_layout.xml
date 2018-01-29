@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_iv_roomy_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:src="@drawable/roomy"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_color" />
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/add"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/rel_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/ll_email"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/et_reg_back"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@drawable/et_drawable_back"
+                android:gravity="center"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="9dp">
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:fontFamily="serif"
+                    android:hint="Name"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <!--<EditText-->
+        <!--android:id="@+id/et_email_login"-->
+        <!--style="@style/et_app"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/et_h"-->
+        <!--android:ems="10"-->
+        <!--android:hint="@string/email"-->
+        <!--android:inputType="textEmailAddress"-->
+        <!--android:textColor="@color/main_app_colorb"-->
+        <!--android:textColorHint="@color/grey_color"-->
+        <!--android:textSize="15sp" />-->
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/rel_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/ll_password"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/et_reg_back"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@drawable/et_drawable_back"
+                android:gravity="center"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/call" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="9dp">
+
+                <EditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:fontFamily="serif"
+                    android:hint="Mobile"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/rel_save_roomy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="saveRoomy"
+            android:text="save"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/rel_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="backToHome"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

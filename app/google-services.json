@@ -1,0 +1,117 @@
+{
+  "project_info": {
+    "project_number": "208641621756",
+    "firebase_url": "https://beauty-parlour.firebaseio.com",
+    "project_id": "beauty-parlour",
+    "storage_bucket": "beauty-parlour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208641621756:android:3adbf9b2715d4587",
+        "android_client_info": {
+          "package_name": "com.example.sanket.beautyparlour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208641621756-p60k0l81jha5bjmgagod3tmik1jtk1g9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sanket.beautyparlour",
+            "certificate_hash": "83633f65f2edf53ba048c4ef337b0e942b0935d3"
+          }
+        },
+        {
+          "client_id": "208641621756-8m14ki89gf2l5jkf9tsm0r3fsopjiqfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQzMPLbYAMEyE9vTHnrAu5upEsi-ciG5M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208641621756-8m14ki89gf2l5jkf9tsm0r3fsopjiqfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208641621756:android:52f5c80a09ad4672",
+        "android_client_info": {
+          "package_name": "practice.nondummypros.com.adminpannel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208641621756-8m14ki89gf2l5jkf9tsm0r3fsopjiqfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQzMPLbYAMEyE9vTHnrAu5upEsi-ciG5M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208641621756:android:8b0ce03ee8763b8f",
+        "android_client_info": {
+          "package_name": "com.busyprojects.roomies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208641621756-8m14ki89gf2l5jkf9tsm0r3fsopjiqfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQzMPLbYAMEyE9vTHnrAu5upEsi-ciG5M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="9dp"
+    android:background="@drawable/lv_back"
+    android:layout_margin="9dp">
+
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_roomy_name"
+            android:layout_width="250dp"
+            android:textColor="@color/white_color"
+            android:layout_height="wrap_content"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/tv_roomy_amount"
+            android:textColor="@color/white_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_payment_date"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:textColor="@color/date_time"
+            android:layout_height="wrap_content"
+            android:text="00/00/0000" />
+
+
+    </LinearLayout>
+
+  <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/but_call_roomy_p"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/buttons"
+            android:layout_width="100dp"
+            android:textColor="@color/white_color"
+            android:layout_height="30dp"
+            android:text="Call" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

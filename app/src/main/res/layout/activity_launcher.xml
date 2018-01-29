@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.busyprojects.roomies.LauncherActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/share_money"/>
+
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/expense_divider"
+            android:scaleType="centerCrop"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="50dp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white_color" />
+
+
+
+     </RelativeLayout>
+
+</LinearLayout>

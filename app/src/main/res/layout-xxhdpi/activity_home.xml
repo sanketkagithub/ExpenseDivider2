@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.busyprojects.roomies.HomeActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_iv_roomy_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:src="@drawable/share_money"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_color" />
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/expense_divider"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+  <RelativeLayout
+      android:visibility="gone"
+      android:id="@+id/rel_add_roomy_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:layout_weight="1">
+
+      <include
+          layout="@layout/add_roomy_layout"/>
+
+  </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_add_roomy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="addRoomy"
+            android:text="@string/add_roomy"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rel_pay_roomy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="payNow"
+            android:text="@string/pay"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rel_paymen_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <include
+            layout="@layout/payment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rel_view_payment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="viewPayment"
+            android:text="@string/view_payments"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rel_all_paymen_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <include
+            layout="@layout/all_paywment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
