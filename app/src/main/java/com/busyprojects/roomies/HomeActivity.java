@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.PaymentListAdapter;
-import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAdapter;
 import com.busyprojects.roomies.Adapters.RoomySpinnerAdapterr;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -31,7 +31,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -397,8 +399,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-    void setPaymentsTakeGiveList(final List<Payment> paymentList) {
-        List<Payment>  paymentListTg = new ArrayList<>();
 
 
 
@@ -407,11 +407,111 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-        PaymentTakeGiveListAdapter paymentListAdapterTg = new PaymentTakeGiveListAdapter(context, paymentListTg);
-        lv_take_give.setAdapter(paymentListAdapterTg);
+
+
+
+
+
+
+
+
+
+
+
+    List<Roomy> roomyListVp;
+    void getAllRoomieesVp(final List<Payment> paymentList)
+    {
+
+
+
+        dialogEffect.showDialog();
+        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                roomyListVp = new ArrayList<>();
+
+                dialogEffect.cancelDialog();
+               // roomyList.clear();
+
+                for (DataSnapshot dataSnapshot1 :
+                        dataSnapshot.getChildren()) {
+
+                    // TODO: 1/27/2018  add one by one roomy in list
+                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+
+                    if (mobileLogged.equals(roomy.getMobileLogged())) {
+                        roomyListVp.add(roomy);
+                    }
+
+                }
+
+
+
+
+
+
+
+                Log.i("====pp",paymentList.toString());
+
+                Map<String,List<Payment>> paymentMap = new HashMap<>();
+
+                List<Payment> onesPAymentList;
+
+
+                System.out.println(roomyListVp.size() + "");
+
+
+                for (int i = 0; i <roomyListVp.size()  ; i++) {
+
+                    onesPAymentList = new ArrayList<>();
+
+                    for (int j = 0; j < paymentList.size() ; j++) {
+
+
+                        if (roomyListVp.get(i).getMobile().equals(paymentList.get(j).getRoomy().getMobile()))
+                        {
+                            onesPAymentList.add(paymentList.get(j));
+                        }
+
+                    }
+
+                    paymentMap.put(roomyListVp.get(i).getMobile(),onesPAymentList);
+
+                }
+
+
+                System.out.println(paymentMap);
+
+                System.out.println(paymentMap.size() + "   ");
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
     }
+
+
+
+    void setPaymentsTakeGiveList(final List<Payment> paymentList) {
+
+      getAllRoomieesVp(paymentList);
+       // PaymentTakeGiveListAdapter paymentListAdapterTg = new PaymentTakeGiveListAdapter(context, paymentListTg);
+       // lv_take_give.setAdapter(paymentListAdapterTg);
+
+
+    }
+
+
+
+
+
 
 
     public void backfromAllPayment(View view) {
