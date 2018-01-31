@@ -17,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.PaymentListAdapter;
+import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAdapter;
 import com.busyprojects.roomies.Adapters.RoomySpinnerAdapterr;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.ToastManager;
+import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
@@ -77,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         et_name = findViewById(R.id.et_name);
         et_mobile = findViewById(R.id.et_mobile);
 
+
         but_divide = findViewById(R.id.but_divide);
         tv_total_amount = findViewById(R.id.tv_total_amount);
         tv_each_payment = findViewById(R.id.tv_each_payment);
@@ -101,6 +104,7 @@ public class HomeActivity extends AppCompatActivity {
 
         spinner_roomy = findViewById(R.id.spinner_roomy);
         lv_payments = findViewById(R.id.lv_payments);
+        lv_take_give = findViewById(R.id.lv_take_give);
 
 
         fb_db = FirebaseDatabase.getInstance();
@@ -398,30 +402,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     List<Roomy> roomyListVp;
-    void getAllRoomieesVp(final List<Payment> paymentList)
-    {
 
+    void getAllRoomieesVp(final List<Payment> paymentList) {
 
 
         dialogEffect.showDialog();
@@ -432,7 +415,7 @@ public class HomeActivity extends AppCompatActivity {
                 roomyListVp = new ArrayList<>();
 
                 dialogEffect.cancelDialog();
-               // roomyList.clear();
+                // roomyList.clear();
 
                 for (DataSnapshot dataSnapshot1 :
                         dataSnapshot.getChildren()) {
@@ -447,14 +430,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
 
+                Log.i("====pp", paymentList.toString());
 
+                Map<String, List<Payment>> paymentMap = new HashMap<>();
 
-
-
-
-                Log.i("====pp",paymentList.toString());
-
-                Map<String,List<Payment>> paymentMap = new HashMap<>();
+                Map<String, Long> nameTotalMap = new HashMap<>();
 
                 List<Payment> onesPAymentList;
 
@@ -462,28 +442,54 @@ public class HomeActivity extends AppCompatActivity {
                 System.out.println(roomyListVp.size() + "");
 
 
-                for (int i = 0; i <roomyListVp.size()  ; i++) {
+                for (int i = 0; i < roomyListVp.size(); i++) {
 
                     onesPAymentList = new ArrayList<>();
+                    long totalPaidByOne = 0;
+                    for (int j = 0; j < paymentList.size(); j++) {
 
-                    for (int j = 0; j < paymentList.size() ; j++) {
 
-
-                        if (roomyListVp.get(i).getMobile().equals(paymentList.get(j).getRoomy().getMobile()))
-                        {
+                        if (roomyListVp.get(i).getMobile().equals(paymentList.get(j).getRoomy().getMobile())) {
                             onesPAymentList.add(paymentList.get(j));
+
+                            totalPaidByOne = totalPaidByOne + paymentList.get(j).getAmount();
                         }
+
+                        // TODO: 1/31/2018 each total
 
                     }
 
-                    paymentMap.put(roomyListVp.get(i).getMobile(),onesPAymentList);
+                    paymentMap.put(roomyListVp.get(i).getName(), onesPAymentList);
+
+                    nameTotalMap.put(roomyListVp.get(i).getName(), totalPaidByOne);
 
                 }
 
 
-                System.out.println(paymentMap);
+                System.out.println(nameTotalMap);
 
-                System.out.println(paymentMap.size() + "   ");
+                System.out.println(paymentMap.size());
+
+
+                long totalAmount = setEachPayMentTg(roomyListVp);
+                List<PayTg> payTgList = new ArrayList<>();
+
+                for (Map.Entry<String, Long> s : nameTotalMap.entrySet()) {
+
+                    System.out.println("esss" + s.getKey() + s.getValue());
+
+                    PayTg payTg = new PayTg();
+                    payTg.setRoomyName(s.getKey());
+                    payTg.setAmountTg(s.getValue());
+
+                    payTg.setAmountVariation(s.getValue() -totalAmount);
+                    payTgList.add(payTg);
+
+                }
+
+
+                PaymentTakeGiveListAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAdapter(context, payTgList);
+                lv_take_give.setAdapter(paymentTakeGiveListAdapter);
 
 
             }
@@ -498,20 +504,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
     void setPaymentsTakeGiveList(final List<Payment> paymentList) {
 
-      getAllRoomieesVp(paymentList);
-       // PaymentTakeGiveListAdapter paymentListAdapterTg = new PaymentTakeGiveListAdapter(context, paymentListTg);
-       // lv_take_give.setAdapter(paymentListAdapterTg);
+        getAllRoomieesVp(paymentList);
+        // PaymentTakeGiveListAdapter paymentListAdapterTg = new PaymentTakeGiveListAdapter(context, paymentListTg);
+        // lv_take_give.setAdapter(paymentListAdapterTg);
 
 
     }
-
-
-
-
-
 
 
     public void backfromAllPayment(View view) {
@@ -561,14 +561,42 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void divideAmount(View view) {
+
+        but_divide.setVisibility(View.GONE);
         getAllRoomiees();
 
 
     }
 
-    void setEachPayMent(List<Roomy> roomyList) {
-        but_divide.setVisibility(View.GONE);
+    long setEachPayMentTg(List<Roomy> roomyList) {
+      //  but_divide.setVisibility(View.GONE);
 
+//        ll_tot_each_roomy.setVisibility(View.VISIBLE);
+//        tv_each_payment.setVisibility(View.VISIBLE);
+
+
+        total = 0;
+        for (int i = 0; i < paymentList.size(); i++) {
+
+
+            total = total + paymentList.get(i).getAmount();
+
+        }
+
+        long eachAmount = total / roomyList.size();
+
+        tv_total_amount.setText(total + "₹");
+        tv_total_roomies.setText(roomyList.size() + "");
+        tv_each_payment.setText(eachAmount + "₹");
+
+        return eachAmount;
+    }
+
+    long setEachPayMent(List<Roomy> roomyList) {
+
+              total=0;
+
+              
         ll_tot_each_roomy.setVisibility(View.VISIBLE);
         tv_each_payment.setVisibility(View.VISIBLE);
 
@@ -585,6 +613,7 @@ public class HomeActivity extends AppCompatActivity {
         tv_total_roomies.setText(roomyList.size() + "");
         tv_each_payment.setText(eachAmount + "₹");
 
+        return eachAmount;
     }
 
 

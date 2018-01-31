@@ -139,11 +139,15 @@ public class RegisterLoginActivity extends Activity {
                     .setValue(user);
             Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show();
 
+            sp.edit().putString(SessionManager.MOBILE, mobileReg).apply();
         }
 
     }
 
     void setLoginVisibilities() {
+        String mobile = sp.getString(SessionManager.MOBILE, "");
+
+        et_login.setText(mobile);
 
         rel_login_reg.setVisibility(View.GONE);
 

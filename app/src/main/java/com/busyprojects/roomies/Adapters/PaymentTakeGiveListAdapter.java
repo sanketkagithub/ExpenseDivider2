@@ -7,12 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
-import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.busyprojects.roomies.pojos.master.PayTg;
 
 import java.util.List;
 
@@ -22,17 +21,13 @@ import java.util.List;
 
 public class PaymentTakeGiveListAdapter extends ArrayAdapter {
     Context context;
-    List<Payment> paymentList;
+    List<PayTg> payTgList;
     SharedPreferences sp;
 
-    String emailNewUser;
-
-    Animation animation = null;
-
-    public PaymentTakeGiveListAdapter(Context context, List<Payment> paymentList) {
-        super(context, R.layout.row_payment, paymentList);
+    public PaymentTakeGiveListAdapter(Context context, List<PayTg> payTgList) {
+        super(context, R.layout.row_payment, payTgList);
         this.context = context;
-        this.paymentList = paymentList;
+        this.payTgList = payTgList;
 
 
     }
@@ -46,16 +41,18 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
             viewHolder = new ViewHolderTg();
 
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = li.inflate(R.layout.row_payment, parent, false);
-            viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name);
-            viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount);
+            convertView = li.inflate(R.layout.row_take_give_payment, parent, false);
+            viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name_gt);
+            viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount_gt);
+            viewHolder.tv_roomy_amount_variation = convertView.findViewById(R.id.tv_roomy_amount_variation);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolderTg) convertView.getTag();
         }
-        viewHolder.tv_roomy_name.setText(paymentList.get(position).getRoomy().getName());
-        viewHolder.tv_roomy_amount.setText(paymentList.get(position).getAmount() + "/-");
+        viewHolder.tv_roomy_name.setText(payTgList.get(position).getRoomyName());
+        viewHolder.tv_roomy_amount.setText(payTgList.get(position).getAmountTg() + "/-");
+        viewHolder.tv_roomy_amount_variation.setText(payTgList.get(position).getAmountVariation() + "/-");
 
         return convertView;
     }
@@ -65,5 +62,5 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
 
 class ViewHolderTg {
-    TextView tv_roomy_name, tv_roomy_amount;
-           }
+    TextView tv_roomy_name, tv_roomy_amount,tv_roomy_amount_variation;
+}
