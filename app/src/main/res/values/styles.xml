@@ -30,7 +30,7 @@
 
   <style name="payment_calculated_text_value">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/main_app_colorp</item>
+        <item name="android:textColor">@color/white_color</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily" tools:ignore="NewApi">serif</item>
 

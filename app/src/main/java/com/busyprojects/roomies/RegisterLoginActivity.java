@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.helper.DialogEffect;
@@ -26,6 +27,8 @@ public class RegisterLoginActivity extends Activity {
     Context context = RegisterLoginActivity.this;
 
     EditText et_register, et_login;
+    TextView tv_log_reg_title;
+
 
     DatabaseReference db_ref;
 
@@ -49,6 +52,8 @@ public class RegisterLoginActivity extends Activity {
 
         et_login = findViewById(R.id.et_login);
         et_register = findViewById(R.id.et_register);
+
+        tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
         rel_login_reg = findViewById(R.id.rel_log_reg);
         rel_login = findViewById(R.id.rel_login);
@@ -102,6 +107,7 @@ public class RegisterLoginActivity extends Activity {
 
 
                                 startActivity(new Intent(context, HomeActivity.class));
+
                             } else {
                                 Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
 
@@ -153,6 +159,7 @@ public class RegisterLoginActivity extends Activity {
 
         rel_login.setVisibility(View.VISIBLE);
         rel_register.setVisibility(View.GONE);
+        tv_log_reg_title.setText("Login");
     }
 
     void setRegisterationVisibilities() {
@@ -162,6 +169,7 @@ public class RegisterLoginActivity extends Activity {
 
         rel_login.setVisibility(View.GONE);
         rel_register.setVisibility(View.VISIBLE);
+        tv_log_reg_title.setText("Register");
 
     }
 

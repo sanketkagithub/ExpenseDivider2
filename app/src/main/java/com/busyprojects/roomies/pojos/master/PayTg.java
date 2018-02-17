@@ -8,16 +8,9 @@ public class PayTg {
     private String roomyName;
     private long amountTg;
     private long amountVariation;
-
-
-    public PayTg() {
-    }
-
-    public PayTg(String roomyName, long amountTg, long amountVariation) {
-        this.roomyName = roomyName;
-        this.amountTg = amountTg;
-        this.amountVariation = amountVariation;
-    }
+    private String mobile;
+    private String mobileLogged;
+   private  String payTgId;
 
     public String getRoomyName() {
         return roomyName;
@@ -41,5 +34,29 @@ public class PayTg {
 
     public void setAmountVariation(long amountVariation) {
         this.amountVariation = amountVariation;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getMobileLogged() {
+        return mobileLogged;
+    }
+
+    public void setMobileLogged(String mobileLogged) {
+        this.mobileLogged = mobileLogged;
+    }
+
+    public String getPayTgId() {
+        return payTgId;
+    }
+
+    public void setPayTgId(String payTgId) {
+        this.payTgId = payTgId;
     }
 }

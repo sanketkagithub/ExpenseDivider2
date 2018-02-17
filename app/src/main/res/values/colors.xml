@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8f8f00</color>
-    <color name="colorPrimaryDark">#8f8f00</color>
+    <color name="colorPrimary">#89003f</color>
+    <color name="colorPrimaryDark">#89003f</color>
     <color name="colorAccent">#FF4081</color>
 
 
-    <color name="main_app_colorb">#251F39</color>
-    <color name="main_app_colorp">#8f8f00</color>
+    <color name="main_app_colorp">#89003f</color>
+    <color name="main_app_colorb">#efefef</color>
     <color name="main_app_colorskin_text">#a6a64f</color>
+    <color name="grey_color_tg">#e7e7e7</color>
+    <color name="done">#0900FF</color>
+ <color name="done_light">#DCDBFF</color>
 
+
+    <color name="give">#C20017</color>
+    <color name="take">#038F26</color>
+ <color name="give_light">#ffeef0</color>
+    <color name="take_light">#eafff0</color>
 
     <color name="white_color">#ffff</color>
-    <color name="grey_color">#f5f5f5</color>
-    <color name="booking">#262626</color>
+    <color name="grey_color">#f4f4f4</color>
+    <color name="booking">#ffffff</color>
     <color name="black">#262626</color>
-    <color name="allowed">#06A603</color>
-    <color name="blocked">#ff0000</color>
 
 
     <color name="hint">#757575</color>
-
-    <color name="date_time">#dfdf00</color>
 
 
 </resources>

@@ -1,0 +1,271 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_app_colorp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Payments"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_color"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="@dimen/but_w"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Payments"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/reset_button"
+            android:onClick="saveDeleteList"
+            android:text="Reset"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ListView
+            android:id="@+id/lv_payments"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_color"
+
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="@dimen/but_w"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Each Total Payment"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_iv_roomy_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ListView
+            android:id="@+id/lv_take_give"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/but_divide"
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="divideAmount"
+            android:text="Divide"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_tot_each_roomy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:background="@drawable/calculation_back"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/payment_calculated_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_amount"
+                    style="@style/payment_calculated_text_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00000/-"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/payment_calculated_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Roomies "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_roomies"
+                    style="@style/payment_calculated_text_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/payment_calculated_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Each "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_each_payment"
+                    style="@style/payment_calculated_text_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00/-"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+
+    <!--android:gravity="center">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="@dimen/but_w"-->
+    <!--android:layout_height="@dimen/button_ht"-->
+    <!--android:fontFamily="serif"-->
+    <!--android:gravity="center"-->
+    <!--android:text="After Transfer"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="18sp" />-->
+
+
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/rel_iv_roomy_home_at"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center">-->
+
+    <!--<ListView-->
+    <!--android:id="@+id/lv_take_give_at"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp" />-->
+
+
+    <!--</RelativeLayout>-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="@dimen/button_ht"-->
+    <!--android:background="@drawable/buttons"-->
+    <!--android:fontFamily="serif"-->
+    <!--android:onClick="backfromAllPayment"-->
+    <!--android:text="Back"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:textColor="@color/white_color" />-->
+
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

@@ -12,21 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@color/main_app_colorp"
         android:gravity="center">
 
-        <ImageView
-            android:src="@drawable/share_money"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white_color" />
-        <ImageView
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/expense_divider"
-            android:scaleType="centerCrop"
-            android:layout_alignParentBottom="true"
+        <TextView
+            android:id="@+id/tv_log_reg_title"
             android:layout_width="300dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="serif"
+            android:text="@string/app_name"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
@@ -118,6 +115,26 @@
             android:fontFamily="serif"
             android:onClick="viewPayment"
             android:text="@string/view_payments"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_view_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="viewHistory"
+            android:text="History"
             android:textAllCaps="false"
             android:textColor="@color/white_color" />
 

@@ -1,11 +1,18 @@
 package com.busyprojects.roomies.helper;
 
+import com.busyprojects.roomies.pojos.master.History;
+import com.busyprojects.roomies.pojos.master.PayTg;
+import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.SecureRandom;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sanket on 12/23/2017.
@@ -16,16 +23,16 @@ public class Helper {
     public static final String USER = "User";
     public static final String NAME = "name";
     public static final String ROOMY = "Roomy";
-    public static final String BOOK = "Book";
-    public static final String DRIVER = "driver";
-    public static final String DRIVER_IMAGE = "driverImage";
-    public static final String ALLOWED = "Allowed";
+    public static final String SELECT_ROOMY = "Select Roomy";
+    public static final String EACH_TOTAL_PAMENT = "EachTotalPayment";
+    public static final String AMOUNT_VARIATION = "amountVariation";
+    public static final String TOTAL_PAID = "amountTg";
     public static final String BLOCKED = "Blocked";
-    public static  int CURRENT_TAB = 0;
+    public static int CURRENT_TAB = 0;
     public static final String ADMIN_ACCESS = "AdminAccess";
     public static final String APPROX_CONF_TIME_BY_ADMIN = "approxConfirmedTimeByAdmin";
 
-    public static final String PROFILE_PIC = "profilePic";
+    public static final String AFTER_TRANSFER = "AfterTransfer";
     public static final String CURRENT_BID = "currentBookingId";
     public static final String DRIVER_ID = "driverId";
 
@@ -36,6 +43,11 @@ public class Helper {
     public static final String ON_DUTY = "onDuty";
     public static final String PENDING = "pending";
     public static final String PAYMENT = "Payment";
+
+    public static final String PAYMENT_HISTORY = "PaymentHistory";
+    public static final String PAYMENT_PAYTG = "PaymentPayTg";
+    public static final String HISTORY = "History";
+
     public static final String SELECT_DATE = "Select Date";
     public static final String SELECT_TIME = "Select Time";
     public static final String CONFIRMED = "confirmed";
@@ -46,18 +58,6 @@ public class Helper {
 
     public static final String USER_ALLOWED = "userAllowed";
     public static final String USER_INSIDE = "userInside";
-    public static final long ADMIN_NOTIFICATION_INTERVAL = 10000;
-    public static final long MY_STATUS_INTERVAL = 10000;
-    public static final long USER_ENABLED_INTERVAL = 10000;
-    public static final long LATLONG_INTERVAL = 10000;
-    public static final long CHECK_BOOKING_DATA_INSERTION_INTERVAL = 10000;
-    public static final String NOTIFICATION_ID = "notificationId";
-public static final String CLEANING_COMPLETION_CONFIRMATION_BY_USER = "cleaningDoneConfirmedByUser";
-    public static final String ADMIN1_MOBILE = "11";
-    public static final String ADMIN2_MOBILE = "22";
-    public static final String ADMIN3_MOBILE = "33";
-
-  public static final String ADMIN_MOBILE_LIST = "aDMINmOBILES";
 
 
     public static final String SDF_FORMAT = "HH:mm:ss dd-MMM-yyyy";
@@ -88,12 +88,97 @@ public static final String CLEANING_COMPLETION_CONFIRMATION_BY_USER = "cleaningD
     public static final String EMPTY_FIELD = "empty";
     public static final String REGISTERD = "registered";
 
-    public static String getCurrentDateTime()
-    {
+    public static String getCurrentDateTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Helper.SDF_FORMAT);
         String dateTimeCurrent = simpleDateFormat.format(new Date());
-return dateTimeCurrent;
+        return dateTimeCurrent;
     }
+
+    Date date1,date2;
+    public   List<Payment> getSortedTransactionList(List<Payment> paymentList)
+    {
+
+
+        Collections.sort(paymentList, new Comparator<Payment>() {
+            @Override
+            public int compare(Payment o1, Payment o2) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat(Helper.SDF_FORMAT);
+                try {
+                    date1 = sdf.parse(o1.getPaymentDateTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    date2 = sdf.parse(o2.getPaymentDateTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                return date1.compareTo(date2);
+            }
+        });
+
+
+        return  paymentList;
+
+    }
+
+
+
+    public   List<History> getSortedHistoryList(List<History> historyList)
+    {
+
+
+        Collections.sort(historyList, new Comparator<History>() {
+            @Override
+            public int compare(History o1, History o2) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat(Helper.SDF_FORMAT);
+                try {
+                    date1 = sdf.parse(o1.getDateTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    date2 = sdf.parse(o2.getDateTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                return date1.compareTo(date2);
+            }
+        });
+
+
+        return  historyList;
+
+    }
+
+
+    public  static List<PayTg> getSortedPaymentTakeGiveList(List<PayTg> payTgList)
+    {
+
+
+        Collections.sort(payTgList, new Comparator<PayTg>() {
+            @Override
+            public int compare(PayTg o1, PayTg o2) {
+                return o1.getRoomyName().compareTo(o2.getRoomyName());
+            }
+        });
+
+
+        return  payTgList;
+
+    }
+
+
+
+
 
 }
 

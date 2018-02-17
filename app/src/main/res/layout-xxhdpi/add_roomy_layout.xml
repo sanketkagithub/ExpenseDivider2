@@ -9,22 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@color/main_app_colorp"
         android:gravity="center">
 
-        <ImageView
-            android:src="@drawable/roomy"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white_color" />
-        <ImageView
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/add"
-            android:scaleType="centerCrop"
-            android:layout_alignParentBottom="true"
-            android:layout_width="200dp"
-            android:layout_height="70dp"
-            android:textColor="@color/white_color" />
+
+        <TextView
+            android:id="@+id/tv_log_reg_title"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="@string/add_roomy"
+            android:textColor="@color/white_color"
+            android:textSize="30sp" />
+
 
     </RelativeLayout>
 
