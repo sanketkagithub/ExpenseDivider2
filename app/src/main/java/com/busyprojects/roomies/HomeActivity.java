@@ -62,6 +62,8 @@ public class HomeActivity extends Activity {
     AutoCompleteTextView actv_paying_item;
     Button but_delete_payment;
 
+    int totalRoomates;
+
     DialogEffect dialogEffect;
     Context context = HomeActivity.this;
     View inc_all_payment;
@@ -98,13 +100,14 @@ public class HomeActivity extends Activity {
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
         rel_add_roomy_layout = findViewById(R.id.rel_add_roomy_layout);
         rel_divide_payment = findViewById(R.id.rel_divide_payment);
         et_name = findViewById(R.id.et_name);
         et_mobile = findViewById(R.id.et_mobile);
         but_transfer_money = findViewById(R.id.but_transfer_money);
-        but_transfer_money.setVisibility(View.GONE);
+//        but_transfer_money.setVisibility(View.GONE);
         actv_paying_item = findViewById(R.id.actv_paying_item);
 
         iv_no_pay = findViewById(R.id.iv_no_payment_record_found);
@@ -150,35 +153,7 @@ public class HomeActivity extends Activity {
 
         setInitialVisibilities();
 
-
-//        lv_payments.setOnTouchListener(new View.OnTouchListener() {
-//            // Setting on Touch Listener for handling the touch inside ScrollView
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                // Disallow the touch request for parent scroll on touch of child view
-//                v.getParent().requestDisallowInterceptTouchEvent(true);
-//                return false;
-//            }
-//        });
-
-//        lv_take_give.setOnTouchListener(new View.OnTouchListener() {
-//            // Setting on Touch Listener for handling the touch inside ScrollView
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                // Disallow the touch request for parent scroll on touch of child view
-//                v.getParent().requestDisallowInterceptTouchEvent(true);
-//                return false;
-//            }
-//        });
-//        lv_take_give_at.setOnTouchListener(new View.OnTouchListener() {
-//            // Setting on Touch Listener for handling the touch inside ScrollView
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                // Disallow the touch request for parent scroll on touch of child view
-//                v.getParent().requestDisallowInterceptTouchEvent(true);
-//                return false;
-//            }
-//        });
+        setAllRoomiesCountToSession();
 
 
     }
@@ -201,18 +176,7 @@ public class HomeActivity extends Activity {
 
         rel_add_roomy_layout.setVisibility(View.GONE);
 
-//        rel_add_roomy.setVisibility(View.VISIBLE);
-//        rel_pay_roomy.setVisibility(View.VISIBLE);
-//
-//        rel_name.setVisibility(View.GONE);
-//        rel_mobile.setVisibility(View.GONE);
-//        rel_save_roomy.setVisibility(View.GONE);
-//        rel_back.setVisibility(View.GONE);
-//
-//        rel_paymen_lay.setVisibility(View.GONE);
-//        rel_all_paymen_lay.setVisibility(View.GONE);
-//        rel_view_payment.setVisibility(View.VISIBLE);
-//
+
         ll_tot_each_roomy.setVisibility(View.GONE);
 
         rel_iv_roomy_home.setVisibility(View.VISIBLE);
@@ -232,6 +196,7 @@ public class HomeActivity extends Activity {
 
 
     public void saveRoomy(View view) {
+
 
         dialogEffect.showDialog();
         String rid = Helper.randomString(10);
@@ -258,6 +223,13 @@ public class HomeActivity extends Activity {
                     .setValue(roomy);
 
             ToastManager.showToast(context, Helper.REGISTERD);
+
+            totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
+
+            spe = sp.edit();
+            spe.putInt(SessionManager.TOTAL_ROOMMATES, totalRoomates + 1);
+            spe.apply();
+
 
             et_mobile.setText("");
             et_name.setText("");
@@ -290,17 +262,6 @@ public class HomeActivity extends Activity {
 
     public void payNow(View view) {
 
-//        rel_pay_roomy.setVisibility(View.GONE);
-//        rel_iv_roomy_home.setVisibility(View.GONE);
-//
-//        rel_name.setVisibility(View.GONE);
-//        rel_mobile.setVisibility(View.GONE);
-//        rel_save_roomy.setVisibility(View.GONE);
-//        rel_add_roomy.setVisibility(View.GONE);
-//
-//
-//        rel_paymen_lay.setVisibility(View.VISIBLE);
-//        rel_view_payment.setVisibility(View.GONE);
 
         rel_iv_roomy_home.setVisibility(View.GONE);
 
@@ -316,6 +277,64 @@ public class HomeActivity extends Activity {
         setSpinneerAdapter();
         setAutocompetionTextViewItems(actv_paying_item);
 
+
+       // getLatestAfterTransfer();
+
+    }
+
+    private void getLatestAfterTransfer() {
+        db_ref.child(Helper.AFTER_TRANSFER)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        dialogEffect.cancelDialog();
+                        try {
+
+                            payTgListAt = new ArrayList<>();
+
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+
+                                    if (payTg.getMobile().equals(roomySelected.getMobile())) {
+                                        totalAmountPaid = payTg.getAmountTg();
+                                        amountVariation = payTg.getAmountVariation();
+                                        haveTotalAmountPaid = true;
+                                    }
+
+                                    payTgListAt.add(payTg);
+                                }
+
+                                payTgListAt = Helper.getSortedPaymentTakeGiveList(payTgListAt);
+
+
+                            }
+
+
+                            getPayTgListAt();  // will give payTgListAt list also
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                            totalAmountPaid = 0;
+                            amountVariation = 0;
+                        }
+
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
 
@@ -401,9 +420,12 @@ public class HomeActivity extends Activity {
 
 
     boolean canTransfer = false;
+    long totalAfterTransfer = 0;
+    String amount;
 
     public void payNowhere(View view) {
-        final String amount = et_amount.getText().toString();
+
+        amount = et_amount.getText().toString();
         String payingItem = actv_paying_item.getText().toString();
 
 
@@ -450,94 +472,16 @@ public class HomeActivity extends Activity {
 
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
-            getTotalAmountPaid();
+
+            // TODO: 2/18/2018   change------
+            try {
 
 
-            dialogEffect.showDialog();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                  //  dialogEffect.cancelDialog();
-                    // TODO: 2/11/2018 save after some delay================
-                    // totalAmountPaid = totalAmountPaid + Long.parseLong(amount);
-
-
-
-                    getPayTgListAt:       getPayTgListAt();  // will give payTgListAt list also
-
-
-                    dialogEffect.showDialog();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialogEffect.cancelDialog();
-
-                            long totalAfterTransfer = 0;
-
-
-                            for (int i = 0; i < payTgListAt.size(); i++) {
-
-                                try {
-
-                                    if (payTgListAt.get(i).getMobile().equals(roomySelected.getMobile())) {
-                                        // TODO: 2/12/2018 add total amount paid  to atList
-                                        totalAmountPaid = totalAmountPaid + Long.parseLong(amount);
-
-
-                                        db_ref.child(Helper.AFTER_TRANSFER)
-                                                .child(payTgListAt.get(i).getMobile())
-                                                .child(Helper.TOTAL_PAID).setValue(totalAmountPaid);
-
-                                        payTgListAt.get(i).setAmountTg(totalAmountPaid);
-
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-
-                            for (int i = 0; i < payTgListAt.size(); i++) {
-
-                                // TODO: 2/12/2018 find total.......total/roomysize......each
-                                // TODO: 2/12/2018    totPaid -  each =   amountVar
-
-
-                                totalAfterTransfer = totalAfterTransfer + payTgListAt.get(i).getAmountTg();
-
-
-                            }
-
-                            long div = roomyList.size() - 1;
-
-
-                            long eachHasToPayAfterTransfer = totalAfterTransfer / div;
-
-                            for (int i = 0; i < payTgListAt.size(); i++) {
-
-                                db_ref.child(Helper.AFTER_TRANSFER)
-                                        .child(payTgListAt.get(i).getMobile())
-                                        .child(Helper.AMOUNT_VARIATION)
-                                        .setValue(payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer);
-                            }
-
-
-                            canTransfer = true;
-
-                            dialogEffect.cancelDialog();
-
-                            //showAtTgList();
-
-
-
-                            // amountVariation =
-                        }
-                    }, 4000);
-
-
-                }
-            }, 4000);
+                updateAfterTransfer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+// TODO: 2/18/2018 do alllllllllllll below
 
 
             setInitialVisibilities();
@@ -549,20 +493,46 @@ public class HomeActivity extends Activity {
 
     boolean haveTotalAmountPaid;
 
-    void getTotalAmountPaid() {
+    void updateAfterTransfer() {
+        dialogEffect.showDialog();
+        // TODO: 2/18/2018 get  totalAmountPaid n amountVariation of paying roomy  n   also add payTgAtList
+
+
         db_ref.child(Helper.AFTER_TRANSFER)
-                .child(roomySelected.getMobile())
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        dialogEffect.cancelDialog();
                         try {
 
-                            PayTg payTg = dataSnapshot.getValue(PayTg.class);
-                            totalAmountPaid = payTg.getAmountTg();
-                            haveTotalAmountPaid=true;
+                            payTgListAt = new ArrayList<>();
 
-                            amountVariation = payTg.getAmountVariation();
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+
+                                    if (payTg.getMobile().equals(roomySelected.getMobile())) {
+                                        totalAmountPaid = payTg.getAmountTg();
+                                        amountVariation = payTg.getAmountVariation();
+                                        haveTotalAmountPaid = true;
+                                    }
+
+                                    payTgListAt.add(payTg);
+                                }
+
+                                payTgListAt = Helper.getSortedPaymentTakeGiveList(payTgListAt);
+
+
+                            }
+
+
+                            getPayTgListAt();  // will give payTgListAt list also
+
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -575,12 +545,13 @@ public class HomeActivity extends Activity {
                     }
 
 
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
                 });
+
+
     }
 
 
@@ -597,28 +568,28 @@ public class HomeActivity extends Activity {
     public void viewPayment(View view) {
         // TODO: 1/27/2018 get All Sessions list  firstly
 
-
-        rel_iv_roomy_home.setVisibility(View.GONE);
-
-        rel_add_roomy_layout.setVisibility(View.GONE);
-
-        rel_add_roomy.setVisibility(View.GONE);
-        rel_pay_roomy.setVisibility(View.GONE);
-        rel_view_payment.setVisibility(View.GONE);
-        rel_view_history.setVisibility(View.GONE);
-        rel_all_paymen_lay.setVisibility(View.VISIBLE);
-
-
-        setPaymentsList();
-
-        but_divide.setVisibility(View.VISIBLE);
-        tv_each_payment.setVisibility(View.GONE);
+        startActivity(new Intent(context, TestPaymentActivity.class));
+//        rel_iv_roomy_home.setVisibility(View.GONE);
+//
+//        rel_add_roomy_layout.setVisibility(View.GONE);
+//
+//        rel_add_roomy.setVisibility(View.GONE);
+//        rel_pay_roomy.setVisibility(View.GONE);
+//        rel_view_payment.setVisibility(View.GONE);
+//        rel_view_history.setVisibility(View.GONE);
+//        rel_all_paymen_lay.setVisibility(View.VISIBLE);
+//
+//
+//        setPaymentsListAndPayTgList();
+//
+//        but_divide.setVisibility(View.VISIBLE);
+//        tv_each_payment.setVisibility(View.GONE);
 
     }
 
     List<Payment> paymentList = null;
 
-    void setPaymentsList() {
+    void setPaymentsListAndPayTgList() {
         paymentList = new ArrayList<>();
 
         dialogEffect.showDialog();
@@ -632,6 +603,7 @@ public class HomeActivity extends Activity {
                             paymentList.clear();
                         }
 
+                        // TODO: 2/17/2018 add paymentList
                         for (DataSnapshot dataSnapshot1 :
                                 dataSnapshot.getChildren()) {
 
@@ -656,6 +628,7 @@ public class HomeActivity extends Activity {
                         PaymentListAdapter paymentListAdapter = new PaymentListAdapter(context, paymentList);
                         lv_payments.setAdapter(paymentListAdapter);
 
+                        // TODO: 2/17/2018 set payTgList
                         setPaymentsTakeGiveList(paymentList);
 
 
@@ -762,12 +735,13 @@ public class HomeActivity extends Activity {
 
                         System.out.println("esss" + s.getKey() + s.getValue());
 
+                        // TODO: 2/17/2018 save payTgList
                         PayTg payTg = new PayTg();
                         payTg.setRoomyName(s.getKey().getName());
                         payTg.setAmountTg(s.getValue());
                         payTg.setMobile(s.getKey().getMobile());
                         payTg.setMobileLogged(mobileLogged);
-
+                        payTg.setPayTgId(Helper.randomString(10));
                         payTg.setAmountVariation(s.getValue() - totalAmount);
 
                         payTgList.add(payTg);
@@ -796,18 +770,6 @@ public class HomeActivity extends Activity {
                     }
 
 
-//                for (int i = 0; i < payTgList.size(); i++) {
-//
-//                    db_ref.child(Helper.EACH_TOTAL_PAMENT)
-//                            .child(mobileLogged)
-//                            .child(Helper.randomString(10))
-//                            .setValue(payTgList.get(i));
-//
-//                }
-
-
-                    // setAfterTransferTgList(lv_take_give_at);
-
                 }
 
                 @Override
@@ -828,37 +790,46 @@ public class HomeActivity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                        List<PayTg> payTgList = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
-
-                            PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-
-                            if (payTg.getMobileLogged().equals(mobileLogged))
-                            payTgList.add(payTg);
+                        try {
 
 
-                        }
+                            payTgList = new ArrayList<>();
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+                                    payTgList.add(payTg);
+                                }
 
 
-                        if (paymentList.size() > 0) {
-                            iv_no_transfer.setVisibility(View.GONE);
-
-                            lv_take_give.setVisibility(View.VISIBLE);
-                            // TODO: 2/16/2018 sort list
-
-                            payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
+                            }
 
 
-                            rel_divide_payment.setVisibility(View.VISIBLE);
-                            // TODO: 2/3/2018  save PaymentTg(Each Total PAyment List) to db
-                            PaymentTakeGiveListAtAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
-                            lv_take_give.setAdapter(paymentTakeGiveListAdapter);
-                        } else {
-                            iv_no_transfer.setVisibility(View.VISIBLE);
-                            lv_take_give.setVisibility(View.GONE);
+                            if (paymentList.size() > 0) {
+                                iv_no_transfer.setVisibility(View.GONE);
 
-                            rel_divide_payment.setVisibility(View.GONE);
+                                lv_take_give.setVisibility(View.VISIBLE);
+                                // TODO: 2/16/2018 sort list
+
+                                payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
+
+
+                                rel_divide_payment.setVisibility(View.VISIBLE);
+                                // TODO: 2/3/2018  save PaymentTg(Each Total PAyment List) to db
+                                PaymentTakeGiveListAtAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
+                                lv_take_give.setAdapter(paymentTakeGiveListAdapter);
+                            } else {
+                                iv_no_transfer.setVisibility(View.VISIBLE);
+                                lv_take_give.setVisibility(View.GONE);
+
+                                rel_divide_payment.setVisibility(View.GONE);
+                            }
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
 
 
@@ -876,10 +847,8 @@ public class HomeActivity extends Activity {
 
     void setPaymentsTakeGiveList(final List<Payment> paymentList) {
 
+        // TODO: 2/17/2018   2ndlist
         setPaymentListNcallPaymentTakeGive(paymentList);
-        // PaymentTakeGiveListAdapter paymentListAdapterTg = new PaymentTakeGiveListAdapter(context, paymentListTg);
-        // lv_take_give.setAdapter(paymentListAdapterTg);
-
 
     }
 
@@ -950,10 +919,9 @@ public class HomeActivity extends Activity {
         tv_total_roomies.setText(roomyList.size() + "");
         tv_each_payment.setText(eachAmount + "₹");
 
-      if (paymentList.size() != 0)
-      {
-          but_transfer_money.setVisibility(View.VISIBLE);
-      }
+        if (paymentList.size() != 0) {
+            but_transfer_money.setVisibility(View.VISIBLE);
+        }
         return eachAmount;
     }
 
@@ -981,44 +949,64 @@ public class HomeActivity extends Activity {
     }
 
 
-
     void getPayTgListAt() {
 
-        dialogEffect.showDialog();
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        try {
+            // TODO: 2/18/2018 *********
 
-                     //   dialogEffect.cancelDialog();
+            for (int i = 0; i < payTgListAt.size(); i++) {
 
-                        payTgListAt = new ArrayList<>();
+                try {
 
-
-                        try {
+                    if (payTgListAt.get(i).getMobile().equals(roomySelected.getMobile())) {
+                        // TODO: 2/12/2018 add total amount paid  to atList
+                        totalAmountPaid = totalAmountPaid + Long.parseLong(amount);
 
 
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
+                        db_ref.child(Helper.AFTER_TRANSFER)
+                                .child(payTgListAt.get(i).getPayTgId())
+                                .child(Helper.TOTAL_PAID).setValue(totalAmountPaid);
 
-                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-
-                                payTgListAt.add(payTg);
-                            }
-
-                        }catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-
+                        payTgListAt.get(i).setAmountTg(totalAmountPaid);
 
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+            }
 
-                    }
-                });
+
+            // TODO: 2/19/2018 total paid by all    in AfterTransfer
+            for (int i = 0; i < payTgListAt.size(); i++) {
+
+                // TODO: 2/12/2018 find total.......total/roomysize......each
+                // TODO: 2/12/2018    totPaid -  each =   amountVar
+                totalAfterTransfer = totalAfterTransfer + payTgListAt.get(i).getAmountTg();
+
+            }
+
+
+            long eachHasToPayAfterTransfer = totalAfterTransfer / totalRoomates;
+
+            for (int i = 0; i < payTgListAt.size(); i++) {
+
+                db_ref.child(Helper.AFTER_TRANSFER)
+                        .child(payTgListAt.get(i).getPayTgId())
+                        .child(Helper.AMOUNT_VARIATION)
+                        .setValue(payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer);
+            }
+            totalAfterTransfer = 0;
+
+
+            canTransfer = true;
+
+            // TODO: 2/18/2018 *********
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -1034,43 +1022,6 @@ public class HomeActivity extends Activity {
         setInitialVisibilities();
     }
 
-
-//    void setAfterTransferTgList(final ListView lv_take_give_at) {
-//
-//        db_ref.child(Helper.EACH_TOTAL_PAMENT)
-//                .child(mobileLogged)
-//                .addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                        List<PayTg> payTgList = new ArrayList<>();
-//
-//                        try {
-//
-//                            for (DataSnapshot dataSnapshot1 :
-//                                    dataSnapshot.getChildren()) {
-//
-//                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-//
-//                                payTgList.add(payTg);
-//                            }
-//
-//                            PaymentTakeGiveListAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAdapter(context, payTgList);
-//                            lv_take_give_at.setAdapter(paymentTakeGiveListAdapter);
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-//
-//
-//    }
 
     History history;
     String hid;
@@ -1104,12 +1055,10 @@ public class HomeActivity extends Activity {
                 history.setDateTime(Helper.getCurrentDateTime());
 
 
-                if (payTgListAt.size()==0)
-                {
+                if (payTgListAt.size() == 0) {
                     history.setEachPaymentList(payTgList);
 
-                }else
-                {
+                } else {
                     history.setEachPaymentList(payTgListAt);
 
                 }
@@ -1126,10 +1075,79 @@ public class HomeActivity extends Activity {
 
                 // TODO: 2/5/2018 delete current Payment
 
-                db_ref.child(Helper.PAYMENT)
-                        .removeValue();
-                db_ref.child(Helper.AFTER_TRANSFER)
-                        .removeValue();
+                db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                        try {
+
+
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+                                Payment payment = dataSnapshot1.getValue(Payment.class);
+
+                                if (payment.getMobileLogged().equals(mobileLogged)) {
+
+                                    db_ref.child(Helper.PAYMENT)
+                                            .child(payment.getPid())
+                                            .removeValue();
+
+                                }
+
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+                db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                        try {
+
+
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+                                    db_ref.child(Helper.AFTER_TRANSFER)
+                                            .child(payTg.getPayTgId())
+                                            .removeValue();
+
+                                }
+
+
+                            }
+
+                        } catch (Exception e) {
+                            spe = sp.edit();
+                            spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                            spe.apply();
+
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 Toast.makeText(context, "Reset", Toast.LENGTH_SHORT).show();
 
@@ -1152,14 +1170,17 @@ public class HomeActivity extends Activity {
 
 
     View tranferButtonView;
+
     public void showAfterTransferPaymentTakeGiveList(View view) {
 
-        tranferButtonView = view;
-        showAtTgList();
+//        tranferButtonView = view;
+//        showAtTgList();
+
+        savePayTgListToAfterTransfer();
+
     }
 
-    void showAtTgList()
-    {
+    void showAtTgList() {
         if (canTransfer) {
             tranferButtonView.setVisibility(View.GONE);
 
@@ -1171,25 +1192,86 @@ public class HomeActivity extends Activity {
 
                 // TODO: 2/16/2018 save paymenttg list
                 for (int i = 0; i < payTgList.size(); i++) {
-                    db_ref.child(Helper.AFTER_TRANSFER).child(payTgList.get(i).getMobile())
+                    db_ref.child(Helper.AFTER_TRANSFER).
+                            child(payTgList.get(i).getMobile())
                             .setValue(payTgList.get(i));
 
                 }
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             setPaymentTgAfterTransfer(lv_take_give);
 
             canTransfer = false;
-        }else
-        {
+        } else {
             Toast.makeText(context, "Please wait", Toast.LENGTH_SHORT).show();
             dialogEffect.showDialog();
 
 
         }
+
+    }
+
+
+    void savePayTgListToAfterTransfer() {
+
+
+        System.out.println(payTgList + "\n" + payTgListAt);
+        // TODO: 2/17/2018 save to AfterTransfer
+        for (int i = 0; i < payTgList.size(); i++) {
+
+            db_ref.child(Helper.AFTER_TRANSFER)
+                    .child(payTgList.get(i).getPayTgId())
+                    .setValue(payTgList.get(i));
+
+        }
+        spe = sp.edit();
+        spe.putBoolean(SessionManager.IS_TRANSFER, true);
+        spe.apply();
+
+        setPaymentListNcallPaymentTakeGive(paymentList);
+
+
+    }
+
+
+    void setAllRoomiesCountToSession() {
+
+        dialogEffect.showDialog();
+        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                dialogEffect.cancelDialog();
+
+                roomyList = new ArrayList<>();
+
+                for (DataSnapshot dataSnapshot1 :
+                        dataSnapshot.getChildren()) {
+
+                    // TODO: 1/27/2018  add one by one roomy in list
+                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+
+                    if (mobileLogged.equals(roomy.getMobileLogged())) {
+                        roomyList.add(roomy);
+                    }
+
+                }
+
+                // TODO: 2/20/2018 save roomates count;
+                spe = sp.edit();
+                spe.putInt(SessionManager.TOTAL_ROOMMATES, roomyList.size());
+                spe.apply();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 

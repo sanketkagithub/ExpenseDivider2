@@ -14,6 +14,7 @@ public class SessionManager {
     public static final String PASSWORD = "password";
     public static final String ADDRESS = "adddress";
     public static final String MOBILE = "mobile";
+    public static final String TOTAL_ROOMMATES = "totalRoomates" ;
     public static final String IS_ALLOWED = "isallowed";
     public static final String NOTIF_ID = "notifId";
     public static final String BID = "bookingId";

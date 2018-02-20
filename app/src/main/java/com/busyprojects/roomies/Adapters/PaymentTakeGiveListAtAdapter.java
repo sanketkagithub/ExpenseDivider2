@@ -107,8 +107,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder.ll_take_give.setBackgroundColor(takeColor);
             viewHolder.but_transfer.setVisibility(View.GONE);
 
-        }else if (amountVariation==0)
-        {
+        } else if (amountVariation == 0) {
             int doneColor = context.getResources().getColor(R.color.done_light);
             int done = context.getResources().getColor(R.color.done);
 
@@ -139,10 +138,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 " " + payTgList.get(position).getAmountVariation() + "/-";
 
         message = message.replace("-", "");
-        if (amountVariation!=0) {
+        if (amountVariation != 0) {
             viewHolder.tv_payment_info.setText(message);
-        }else
-        {
+        } else {
             String messageDone = payTgList.get(position).getRoomyName() + " is done";
 
             viewHolder.tv_payment_info.setText(messageDone);
@@ -166,6 +164,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     String fromMobile, toMobile;
     String amountToTransfer;
+
     public void showTransferPayment(final PayTg fromPayTg) {
 
         dialog = new Dialog(context);
@@ -185,7 +184,6 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         final Spinner spin_roomy = v.findViewById(R.id.spinner_roomy);
 
         getAllRoomieesTransferSpinner(spin_roomy);
-
 
 
         final int[] possitonTo = new int[1];
@@ -213,12 +211,12 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
 
-               amountToTransfer = et_transfer_amount.getText().toString();
+                amountToTransfer = et_transfer_amount.getText().toString();
 
                 getFromToAmountVar(fromMobile, Long.parseLong(amountToTransfer), toMobile);
 
 
-                setTransferPayMent(fromPayTg.getRoomyName(),selectedFromRoomy.getName());
+                setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
 
 
             }
@@ -228,18 +226,18 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     }
 
 
-    void setTransferPayMent(String roomyFrom,String roomyTo)
-    {
+    void setTransferPayMent(String roomyFrom, String roomyTo) {
         String pid = Helper.randomString(10);
 
         Payment payment = new Payment();
 
-     Roomy roomyFromR =   new Roomy();
-     roomyFromR.setMobileLogged("*");
-     roomyFromR.setRegistrationDateTime("");
-     roomyFromR.setName(roomyFrom);
+        Roomy roomyFromR = new Roomy();
+        roomyFromR.setMobileLogged("*");
+        roomyFromR.setRegistrationDateTime("");
+        roomyFromR.setName(roomyFrom);
         payment.setRoomy(roomyFromR);
         payment.setPayingItem("*");
+        payment.setPid(pid);
         payment.setTransferPayment(true);
         payment.setAmount(Long.parseLong(amountToTransfer));
         payment.setMobileLogged(mobileLogged);
@@ -252,11 +250,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     }
 
 
-
-
     List<Roomy> roomyListTransferSpinner;
 
-    void getAllRoomieesTransferSpinner(final Spinner spinnerRoomy) {
+    private void getAllRoomieesTransferSpinner(final Spinner spinnerRoomy) {
 
         dialogEffect.showDialog();
         db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
@@ -293,8 +289,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     }
 
-long amountVarFrom,amountVarTo, fromTotalPaid,toTotalPaid;
-    void getFromToAmountVar(String fromMobile, long amountToTransfer, String toMobile) {
+    private long amountVarFrom, amountVarTo, fromTotalPaid, toTotalPaid;
+
+    private void getFromToAmountVar(final String fromMobile, long amountToTransfer, final String toMobile) {
 
 //        // TODO: 2/3/2018 save from  (add)
 //
@@ -318,107 +315,166 @@ long amountVarFrom,amountVarTo, fromTotalPaid,toTotalPaid;
 //
 //
         System.out.println("fromMobile " + fromMobile + " \n " +
-                "toMobile " + toMobile + "\n"+
+                "toMobile " + toMobile + "\n" +
                 "amountToTransfer " + amountToTransfer);
 
 
         // TODO: 2/11/2018 get fromAmountVar
         db_ref.child(Helper.AFTER_TRANSFER)
-                .child(fromMobile).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try {
+                        try {
 
 
-                    PayTg payTg = dataSnapshot.getValue(PayTg.class);
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
-                    amountVarFrom = payTg.getAmountVariation();
-                    fromTotalPaid = payTg.getAmountTg();
-                }catch (Exception e)
-                {
-                    e.printStackTrace();;
-                }
 
-                }
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+                                    if (payTg.getMobile().equals(fromMobile)) {
+                                        amountVarFrom = payTg.getAmountVariation();
+                                        fromTotalPaid = payTg.getAmountTg();
+                                    }
 
-            }
-        });
+
+                                }
+
+                            }
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
         // TODO: 2/11/2018 get toAmountVar
         db_ref.child(Helper.AFTER_TRANSFER)
-                .child(toMobile).addValueEventListener(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                        try {
+
+
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
+
+                            PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                            if (payTg.getMobileLogged().equals(mobileLogged)) {
+
+                                if (payTg.getMobile().equals(toMobile)) {
+
+                                    amountVarTo = payTg.getAmountVariation();
+                                    toTotalPaid = payTg.getAmountTg();
+
+                                }
+
+                            }
+                            }
+
+                        }catch (Exception e)
+                        {
+
+                           SharedPreferences.Editor spe = sp.edit();
+                            spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                            spe.apply();
+
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+        new android.os.Handler().postDelayed(new Runnable() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void run() {
+                dialog.dismiss();
 
-                try {
-
-
-                    PayTg payTg = dataSnapshot.getValue(PayTg.class);
-
-                    amountVarTo = payTg.getAmountVariation();
-                    toTotalPaid = payTg.getAmountTg();
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                setFromToAmountVar();
 
             }
-        });
+        }, 3000);
+    }
 
 
-       new android.os.Handler().postDelayed(new Runnable() {
-           @Override
-           public void run() {
-               dialog.dismiss();
+    void setFromToAmountVar() {
+        final long updatedFromAmountVar, updatedToAmountVar;
+        final long updatedTotalPaidFrom, updatedTotalPaidTo;
 
-               setFromToAmountVar();
-
-           }
-       },3000);
-       }
-
-
-    void setFromToAmountVar()
-    {
-        long updatedFromAmountVar,updatedToAmountVar;
-        long updatedTotalPaidFrom,updatedTotalPaidTo;
-
-       updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
+        updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
         updatedToAmountVar = amountVarTo - Long.parseLong(amountToTransfer);
 
-       updatedTotalPaidFrom = fromTotalPaid + Long.parseLong(amountToTransfer);
+        updatedTotalPaidFrom = fromTotalPaid + Long.parseLong(amountToTransfer);
         updatedTotalPaidTo = toTotalPaid - Long.parseLong(amountToTransfer);
 
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .child(fromMobile)
-                .child(Helper.AMOUNT_VARIATION).setValue(updatedFromAmountVar);
 
-  db_ref.child(Helper.AFTER_TRANSFER)
-                .child(fromMobile)
-                .child(Helper.TOTAL_PAID).setValue(updatedTotalPaidFrom);
+        for (int i = 0; i <payTgList.size() ; i++) {
+
+            if (payTgList.get(i).getMobileLogged().equals(mobileLogged)) {
+                // TODO: 2/19/2018 set from values
+
+                if (payTgList.get(i).getMobile().equals(fromMobile)) {
+                    db_ref.child(Helper.AFTER_TRANSFER)
+                            .child(payTgList.get(i).getPayTgId())
+                            .child(Helper.TOTAL_PAID)
+                            .setValue(updatedTotalPaidFrom);
+
+
+                    db_ref.child(Helper.AFTER_TRANSFER)
+                            .child(payTgList.get(i).getPayTgId())
+                            .child(Helper.AMOUNT_VARIATION)
+                            .setValue(updatedFromAmountVar);
+                }
+
+                // TODO: 2/19/2018 set to values
+                if (payTgList.get(i).getMobile().equals(toMobile)) {
+                    db_ref.child(Helper.AFTER_TRANSFER)
+                        .child(payTgList.get(i).getPayTgId())
+                        .child(Helper.AMOUNT_VARIATION)
+                        .setValue(updatedToAmountVar);
+
+                db_ref.child(Helper.AFTER_TRANSFER)
+                        .child(payTgList.get(i).getPayTgId())
+                        .child(Helper.TOTAL_PAID)
+                        .setValue(updatedTotalPaidTo);
+
+            }}
+
+        }
 
 
 
-         db_ref.child(Helper.AFTER_TRANSFER)
-                .child(toMobile)
-                .child(Helper.AMOUNT_VARIATION).setValue(updatedToAmountVar);
 
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .child(toMobile)
-                .child(Helper.TOTAL_PAID).setValue(updatedTotalPaidTo);
+
+
+
+
+
+
+
 
 
 
     }
-
 
 
 }
