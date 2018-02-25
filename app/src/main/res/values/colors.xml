@@ -26,5 +26,16 @@
 
     <color name="hint">#757575</color>
 
+    <color name="sky_bluish">#03abff</color>
+    <color name="greenish">#1E5142</color>
+<color name="yellowish">#f0c400</color>
+<color name="blackish">#2c2c2c</color>
+
+<color name="redish">#f47272</color>
+
+<color name="pinkish">#63184a</color>
+<color name="voiletish">#9c58fc</color>
+
+
 
 </resources>

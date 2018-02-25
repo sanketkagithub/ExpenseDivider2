@@ -3,6 +3,7 @@ package com.busyprojects.roomies;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -77,4 +78,10 @@ public class TransferActivity extends AppCompatActivity {
     }
 
 
+    public void saveRoomy(View view)
+    {
+    }
+
+    public void backToHome(View view) {
+    }
 }

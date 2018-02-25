@@ -38,6 +38,7 @@
                 android:textColor="@color/white_color" />
 
             <TextView
+                android:id="@+id/tv_transaction"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
@@ -107,7 +108,7 @@
 
 
                 <TextView
-                    android:id="@+id/tv_log_reg_title"
+                    android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"

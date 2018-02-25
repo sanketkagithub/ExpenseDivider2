@@ -47,6 +47,7 @@ public class Helper {
     public static final String PAYMENT_HISTORY = "PaymentHistory";
     public static final String PAYMENT_PAYTG = "PaymentPayTg";
     public static final String HISTORY = "History";
+    public static final String IS_TRANSFER = "isTransfer";
 
     public static final String SELECT_DATE = "Select Date";
     public static final String SELECT_TIME = "Select Time";

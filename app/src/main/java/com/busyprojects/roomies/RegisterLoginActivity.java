@@ -129,26 +129,74 @@ public class RegisterLoginActivity extends Activity {
 
 
     public void registerRoomy(View view) {
-        String mobileReg = et_register.getText().toString();
+        final String mobileReg = et_register.getText().toString();
 
         if (mobileReg.equals("")) {
             Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
         } else {
-            String uid = Helper.randomString(10);
 
 
-            User user = new User();
-            user.setUid(uid);
-            user.setMobile(mobileReg);
 
-            db_ref.child(Helper.USER).child(uid)
-                    .setValue(user);
-            Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+            db_ref.child(Helper.USER)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-            sp.edit().putString(SessionManager.MOBILE, mobileReg).apply();
+                            List<String> userList = new ArrayList<>();
+
+                            for (DataSnapshot dataSnapshot1:
+                                 dataSnapshot.getChildren()) {
+
+                              User userDb =  dataSnapshot1.getValue(User.class);
+
+                          userList.add(userDb.getMobile());
+
+                            }
+
+
+                            if (userList.contains(mobileReg))
+                            {
+                                Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
+                            }else
+                            {
+                                // TODO: 2/25/2018 save user
+                                String uid = Helper.randomString(10);
+                                User user = new User();
+                                user.setUid(uid);
+                                user.setMobile(mobileReg);
+
+                                db_ref.child(Helper.USER).child(uid)
+                                        .setValue(user);
+                                Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+
+                                sp.edit().putString(SessionManager.MOBILE, mobileReg).apply();
+
+
+                            }
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+
+
+
         }
 
+
+
+
     }
+
+
 
     void setLoginVisibilities() {
         String mobile = sp.getString(SessionManager.MOBILE, "");

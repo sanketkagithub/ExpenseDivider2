@@ -87,17 +87,7 @@
 
             </LinearLayout>
 
-            <!--<EditText-->
-            <!--android:id="@+id/et_email_login"-->
-            <!--style="@style/et_app"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="@dimen/et_h"-->
-            <!--android:ems="10"-->
-            <!--android:hint="@string/email"-->
-            <!--android:inputType="textEmailAddress"-->
-            <!--android:textColor="@color/main_app_colorb"-->
-            <!--android:textColorHint="@color/grey_color"-->
-            <!--android:textSize="15sp" />-->
+
 
 
         </RelativeLayout>
@@ -168,6 +158,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/but_save"
                 android:layout_width="@dimen/but_w"
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
@@ -188,6 +179,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/but_back"
                 android:layout_width="@dimen/but_w"
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"

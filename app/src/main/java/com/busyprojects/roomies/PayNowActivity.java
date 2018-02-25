@@ -2,15 +2,18 @@ package com.busyprojects.roomies;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,7 +39,6 @@ import java.util.List;
 public class PayNowActivity extends AppCompatActivity {
 
     String mobileLogged;
-    ListView lv_payments, lv_take_give;
 
     Context context = PayNowActivity.this;
     DialogEffect dialogEffect;
@@ -82,6 +84,11 @@ public class PayNowActivity extends AppCompatActivity {
 
         dialogEffect = new DialogEffect(this);
         spinner_roomy = findViewById(R.id.spinner_roomy);
+       RelativeLayout rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
+       ImageView iv_amount_to_pay = findViewById(R.id.iv_amount_to_pay);
+       ImageView iv_paying_item = findViewById(R.id.iv_paying_item);
+       Button but_cancel_pay = findViewById(R.id.iv_cancel_pay);
+       Button but_pay = findViewById(R.id.but_pay);
         ll_paying_amount = findViewById(R.id.ll_paying_amount);
         ll_paying_item = findViewById(R.id.ll_paying_item);
         actv_paying_item = findViewById(R.id.actv_paying_item);
@@ -106,6 +113,12 @@ public class PayNowActivity extends AppCompatActivity {
                     getSelectedRoomy();
 
 
+        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+        rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
+        but_pay.setBackgroundColor(Color.parseColor(appColor));
+//        iv_amount_to_pay.setColorFilter(Color.parseColor(appColor));
+//        iv_paying_item.setColorFilter(Color.parseColor(appColor));
+//        iv_cancel_pay.setColorFilter(Color.parseColor(appColor));
 
     }
 
@@ -403,4 +416,8 @@ public class PayNowActivity extends AppCompatActivity {
 
     }
 
+    public void cancelPayment(View view)
+    {
+        onBackPressed();
+    }
 }
