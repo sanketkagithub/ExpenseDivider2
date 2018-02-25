@@ -367,7 +367,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         // TODO: 2/11/2018 get fromAmountVar   &&  // TODO: 2/11/2018 get toAmountVar
 
         db_ref.child(Helper.AFTER_TRANSFER)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -381,6 +381,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                                 PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
                                 if (payTg.getMobileLogged().equals(mobileLogged)) {
+
                                     if (payTg.getMobile().equals(fromMobile)) {
                                         amountVarFrom = payTg.getAmountVariation();
                                         fromTotalPaid = payTg.getAmountTg();
@@ -392,6 +393,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                                         toTotalPaid = payTg.getAmountTg();
 
                                     }
+
+                                    setFromToAmountVar();
+
 
 
                                 }
@@ -409,19 +413,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 });
 
 
-        dialogEffect.showDialog();
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
 
-                dialogEffect.cancelDialog();
-                dialog.dismiss();
-
-
-                setFromToAmountVar();
-
-            }
-        }, 3000);
     }
 
 
@@ -474,6 +466,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
             }
 
+
+            dialog.dismiss();
+            Toast.makeText(context, " Transfered ", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(context, "Please Select One Roomy", Toast.LENGTH_SHORT).show();

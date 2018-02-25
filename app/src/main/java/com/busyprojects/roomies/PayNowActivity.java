@@ -3,7 +3,6 @@ package com.busyprojects.roomies;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -104,23 +103,8 @@ public class PayNowActivity extends AppCompatActivity {
 
         totalAfterTransfer = 0;
 
-
-        dialogEffect.showDialog();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                dialogEffect.cancelDialog();
-
-                if (spinner_roomy.getSelectedItemPosition() != 0) {
                     getSelectedRoomy();
-                }
 
-                //  getSelectedRoomy();
-
-                // getLatestAfterTransferToGetTotalAmountOfPayee();
-            }
-        }, 2000);
 
 
     }
@@ -128,7 +112,7 @@ public class PayNowActivity extends AppCompatActivity {
 
     public void payNowhere(View view) {
 
-        getSelectedRoomy();
+        //getSelectedRoomy();
         amount = et_amount.getText().toString();
         String payingItem = actv_paying_item.getText().toString();
 
@@ -320,7 +304,7 @@ public class PayNowActivity extends AppCompatActivity {
                 RoomySpinnerAdapterr roomySpinnerAdapterr = new RoomySpinnerAdapterr(context, roomyListNames);
                 spinner_roomy.setAdapter(roomySpinnerAdapterr);
 
-                getSelectedRoomy();
+      //          getSelectedRoomy();
             }
 
             @Override
