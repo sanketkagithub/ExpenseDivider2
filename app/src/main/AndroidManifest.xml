@@ -20,22 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".testAct.SwipeActivity"
-            android:label="@string/title_activity_swipe"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".testAct.TabActivity"
-            android:label="@string/title_activity_tab"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".testAct.SpinActivity"
-            android:label="@string/title_activity_spin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".testAct.Tab0Activity" />
-        <activity android:name=".testAct.Tab1ListActivity" />
-        <activity android:name=".HomeActivity" />
+
+
+
+        <activity android:name=".AddRoomyActivity" />
+       <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterLoginActivity" />
+        <activity android:name=".PayNowActivity" />
         <activity android:name=".HistoryDateActivity" />
         <activity android:name=".TotalEachPaymentHistoryActivity" />
         <activity android:name=".TransferActivity" />

@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -48,6 +50,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     DatabaseReference db_ref;
 
     String[] transferAmount = new String[1];
+    AnimationManager animationManager;
 
 
     public PaymentTakeGiveListAtAdapter(Context context, List<PayTg> payTgList) {
@@ -56,6 +59,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         this.payTgList = payTgList;
 
         dialogEffect = new DialogEffect(context);
+
+        animationManager = AnimationManager.getInstance();
 
         sp = context.getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
@@ -175,9 +180,13 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         TextView tvFrom = v.findViewById(R.id.tv_from);
         final EditText et_transfer_amount = v.findViewById(R.id.et_transfer_amount);
+        final TextView tv_from_bottom = v.findViewById(R.id.tv_from_bottom);
+        final TextView tv_to_bottom = v.findViewById(R.id.tv_to_bottom);
 
         // TODO: 2/11/2018 from
         tvFrom.setText(fromPayTg.getRoomyName());
+
+        tv_from_bottom.setText(fromPayTg.getRoomyName());
 
         fromMobile = fromPayTg.getMobile();
 
@@ -186,7 +195,6 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         getAllRoomieesTransferSpinner(spin_roomy);
 
 
-        final int[] possitonTo = new int[1];
         spin_roomy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -194,6 +202,13 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                 toMobile = roomyListTransferSpinner.get(i).getMobile();
                 selectedFromRoomy = roomyListTransferSpinner.get(i);
+
+                tv_to_bottom.setText(roomyListTransferSpinner.get(i).getName());
+
+                if (roomyListTransferSpinner.get(i).getMobile().equals(fromMobile)) {
+                    spin_roomy.setSelection(0);
+                    Toast.makeText(context, "Please  Select Different Roomy", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -211,13 +226,33 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
 
+                // TODO: 2/25/2018 final transfer
+
+
                 amountToTransfer = et_transfer_amount.getText().toString();
 
-                getFromToAmountVar(fromMobile, Long.parseLong(amountToTransfer), toMobile);
+                if (amountToTransfer.equals("")||spin_roomy.getSelectedItemPosition()==0) {
+
+                    if (amountToTransfer.equals(""))
+                    {
+                        animationManager.animateViewForEmptyField(et_transfer_amount, context);
+
+                    }
+
+                    if (spin_roomy.getSelectedItemPosition()==0)
+                    {
+                        animationManager.animateViewForEmptyField(spin_roomy, context);
+
+                    }
+
+                    Toast.makeText(context, "Please Check Empty field", Toast.LENGTH_SHORT).show();
 
 
-                setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
+                } else {
 
+                    getFromToAmountVar(fromMobile, Long.parseLong(amountToTransfer), toMobile);
+                    setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
+                }
 
             }
         });
@@ -262,6 +297,16 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 dialogEffect.cancelDialog();
 
                 roomyListTransferSpinner = new ArrayList<>();
+
+                // TODO: 2/25/2018 add default select text in roomy spinner
+                Roomy roomyDefault = new Roomy();
+                roomyDefault.setRegistrationDateTime("");
+                roomyDefault.setMobileLogged("");
+                roomyDefault.setMobile("");
+                roomyDefault.setName(Helper.SELECT_ROOMY);
+                roomyDefault.setRid("");
+
+                roomyListTransferSpinner.add(roomyDefault);
 
                 for (DataSnapshot dataSnapshot1 :
                         dataSnapshot.getChildren()) {
@@ -319,7 +364,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 "amountToTransfer " + amountToTransfer);
 
 
-        // TODO: 2/11/2018 get fromAmountVar
+        // TODO: 2/11/2018 get fromAmountVar   &&  // TODO: 2/11/2018 get toAmountVar
+
         db_ref.child(Helper.AFTER_TRANSFER)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -340,12 +386,18 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                                         fromTotalPaid = payTg.getAmountTg();
                                     }
 
+                                    if (payTg.getMobile().equals(toMobile)) {
+
+                                        amountVarTo = payTg.getAmountVariation();
+                                        toTotalPaid = payTg.getAmountTg();
+
+                                    }
+
 
                                 }
 
                             }
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -357,57 +409,14 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 });
 
 
-        // TODO: 2/11/2018 get toAmountVar
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                        try {
-
-
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
-
-                            PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-
-                            if (payTg.getMobileLogged().equals(mobileLogged)) {
-
-                                if (payTg.getMobile().equals(toMobile)) {
-
-                                    amountVarTo = payTg.getAmountVariation();
-                                    toTotalPaid = payTg.getAmountTg();
-
-                                }
-
-                            }
-                            }
-
-                        }catch (Exception e)
-                        {
-
-                           SharedPreferences.Editor spe = sp.edit();
-                            spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                            spe.apply();
-
-                            e.printStackTrace();
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
+        dialogEffect.showDialog();
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                dialogEffect.cancelDialog();
                 dialog.dismiss();
+
 
                 setFromToAmountVar();
 
@@ -417,63 +426,58 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
     void setFromToAmountVar() {
-        final long updatedFromAmountVar, updatedToAmountVar;
-        final long updatedTotalPaidFrom, updatedTotalPaidTo;
 
-        updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
-        updatedToAmountVar = amountVarTo - Long.parseLong(amountToTransfer);
+        if (!selectedFromRoomy.getMobile().equals("")) {
 
-        updatedTotalPaidFrom = fromTotalPaid + Long.parseLong(amountToTransfer);
-        updatedTotalPaidTo = toTotalPaid - Long.parseLong(amountToTransfer);
+            final long updatedFromAmountVar, updatedToAmountVar;
+            final long updatedTotalPaidFrom, updatedTotalPaidTo;
 
+            updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
+            updatedToAmountVar = amountVarTo - Long.parseLong(amountToTransfer);
 
-        for (int i = 0; i <payTgList.size() ; i++) {
-
-            if (payTgList.get(i).getMobileLogged().equals(mobileLogged)) {
-                // TODO: 2/19/2018 set from values
-
-                if (payTgList.get(i).getMobile().equals(fromMobile)) {
-                    db_ref.child(Helper.AFTER_TRANSFER)
-                            .child(payTgList.get(i).getPayTgId())
-                            .child(Helper.TOTAL_PAID)
-                            .setValue(updatedTotalPaidFrom);
+            updatedTotalPaidFrom = fromTotalPaid + Long.parseLong(amountToTransfer);
+            updatedTotalPaidTo = toTotalPaid - Long.parseLong(amountToTransfer);
 
 
-                    db_ref.child(Helper.AFTER_TRANSFER)
-                            .child(payTgList.get(i).getPayTgId())
-                            .child(Helper.AMOUNT_VARIATION)
-                            .setValue(updatedFromAmountVar);
+            for (int i = 0; i < payTgList.size(); i++) {
+
+                if (payTgList.get(i).getMobileLogged().equals(mobileLogged)) {
+                    // TODO: 2/19/2018 set from values
+
+                    if (payTgList.get(i).getMobile().equals(fromMobile)) {
+                        db_ref.child(Helper.AFTER_TRANSFER)
+                                .child(payTgList.get(i).getPayTgId())
+                                .child(Helper.TOTAL_PAID)
+                                .setValue(updatedTotalPaidFrom);
+
+
+                        db_ref.child(Helper.AFTER_TRANSFER)
+                                .child(payTgList.get(i).getPayTgId())
+                                .child(Helper.AMOUNT_VARIATION)
+                                .setValue(updatedFromAmountVar);
+                    }
+
+                    // TODO: 2/19/2018 set to values
+                    if (payTgList.get(i).getMobile().equals(toMobile)) {
+                        db_ref.child(Helper.AFTER_TRANSFER)
+                                .child(payTgList.get(i).getPayTgId())
+                                .child(Helper.AMOUNT_VARIATION)
+                                .setValue(updatedToAmountVar);
+
+                        db_ref.child(Helper.AFTER_TRANSFER)
+                                .child(payTgList.get(i).getPayTgId())
+                                .child(Helper.TOTAL_PAID)
+                                .setValue(updatedTotalPaidTo);
+
+                    }
                 }
 
-                // TODO: 2/19/2018 set to values
-                if (payTgList.get(i).getMobile().equals(toMobile)) {
-                    db_ref.child(Helper.AFTER_TRANSFER)
-                        .child(payTgList.get(i).getPayTgId())
-                        .child(Helper.AMOUNT_VARIATION)
-                        .setValue(updatedToAmountVar);
+            }
 
-                db_ref.child(Helper.AFTER_TRANSFER)
-                        .child(payTgList.get(i).getPayTgId())
-                        .child(Helper.TOTAL_PAID)
-                        .setValue(updatedTotalPaidTo);
 
-            }}
-
+        } else {
+            Toast.makeText(context, "Please Select One Roomy", Toast.LENGTH_SHORT).show();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 

@@ -6,8 +6,8 @@
 
 
     <color name="main_app_colorp">#89003f</color>
+    <color name="blue">#0011ff</color>
     <color name="main_app_colorb">#efefef</color>
-    <color name="main_app_colorskin_text">#a6a64f</color>
     <color name="grey_color_tg">#e7e7e7</color>
     <color name="done">#0900FF</color>
  <color name="done_light">#DCDBFF</color>

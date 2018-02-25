@@ -32,18 +32,23 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
     DialogEffect dialogEffect;
     DatabaseReference dbRef;
 
-    TextView tv_total_amount,tv_total_roomies,tv_each_payment;
+    int totalRoomates;
+
+
+    TextView tv_total_amount, tv_total_roomies, tv_each_payment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_each_payment);
+        sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
 
         dialogEffect = new DialogEffect(this);
 
         context = TotalEachPaymentHistoryActivity.this;
         dbRef = Helper.getFirebaseDatabseRef();
 
+        totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
         lv_payments = findViewById(R.id.lv_payments);
         lv_take_give = findViewById(R.id.lv_take_give);
 
@@ -60,9 +65,6 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
         setEachPaymentsList();
 
     }
-
-
-
 
 
     List<Payment> paymentList;
@@ -148,7 +150,7 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
 
     long setEachPayMent() {
 
-     long   total = 0;
+        long total = 0;
 
 
         for (int i = 0; i < paymentList.size(); i++) {
@@ -158,7 +160,7 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
             }
         }
 
-        long eachAmount = total / eachPaymentList.size();
+        long eachAmount = total / totalRoomates;
 
         tv_total_amount.setText(total + "₹");
         tv_total_roomies.setText(eachPaymentList.size() + "");

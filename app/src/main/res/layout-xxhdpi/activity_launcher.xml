@@ -42,7 +42,6 @@
 
 
             <ImageView
-                android:id="@+id/iv_1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_above="@+id/iv_centre_right"
@@ -54,7 +53,6 @@
 
 
             <ImageView
-                android:id="@+id/iv_2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_above="@+id/iv_centre_right"
@@ -67,7 +65,6 @@
 
 
             <ImageView
-                android:id="@+id/iv_03"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_below="@+id/iv_centre_right"

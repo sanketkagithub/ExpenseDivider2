@@ -6,14 +6,12 @@
 
     <RelativeLayout
         android:visibility="visible"
-        android:id="@+id/rel_et_reg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ll_et_register"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/et_reg_back"
@@ -64,7 +62,6 @@
 
     <RelativeLayout
         android:visibility="visible"
-        android:id="@+id/rel_but_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -84,7 +81,6 @@
 
     <RelativeLayout
         android:visibility="visible"
-        android:id="@+id/rel_but_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

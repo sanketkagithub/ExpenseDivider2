@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAtAdapter;
 import com.busyprojects.roomies.helper.DialogEffect;
@@ -24,11 +25,14 @@ public class TransferActivity extends AppCompatActivity {
     DatabaseReference db_ref;
     Context context = TransferActivity.this;
 
+    TextView tv_from,tv_to;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         lv_take_give_at = findViewById(R.id.lv_take_give_at);
+
 
         db_ref = Helper.getFirebaseDatabseRef();
         dialogEffect = new DialogEffect(context);

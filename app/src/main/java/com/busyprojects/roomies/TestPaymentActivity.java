@@ -114,7 +114,7 @@ public class TestPaymentActivity extends AppCompatActivity {
         history.setDateTime(Helper.getCurrentDateTime());
 
 
-        if (payTgList.size() == 0) {
+        if (payTgList.size() != 0) {
             history.setEachPaymentList(payTgList);
 
         }
@@ -415,7 +415,16 @@ public class TestPaymentActivity extends AppCompatActivity {
                     // TODO: 2/3/2018 save paymentTg List (Each Payment total Map)
 
 
-                    long totalAmount = setEachAndTotalTexts();
+                    long totalAmount=0;
+                    try {
+                         totalAmount = setEachAndTotalTexts();
+
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+
                     payTgList = new ArrayList<>();
 
                     for (Map.Entry<Roomy, Long> s : roomyTotalMap.entrySet()) {

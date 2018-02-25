@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/but_upload"
             android:layout_width="250dp"
             android:layout_height="30dp"
-            android:background="@drawable/buttons"
+            android:background="@drawable/from_to"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="From"
@@ -27,7 +26,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:gravity="center">
 
         <TextView
@@ -45,15 +44,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="50dp"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/but_upload"
             android:layout_width="250dp"
             android:layout_height="30dp"
-            android:background="@drawable/buttons"
+            android:background="@drawable/from_to"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="To"
@@ -65,8 +62,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="70dp"
         android:gravity="center">
 
         <Spinner
@@ -82,15 +78,12 @@
 
     <RelativeLayout
         android:visibility="visible"
-        android:id="@+id/rel_et_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="50dp"
         android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ll_et_login"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/et_reg_back"
             android:orientation="horizontal">
@@ -106,7 +99,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/rupee" />
 
             </RelativeLayout>
 
@@ -114,16 +107,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:paddingLeft="9dp">
+                android:gravity="center|left"
+                android:paddingLeft="2dp">
 
                 <EditText
                     android:id="@+id/et_transfer_amount"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint="Mobile"
+                    android:hint="Amount"
                     android:inputType="phone"
                     android:maxLength="10"
                     android:textColorHint="@color/hint"
@@ -141,8 +134,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="80dp"
         android:gravity="center">
 
         <Button
@@ -154,6 +146,50 @@
             android:text="transfer"
             android:textAllCaps="false"
             android:textColor="@color/white_color" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/ll_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_from_bottom"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/main_app_colorp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:fontFamily="serif"
+                android:src="@drawable/transfer_money"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_to_bottom"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/main_app_colorp" />
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 

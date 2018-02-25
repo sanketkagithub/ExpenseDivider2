@@ -28,18 +28,7 @@
 
     </RelativeLayout>
 
-  <RelativeLayout
-      android:visibility="gone"
-      android:id="@+id/rel_add_roomy_layout"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:gravity="center"
-      android:layout_weight="1">
 
-      <include
-          layout="@layout/add_roomy_layout"/>
-
-  </RelativeLayout>
 
 
     <RelativeLayout
@@ -83,21 +72,7 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/rel_paymen_lay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
 
-        <include
-            layout="@layout/payment_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white_color" />
-
-    </RelativeLayout>
 
 
 
@@ -141,21 +116,6 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/rel_all_paymen_lay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <include
-            layout="@layout/all_paywment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white_color" />
-
-    </RelativeLayout>
 
 
 

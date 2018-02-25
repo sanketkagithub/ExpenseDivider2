@@ -54,7 +54,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textColor="@color/main_app_colorp" />
+                android:textColor="@color/blue" />
 
 
         </LinearLayout>

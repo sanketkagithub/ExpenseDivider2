@@ -15,7 +15,6 @@
         android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ll_email"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/et_reg_back"
@@ -83,7 +82,6 @@
         android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/ll_password"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/et_reg_back"
