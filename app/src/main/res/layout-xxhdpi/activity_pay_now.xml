@@ -21,14 +21,13 @@
             android:gravity="center">
 
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_log_reg_title"
-                android:layout_width="300dp"
+                android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="@string/pay"
+                android:padding="2dp"
+                android:text="@string/add_roomy"
+                android:src="@drawable/pay"
                 android:textColor="@color/white_color"
                 android:textSize="30sp" />
 

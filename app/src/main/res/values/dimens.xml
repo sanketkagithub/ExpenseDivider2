@@ -6,5 +6,6 @@
     <dimen name="but_w">200dp</dimen>
     <dimen name="date">10sp</dimen>
     <dimen name="payment_lv_lr_margin">15dp</dimen>
+    <dimen name="cursor_width">1dp</dimen>
 
 </resources>

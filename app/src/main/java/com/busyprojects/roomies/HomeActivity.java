@@ -234,6 +234,13 @@ public class HomeActivity extends Activity {
             case R.id.iv_sky_blue:
 
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.sky_bluish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.profile_bluish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_blu);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_blu);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_blu);
+
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -243,6 +250,11 @@ public class HomeActivity extends Activity {
 
             case R.id.iv_greenish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.greenish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_greenish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_green);
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_green);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_green);
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -252,6 +264,12 @@ public class HomeActivity extends Activity {
 
             case R.id.iv_yellowish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.yellowish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_yellowish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_yellow);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_yell);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_yellow);
+
                 spe.apply();
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
 
@@ -261,6 +279,12 @@ public class HomeActivity extends Activity {
 
             case R.id.iv_blackish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.blackish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_blackish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_black);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_black);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_black);
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -270,6 +294,12 @@ public class HomeActivity extends Activity {
 
             case R.id.iv_redish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.redish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_redish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_red);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_red);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_red);
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -280,6 +310,12 @@ public class HomeActivity extends Activity {
                 break;
             case R.id.iv_pinkish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.pinkish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_pinkish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_pink);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_pink);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_pink);
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -289,6 +325,12 @@ public class HomeActivity extends Activity {
                 break;
             case R.id.iv_voiletish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.voiletish));
+                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_violetish);
+                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_violet);
+
+                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_vio);
+                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_vio);
+
                 spe.apply();
 
 

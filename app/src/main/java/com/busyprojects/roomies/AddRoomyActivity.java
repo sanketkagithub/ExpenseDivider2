@@ -1,13 +1,17 @@
 package com.busyprojects.roomies;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.busyprojects.roomies.helper.DialogEffect;
@@ -21,7 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class AddRoomyActivity extends AppCompatActivity {
+public class AddRoomyActivity extends Activity {
 
     DialogEffect dialogEffect;
     DatabaseReference db_ref;
@@ -33,15 +37,21 @@ public class AddRoomyActivity extends AppCompatActivity {
     EditText et_name, et_mobile;
 
     RelativeLayout rel_iv_roomy_home;
-
+    ImageView iv_name, iv_call;
+String appColor;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_roomy);
         et_name = findViewById(R.id.et_name);
         et_mobile = findViewById(R.id.et_mobile);
-       Button but_save = findViewById(R.id.but_save);
-       Button but_back = findViewById(R.id.but_back);
+        Button but_save = findViewById(R.id.but_save);
+        Button but_back = findViewById(R.id.but_back);
+
+        iv_name = findViewById(R.id.iv_name);
+        iv_call = findViewById(R.id.iv_call);
+
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
 
         db_ref = Helper.getFirebaseDatabseRef();
@@ -49,18 +59,34 @@ public class AddRoomyActivity extends AppCompatActivity {
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
-String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
-
+         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
 
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_save.setBackgroundColor(Color.parseColor(appColor));
         but_back.setBackgroundColor(Color.parseColor(appColor));
+
+        setApptheme();
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    void setApptheme() {
+
+        int profile = sp.getInt(SessionManager.IV_ROOMY, R.drawable.name);
+        int mobile = sp.getInt(SessionManager.IV_MOBILE, R.drawable.call);
+
+        iv_name.setImageResource(profile);
+        iv_call.setImageResource(mobile);
+
+        //SessionManager.setCursorColor(et_name,Color.parseColor(appColor));
+        et_name.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+        et_mobile.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+
     }
 
 
     public void saveRoomy(View view) {
-
 
         dialogEffect.showDialog();
         String rid = Helper.randomString(10);
@@ -99,17 +125,14 @@ String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_
             spe.apply();
 
 
-
-          deleteAfterExistingTransfer();
+            deleteAfterExistingTransfer();
 
         }
 
     }
 
 
-
-    void deleteAfterExistingTransfer()
-    {
+    void deleteAfterExistingTransfer() {
 
         dialogEffect.showDialog();
         db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -152,8 +175,7 @@ String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_
 
     }
 
-    public void backToHome(View view)
-    {
+    public void backToHome(View view) {
         onBackPressed();
     }
 }

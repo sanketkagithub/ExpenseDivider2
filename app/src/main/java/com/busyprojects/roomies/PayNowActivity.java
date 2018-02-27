@@ -1,10 +1,13 @@
 package com.busyprojects.roomies;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PayNowActivity extends AppCompatActivity {
+public class PayNowActivity extends Activity {
 
     String mobileLogged;
 
@@ -68,12 +71,13 @@ public class PayNowActivity extends AppCompatActivity {
 
     AnimationManager animationManager;
     LinearLayout ll_paying_amount, ll_paying_item;
-    long total = 0;
+
 
     List<PayTg> payTgList;
     List<PayTg> payTgListAt;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,11 +120,25 @@ public class PayNowActivity extends AppCompatActivity {
         String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_pay.setBackgroundColor(Color.parseColor(appColor));
+        but_cancel_pay.setBackgroundColor(Color.parseColor(appColor));
 //        iv_amount_to_pay.setColorFilter(Color.parseColor(appColor));
 //        iv_paying_item.setColorFilter(Color.parseColor(appColor));
 //        iv_cancel_pay.setColorFilter(Color.parseColor(appColor));
 
+
+
+       int rupee = sp.getInt(SessionManager.IV_RUPEE,R.drawable.rupee);
+       int payingItem = sp.getInt(SessionManager.IV_PAYING_ITEM,R.drawable.paying_item);
+
+        iv_amount_to_pay.setImageResource(rupee);
+        iv_paying_item.setImageResource(payingItem);
+
+        et_amount.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+        actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+
     }
+
+
 
 
     public void payNowhere(View view) {

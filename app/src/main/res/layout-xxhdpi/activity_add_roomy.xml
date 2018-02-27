@@ -20,16 +20,13 @@
             android:gravity="center">
 
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_log_reg_title"
-                android:layout_width="300dp"
+                android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:fontFamily="serif"
-                android:gravity="center"
+                android:padding="2dp"
                 android:text="@string/add_roomy"
-                android:textColor="@color/white_color"
-                android:textSize="30sp" />
+                android:src="@drawable/add_roomy" />
 
 
         </RelativeLayout>
@@ -57,6 +54,7 @@
                     android:padding="5dp">
 
                     <ImageView
+                        android:id="@+id/iv_name"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/name" />
@@ -77,6 +75,8 @@
                         android:ems="10"
                         android:fontFamily="serif"
                         android:hint="Name"
+                        android:textCursorDrawable="@drawable/cursor_background"
+                        android:backgroundTint="@color/voiletish"
                         android:inputType="textEmailAddress"
                         android:textColorHint="@color/hint"
                         android:textSize="15sp" />
@@ -115,6 +115,7 @@
                     android:padding="5dp">
 
                     <ImageView
+                        android:id="@+id/iv_call"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/call" />

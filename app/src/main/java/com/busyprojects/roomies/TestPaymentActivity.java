@@ -1,10 +1,10 @@
 package com.busyprojects.roomies;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,10 +34,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestPaymentActivity extends AppCompatActivity {
+public class TestPaymentActivity extends Activity {
 
     List<Payment> paymentList;
-    List<PayTg> payTgList, payTgListAfterTransfer;
+    List<PayTg> payTgList;
     String mobileLogged;
     TextView tv_total_amount, tv_each_payment, tv_total_roomies;
     boolean isTransfer;
