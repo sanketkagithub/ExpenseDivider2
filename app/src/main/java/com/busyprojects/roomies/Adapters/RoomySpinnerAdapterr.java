@@ -80,6 +80,7 @@ public class RoomySpinnerAdapterr extends ArrayAdapter {
 
         }
         viewHolderRoomySpinner.tvRoomyName.setText(listRoomName.get(position));
+        viewHolderRoomySpinner.tvRoomyName.setTextColor(Color.parseColor(appColor));
 
 
         return convertView;

@@ -1,10 +1,13 @@
 package com.busyprojects.roomies;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +48,7 @@ public class TestPaymentActivity extends Activity {
     SharedPreferences.Editor spe;
     ListView lv_payments, lv_take_give;
 
-    Button but_transfer_money;
+    Button but_delete_payment, but_transfer_money;
 
     Context context = TestPaymentActivity.this;
     SharedPreferences sp;
@@ -55,6 +58,8 @@ public class TestPaymentActivity extends Activity {
     long total;
     int totalRoommates;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,7 @@ public class TestPaymentActivity extends Activity {
         totalRoommates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
 
+        but_delete_payment = findViewById(R.id.but_delete_payment);
         but_transfer_money = findViewById(R.id.but_transfer_money);
         tv_total_amount = findViewById(R.id.tv_total_amount);
        TextView tv_transaction = findViewById(R.id.tv_transaction);
@@ -88,11 +94,16 @@ public class TestPaymentActivity extends Activity {
 
         setPaymentList();
         String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+  int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
+ int transferPayment =  sp.getInt(SessionManager.IV_TRANSFER,R.drawable.transfer_payment);
 
+
+        // TODO: 2/27/2018  appColor
         tv_transaction.setTextColor(Color.parseColor(appColor));
         tv_each_paid.setTextColor(Color.parseColor(appColor));
         ll_tot_each_roomy.setBackgroundColor(Color.parseColor(appColor));
-
+        but_delete_payment.setBackground(getDrawable(deletePayment));
+        but_transfer_money.setBackground(getDrawable(transferPayment));
 
     }
 

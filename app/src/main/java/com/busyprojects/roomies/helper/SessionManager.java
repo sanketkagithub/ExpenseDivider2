@@ -50,7 +50,8 @@ public class SessionManager {
     // TODO: 2/26/2018 images in session 
     public static final String IV_ROOMY = "iv_roomy";
     public static final String IV_MOBILE = "iv_mobile";
-    public static final String CUSTOM_CURSOR = "customCursior";
+    public static final String IV_DELETE = "IV_DELETE";
+    public static final String IV_TRANSFER = "IV_TRANSFER";
 
 
     public static final String IV_RUPEE = "iv_rupee";

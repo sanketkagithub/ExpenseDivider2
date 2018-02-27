@@ -240,6 +240,9 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_blu);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_blu);
 
+               spe.putInt(SessionManager.IV_DELETE,R.drawable.del_blu);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_blu);
+
 
                 spe.apply();
 
@@ -255,6 +258,8 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_green);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_green);
 
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_green);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_green);
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -270,6 +275,8 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_yell);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_yellow);
 
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_yell);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_yell);
                 spe.apply();
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
 
@@ -284,6 +291,9 @@ public class HomeActivity extends Activity {
 
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_black);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_black);
+
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_black);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_black);
 
                 spe.apply();
 
@@ -300,6 +310,8 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_red);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_red);
 
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_red);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_red);
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -316,6 +328,9 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_pink);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_pink);
 
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_pink);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_pink);
+
                 spe.apply();
 
                 appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
@@ -331,6 +346,8 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_vio);
                 spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_vio);
 
+                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_vio);
+                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_vio);
                 spe.apply();
 
 
