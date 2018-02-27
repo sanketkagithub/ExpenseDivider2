@@ -88,11 +88,11 @@ public class PayNowActivity extends Activity {
 
         dialogEffect = new DialogEffect(this);
         spinner_roomy = findViewById(R.id.spinner_roomy);
-       RelativeLayout rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
-       ImageView iv_amount_to_pay = findViewById(R.id.iv_amount_to_pay);
-       ImageView iv_paying_item = findViewById(R.id.iv_paying_item);
-       Button but_cancel_pay = findViewById(R.id.iv_cancel_pay);
-       Button but_pay = findViewById(R.id.but_pay);
+        RelativeLayout rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
+        ImageView iv_amount_to_pay = findViewById(R.id.iv_amount_to_pay);
+        ImageView iv_paying_item = findViewById(R.id.iv_paying_item);
+        Button but_cancel_pay = findViewById(R.id.iv_cancel_pay);
+        Button but_pay = findViewById(R.id.but_pay);
         ll_paying_amount = findViewById(R.id.ll_paying_amount);
         ll_paying_item = findViewById(R.id.ll_paying_item);
         actv_paying_item = findViewById(R.id.actv_paying_item);
@@ -114,10 +114,10 @@ public class PayNowActivity extends Activity {
 
         totalAfterTransfer = 0;
 
-                    getSelectedRoomy();
+        getSelectedRoomy();
 
 
-        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+        String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_pay.setBackgroundColor(Color.parseColor(appColor));
         but_cancel_pay.setBackgroundColor(Color.parseColor(appColor));
@@ -126,9 +126,8 @@ public class PayNowActivity extends Activity {
 //        iv_cancel_pay.setColorFilter(Color.parseColor(appColor));
 
 
-
-       int rupee = sp.getInt(SessionManager.IV_RUPEE,R.drawable.rupee);
-       int payingItem = sp.getInt(SessionManager.IV_PAYING_ITEM,R.drawable.paying_item);
+        int rupee = sp.getInt(SessionManager.IV_RUPEE, R.drawable.rupee);
+        int payingItem = sp.getInt(SessionManager.IV_PAYING_ITEM, R.drawable.paying_item);
 
         iv_amount_to_pay.setImageResource(rupee);
         iv_paying_item.setImageResource(payingItem);
@@ -137,8 +136,6 @@ public class PayNowActivity extends Activity {
         actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
 
     }
-
-
 
 
     public void payNowhere(View view) {
@@ -192,6 +189,14 @@ public class PayNowActivity extends Activity {
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
 
+            // TODO: 1/27/2018 save payment notification;
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .child(mobileLogged)
+                    .child(Helper.PAYMENT_LIST)
+                    .child(pid)
+                    .setValue(payment);
+
+
             // TODO: 2/18/2018   change------
             try {
 
@@ -216,7 +221,7 @@ public class PayNowActivity extends Activity {
 
                 roomySelected = roomyList.get(i);
 
-                Toast.makeText(context, i + "   poss", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, i + "   poss", Toast.LENGTH_SHORT).show();
 
                 getLatestAfterTransferToGetTotalAmountOfPayee();
             }
@@ -335,7 +340,7 @@ public class PayNowActivity extends Activity {
                 RoomySpinnerAdapterr roomySpinnerAdapterr = new RoomySpinnerAdapterr(context, roomyListNames);
                 spinner_roomy.setAdapter(roomySpinnerAdapterr);
 
-      //          getSelectedRoomy();
+                //          getSelectedRoomy();
             }
 
             @Override
@@ -406,7 +411,7 @@ public class PayNowActivity extends Activity {
             }
             totalAfterTransfer = 0;
 
-            Toast.makeText(context, "At updated", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(context, "At updated", Toast.LENGTH_SHORT).show();
 
             canTransfer = true;
 
@@ -434,8 +439,7 @@ public class PayNowActivity extends Activity {
 
     }
 
-    public void cancelPayment(View view)
-    {
+    public void cancelPayment(View view) {
         onBackPressed();
     }
 }

@@ -2,13 +2,16 @@ package com.busyprojects.roomies;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.busyprojects.roomies.Adapters.PaymentListAdapter;
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAdapter;
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAtAdapter;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -37,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestPaymentActivity extends Activity {
+public class PaymentActivity extends Activity {
 
     List<Payment> paymentList;
     List<PayTg> payTgList;
@@ -50,14 +54,14 @@ public class TestPaymentActivity extends Activity {
 
     Button but_delete_payment, but_transfer_money;
 
-    Context context = TestPaymentActivity.this;
+    Context context = PaymentActivity.this;
     SharedPreferences sp;
     DialogEffect dialogEffect;
     DatabaseReference db_ref;
 
     long total;
     int totalRoommates;
-
+AnimationManager animationManager;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -65,6 +69,7 @@ public class TestPaymentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_payment);
 
+       animationManager = AnimationManager.getInstance();
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
 
@@ -110,14 +115,27 @@ public class TestPaymentActivity extends Activity {
 
     String hid;
     History history;
+    Dialog dialogDeleteAlert;
+    public void showSaveDeleteListAlert(View view) {
 
-    public void saveDeleteList(View view) {
+     //animationManager.animateViewForEmptyField();
+        dialogDeleteAlert  = new Dialog(this);
+        dialogDeleteAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        View v = LayoutInflater.from(context).inflate(R.layout.delete_alert, null);
+        dialogDeleteAlert.setContentView(v);
+        dialogDeleteAlert.setCancelable(false);
+        dialogDeleteAlert.show();
+
+
+    }
+
+    void saveNdelete()
+    {
 
         // boolean isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
 
 
         // TODO: 2/4/2018 save n delete list
-
 
         // TODO: 2/5/2018 save Payments to History
 
@@ -231,11 +249,14 @@ public class TestPaymentActivity extends Activity {
 
         db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
 
-        Toast.makeText(context, "Reset", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
 
         payTgList.clear();
 
+
     }
+
+
 
 
 
@@ -587,4 +608,15 @@ public class TestPaymentActivity extends Activity {
         onBackPressed();
     }
 
+    public void deletePayment(View view)
+    {
+        saveNdelete();
+        dialogDeleteAlert.dismiss();
+
+    }
+
+    public void cancelDelete(View view)
+    {
+        dialogDeleteAlert.dismiss();
+    }
 }

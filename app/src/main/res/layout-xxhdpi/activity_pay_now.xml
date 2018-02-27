@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.TestPaymentActivity">
+    tools:context="com.busyprojects.roomies.PaymentActivity">
 
 
     <LinearLayout
@@ -155,6 +155,7 @@
                         android:ems="10"
                         android:fontFamily="serif"
                         android:hint="Paying Item"
+                        android:inputType="textEmailAddress"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="15sp" />

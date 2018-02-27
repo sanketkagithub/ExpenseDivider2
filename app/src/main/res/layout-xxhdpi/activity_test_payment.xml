@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.TestPaymentActivity">
+    tools:context="com.busyprojects.roomies.PaymentActivity">
 
 
     <LinearLayout
@@ -33,7 +33,7 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/delete_payment"
                 android:gravity="center"
-                android:onClick="saveDeleteList"
+                android:onClick="showSaveDeleteListAlert"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 

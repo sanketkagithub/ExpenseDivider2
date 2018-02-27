@@ -13,6 +13,7 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.Roomy;
+import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,8 +42,8 @@ public class HomeActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
-    TextView tv_login_message;
-
+    TextView tv_login_message, tv_notification_count;
+    ImageView iv_notification;
     AnimationManager animationManager = null;
 
 
@@ -75,6 +77,13 @@ public class HomeActivity extends Activity {
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
 
         but_add_roomy = findViewById(R.id.but_add_roomy);
+
+        iv_notification = findViewById(R.id.iv_notification);
+        tv_notification_count = findViewById(R.id.tv_notification_count);
+
+        iv_notification.setVisibility(View.GONE);
+        tv_notification_count.setVisibility(View.GONE);
+
         but_pay = findViewById(R.id.but_pay);
         but_view_payment = findViewById(R.id.but_view_payment);
         but_history = findViewById(R.id.but_history);
@@ -96,9 +105,17 @@ public class HomeActivity extends Activity {
 
         //  rel_iv_roomy_home.setBackgroundColor(Color.parseColor("#F5F1F1"));
 
-        setItemsColor();
-    }
+        // TODO: 2/27/2018 save mac address 
+       String macAddress = Helper.getMacAddr();
+       spe= sp.edit();
+        spe.putString(SessionManager.MAC_ADDRESS,macAddress);
+        spe.apply();
 
+
+        setItemsColor();
+
+        getNewNotifyObjects();
+    }
 
 
     List<String> roomysList;
@@ -166,7 +183,7 @@ public class HomeActivity extends Activity {
     public void viewPayment(View view) {
         // TODO: 1/27/2018 get All Sessions list  firstly
 
-        startActivity(new Intent(context, TestPaymentActivity.class));
+        startActivity(new Intent(context, PaymentActivity.class));
 //        rel_iv_roomy_home.setVisibility(View.GONE);
 //
 //        rel_add_roomy_layout.setVisibility(View.GONE);
@@ -227,58 +244,58 @@ public class HomeActivity extends Activity {
         spe = sp.edit();
 
 
-       Resources resources = getResources();
+        Resources resources = getResources();
         Toast.makeText(context, "==> " + getResources().getColor(R.color.done_light), Toast.LENGTH_SHORT).show();
 
         switch (view.getId()) {
             case R.id.iv_sky_blue:
 
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.sky_bluish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.profile_bluish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_blu);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.profile_bluish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_blu);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_blu);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_blu);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_blu);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_blu);
 
-               spe.putInt(SessionManager.IV_DELETE,R.drawable.del_blu);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_blu);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_blu);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_blu);
 
 
                 spe.apply();
 
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
                 setItemsColor();
                 dialog.dismiss();
                 break;
 
             case R.id.iv_greenish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.greenish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_greenish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_green);
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_green);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_green);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_greenish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_green);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_green);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_green);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_green);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_green);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_green);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_green);
                 spe.apply();
 
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
                 setItemsColor();
                 dialog.dismiss();
                 break;
 
             case R.id.iv_yellowish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.yellowish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_yellowish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_yellow);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_yellowish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_yellow);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_yell);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_yellow);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_yell);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_yellow);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_yell);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_yell);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_yell);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_yell);
                 spe.apply();
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
 
                 setItemsColor();
                 dialog.dismiss();
@@ -286,35 +303,35 @@ public class HomeActivity extends Activity {
 
             case R.id.iv_blackish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.blackish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_blackish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_black);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_blackish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_black);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_black);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_black);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_black);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_black);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_black);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_black);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_black);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_black);
 
                 spe.apply();
 
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
                 setItemsColor();
                 dialog.dismiss();
                 break;
 
             case R.id.iv_redish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.redish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_redish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_red);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_redish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_red);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_red);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_red);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_red);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_red);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_red);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_red);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_red);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_red);
                 spe.apply();
 
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
 
                 setItemsColor();
 
@@ -322,38 +339,36 @@ public class HomeActivity extends Activity {
                 break;
             case R.id.iv_pinkish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.pinkish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_pinkish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_pink);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_pinkish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_pink);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_pink);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_pink);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_pink);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_pink);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_pink);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_pink);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_pink);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_pink);
 
                 spe.apply();
 
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
 
                 dialog.dismiss();
                 setItemsColor();
                 break;
             case R.id.iv_voiletish:
                 spe.putString(SessionManager.APP_COLOR, resources.getString(R.string.voiletish));
-                spe.putInt(SessionManager.IV_ROOMY,R.drawable.prof_violetish);
-                spe.putInt(SessionManager.IV_MOBILE,R.drawable.mob_violet);
+                spe.putInt(SessionManager.IV_ROOMY, R.drawable.prof_violetish);
+                spe.putInt(SessionManager.IV_MOBILE, R.drawable.mob_violet);
 
-                spe.putInt(SessionManager.IV_RUPEE,R.drawable.rupee_vio);
-                spe.putInt(SessionManager.IV_PAYING_ITEM,R.drawable.cart_vio);
+                spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_vio);
+                spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_vio);
 
-                spe.putInt(SessionManager.IV_DELETE,R.drawable.del_vio);
-                spe.putInt(SessionManager.IV_TRANSFER,R.drawable.tp_vio);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_vio);
+                spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_vio);
                 spe.apply();
 
 
-
-
-                appColor = sp.getString(SessionManager.APP_COLOR,  resources.getString(R.string.default_color));
+                appColor = sp.getString(SessionManager.APP_COLOR, resources.getString(R.string.default_color));
 
                 setItemsColor();
                 dialog.dismiss();
@@ -375,6 +390,70 @@ public class HomeActivity extends Activity {
         but_logout.setBackgroundColor(Color.parseColor(appColor));
 
     }
+
+    List<Payment> paymentListNotify;
+
+    void getNewNotifyObjects() {
+        db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                .child(mobileLogged)
+                .child(Helper.PAYMENT_LIST)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        paymentListNotify = new ArrayList<>();
+
+
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
+
+                            try {
+                                Payment payment = dataSnapshot1.getValue(Payment.class);
+                                paymentListNotify.add(payment);
+
+                            }catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+                        if (paymentListNotify.size() > 0) {
+
+                            iv_notification.setVisibility(View.VISIBLE);
+                            tv_notification_count.setVisibility(View.VISIBLE);
+
+
+                            tv_notification_count.setText(paymentListNotify.size() + "");
+                        }else
+                        {
+                            iv_notification.setVisibility(View.GONE);
+                            tv_notification_count.setVisibility(View.GONE);
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
+
+    public void showNotifiedData(View view) {
+        db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                .child(mobileLogged)
+                .removeValue();
+
+        startActivity(new Intent(this, PaymentActivity.class));
+
+    }
+
 
 }
 

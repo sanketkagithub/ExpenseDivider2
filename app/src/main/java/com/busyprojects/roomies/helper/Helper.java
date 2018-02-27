@@ -1,11 +1,16 @@
 package com.busyprojects.roomies.helper;
 
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+
 import com.busyprojects.roomies.pojos.master.History;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.net.NetworkInterface;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +26,9 @@ import java.util.List;
 public class Helper {
 
     public static final String USER = "User";
-    public static final String NAME = "name";
+    public static final String PAYMENT_LIST = "paymentList";
+    public static final String MOBILE_LOGGED = "mobileLogged";
+    public static final String PAYMENT_NOTIFICATION = "PaymentNotification";
     public static final String ROOMY = "Roomy";
     public static final String SELECT_ROOMY = "Select Roomy";
     public static final String EACH_TOTAL_PAMENT = "EachTotalPayment";
@@ -95,9 +102,9 @@ public class Helper {
         return dateTimeCurrent;
     }
 
-    Date date1,date2;
-    public   List<Payment> getSortedTransactionList(List<Payment> paymentList)
-    {
+    Date date1, date2;
+
+    public List<Payment> getSortedTransactionList(List<Payment> paymentList) {
 
 
         Collections.sort(paymentList, new Comparator<Payment>() {
@@ -123,14 +130,12 @@ public class Helper {
         });
 
 
-        return  paymentList;
+        return paymentList;
 
     }
 
 
-
-    public   List<History> getSortedHistoryList(List<History> historyList)
-    {
+    public List<History> getSortedHistoryList(List<History> historyList) {
 
 
         Collections.sort(historyList, new Comparator<History>() {
@@ -156,13 +161,12 @@ public class Helper {
         });
 
 
-        return  historyList;
+        return historyList;
 
     }
 
 
-    public  static List<PayTg> getSortedPaymentTakeGiveList(List<PayTg> payTgList)
-    {
+    public static List<PayTg> getSortedPaymentTakeGiveList(List<PayTg> payTgList) {
 
 
         Collections.sort(payTgList, new Comparator<PayTg>() {
@@ -173,13 +177,46 @@ public class Helper {
         });
 
 
-        return  payTgList;
+        return payTgList;
 
     }
 
 
+    public static String getMaccAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wInfo = wifiManager.getConnectionInfo();
+        String macAddress = wInfo.getMacAddress();
 
+        return  macAddress;
+    }
 
+    public static String getMacAddr() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return "";
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    // res1.append(Integer.toHexString(b & 0xFF) + ":");
+                    res1.append(String.format("%02X:",b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            //handle exception
+        }
+        return "";
+    }
 
 }
 

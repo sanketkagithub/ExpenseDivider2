@@ -106,6 +106,7 @@ String appColor;
             roomy.setMobile(mobileS);
             roomy.setName(nameS);
             roomy.setRid(rid);
+            roomy.setMacAddress(Helper.getMaccAddress(this));
             roomy.setMobileLogged(mobileLogged);
             roomy.setRegistrationDateTime(registrationDateTime);
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/grey_color_tg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_del_alert"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:onClick="addRoomy"
+        android:text="Are You sure to delete ?"
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
+
+
+    <LinearLayout
+        android:layout_below="@+id/tv_del_alert"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Yes"
+            android:onClick="deletePayment"
+            android:layout_marginRight="55dp"
+            android:textAllCaps="false"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="No"
+            android:onClick="cancelDelete"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

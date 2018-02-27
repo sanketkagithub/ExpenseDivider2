@@ -50,7 +50,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.95"
         android:background="@color/grey_color_tg"
         android:gravity="center">
 
@@ -65,6 +65,26 @@
             android:text="Every Roommate of this room must login with 7777777777"
             android:textAllCaps="false"
             android:textColor="@color/blue" />
+
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:onClick="showNotifiedData"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_login_message"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/notification"/>
+
+        <TextView
+            android:id="@+id/tv_notification_count"
+            android:textSize="10sp"
+            android:text="00"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white_color"
+            android:layout_below="@+id/tv_login_message"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
   <RelativeLayout

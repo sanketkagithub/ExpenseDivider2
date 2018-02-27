@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 public class SessionManager {
 
     public static final String FILE_WTC = "file";
-    public static final String UID = "uid";
+    public static final String MAC_ADDRESS = "macAddress";
     public static final String HID = "hid";
     public static final String EMAIL = "email";
     public static final String NAME = "name";
