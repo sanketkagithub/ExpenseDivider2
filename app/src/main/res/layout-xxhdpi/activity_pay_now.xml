@@ -155,7 +155,7 @@
                         android:ems="10"
                         android:fontFamily="serif"
                         android:hint="Paying Item"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textAutoComplete"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="15sp" />

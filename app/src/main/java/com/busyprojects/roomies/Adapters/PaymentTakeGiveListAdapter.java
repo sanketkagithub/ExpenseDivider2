@@ -50,7 +50,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
     String[] transferAmount = new String[1];
 
-
+    String appColor;
     public PaymentTakeGiveListAdapter(Context context, List<PayTg> payTgList) {
         super(context, R.layout.row_payment, payTgList);
         this.context = context;
@@ -60,6 +60,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
         sp = context.getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
         db_ref = Helper.getFirebaseDatabseRef();
     }
@@ -80,7 +81,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
             viewHolder.iv_roomy_variation = convertView.findViewById(R.id.iv_roomy_variation);
             viewHolder.but_transfer = convertView.findViewById(R.id.but_transfer);
             viewHolder.tv_payment_info = convertView.findViewById(R.id.tv_payment_info);
-            viewHolder.ll_take_give = convertView.findViewById(R.id.ll_take_give);
+       //     viewHolder.ll_take_give = convertView.findViewById(R.id.ll_take_give);
 
             convertView.setTag(viewHolder);
         } else {
@@ -91,6 +92,8 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
         long amountVariation = payTgList.get(position).getAmountVariation();
         viewHolder.tv_roomy_amount_variation.setText(amountVariation + "/-");
+
+        viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
 
 
         String takeGive;
@@ -105,7 +108,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
             takeGive = "get";
 
-            viewHolder.ll_take_give.setBackgroundColor(takeColor);
+           // viewHolder.ll_take_give.setBackgroundColor(takeColor);
 
         }else if (amountVariation==0)
         {
@@ -118,7 +121,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
             takeGive = "done";
 
-            viewHolder.ll_take_give.setBackgroundColor(doneColor);
+          //  viewHolder.ll_take_give.setBackgroundColor(doneColor);
 
         }
 
@@ -131,7 +134,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
             viewHolder.iv_roomy_variation.setImageResource(R.drawable.give);
 
             takeGive = "give";
-            viewHolder.ll_take_give.setBackgroundColor(giveColor);
+         //   viewHolder.ll_take_give.setBackgroundColor(giveColor);
         }
 
         String message = payTgList.get(position).getRoomyName()

@@ -1,8 +1,11 @@
 package com.busyprojects.roomies;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,6 +40,8 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
 
     TextView tv_total_amount, tv_total_roomies, tv_each_payment;
 
+    @SuppressLint("WrongConstant")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,10 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
 
         setPaymentsList();
         setEachPaymentsList();
+
+      //  lv_payments.se(R.style.list_style);
+       // lv_payments.setsc
+        lv_payments.setScrollIndicators(R.style.list_style);
 
     }
 

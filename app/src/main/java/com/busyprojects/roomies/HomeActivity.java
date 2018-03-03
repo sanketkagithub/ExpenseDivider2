@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -22,8 +23,10 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.busyprojects.roomies.pojos.transaction.PaymentNotification;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,7 @@ import java.util.List;
 public class HomeActivity extends Activity {
 
 
+    MediaPlayer mp;
     FirebaseDatabase fb_db;
     DatabaseReference db_ref, cc_ref, key_ref_cc, cc_inner_ref;        // TODO : one database ref
 
@@ -53,7 +57,7 @@ public class HomeActivity extends Activity {
     Context context = HomeActivity.this;
 
 
-    String mobileLogged;
+    String mobileLogged, macAdd;
 
     RelativeLayout rel_iv_roomy_home;
     Button but_add_roomy;
@@ -68,7 +72,6 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         animationManager = AnimationManager.getInstance();
 
         dialogEffect = new DialogEffect(context);
@@ -81,15 +84,26 @@ public class HomeActivity extends Activity {
         iv_notification = findViewById(R.id.iv_notification);
         tv_notification_count = findViewById(R.id.tv_notification_count);
 
-        iv_notification.setVisibility(View.GONE);
-        tv_notification_count.setVisibility(View.GONE);
+
+        try {
+            iv_notification.setVisibility(View.GONE);
+            tv_notification_count.setVisibility(View.GONE);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         but_pay = findViewById(R.id.but_pay);
         but_view_payment = findViewById(R.id.but_view_payment);
         but_history = findViewById(R.id.but_history);
         but_logout = findViewById(R.id.but_logout);
+
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
+
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        macAdd = sp.getString(SessionManager.MAC_ADDRESS, "");
+
         totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
@@ -106,17 +120,24 @@ public class HomeActivity extends Activity {
         //  rel_iv_roomy_home.setBackgroundColor(Color.parseColor("#F5F1F1"));
 
         // TODO: 2/27/2018 save mac address 
-       String macAddress = Helper.getMacAddr();
-       spe= sp.edit();
-        spe.putString(SessionManager.MAC_ADDRESS,macAddress);
+        String macAddress = Helper.getMacAddr();
+        spe = sp.edit();
+        spe.putString(SessionManager.MAC_ADDRESS, macAddress);
         spe.apply();
 
 
         setItemsColor();
 
         getNewNotifyObjects();
+
+        getRoomsAllMacAddressListInSession();
     }
 
+    void setNotificationSound() {
+        mp = MediaPlayer.create(this, R.raw.ghanti);
+        // mp.prepare();
+        mp.start();
+    }
 
     List<String> roomysList;
 
@@ -391,11 +412,11 @@ public class HomeActivity extends Activity {
 
     }
 
-    List<Payment> paymentListNotify;
+    List<String> paymentListNotify;
 
     void getNewNotifyObjects() {
         db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(mobileLogged)
+                .child(macAdd)
                 .child(Helper.PAYMENT_LIST)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -409,10 +430,11 @@ public class HomeActivity extends Activity {
 
                             try {
                                 Payment payment = dataSnapshot1.getValue(Payment.class);
-                                paymentListNotify.add(payment);
 
-                            }catch (Exception e)
-                            {
+                                if (payment.getMobileLogged().equals(mobileLogged)) {
+                                    paymentListNotify.add(payment.getPid());
+                                }
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -426,8 +448,20 @@ public class HomeActivity extends Activity {
 
 
                             tv_notification_count.setText(paymentListNotify.size() + "");
-                        }else
-                        {
+
+                            //setNotificationSound();
+
+                            // TODO: 3/1/2018 save payNotifList Size in session.
+
+                            SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+                            spe = spuc.edit();
+                            spe.putInt(SessionManager.PNID_LIST, paymentListNotify.size());
+
+                            spe.apply();
+
+
+                        } else {
                             iv_notification.setVisibility(View.GONE);
                             tv_notification_count.setVisibility(View.GONE);
 
@@ -446,12 +480,76 @@ public class HomeActivity extends Activity {
 
 
     public void showNotifiedData(View view) {
+
+        // TODO: 3/1/2018 remove notification data 
         db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(mobileLogged)
+                .child(macAdd)
+                .child(Helper.PAYMENT_LIST)
                 .removeValue();
+
+
+        SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+        spe = spuc.edit();
+        spe.putInt(SessionManager.PNID_LIST, 0);
+
+        spe.apply();
+
+
 
         startActivity(new Intent(this, PaymentActivity.class));
 
+    }
+
+
+    private void getRoomsAllMacAddressListInSession() {
+
+
+        db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        ArrayList<String> stringArrayListMacAdd = new ArrayList<>();
+                        ArrayList<String> stringArrayListPnId = new ArrayList<>();
+
+                        List<PaymentNotification> paymentNotificationList = new ArrayList<>();
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
+
+
+                            try {
+                                PaymentNotification paymentNotification = dataSnapshot1.getValue(PaymentNotification.class);
+
+                                if (paymentNotification.getMobileLogged().equals(mobileLogged)) {
+                                    paymentNotificationList.add(paymentNotification);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                        for (int i = 0; i < paymentNotificationList.size(); i++) {
+
+                            stringArrayListMacAdd.add(paymentNotificationList.get(i).getMacAddress());
+                            stringArrayListPnId.add(paymentNotificationList.get(i).getPnid());
+                        }
+
+
+                        // TODO: 2/28/2018 save macAdd list
+                        TinyDb tinyDb = new TinyDb(context);
+                        tinyDb.putListString(SessionManager.MAC_ADD_LIST, stringArrayListMacAdd);
+                        tinyDb.putListString(SessionManager.PNID_LIST, stringArrayListPnId);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
 

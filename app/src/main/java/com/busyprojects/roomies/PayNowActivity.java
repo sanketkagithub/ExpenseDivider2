@@ -25,6 +25,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
@@ -133,7 +134,11 @@ public class PayNowActivity extends Activity {
         iv_paying_item.setImageResource(payingItem);
 
         et_amount.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+        et_amount.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
+
+
         actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+        actv_paying_item.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
 
     }
 
@@ -189,12 +194,22 @@ public class PayNowActivity extends Activity {
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
 
-            // TODO: 1/27/2018 save payment notification;
-            db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                    .child(mobileLogged)
-                    .child(Helper.PAYMENT_LIST)
-                    .child(pid)
-                    .setValue(payment);
+            TinyDb tinyDb = new TinyDb(context);
+            ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
+            ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
+
+            for (int i = 0; i < macAddList.size(); i++) {
+
+
+                // TODO: 1/27/2018 save payment notification;
+                db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                        .child(macAddList.get(i))
+                        .child(Helper.PAYMENT_LIST)
+                         .child(pid)
+                        .setValue(payment);
+
+
+            }
 
 
             // TODO: 2/18/2018   change------
@@ -206,6 +221,8 @@ public class PayNowActivity extends Activity {
                 e.printStackTrace();
             }
 // TODO: 2/18/2018 do alllllllllllll below
+
+            onBackPressed();
 
         }
 
@@ -221,7 +238,7 @@ public class PayNowActivity extends Activity {
 
                 roomySelected = roomyList.get(i);
 
-              //  Toast.makeText(context, i + "   poss", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(context, i + "   poss", Toast.LENGTH_SHORT).show();
 
                 getLatestAfterTransferToGetTotalAmountOfPayee();
             }
@@ -411,7 +428,7 @@ public class PayNowActivity extends Activity {
             }
             totalAfterTransfer = 0;
 
-         //   Toast.makeText(context, "At updated", Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(context, "At updated", Toast.LENGTH_SHORT).show();
 
             canTransfer = true;
 

@@ -15,12 +15,15 @@ import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.User;
+import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.busyprojects.roomies.pojos.transaction.PaymentNotification;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RegisterLoginActivity extends Activity {
@@ -72,9 +75,11 @@ public class RegisterLoginActivity extends Activity {
     }
 
 
+    String mobileLogin;
+
     public void loginRoomy(View view) {
 
-        final String mobileLogin = et_login.getText().toString();
+        mobileLogin = et_login.getText().toString();
 
         if (mobileLogin.equals("")) {
             Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
@@ -105,8 +110,18 @@ public class RegisterLoginActivity extends Activity {
                                 spe.putString(SessionManager.MOBILE, mobileLogin);
                                 spe.apply();
 
+                                SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+                                spe = spUc.edit();
+                                spe.putString(SessionManager.LOGGED_MOBILE_UC, mobileLogin);
+                                spe.apply();
+
+
+                                saveRoomyMacAddressForNotification();
+
 
                                 startActivity(new Intent(context, HomeActivity.class));
+
 
                             } else {
                                 Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
@@ -128,13 +143,58 @@ public class RegisterLoginActivity extends Activity {
     }
 
 
+    void saveRoomyMacAddressForNotification() {
+        String macAddress = Helper.getMacAddr();
+
+        if (macAddress.equals("")) {
+            macAddress = "emulatorMacAdd";
+        }
+        spe = sp.edit();
+        spe.putString(SessionManager.MAC_ADDRESS, macAddress);
+        spe.apply();
+
+
+       SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC,MODE_PRIVATE);
+        int payNotfSize = spUc.getInt(SessionManager.PNID_LIST, 0);
+
+        System.out.println(payNotfSize + " payNotfSize ");
+
+        String pnId = Helper.randomString(10);
+        PaymentNotification paymentNotification = new PaymentNotification();
+        paymentNotification.setMacAddress(macAddress);
+        paymentNotification.setMobileLogged(mobileLogin);
+        paymentNotification.setPnid(pnId);
+
+        HashMap<String, Payment> paymentMap = new HashMap<>();
+
+        // TODO: 3/1/2018  dummy Payment
+        Payment payment = new Payment();
+        payment.setPid("xdvxcvcxcv");
+        payment.setMobileLogged(mobileLogin);
+
+        for (int i = 0; i < payNotfSize; i++) {
+            paymentMap.put(i + "defaultKeys", payment);
+        }
+
+
+        paymentNotification.setPaymentList(paymentMap);
+
+        db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                .child(macAddress)
+                .setValue(paymentNotification);
+
+
+        //getRoomsAllMacAddressListInSession();
+
+
+    }
+
     public void registerRoomy(View view) {
         final String mobileReg = et_register.getText().toString();
 
         if (mobileReg.equals("")) {
             Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
         } else {
-
 
 
             db_ref.child(Helper.USER)
@@ -144,21 +204,19 @@ public class RegisterLoginActivity extends Activity {
 
                             List<String> userList = new ArrayList<>();
 
-                            for (DataSnapshot dataSnapshot1:
-                                 dataSnapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
-                              User userDb =  dataSnapshot1.getValue(User.class);
+                                User userDb = dataSnapshot1.getValue(User.class);
 
-                          userList.add(userDb.getMobile());
+                                userList.add(userDb.getMobile());
 
                             }
 
 
-                            if (userList.contains(mobileReg))
-                            {
+                            if (userList.contains(mobileReg)) {
                                 Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
-                            }else
-                            {
+                            } else {
                                 // TODO: 2/25/2018 save user
                                 String uid = Helper.randomString(10);
                                 User user = new User();
@@ -175,7 +233,6 @@ public class RegisterLoginActivity extends Activity {
                             }
 
 
-
                         }
 
                         @Override
@@ -185,21 +242,16 @@ public class RegisterLoginActivity extends Activity {
                     });
 
 
-
-
-
-
         }
-
-
 
 
     }
 
 
-
     void setLoginVisibilities() {
-        String mobile = sp.getString(SessionManager.MOBILE, "");
+
+        SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+        String mobile = spUc.getString(SessionManager.LOGGED_MOBILE_UC, "");
 
         et_login.setText(mobile);
 

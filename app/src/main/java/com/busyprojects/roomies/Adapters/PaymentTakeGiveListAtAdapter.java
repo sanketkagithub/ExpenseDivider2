@@ -3,6 +3,7 @@ package com.busyprojects.roomies.Adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -51,7 +52,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     String[] transferAmount = new String[1];
     AnimationManager animationManager;
-
+    String appColor;
 
     public PaymentTakeGiveListAtAdapter(Context context, List<PayTg> payTgList) {
         super(context, R.layout.row_payment, payTgList);
@@ -64,6 +65,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         sp = context.getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
         db_ref = Helper.getFirebaseDatabseRef();
     }
@@ -96,6 +98,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         long amountVariation = payTgList.get(position).getAmountVariation();
         viewHolder.tv_roomy_amount_variation.setText(amountVariation + "/-");
 
+        viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
+
 
         String takeGive;
         if (amountVariation > 0) {
@@ -109,7 +113,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
             takeGive = "get";
 
-            viewHolder.ll_take_give.setBackgroundColor(takeColor);
+            // viewHolder.ll_take_give.setBackgroundColor(takeColor);
             viewHolder.but_transfer.setVisibility(View.GONE);
 
         } else if (amountVariation == 0) {
@@ -123,7 +127,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
             takeGive = "done";
 
-            viewHolder.ll_take_give.setBackgroundColor(doneColor);
+            // viewHolder.ll_take_give.setBackgroundColor(doneColor);
 
         } else {
             int giveColor = context.getResources().getColor(R.color.give_light);
@@ -134,7 +138,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder.iv_roomy_variation.setImageResource(R.drawable.give);
 
             takeGive = "give";
-            viewHolder.ll_take_give.setBackgroundColor(giveColor);
+            //  viewHolder.ll_take_give.setBackgroundColor(giveColor);
             viewHolder.but_transfer.setVisibility(View.VISIBLE);
         }
 
@@ -231,16 +235,14 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                 amountToTransfer = et_transfer_amount.getText().toString();
 
-                if (amountToTransfer.equals("")||spin_roomy.getSelectedItemPosition()==0) {
+                if (amountToTransfer.equals("") || spin_roomy.getSelectedItemPosition() == 0) {
 
-                    if (amountToTransfer.equals(""))
-                    {
+                    if (amountToTransfer.equals("")) {
                         animationManager.animateViewForEmptyField(et_transfer_amount, context);
 
                     }
 
-                    if (spin_roomy.getSelectedItemPosition()==0)
-                    {
+                    if (spin_roomy.getSelectedItemPosition() == 0) {
                         animationManager.animateViewForEmptyField(spin_roomy, context);
 
                     }
@@ -397,7 +399,6 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                                     setFromToAmountVar();
 
 
-
                                 }
 
                             }
@@ -411,7 +412,6 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                     }
                 });
-
 
 
     }

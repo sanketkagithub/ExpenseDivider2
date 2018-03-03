@@ -67,7 +67,7 @@ AnimationManager animationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_payment);
+        setContentView(R.layout.activity_payment);
 
        animationManager = AnimationManager.getInstance();
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
@@ -313,6 +313,11 @@ AnimationManager animationManager;
                             lv_payments.setVisibility(View.GONE);
                             iv_no_pay.setVisibility(View.VISIBLE);
                             iv_no_transfer.setVisibility(View.VISIBLE);
+
+
+                            but_transfer_money.setVisibility(View.GONE);
+                            but_delete_payment.setVisibility(View.GONE);
+
                         }
 
                     }

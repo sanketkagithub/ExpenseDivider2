@@ -1,14 +1,19 @@
 package com.busyprojects.roomies;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.HistoryDatesAdapter;
 import com.busyprojects.roomies.helper.DialogEffect;
@@ -21,9 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class HistoryDateActivity extends AppCompatActivity {
+public class HistoryDateActivity extends Activity {
 
     ListView lv_history_dates;
 
@@ -35,7 +41,11 @@ public class HistoryDateActivity extends AppCompatActivity {
     DatabaseReference dbRef;
     DialogEffect dialogEffect;
 
+    Button but_delete_payment;
     ImageView iv_no_history_record_found;
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +56,8 @@ public class HistoryDateActivity extends AppCompatActivity {
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
 
         lv_history_dates = findViewById(R.id.lv_history_dates);
-       TextView tv_history_date = findViewById(R.id.tv_history_date);
+        but_delete_payment = findViewById(R.id.but_delete_payment);
+        TextView tv_history_date = findViewById(R.id.tv_history_date);
         lv_history_dates.setVisibility(View.VISIBLE);
         iv_no_history_record_found = findViewById(R.id.iv_no_history_record_found);
         iv_no_history_record_found.setVisibility(View.GONE);
@@ -54,9 +65,12 @@ public class HistoryDateActivity extends AppCompatActivity {
 
         setHistoryDatesList(lv_history_dates);
 
-        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+        String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
+        int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
 
-        tv_history_date.setTextColor(Color.parseColor(appColor)); }
+        tv_history_date.setBackgroundColor(Color.parseColor(appColor));
+        but_delete_payment.setBackground(getDrawable(deletePayment));
+    }
 
 
     List<History> historyList;
@@ -86,18 +100,20 @@ public class HistoryDateActivity extends AppCompatActivity {
                         }
 
 
-                        if (historyList.size()!=0) {
+                        if (historyList.size() != 0) {
                             historyList = new Helper().getSortedHistoryList(historyList);
 
                             lv_history_dates.setVisibility(View.VISIBLE);
                             iv_no_history_record_found.setVisibility(View.GONE);
+
+                            Collections.reverse(historyList);
                             HistoryDatesAdapter historyDatesAdapter = new HistoryDatesAdapter(context, historyList);
                             lv_history_dates.setAdapter(historyDatesAdapter);
-                        }else
-                        {
+                        } else {
                             lv_history_dates.setVisibility(View.GONE);
                             iv_no_history_record_found.setVisibility(View.VISIBLE);
 
+                            but_delete_payment.setVisibility(View.GONE);
                         }
 
                     }
@@ -132,6 +148,7 @@ public class HistoryDateActivity extends AppCompatActivity {
                                     dbRef.child(Helper.HISTORY).child(history.getHid())
                                             .removeValue();
                                 }
+                                Toast.makeText(context, "History deleted successfully", Toast.LENGTH_SHORT).show();
 
 
                             }

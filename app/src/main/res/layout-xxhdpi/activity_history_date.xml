@@ -24,7 +24,9 @@
         android:id="@+id/but_delete_payment"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/delete_payment"
@@ -36,7 +38,7 @@
 
 
     <RelativeLayout
-        android:layout_below="@id/tv_log_reg_title"
+        android:layout_below="@id/tv_history_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

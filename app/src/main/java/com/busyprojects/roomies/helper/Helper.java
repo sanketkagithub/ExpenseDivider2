@@ -182,13 +182,13 @@ public class Helper {
     }
 
 
-    public static String getMaccAddress(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wInfo = wifiManager.getConnectionInfo();
-        String macAddress = wInfo.getMacAddress();
-
-        return  macAddress;
-    }
+//    public static String getMaccAddress(Context context) {
+//        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//        WifiInfo wInfo = wifiManager.getConnectionInfo();
+//        String macAddress = wInfo.getMacAddress();
+//
+//        return  macAddress;
+//    }
 
     public static String getMacAddr() {
         try {

@@ -106,7 +106,7 @@ String appColor;
             roomy.setMobile(mobileS);
             roomy.setName(nameS);
             roomy.setRid(rid);
-            roomy.setMacAddress(Helper.getMaccAddress(this));
+            roomy.setMacAddress(Helper.getMacAddr());
             roomy.setMobileLogged(mobileLogged);
             roomy.setRegistrationDateTime(registrationDateTime);
 
@@ -127,6 +127,8 @@ String appColor;
 
 
             deleteAfterExistingTransfer();
+
+            onBackPressed();
 
         }
 
