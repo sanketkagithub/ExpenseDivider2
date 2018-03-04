@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.TransferActivity">
+    tools:context="com.busyprojects.roomies.PaymentActivity">
 
- <LinearLayout
-     android:layout_width="match_parent"
-       android:layout_height="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <RelativeLayout
             android:id="@+id/rel_iv_roomy_home"
@@ -26,20 +27,41 @@
                 android:layout_height="60dp"
                 android:padding="2dp"
                 android:text="@string/add_roomy"
-                android:src="@drawable/add_roomy" />
-
+                android:src="@drawable/pay"
+                android:textColor="@color/white_color"
+                android:textSize="30sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="visible"
-            android:id="@+id/rel_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp">
+
+            <Spinner
+                android:id="@+id/spinner_roomy"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="#000"
+                android:popupBackground="@android:color/transparent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp">
 
             <LinearLayout
+                android:id="@+id/ll_paying_amount"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:background="@drawable/et_reg_back"
@@ -54,10 +76,10 @@
                     android:padding="5dp">
 
                     <ImageView
-                        android:id="@+id/iv_name"
+                        android:id="@+id/iv_amount_to_pay"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/name" />
+                        android:src="@drawable/rupee" />
 
                 </RelativeLayout>
 
@@ -69,15 +91,14 @@
                     android:paddingLeft="9dp">
 
                     <EditText
-                        android:id="@+id/et_name"
+                        android:id="@+id/et_amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:fontFamily="serif"
-                        android:hint="Name"
-                        android:textCursorDrawable="@drawable/cursor_background"
-                        android:backgroundTint="@color/voiletish"
-                        android:inputType="textEmailAddress"
+                        android:hint="Amount"
+                        android:inputType="number"
+                        android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="15sp" />
 
@@ -87,20 +108,18 @@
 
             </LinearLayout>
 
-
-
-
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="visible"
-            android:id="@+id/rel_mobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp">
 
             <LinearLayout
+                android:id="@+id/ll_paying_item"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:background="@drawable/et_reg_back"
@@ -115,10 +134,10 @@
                     android:padding="5dp">
 
                     <ImageView
-                        android:id="@+id/iv_call"
+                        android:id="@+id/iv_paying_item"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/call" />
+                        android:src="@drawable/paying_item" />
 
                 </RelativeLayout>
 
@@ -129,15 +148,15 @@
                     android:gravity="center"
                     android:paddingLeft="9dp">
 
-                    <EditText
-                        android:id="@+id/et_mobile"
+                    <AutoCompleteTextView
+                        android:id="@+id/actv_paying_item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:fontFamily="serif"
-                        android:hint="Mobile"
-                        android:inputType="phone"
-                        android:maxLength="10"
+                        android:hint="Paying Item"
+                        android:inputType="textAutoComplete"
+                        android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="15sp" />
 
@@ -147,53 +166,49 @@
 
             </LinearLayout>
 
-
         </RelativeLayout>
 
+
         <RelativeLayout
-            android:visibility="visible"
-            android:id="@+id/rel_save_roomy"
+            android:id="@+id/rel_pay_roomy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
-                android:id="@+id/but_save"
+                android:id="@+id/but_pay"
                 android:layout_width="@dimen/but_w"
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
                 android:fontFamily="serif"
-                android:onClick="saveRoomy"
-                android:text="save"
+                android:onClick="payNowhere"
+                android:text="Pay"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="visible"
-            android:id="@+id/rel_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
-                android:id="@+id/but_back"
+                android:id="@+id/iv_cancel_pay"
                 android:layout_width="@dimen/but_w"
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
                 android:fontFamily="serif"
-                android:onClick="backToHome"
-                android:text="Back"
+                android:onClick="cancelPayment"
+                android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
         </RelativeLayout>
-
-
 
     </LinearLayout>
+
 
 </RelativeLayout>

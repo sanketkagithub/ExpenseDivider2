@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ public class LauncherActivity extends Activity {
         iv_centre_down = findViewById(R.id.iv_centre_down);
         final RelativeLayout rel_launcher_back = findViewById(R.id.rel_launcher_back);
 
+          getScreenInfo();
 
         Resources resources = getResources();
 
@@ -62,7 +64,20 @@ public class LauncherActivity extends Activity {
             }
         }, 1500);
     }
+    public void getScreenInfo(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
+     int   heightPixels = metrics.heightPixels;
+        int widthPixels = metrics.widthPixels;
+        float density = metrics.density;
+        int    densityDpi = metrics.densityDpi;
+
+        System.out.println("heightPixels " +heightPixels + "\n" + "widthPixels " +widthPixels + "\n"
+
+                + density + "\n" + densityDpi);
+
+    }
     void animateSharing() {
 
         iv_centre_right.startAnimation(AnimationUtils.loadAnimation(this, R.anim.share_money_launcher_right));

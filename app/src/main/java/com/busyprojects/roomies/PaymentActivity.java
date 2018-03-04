@@ -107,8 +107,15 @@ AnimationManager animationManager;
         tv_transaction.setTextColor(Color.parseColor(appColor));
         tv_each_paid.setTextColor(Color.parseColor(appColor));
         ll_tot_each_roomy.setBackgroundColor(Color.parseColor(appColor));
-        but_delete_payment.setBackground(getDrawable(deletePayment));
-        but_transfer_money.setBackground(getDrawable(transferPayment));
+
+        try {
+            but_delete_payment.setBackground(getDrawable(deletePayment));
+            but_transfer_money.setBackground(getDrawable(transferPayment));
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 

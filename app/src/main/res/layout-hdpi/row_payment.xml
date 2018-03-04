@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_payment_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/lv_back"
+        android:orientation="vertical"
+        android:paddingBottom="2dp"
+        android:paddingEnd="9dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingStart="9dp"
+        android:paddingTop="2dp">
+
+
+        <LinearLayout
+            android:id="@+id/ll_item"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_roomy_name"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:text="Name"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:fontFamily="serif"
+                android:src="@drawable/paid"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_paying_item"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/blue" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_from"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/main_app_colorp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:fontFamily="serif"
+                android:src="@drawable/transfer_money"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_to"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/main_app_colorp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_roomy_amount"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="00"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/tv_payment_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="00/00/0000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/date" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center"
+    android:layout_margin="5dp"
+    android:text="jjhbjhbjhbhj"
+    android:background="@drawable/roomy_spinner_back"
+    android:id="@+id/tv_spin_roomy_name"
+    android:textColor="@color/main_app_colorp">
+
+</TextView>
