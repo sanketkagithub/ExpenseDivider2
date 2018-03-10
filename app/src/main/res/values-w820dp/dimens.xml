@@ -2,4 +2,32 @@
     <!-- Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+    <dimen name="top_image">40dp</dimen>
+    <dimen name="et_left_image">20dp</dimen>
+    <dimen name="ll_et_wd">220dp</dimen>
+    <dimen name="et_text">12sp</dimen>
+    <dimen name="image_buttons">25dp</dimen>
+    <dimen name="bottom_iv_margin">5dp</dimen>
+    <dimen name="bell">40dp</dimen>
+    <dimen name="bell_text">10sp</dimen>
+    <dimen name="ll_et_ht">40dp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="lv_but_ht">25dp</dimen>
+    <dimen name="launcher_title">30sp</dimen>
+    <dimen name="launcher_images">50dp</dimen>
+    <dimen name="calculated_bottom_text">12sp</dimen>
+    <dimen name="title_login">20sp</dimen>
+    <dimen name="transactions_title">15sp</dimen>
+    <dimen name="paid">50dp</dimen>
+    <dimen name="but_text">10sp</dimen>
+
+    <dimen name="transfer_iv">40dp</dimen>
+    <dimen name="change_color">25dp</dimen>
+    <dimen name="coin_wh">20dp</dimen>
+    <dimen name="lv_text">11sp</dimen>
+    <dimen name="spin_ht">55dp</dimen>
+    <dimen name="spin_mar">25dp</dimen>
+    <dimen name="lr_padd_transfer_lv">5dp</dimen>
+    <dimen name="lv_pad">5dp</dimen>
+    <dimen name="transfer_but_marging">2dp</dimen>
 </resources>

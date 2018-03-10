@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="button_ht">50dp</dimen>
+    <dimen name="but_w">300dp</dimen>
+
+    <dimen name="payment_lv_lr_margin">15dp</dimen>
+    <dimen name="but_text">28sp</dimen>
+    <dimen name="et_ht">60dp</dimen>
+    <dimen name="top_image">80dp</dimen>
+    <dimen name="et_left_image">30dp</dimen>
+    <dimen name="ll_et_wd">520dp</dimen>
+
+    <dimen name="lv_but_ht">25dp</dimen>
+    <dimen name="et_text">27sp</dimen>
+    <dimen name="image_buttons">38dp</dimen>
+    <dimen name="bottom_iv_margin">19dp</dimen>
+    <dimen name="bell">80dp</dimen>
+    <dimen name="date">21sp</dimen>
+    <dimen name="ll_et_ht">50dp</dimen>
+
+    <dimen name="bell_text">22sp</dimen>
+    <dimen name="title">45sp</dimen>
+    <dimen name="launcher_title">40sp</dimen>
+    <dimen name="launcher_images">60dp</dimen>
+    <dimen name="calculated_bottom_text">12sp</dimen>
+    <dimen name="title_login">50sp</dimen>
+    <dimen name="transactions_title">37sp</dimen>
+    <dimen name="paid">50dp</dimen>
+    <dimen name="transfer_iv">40dp</dimen>
+    <dimen name="change_color">45dp</dimen>
+    <dimen name="launcher_div_iv_margin">100dp</dimen>
+    <dimen name="coin_wh">40dp</dimen>
+    <dimen name="lv_text">27sp</dimen>
+    <dimen name="paid_marging">42dp</dimen>
+    <dimen name="paid_left_righ_et_wd">250dp</dimen>
+    <dimen name="paid_wd_ht">85dp</dimen>
+    <dimen name="spin_ht">55dp</dimen>
+    <dimen name="spin_mar">25dp</dimen>
+    <dimen name="lr_padd_transfer_lv">35dp</dimen>
+    <dimen name="lv_pad">9dp</dimen>
+    <dimen name="transfer_but_marging">12dp</dimen>
+
+</resources>

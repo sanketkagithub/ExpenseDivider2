@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LauncherActivity">
+        <activity android:name=".LauncherActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +28,8 @@
         <activity
             android:name=".AddRoomyActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".RegisterLoginActivity"
             android:screenOrientation="portrait" />
@@ -44,6 +48,15 @@
         <activity
             android:name=".PaymentActivity"
             android:screenOrientation="portrait" />
+
+        <receiver android:name=".helper.CheckInternetReceiver">
+            <intent-filter>
+
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

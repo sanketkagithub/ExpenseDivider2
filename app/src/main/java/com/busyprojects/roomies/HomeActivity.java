@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,12 +15,11 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.busyprojects.roomies.helper.AnimationManager;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -47,7 +47,7 @@ public class HomeActivity extends Activity {
     SharedPreferences.Editor spe;
 
     TextView tv_login_message, tv_notification_count;
-    ImageView iv_notification;
+    RelativeLayout iv_notification;
     AnimationManager animationManager = null;
 
 
@@ -68,7 +68,8 @@ public class HomeActivity extends Activity {
     String appColor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -101,6 +102,8 @@ public class HomeActivity extends Activity {
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
 
+
+
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         macAdd = sp.getString(SessionManager.MAC_ADDRESS, "");
 
@@ -108,13 +111,10 @@ public class HomeActivity extends Activity {
 
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
-        fb_db = FirebaseDatabase.getInstance();
-        db_ref = fb_db.getReference();
 
-        setTotalRoomieesCountInSession();
+
 
         tv_login_message.setText("Every Roommate of this room must login with " + mobileLogged);
-
         tv_login_message.setTextColor(Color.parseColor(appColor));
 
         //  rel_iv_roomy_home.setBackgroundColor(Color.parseColor("#F5F1F1"));
@@ -126,11 +126,16 @@ public class HomeActivity extends Activity {
         spe.apply();
 
 
-        setItemsColor();
-
-        getNewNotifyObjects();
-
-        getRoomsAllMacAddressListInSession();
+        if (CheckInternetReceiver.isOnline(this)) {
+            db_ref = Helper.getFirebaseDatabseRef();
+            setTotalRoomieesCountInSession();
+            setItemsColor();
+            getNewNotifyObjects();
+            getRoomsAllMacAddressListInSession();
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
     }
 
     void setNotificationSound() {
@@ -144,59 +149,74 @@ public class HomeActivity extends Activity {
     private void setTotalRoomieesCountInSession() {
 
         dialogEffect.showDialog();
-        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                roomysList = new ArrayList<>();
-                dialogEffect.cancelDialog();
+        if (CheckInternetReceiver.isOnline(this)) {
+            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                for (DataSnapshot dataSnapshot1 :
-                        dataSnapshot.getChildren()) {
-
-                    // TODO: 1/27/2018  add one by one roomy in list
-                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                    roomysList = new ArrayList<>();
+                    dialogEffect.cancelDialog();
 
 
-                    if (mobileLogged.equals(roomy.getMobileLogged())) {
-                        if (roomy != null) {
-                            roomysList.add(roomy.getName());
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        // TODO: 1/27/2018  add one by one roomy in list
+                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+
+
+                        if (mobileLogged.equals(roomy.getMobileLogged())) {
+                            if (roomy != null) {
+                                roomysList.add(roomy.getName());
+                            }
                         }
+
                     }
+
+
+                    // TODO: 2/24/2018 save roomies  count
+
+                    spe = sp.edit();
+                    spe.putInt(SessionManager.TOTAL_ROOMMATES, roomysList.size());
+                    spe.apply();
+
 
                 }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                // TODO: 2/24/2018 save roomies  count
+                }
+            });
 
-                spe = sp.edit();
-                spe.putInt(SessionManager.TOTAL_ROOMMATES, roomysList.size());
-                spe.apply();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
 
     }
 
 
     public void addRoomy(View view) {
-
-        startActivity(new Intent(this, AddRoomyActivity.class));
-
+        if (CheckInternetReceiver.isOnline(this)) {
+            startActivity(new Intent(this, AddRoomyActivity.class));
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
 
     }
 
 
     public void payNow(View view) {
 
-        startActivity(new Intent(this, PayNowActivity.class));
-
+        if (CheckInternetReceiver.isOnline(this)) {
+            startActivity(new Intent(this, PayNowActivity.class));
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
 
     }
 
@@ -204,7 +224,12 @@ public class HomeActivity extends Activity {
     public void viewPayment(View view) {
         // TODO: 1/27/2018 get All Sessions list  firstly
 
-        startActivity(new Intent(context, PaymentActivity.class));
+        if (CheckInternetReceiver.isOnline(this)) {
+            startActivity(new Intent(context, PaymentActivity.class));
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
 //        rel_iv_roomy_home.setVisibility(View.GONE);
 //
 //        rel_add_roomy_layout.setVisibility(View.GONE);
@@ -232,9 +257,15 @@ public class HomeActivity extends Activity {
     }
 
 
-    public void viewHistory(View view) {
-        startActivity(new Intent(this, HistoryDateActivity.class));
-    }
+    public void viewHistory(View view)
+    {
+        if (CheckInternetReceiver.isOnline(this)) {
+            startActivity(new Intent(this, HistoryDateActivity.class));
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
+        }
 
     public void logout(View view) {
 
@@ -251,6 +282,8 @@ public class HomeActivity extends Activity {
     public void changeAppColor(View view) {
         dialog = new Dialog(context);
         View v = LayoutInflater.from(context).inflate(R.layout.change_color_layout, null);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         dialog.setContentView(v);
 
 
@@ -264,9 +297,8 @@ public class HomeActivity extends Activity {
 
         spe = sp.edit();
 
-
         Resources resources = getResources();
-        Toast.makeText(context, "==> " + getResources().getColor(R.color.done_light), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "==> " + getResources().getColor(R.color.done_light), Toast.LENGTH_SHORT).show();
 
         switch (view.getId()) {
             case R.id.iv_sky_blue:
@@ -415,141 +447,156 @@ public class HomeActivity extends Activity {
     List<String> paymentListNotify;
 
     void getNewNotifyObjects() {
-        db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(macAdd)
-                .child(Helper.PAYMENT_LIST)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        paymentListNotify = new ArrayList<>();
+        if (CheckInternetReceiver.isOnline(this)) {
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .child(macAdd)
+                    .child(Helper.PAYMENT_LIST)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            paymentListNotify = new ArrayList<>();
 
 
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
-                            try {
-                                Payment payment = dataSnapshot1.getValue(Payment.class);
+                                try {
+                                    Payment payment = dataSnapshot1.getValue(Payment.class);
 
-                                if (payment.getMobileLogged().equals(mobileLogged)) {
-                                    paymentListNotify.add(payment.getPid());
+                                    if (payment.getMobileLogged().equals(mobileLogged)) {
+                                        paymentListNotify.add(payment.getPid());
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
+
+
+                            }
+
+                            if (paymentListNotify.size() > 0) {
+
+                                iv_notification.setVisibility(View.VISIBLE);
+                                tv_notification_count.setVisibility(View.VISIBLE);
+
+
+                                tv_notification_count.setText(paymentListNotify.size() + "");
+
+                                //setNotificationSound();
+
+                                // TODO: 3/1/2018 save payNotifList Size in session.
+
+                                SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+                                spe = spuc.edit();
+                                spe.putInt(SessionManager.PNID_LIST, paymentListNotify.size());
+
+                                spe.apply();
+
+
+                            } else {
+                                iv_notification.setVisibility(View.GONE);
+                                tv_notification_count.setVisibility(View.GONE);
+
                             }
 
 
                         }
 
-                        if (paymentListNotify.size() > 0) {
-
-                            iv_notification.setVisibility(View.VISIBLE);
-                            tv_notification_count.setVisibility(View.VISIBLE);
-
-
-                            tv_notification_count.setText(paymentListNotify.size() + "");
-
-                            //setNotificationSound();
-
-                            // TODO: 3/1/2018 save payNotifList Size in session.
-
-                            SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
-
-                            spe = spuc.edit();
-                            spe.putInt(SessionManager.PNID_LIST, paymentListNotify.size());
-
-                            spe.apply();
-
-
-                        } else {
-                            iv_notification.setVisibility(View.GONE);
-                            tv_notification_count.setVisibility(View.GONE);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
+                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+        }
     }
 
 
     public void showNotifiedData(View view) {
 
-        // TODO: 3/1/2018 remove notification data 
-        db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(macAdd)
-                .child(Helper.PAYMENT_LIST)
-                .removeValue();
+        if (CheckInternetReceiver.isOnline(this))
+        {
+            // TODO: 3/1/2018 remove notification data
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .child(macAdd)
+                    .child(Helper.PAYMENT_LIST)
+                    .removeValue();
 
 
-        SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+            SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
 
-        spe = spuc.edit();
-        spe.putInt(SessionManager.PNID_LIST, 0);
+            spe = spuc.edit();
+            spe.putInt(SessionManager.PNID_LIST, 0);
 
-        spe.apply();
+            spe.apply();
 
-
-
-        startActivity(new Intent(this, PaymentActivity.class));
-
+            startActivity(new Intent(this, PaymentActivity.class));
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
     }
 
 
     private void getRoomsAllMacAddressListInSession() {
 
 
-        db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        ArrayList<String> stringArrayListMacAdd = new ArrayList<>();
-                        ArrayList<String> stringArrayListPnId = new ArrayList<>();
+                            ArrayList<String> stringArrayListMacAdd = new ArrayList<>();
+                            ArrayList<String> stringArrayListPnId = new ArrayList<>();
 
-                        List<PaymentNotification> paymentNotificationList = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
+                            List<PaymentNotification> paymentNotificationList = new ArrayList<>();
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
 
-                            try {
-                                PaymentNotification paymentNotification = dataSnapshot1.getValue(PaymentNotification.class);
+                                try {
+                                    PaymentNotification paymentNotification = dataSnapshot1.getValue(PaymentNotification.class);
 
-                                if (paymentNotification.getMobileLogged().equals(mobileLogged)) {
-                                    paymentNotificationList.add(paymentNotification);
+                                    if (paymentNotification.getMobileLogged().equals(mobileLogged)) {
+                                        paymentNotificationList.add(paymentNotification);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
+
+
+                            for (int i = 0; i < paymentNotificationList.size(); i++) {
+
+                                stringArrayListMacAdd.add(paymentNotificationList.get(i).getMacAddress());
+                                stringArrayListPnId.add(paymentNotificationList.get(i).getPnid());
+                            }
+
+
+                            // TODO: 2/28/2018 save macAdd list
+                            TinyDb tinyDb = new TinyDb(context);
+                            tinyDb.putListString(SessionManager.MAC_ADD_LIST, stringArrayListMacAdd);
+                            tinyDb.putListString(SessionManager.PNID_LIST, stringArrayListPnId);
+
+
                         }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                        for (int i = 0; i < paymentNotificationList.size(); i++) {
-
-                            stringArrayListMacAdd.add(paymentNotificationList.get(i).getMacAddress());
-                            stringArrayListPnId.add(paymentNotificationList.get(i).getPnid());
                         }
+                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-
-                        // TODO: 2/28/2018 save macAdd list
-                        TinyDb tinyDb = new TinyDb(context);
-                        tinyDb.putListString(SessionManager.MAC_ADD_LIST, stringArrayListMacAdd);
-                        tinyDb.putListString(SessionManager.PNID_LIST, stringArrayListPnId);
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+        }
     }
 
 

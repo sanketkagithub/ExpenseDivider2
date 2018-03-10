@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.RoomySpinnerAdapterr;
 import com.busyprojects.roomies.helper.AnimationManager;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -133,11 +134,16 @@ public class PayNowActivity extends Activity {
         iv_amount_to_pay.setImageResource(rupee);
         iv_paying_item.setImageResource(payingItem);
 
-        et_amount.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+
+        if (Build.VERSION.SDK_INT>=21) {
+            et_amount.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+            actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+
+        }
+
         et_amount.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
 
 
-        actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
         actv_paying_item.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
 
     }
@@ -254,6 +260,8 @@ public class PayNowActivity extends Activity {
 
 
     private void getLatestAfterTransferToGetTotalAmountOfPayee() {
+
+    if (CheckInternetReceiver.isOnline(this)) {
         dialogEffect.showDialog();
         db_ref.child(Helper.AFTER_TRANSFER)
                 .addValueEventListener(new ValueEventListener() {
@@ -306,6 +314,12 @@ public class PayNowActivity extends Activity {
 
                     }
                 });
+    }else
+    {
+        Helper.showCheckInternet(context);
+
+    }
+
     }
 
     List<String> roomyListNames = new ArrayList<>();
@@ -313,59 +327,64 @@ public class PayNowActivity extends Activity {
 
     void setSpinneerAdapter() {
 
-        dialogEffect.showDialog();
-        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                dialogEffect.cancelDialog();
-                roomyListNames.clear();
-                roomyList.clear();
+                    dialogEffect.cancelDialog();
+                    roomyListNames.clear();
+                    roomyList.clear();
 
-                // TODO: 2/10/2018 add default roomy
-                roomyListNames.add(Helper.SELECT_ROOMY);
+                    // TODO: 2/10/2018 add default roomy
+                    roomyListNames.add(Helper.SELECT_ROOMY);
 
-                Roomy roomyDefault = new Roomy();
-                roomyDefault.setName(Helper.SELECT_ROOMY);
-                roomyDefault.setRid("");
-                roomyDefault.setRegistrationDateTime("");
-                roomyDefault.setMobile("");
-                roomyDefault.setMobileLogged("");
+                    Roomy roomyDefault = new Roomy();
+                    roomyDefault.setName(Helper.SELECT_ROOMY);
+                    roomyDefault.setRid("");
+                    roomyDefault.setRegistrationDateTime("");
+                    roomyDefault.setMobile("");
+                    roomyDefault.setMobileLogged("");
 
-                roomyList.add(roomyDefault);
+                    roomyList.add(roomyDefault);
 
 
-                for (DataSnapshot dataSnapshot1 :
-                        dataSnapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
 
-                    // TODO: 1/27/2018  add one by one roomy in list
-                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                        // TODO: 1/27/2018  add one by one roomy in list
+                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                    String mobile = roomy.getMobileLogged();
+                        String mobile = roomy.getMobileLogged();
 
-                    System.out.println(mobileLogged + " == " + mobile);
+                        System.out.println(mobileLogged + " == " + mobile);
 
-                    if (mobileLogged.equals(roomy.getMobileLogged())) {
-                        roomyListNames.add(roomy.getName());
-                        roomyList.add(roomy);
+                        if (mobileLogged.equals(roomy.getMobileLogged())) {
+                            roomyListNames.add(roomy.getName());
+                            roomyList.add(roomy);
+
+                        }
 
                     }
 
+                    // TODO: 1/27/2018 set roomy list in spinner
+                    RoomySpinnerAdapterr roomySpinnerAdapterr = new RoomySpinnerAdapterr(context, roomyListNames);
+                    spinner_roomy.setAdapter(roomySpinnerAdapterr);
+
+                    //          getSelectedRoomy();
                 }
 
-                // TODO: 1/27/2018 set roomy list in spinner
-                RoomySpinnerAdapterr roomySpinnerAdapterr = new RoomySpinnerAdapterr(context, roomyListNames);
-                spinner_roomy.setAdapter(roomySpinnerAdapterr);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                //          getSelectedRoomy();
-            }
+                }
+            });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        }
     }
 
     void updateAfterTransfer() {

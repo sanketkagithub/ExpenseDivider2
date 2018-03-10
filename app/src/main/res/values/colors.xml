@@ -36,5 +36,13 @@
     <color name="pinkish">#63184a</color>
     <color name="voiletish">#9c58fc</color>
 
+    <!--<color name="mdpi">#000</color>
+ <color name="hdpi">#ff0000</color>
+ <color name="xhdpi">#0ab1ff</color>
+ <color name="xxhdpi">#ff00f2</color>
+<color name="xxxhdpi">#33ff00</color>
+<color name="t600hdpi">#0008ff</color>
+<color name="t720dpi">#ffdd00</color>-->
+
 
 </resources>

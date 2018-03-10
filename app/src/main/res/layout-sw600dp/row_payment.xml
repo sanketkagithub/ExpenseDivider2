@@ -33,27 +33,32 @@
 
             <TextView
                 android:id="@+id/tv_roomy_name"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/paid_left_righ_et_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
-                android:text="Name"
-                android:gravity="center"
+                android:text="Name"                android:gravity="center|left"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/paid_marging"
+                android:layout_marginEnd="@dimen/paid_marging"
+                android:layout_marginLeft="@dimen/paid_marging"
+                android:layout_marginRight="@dimen/paid_marging"
+                android:layout_width="@dimen/paid_wd_ht"
+                android:layout_height="@dimen/paid_wd_ht"
                 android:fontFamily="serif"
                 android:src="@drawable/paid"
                 android:text="Name" />
 
             <TextView
                 android:id="@+id/tv_paying_item"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/paid_left_righ_et_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/blue" />
 
 
@@ -70,27 +75,33 @@
 
             <TextView
                 android:id="@+id/tv_from"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/paid_left_righ_et_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/paid_marging"
+                android:layout_marginEnd="@dimen/paid_marging"
+                android:layout_marginLeft="@dimen/paid_marging"
+                android:layout_marginRight="@dimen/paid_marging"
+                android:layout_width="@dimen/paid_wd_ht"
+                android:layout_height="@dimen/paid_wd_ht"
                 android:fontFamily="serif"
                 android:src="@drawable/transfer_money"
                 android:text="Name" />
 
             <TextView
                 android:id="@+id/tv_to"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/paid_left_righ_et_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
 
@@ -99,10 +110,11 @@
         <TextView
             android:id="@+id/tv_roomy_amount"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="00"
+            android:textSize="@dimen/et_text"
             android:textColor="@color/black" />
 
 

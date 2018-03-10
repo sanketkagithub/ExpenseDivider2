@@ -24,13 +24,13 @@
             <TextView
                 android:id="@+id/tv_log_reg_title"
                 android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textColor="@color/white_color"
-                android:textSize="30sp" />
+                android:textSize="@dimen/launcher_title" />
 
 
         </RelativeLayout>
@@ -43,54 +43,54 @@
 
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/launcher_images"
+                android:layout_height="@dimen/launcher_images"
                 android:layout_above="@+id/iv_centre_right"
-                android:layout_marginBottom="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginBottom="@dimen/launcher_div_iv_margin"
+                android:layout_marginEnd="@dimen/launcher_div_iv_margin"
+                android:layout_marginRight="@dimen/launcher_div_iv_margin"
                 android:layout_toLeftOf="@+id/iv_centre_right"
                 android:src="@drawable/roomy_launcher" />
 
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/launcher_images"
+                android:layout_height="@dimen/launcher_images"
                 android:layout_above="@+id/iv_centre_right"
 
-                android:layout_marginBottom="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginBottom="@dimen/launcher_div_iv_margin"
+                android:layout_marginLeft="@dimen/launcher_div_iv_margin"
+                android:layout_marginStart="@dimen/launcher_div_iv_margin"
                 android:layout_toRightOf="@+id/iv_centre_right"
                 android:src="@drawable/roomy_launcher" />
 
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/launcher_images"
+                android:layout_height="@dimen/launcher_images"
                 android:layout_below="@+id/iv_centre_right"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="130dp"
                 android:src="@drawable/roomy_launcher" />
 
             <ImageView
                 android:id="@+id/iv_centre_right"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/coin_wh"
+                android:layout_height="@dimen/coin_wh"
                 android:layout_centerInParent="true"
                 android:src="@drawable/share_launcher" />
 
             <ImageView
                 android:id="@+id/iv_centre_left"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/coin_wh"
+                android:layout_height="@dimen/coin_wh"
                 android:layout_centerInParent="true"
                 android:src="@drawable/share_launcher" />
 
             <ImageView
                 android:id="@+id/iv_centre_down"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/coin_wh"
+                android:layout_height="@dimen/coin_wh"
                 android:layout_centerInParent="true"
                 android:src="@drawable/share_launcher" />
 

@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:textSize="@dimen/et_text"
             android:fontFamily="serif"
             android:gravity="center"
             android:textColor="@color/black" />

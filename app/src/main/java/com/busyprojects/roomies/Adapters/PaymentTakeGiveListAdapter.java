@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -50,6 +51,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
     String[] transferAmount = new String[1];
 
+
     String appColor;
     public PaymentTakeGiveListAdapter(Context context, List<PayTg> payTgList) {
         super(context, R.layout.row_payment, payTgList);
@@ -59,6 +61,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
         dialogEffect = new DialogEffect(context);
 
         sp = context.getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
+
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
@@ -246,38 +249,44 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
     void getAllRoomieesTransferSpinner(final Spinner spinnerRoomy) {
 
-        dialogEffect.showDialog();
-        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                dialogEffect.cancelDialog();
+        if (CheckInternetReceiver.isOnline(context)) {
+            dialogEffect.showDialog();
+            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                roomyListTransferSpinner = new ArrayList<>();
+                    dialogEffect.cancelDialog();
 
-                for (DataSnapshot dataSnapshot1 :
-                        dataSnapshot.getChildren()) {
+                    roomyListTransferSpinner = new ArrayList<>();
 
-                    // TODO: 1/27/2018  add one by one roomy in list
-                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
 
-                    if (mobileLogged.equals(roomy.getMobileLogged())) {
-                        roomyListTransferSpinner.add(roomy);
+                        // TODO: 1/27/2018  add one by one roomy in list
+                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+
+                        if (mobileLogged.equals(roomy.getMobileLogged())) {
+                            roomyListTransferSpinner.add(roomy);
+                        }
+
                     }
+
+                    RoomySpinnerTransferAdapter roomySpinnerAdapterr = new RoomySpinnerTransferAdapter(context, roomyListTransferSpinner);
+                    spinnerRoomy.setAdapter(roomySpinnerAdapterr);
 
                 }
 
-                RoomySpinnerTransferAdapter roomySpinnerAdapterr = new RoomySpinnerTransferAdapter(context, roomyListTransferSpinner);
-                spinnerRoomy.setAdapter(roomySpinnerAdapterr);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
+                }
+            });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        }
 
     }
 

@@ -1,8 +1,7 @@
 package com.busyprojects.roomies.helper;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
+import android.widget.Toast;
 
 import com.busyprojects.roomies.pojos.master.History;
 import com.busyprojects.roomies.pojos.master.PayTg;
@@ -79,6 +78,13 @@ public class Helper {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
+
+
+    public  static void showCheckInternet(Context context)
+    {
+        Toast.makeText(context, "Please Check Internet", Toast.LENGTH_SHORT).show();
+    }
+
 
     static String NOTIF = "0123456789";
 

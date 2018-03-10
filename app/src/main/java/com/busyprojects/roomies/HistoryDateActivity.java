@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.HistoryDatesAdapter;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -69,7 +70,7 @@ public class HistoryDateActivity extends Activity {
         int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
 
         tv_history_date.setBackgroundColor(Color.parseColor(appColor));
-        but_delete_payment.setBackground(getDrawable(deletePayment));
+        but_delete_payment.setBackground(getResources().getDrawable(deletePayment));
     }
 
 
@@ -77,58 +78,65 @@ public class HistoryDateActivity extends Activity {
 
     void setHistoryDatesList(final ListView lv_history_dates) {
 
-        dialogEffect.showDialog();
-        dbRef.child(Helper.HISTORY)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            dbRef.child(Helper.HISTORY)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        dialogEffect.cancelDialog();
-                        historyList = new ArrayList<>();
+                            dialogEffect.cancelDialog();
+                            historyList = new ArrayList<>();
 
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
 
-                            History history = dataSnapshot1.getValue(History.class);
+                                History history = dataSnapshot1.getValue(History.class);
 
-                            if (mobileLogged.equals(history.getMobileLogged())) {
-                                historyList.add(history);
+                                if (mobileLogged.equals(history.getMobileLogged())) {
+                                    historyList.add(history);
+                                }
+
+
                             }
 
 
+                            if (historyList.size() != 0) {
+                                historyList = new Helper().getSortedHistoryList(historyList);
+
+                                lv_history_dates.setVisibility(View.VISIBLE);
+                                iv_no_history_record_found.setVisibility(View.GONE);
+
+                                Collections.reverse(historyList);
+                                HistoryDatesAdapter historyDatesAdapter = new HistoryDatesAdapter(context, historyList);
+                                lv_history_dates.setAdapter(historyDatesAdapter);
+                            } else {
+                                lv_history_dates.setVisibility(View.GONE);
+                                iv_no_history_record_found.setVisibility(View.VISIBLE);
+
+                                but_delete_payment.setVisibility(View.GONE);
+                            }
+
                         }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                        if (historyList.size() != 0) {
-                            historyList = new Helper().getSortedHistoryList(historyList);
-
-                            lv_history_dates.setVisibility(View.VISIBLE);
-                            iv_no_history_record_found.setVisibility(View.GONE);
-
-                            Collections.reverse(historyList);
-                            HistoryDatesAdapter historyDatesAdapter = new HistoryDatesAdapter(context, historyList);
-                            lv_history_dates.setAdapter(historyDatesAdapter);
-                        } else {
-                            lv_history_dates.setVisibility(View.GONE);
-                            iv_no_history_record_found.setVisibility(View.VISIBLE);
-
-                            but_delete_payment.setVisibility(View.GONE);
                         }
+                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+        }
 
     }
 
 
     public void deleteHistoryList(View view) {
+
+    if (CheckInternetReceiver.isOnline(this)) {
         dialogEffect.showDialog();
         dbRef.child(Helper.HISTORY)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -162,5 +170,11 @@ public class HistoryDateActivity extends Activity {
 
                     }
                 });
+
+    }else
+    {
+        Helper.showCheckInternet(context);
+
+    }
     }
 }

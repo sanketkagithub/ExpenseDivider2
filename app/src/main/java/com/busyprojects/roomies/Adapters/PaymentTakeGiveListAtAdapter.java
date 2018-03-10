@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.AnimationManager;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -291,48 +292,52 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     private void getAllRoomieesTransferSpinner(final Spinner spinnerRoomy) {
 
-        dialogEffect.showDialog();
-        db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(context)) {
+            dialogEffect.showDialog();
+            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                dialogEffect.cancelDialog();
+                    dialogEffect.cancelDialog();
 
-                roomyListTransferSpinner = new ArrayList<>();
+                    roomyListTransferSpinner = new ArrayList<>();
 
-                // TODO: 2/25/2018 add default select text in roomy spinner
-                Roomy roomyDefault = new Roomy();
-                roomyDefault.setRegistrationDateTime("");
-                roomyDefault.setMobileLogged("");
-                roomyDefault.setMobile("");
-                roomyDefault.setName(Helper.SELECT_ROOMY);
-                roomyDefault.setRid("");
+                    // TODO: 2/25/2018 add default select text in roomy spinner
+                    Roomy roomyDefault = new Roomy();
+                    roomyDefault.setRegistrationDateTime("");
+                    roomyDefault.setMobileLogged("");
+                    roomyDefault.setMobile("");
+                    roomyDefault.setName(Helper.SELECT_ROOMY);
+                    roomyDefault.setRid("");
 
-                roomyListTransferSpinner.add(roomyDefault);
+                    roomyListTransferSpinner.add(roomyDefault);
 
-                for (DataSnapshot dataSnapshot1 :
-                        dataSnapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
 
-                    // TODO: 1/27/2018  add one by one roomy in list
-                    Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                        // TODO: 1/27/2018  add one by one roomy in list
+                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                    if (mobileLogged.equals(roomy.getMobileLogged())) {
-                        roomyListTransferSpinner.add(roomy);
+                        if (mobileLogged.equals(roomy.getMobileLogged())) {
+                            roomyListTransferSpinner.add(roomy);
+                        }
+
                     }
+
+                    RoomySpinnerTransferAdapter roomySpinnerAdapterr = new RoomySpinnerTransferAdapter(context, roomyListTransferSpinner);
+                    spinnerRoomy.setAdapter(roomySpinnerAdapterr);
 
                 }
 
-                RoomySpinnerTransferAdapter roomySpinnerAdapterr = new RoomySpinnerTransferAdapter(context, roomyListTransferSpinner);
-                spinnerRoomy.setAdapter(roomySpinnerAdapterr);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+                }
+            });
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
 
     }
 
@@ -365,55 +370,59 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 "toMobile " + toMobile + "\n" +
                 "amountToTransfer " + amountToTransfer);
 
+        if (CheckInternetReceiver.isOnline(context)) {
+            // TODO: 2/11/2018 get fromAmountVar   &&  // TODO: 2/11/2018 get toAmountVar
 
-        // TODO: 2/11/2018 get fromAmountVar   &&  // TODO: 2/11/2018 get toAmountVar
+            db_ref.child(Helper.AFTER_TRANSFER)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        try {
-
-
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
+                            try {
 
 
-                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+                                for (DataSnapshot dataSnapshot1 :
+                                        dataSnapshot.getChildren()) {
 
-                                if (payTg.getMobileLogged().equals(mobileLogged)) {
 
-                                    if (payTg.getMobile().equals(fromMobile)) {
-                                        amountVarFrom = payTg.getAmountVariation();
-                                        fromTotalPaid = payTg.getAmountTg();
+                                    PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                                    if (payTg.getMobileLogged().equals(mobileLogged)) {
+
+                                        if (payTg.getMobile().equals(fromMobile)) {
+                                            amountVarFrom = payTg.getAmountVariation();
+                                            fromTotalPaid = payTg.getAmountTg();
+                                        }
+
+                                        if (payTg.getMobile().equals(toMobile)) {
+
+                                            amountVarTo = payTg.getAmountVariation();
+                                            toTotalPaid = payTg.getAmountTg();
+
+                                        }
+
+                                        setFromToAmountVar();
+
+
                                     }
-
-                                    if (payTg.getMobile().equals(toMobile)) {
-
-                                        amountVarTo = payTg.getAmountVariation();
-                                        toTotalPaid = payTg.getAmountTg();
-
-                                    }
-
-                                    setFromToAmountVar();
-
 
                                 }
-
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
 
+        }else
+        {
+            Helper.showCheckInternet(context);
 
+        }
     }
 
 
@@ -468,7 +477,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
             dialog.dismiss();
-            Toast.makeText(context, " Transfered ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Amount Transfered Successfully", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(context, "Please Select One Roomy", Toast.LENGTH_SHORT).show();

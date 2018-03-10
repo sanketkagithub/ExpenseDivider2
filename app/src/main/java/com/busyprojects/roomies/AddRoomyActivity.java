@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -79,10 +80,12 @@ String appColor;
         iv_name.setImageResource(profile);
         iv_call.setImageResource(mobile);
 
-        //SessionManager.setCursorColor(et_name,Color.parseColor(appColor));
-        et_name.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
-        et_mobile.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
 
+        if (Build.VERSION.SDK_INT>=21) {
+            //SessionManager.setCursorColor(et_name,Color.parseColor(appColor));
+            et_name.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+            et_mobile.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+        }
     }
 
 
@@ -137,45 +140,52 @@ String appColor;
 
     void deleteAfterExistingTransfer() {
 
-        dialogEffect.showDialog();
-        db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
 
-                dialogEffect.cancelDialog();
-                try {
+            dialogEffect.showDialog();
+
+            db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    dialogEffect.cancelDialog();
+                    try {
 
 
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
 
-                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+                            PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
-                        if (payTg.getMobileLogged().equals(mobileLogged)) {
-                            db_ref.child(Helper.AFTER_TRANSFER)
-                                    .child(payTg.getPayTgId())
-                                    .removeValue();
+                            if (payTg.getMobileLogged().equals(mobileLogged)) {
+                                db_ref.child(Helper.AFTER_TRANSFER)
+                                        .child(payTg.getPayTgId())
+                                        .removeValue();
+
+                            }
+
 
                         }
 
+                    } catch (Exception e) {
+                        spe = sp.edit();
+                        spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                        spe.apply();
 
+                        e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                    spe = sp.edit();
-                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                    spe.apply();
-
-                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
+        }else
+        {
+            Helper.showCheckInternet(context);
+        }
     }
 
     public void backToHome(View view) {

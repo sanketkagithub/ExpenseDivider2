@@ -16,11 +16,11 @@
 
         <TextView
             android:id="@+id/tv_log_reg_title"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="@dimen/title"
             android:fontFamily="serif"
             android:text="@string/app_name"
             android:textColor="@color/white_color" />
@@ -28,11 +28,11 @@
 
         <Button
             android:id="@+id/but_delete_payment"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/change_color"
+            android:layout_height="@dimen/change_color"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="@dimen/bottom_iv_margin"
+            android:layout_marginRight="@dimen/bottom_iv_margin"
             android:background="@drawable/change_color"
             android:gravity="center"
             android:onClick="changeAppColor"
@@ -47,7 +47,8 @@
 
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.95"
@@ -58,35 +59,39 @@
             android:id="@+id/tv_login_message"
             android:gravity="center"
             android:padding="5dp"
-            android:layout_width="wrap_content"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
            android:fontFamily="serif"
+            android:textSize="@dimen/et_text"
             android:onClick="addRoomy"
             android:text="Every Roommate of this room must login with 7777777777"
             android:textAllCaps="false"
             android:textColor="@color/blue" />
 
-        <ImageView
+        <RelativeLayout
+            android:background="@drawable/notification"
             android:id="@+id/iv_notification"
             android:onClick="showNotifiedData"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_login_message"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/notification"/>
+            android:layout_width="@dimen/bell"
+            android:layout_height="@dimen/bell" >
 
-        <TextView
-            android:id="@+id/tv_notification_count"
-            android:textSize="10sp"
-            android:text="00"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/white_color"
-            android:layout_below="@+id/tv_login_message"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_notification_count"
+                android:textSize="@dimen/bell_text"
+                android:text="00"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white_color"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+
+    </LinearLayout>
   <RelativeLayout
         android:id="@+id/rel_add_roomy"
         android:layout_width="match_parent"
@@ -103,6 +108,7 @@
             android:onClick="addRoomy"
             android:text="@string/add_roomy"
             android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
@@ -125,6 +131,7 @@
             android:onClick="payNow"
             android:text="@string/pay"
             android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
@@ -150,6 +157,7 @@
             android:onClick="viewPayment"
             android:text="@string/view_payments"
             android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
@@ -171,6 +179,7 @@
             android:onClick="viewHistory"
             android:text="History"
             android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
@@ -190,6 +199,7 @@
             android:onClick="logout"
             android:text="@string/logout"
             android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>

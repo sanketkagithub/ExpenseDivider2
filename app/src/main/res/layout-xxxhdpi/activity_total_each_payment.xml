@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context="com.busyprojects.roomies.TotalEachPaymentHistoryActivity">
 
 
     <LinearLayout
@@ -23,16 +24,17 @@
 
 
             <TextView
+                android:id="@+id/tv_transaction"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="@color/grey_color_tg"
+                android:background="@color/white_color"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="@string/transactions"
                 android:textColor="@color/main_app_colorp"
-                android:textSize="15sp" />
+                android:textSize="@dimen/transactions_title" />
 
 
         </RelativeLayout>
@@ -88,22 +90,24 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:textSize="15sp">
+                android:textSize="@dimen/title">
 
 
                 <TextView
-                    android:id="@+id/tv_log_reg_title"
+                    android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
 
-                    android:background="@color/grey_color_tg"
+                    android:background="@color/white_color"
                     android:fontFamily="serif"
                     android:gravity="center"
                     android:text="Each Paid"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/transactions_title" />
+
+
 
 
             </RelativeLayout>

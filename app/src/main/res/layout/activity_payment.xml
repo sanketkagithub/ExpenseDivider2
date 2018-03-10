@@ -1,9 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.busyprojects.roomies.PaymentActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.45"
+            android:background="@color/white_color"
+            android:gravity="center">
+
+
+            <Button
+                android:id="@+id/but_delete_payment"
+                android:layout_width="@dimen/image_buttons"
+                android:layout_height="@dimen/image_buttons"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/bottom_iv_margin"
+                android:layout_marginRight="@dimen/bottom_iv_margin"
+                android:background="@drawable/delete_payment"
+                android:gravity="center"
+                android:onClick="showSaveDeleteListAlert"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color" />
+
+            <TextView
+                android:id="@+id/tv_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_color"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="@string/transactions"
+                android:textColor="@color/main_app_colorp"
+                android:textSize="@dimen/transactions_title" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white_color"
+            android:gravity="center"
+            android:paddingBottom="4dp">
+
+            <ListView
+                android:id="@+id/lv_payments"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginEnd="@dimen/payment_lv_lr_margin"
+                android:layout_marginLeft="@dimen/payment_lv_lr_margin"
+                android:layout_marginRight="@dimen/payment_lv_lr_margin"
+                android:layout_marginStart="@dimen/payment_lv_lr_margin"
+                android:layout_marginTop="4dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:scrollbarSize="10dp"
+                android:scrollbarThumbVertical="@drawable/list_scroller" />
+
+            <ImageView
+                android:id="@+id/iv_no_payment_record_found"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/no_record"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.45"
+            android:background="@color/white_color"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:textSize="15sp">
+
+
+                <TextView
+                    android:id="@+id/tv_each_paid"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:background="@color/white_color"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Each Paid"
+                    android:textColor="@color/main_app_colorp"
+                    android:textSize="@dimen/transactions_title" />
+
+                <Button
+                    android:id="@+id/but_transfer_money"
+                    android:layout_width="@dimen/image_buttons"
+                    android:layout_height="@dimen/image_buttons"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/bottom_iv_margin"
+                    android:layout_marginRight="@dimen/bottom_iv_margin"
+                    android:background="@drawable/transfer_payment"
+                    android:onClick="saveAndShowAfterTransferPayTgList"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_color" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white_color"
+            android:gravity="center">
+
+            <ListView
+                android:id="@+id/lv_take_give"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginEnd="@dimen/payment_lv_lr_margin"
+                android:layout_marginLeft="@dimen/payment_lv_lr_margin"
+                android:layout_marginRight="@dimen/payment_lv_lr_margin"
+                android:layout_marginStart="@dimen/payment_lv_lr_margin"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:scrollbarSize="10dp"
+                android:scrollbarThumbVertical="@drawable/list_scroller" />
+
+            <ImageView
+                android:id="@+id/iv_no_transfer_record_found"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/no_record"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_divide_payment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/but_divide"
+                    android:layout_width="@dimen/but_w"
+                    android:layout_height="@dimen/button_ht"
+                    android:background="@drawable/buttons"
+                    android:fontFamily="serif"
+                    android:onClick="divideAmount"
+                    android:text="Divide"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_color"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tot_each_roomy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/calculation_back"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/payment_calculated_text"
+                            android:layout_width="195dp"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_total_amount"
+                            style="@style/payment_calculated_text_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00000/-"
+                            android:textSize="@dimen/calculated_bottom_text" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/payment_calculated_text"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Roomies "
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_total_roomies"
+                            style="@style/payment_calculated_text_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/payment_calculated_text"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="Each "
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_each_payment"
+                            style="@style/payment_calculated_text_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00/-"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

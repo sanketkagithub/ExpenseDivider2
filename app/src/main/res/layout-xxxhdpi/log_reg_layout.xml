@@ -11,16 +11,6 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <Button
-            android:layout_width="@dimen/but_w"
-            android:layout_height="@dimen/button_ht"
-            android:background="@drawable/buttons"
-            android:fontFamily="serif"
-            android:onClick="showLogin"
-            android:text="Login"
-            android:textAllCaps="false"
-            android:textColor="@color/white_color" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -37,8 +27,25 @@
             android:fontFamily="serif"
             android:onClick="showRegister"
             android:text="Register"
+            android:textSize="@dimen/but_text"
             android:textAllCaps="false"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:id="@+id/button2" />
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:layout_alignLeft="@+id/button2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/button2"
+            android:layout_marginBottom="87dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="showLogin"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
 

@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:text="@string/transactions"
                 android:textColor="@color/main_app_colorp"
-                android:textSize="15sp" />
+                android:textSize="@dimen/transactions_title" />
 
 
         </RelativeLayout>
@@ -90,7 +90,7 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:textSize="15sp">
+                android:textSize="@dimen/title">
 
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:gravity="center"
                     android:text="Each Paid"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/transactions_title" />
 
 
 

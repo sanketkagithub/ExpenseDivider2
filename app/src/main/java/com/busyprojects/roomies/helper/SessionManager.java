@@ -15,6 +15,7 @@ public class SessionManager {
     public static final String MAC_ADDRESS = "macAddress";
     public static final String HID = "hid";
     public static final String MAC_ADD_LIST = "macAddList";
+    public static final String IS_INTERNET = "isInternet";
     public static final String PNID_LIST = "pnidList";
     public static final String PNID_LIST_SIZE = "pnidList_size";
     public static final String FILE_UC = "fileUc";

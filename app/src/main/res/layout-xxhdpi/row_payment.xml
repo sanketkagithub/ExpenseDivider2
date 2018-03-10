@@ -38,6 +38,7 @@
                 android:fontFamily="serif"
                 android:text="Name"
                 android:gravity="center"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/black" />
 
             <ImageView
@@ -54,6 +55,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/blue" />
 
 
@@ -75,11 +77,12 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/transfer_iv"
+                android:layout_height="@dimen/transfer_iv"
                 android:fontFamily="serif"
                 android:src="@drawable/transfer_money"
                 android:text="Name" />
@@ -91,6 +94,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
 
@@ -103,6 +107,7 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="00"
+            android:textSize="@dimen/et_text"
             android:textColor="@color/black" />
 
 

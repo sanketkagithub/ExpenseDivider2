@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/tv_log_reg_title"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/top_image"
+                android:layout_height="@dimen/top_image"
                 android:padding="2dp"
                 android:text="@string/add_roomy"
                 android:src="@drawable/pay"
@@ -62,8 +62,8 @@
 
             <LinearLayout
                 android:id="@+id/ll_paying_amount"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
                 android:background="@drawable/et_reg_back"
                 android:orientation="horizontal">
 
@@ -77,8 +77,8 @@
 
                     <ImageView
                         android:id="@+id/iv_amount_to_pay"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
                         android:src="@drawable/rupee" />
 
                 </RelativeLayout>
@@ -100,7 +100,7 @@
                         android:inputType="number"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/et_text" />
 
 
                 </RelativeLayout>
@@ -120,8 +120,8 @@
 
             <LinearLayout
                 android:id="@+id/ll_paying_item"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
                 android:background="@drawable/et_reg_back"
                 android:orientation="horizontal">
 
@@ -135,8 +135,8 @@
 
                     <ImageView
                         android:id="@+id/iv_paying_item"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
                         android:src="@drawable/paying_item" />
 
                 </RelativeLayout>
@@ -158,7 +158,7 @@
                         android:inputType="textAutoComplete"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/et_text" />
 
 
                 </RelativeLayout>
@@ -184,6 +184,7 @@
                 android:fontFamily="serif"
                 android:onClick="payNowhere"
                 android:text="Pay"
+                android:textSize="@dimen/but_text"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
@@ -201,6 +202,7 @@
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
                 android:fontFamily="serif"
+                android:textSize="@dimen/but_text"
                 android:onClick="cancelPayment"
                 android:text="Cancel"
                 android:textAllCaps="false"

@@ -18,8 +18,8 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="From"
-            android:textColor="@color/white_color"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/et_text" />
 
     </RelativeLayout>
 
@@ -35,9 +35,9 @@
             android:layout_height="30dp"
             android:fontFamily="serif"
             android:gravity="center"
-            android:text="ddddfdsdfsdf"
+            android:text="Sanket"
             android:textColor="@color/main_app_colorp"
-            android:textSize="15sp" />
+            android:textSize="@dimen/et_text" />
 
     </RelativeLayout>
 
@@ -54,8 +54,8 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="To"
-            android:textColor="@color/white_color"
-            android:textSize="15sp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/et_text" />
 
     </RelativeLayout>
 
@@ -83,8 +83,9 @@
         android:gravity="center">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_width="@dimen/ll_et_wd"
+            android:layout_height="@dimen/ll_et_ht"
             android:background="@drawable/et_reg_back"
             android:orientation="horizontal">
 
@@ -97,8 +98,8 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/et_left_image"
+                    android:layout_height="@dimen/et_left_image"
                     android:src="@drawable/rupee" />
 
             </RelativeLayout>
@@ -112,7 +113,7 @@
 
                 <EditText
                     android:id="@+id/et_transfer_amount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:fontFamily="serif"
@@ -120,7 +121,7 @@
                     android:inputType="phone"
                     android:maxLength="10"
                     android:textColorHint="@color/hint"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/et_text" />
 
 
             </RelativeLayout>
@@ -144,6 +145,7 @@
             android:background="@drawable/buttons"
             android:fontFamily="serif"
             android:text="transfer"
+            android:textSize="@dimen/but_text"
             android:textAllCaps="false"
             android:textColor="@color/white_color" />
 
@@ -170,11 +172,12 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/transfer_iv"
+                android:layout_height="@dimen/transfer_iv"
                 android:fontFamily="serif"
                 android:src="@drawable/transfer_money"
                 android:text="Name" />
@@ -186,6 +189,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
+                android:textSize="@dimen/et_text"
                 android:textColor="@color/main_app_colorp" />
 
 

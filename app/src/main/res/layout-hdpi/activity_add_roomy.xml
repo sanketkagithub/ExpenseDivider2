@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/tv_log_reg_title"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/top_image"
+                android:layout_height="@dimen/top_image"
                 android:padding="2dp"
                 android:text="@string/add_roomy"
                 android:src="@drawable/add_roomy" />
@@ -40,8 +40,8 @@
             android:gravity="center">
 
             <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
                 android:background="@drawable/et_reg_back"
                 android:orientation="horizontal">
 
@@ -55,8 +55,8 @@
 
                     <ImageView
                         android:id="@+id/iv_name"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
                         android:src="@drawable/name" />
 
                 </RelativeLayout>
@@ -79,7 +79,7 @@
                         android:backgroundTint="@color/voiletish"
                         android:inputType="textEmailAddress"
                         android:textColorHint="@color/hint"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/et_text" />
 
 
                 </RelativeLayout>
@@ -101,8 +101,8 @@
             android:gravity="center">
 
             <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
                 android:background="@drawable/et_reg_back"
                 android:orientation="horizontal">
 
@@ -116,8 +116,8 @@
 
                     <ImageView
                         android:id="@+id/iv_call"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
                         android:src="@drawable/call" />
 
                 </RelativeLayout>
@@ -139,7 +139,7 @@
                         android:inputType="phone"
                         android:maxLength="10"
                         android:textColorHint="@color/hint"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/et_text" />
 
 
                 </RelativeLayout>
@@ -166,6 +166,8 @@
                 android:fontFamily="serif"
                 android:onClick="saveRoomy"
                 android:text="save"
+                android:textSize="@dimen/but_text"
+
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
@@ -188,6 +190,8 @@
                 android:onClick="backToHome"
                 android:text="Back"
                 android:textAllCaps="false"
+                android:textSize="@dimen/but_text"
+
                 android:textColor="@color/white_color" />
 
         </RelativeLayout>

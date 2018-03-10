@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -40,6 +41,7 @@ public class RegisterLoginActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
+   // boolean CheckInternetReceiver.isOnline(this);
     RelativeLayout rel_login_reg, rel_login, rel_register;
 
     @Override
@@ -48,7 +50,8 @@ public class RegisterLoginActivity extends Activity {
         setContentView(R.layout.activity_register_login);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
-
+//        CheckInternetReceiver.isOnline(this) = sp.getBoolean(SessionManager.IS_INTERNET, false);
+        //CheckInternetReceiver.isOnline(this) = CheckInternetReceiver.isOnline(this);
         db_ref = Helper.getFirebaseDatabseRef();
 
         dialogEffect = new DialogEffect(context);
@@ -79,67 +82,72 @@ public class RegisterLoginActivity extends Activity {
 
     public void loginRoomy(View view) {
 
-        mobileLogin = et_login.getText().toString();
+        if (CheckInternetReceiver.isOnline(this)) {
+            mobileLogin = et_login.getText().toString();
 
-        if (mobileLogin.equals("")) {
-            Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
+            if (mobileLogin.equals("")) {
+                Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
 
-        } else {
+            } else {
 
-            dialogEffect.showDialog();
-            final List<String> userListMobile = new ArrayList<>();
-            // TODO: 1/28/2018 validate login mobile
-            db_ref.child(Helper.USER)
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                dialogEffect.showDialog();
+                final List<String> userListMobile = new ArrayList<>();
+                // TODO: 1/28/2018 validate login mobile
+                db_ref.child(Helper.USER)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            dialogEffect.cancelDialog();
-                            userListMobile.clear();
+                                dialogEffect.cancelDialog();
+                                userListMobile.clear();
 
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
-                                User user = dataSnapshot1.getValue(User.class);
-                                userListMobile.add(user.getMobile());
+                                for (DataSnapshot dataSnapshot1 :
+                                        dataSnapshot.getChildren()) {
+                                    User user = dataSnapshot1.getValue(User.class);
+                                    userListMobile.add(user.getMobile());
+                                }
+
+                                if (userListMobile.contains(mobileLogin)) {
+
+                                    // TODO: 1/28/2018 save main roomate (user) in session
+                                    spe = sp.edit();
+                                    spe.putString(SessionManager.MOBILE, mobileLogin);
+                                    spe.apply();
+
+                                    SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+                                    spe = spUc.edit();
+                                    spe.putString(SessionManager.LOGGED_MOBILE_UC, mobileLogin);
+                                    spe.apply();
+
+
+                                    saveRoomyMacAddressForNotification();
+
+
+                                    startActivity(new Intent(context, HomeActivity.class));
+
+
+                                } else {
+                                    Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
+
+                                }
+
                             }
 
-                            if (userListMobile.contains(mobileLogin)) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                                // TODO: 1/28/2018 save main roomate (user) in session
-                                spe = sp.edit();
-                                spe.putString(SessionManager.MOBILE, mobileLogin);
-                                spe.apply();
-
-                                SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
-
-                                spe = spUc.edit();
-                                spe.putString(SessionManager.LOGGED_MOBILE_UC, mobileLogin);
-                                spe.apply();
-
-
-                                saveRoomyMacAddressForNotification();
-
-
-                                startActivity(new Intent(context, HomeActivity.class));
-
-
-                            } else {
-                                Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                             }
+                        });
 
-                        }
+            }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                            Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
         }
-
-
     }
 
 
@@ -190,61 +198,67 @@ public class RegisterLoginActivity extends Activity {
     }
 
     public void registerRoomy(View view) {
-        final String mobileReg = et_register.getText().toString();
 
-        if (mobileReg.equals("")) {
-            Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
-        } else {
+if (CheckInternetReceiver.isOnline(this)) {
+    final String mobileReg = et_register.getText().toString();
 
-
-            db_ref.child(Helper.USER)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            List<String> userList = new ArrayList<>();
-
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
-
-                                User userDb = dataSnapshot1.getValue(User.class);
-
-                                userList.add(userDb.getMobile());
-
-                            }
+    if (mobileReg.equals("")) {
+        Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
+    } else {
 
 
-                            if (userList.contains(mobileReg)) {
-                                Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
-                            } else {
-                                // TODO: 2/25/2018 save user
-                                String uid = Helper.randomString(10);
-                                User user = new User();
-                                user.setUid(uid);
-                                user.setMobile(mobileReg);
+        db_ref.child(Helper.USER)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                db_ref.child(Helper.USER).child(uid)
-                                        .setValue(user);
-                                Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                        List<String> userList = new ArrayList<>();
 
-                                sp.edit().putString(SessionManager.MOBILE, mobileReg).apply();
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
+
+                            User userDb = dataSnapshot1.getValue(User.class);
+
+                            userList.add(userDb.getMobile());
+
+                        }
 
 
-                            }
+                        if (userList.contains(mobileReg)) {
+                            Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // TODO: 2/25/2018 save user
+                            String uid = Helper.randomString(10);
+                            User user = new User();
+                            user.setUid(uid);
+                            user.setMobile(mobileReg);
+
+                            db_ref.child(Helper.USER).child(uid)
+                                    .setValue(user);
+                            Toast.makeText(context, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+
+                            sp.edit().putString(SessionManager.MOBILE, mobileReg).apply();
 
 
                         }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
-        }
+    }
 
+}else
+{
+    Helper.showCheckInternet(context);
 
+}
     }
 
 

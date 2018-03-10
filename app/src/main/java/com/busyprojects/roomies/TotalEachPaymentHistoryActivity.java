@@ -1,17 +1,20 @@
 package com.busyprojects.roomies;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.Adapters.PaymentListAdapter;
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAdapter;
+import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
@@ -25,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
+public class TotalEachPaymentHistoryActivity extends Activity {
 
     ListView lv_payments, lv_take_give;
     SharedPreferences sp;
@@ -58,6 +61,9 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
         lv_take_give = findViewById(R.id.lv_take_give);
 
         tv_total_amount = findViewById(R.id.tv_total_amount);
+        TextView tv_transaction = findViewById(R.id.tv_transaction);
+        TextView tv_each_paid = findViewById(R.id.tv_each_paid);
+        LinearLayout ll_tot_each_roomy = findViewById(R.id.ll_tot_each_roomy);
         tv_total_roomies = findViewById(R.id.tv_total_roomies);
         tv_each_payment = findViewById(R.id.tv_each_payment);
 
@@ -69,10 +75,20 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
         setPaymentsList();
         setEachPaymentsList();
 
-      //  lv_payments.se(R.style.list_style);
-       // lv_payments.setsc
-        lv_payments.setScrollIndicators(R.style.list_style);
+        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+        int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
+        int transferPayment =  sp.getInt(SessionManager.IV_TRANSFER,R.drawable.transfer_payment);
+        // TODO: 2/27/2018  appColor
+        tv_transaction.setTextColor(Color.parseColor(appColor));
+        tv_each_paid.setTextColor(Color.parseColor(appColor));
+        ll_tot_each_roomy.setBackgroundColor(Color.parseColor(appColor));
 
+        //  lv_payments.se(R.style.list_style);
+       // lv_payments.setsc
+
+        if (Build.VERSION.SDK_INT>=21) {
+            lv_payments.setScrollIndicators(R.style.list_style);
+        }
     }
 
 
@@ -80,39 +96,44 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
 
     void setPaymentsList() {
 
-        dialogEffect.showDialog();
-        dbRef.child(Helper.HISTORY)
-                .child(hid)
-                .child("paymentList")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            dbRef.child(Helper.HISTORY)
+                    .child(hid)
+                    .child("paymentList")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        dialogEffect.cancelDialog();
+                            dialogEffect.cancelDialog();
 
-                        paymentList = new ArrayList<>();
+                            paymentList = new ArrayList<>();
 
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
-                            Payment payment = dataSnapshot1.getValue(Payment.class);
+                                Payment payment = dataSnapshot1.getValue(Payment.class);
 
-                            if (mobileLogged.equals(payment.getMobileLogged())) {
-                                paymentList.add(payment);
+                                if (mobileLogged.equals(payment.getMobileLogged())) {
+                                    paymentList.add(payment);
+                                }
                             }
+
+                            PaymentListAdapter paymentListAdapter = new PaymentListAdapter(context, paymentList);
+                            lv_payments.setAdapter(paymentListAdapter);
+
                         }
 
-                        PaymentListAdapter paymentListAdapter = new PaymentListAdapter(context, paymentList);
-                        lv_payments.setAdapter(paymentListAdapter);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
+                        }
+                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+        }
 
     }
 
@@ -121,38 +142,44 @@ public class TotalEachPaymentHistoryActivity extends AppCompatActivity {
 
     void setEachPaymentsList() {
 
-        dialogEffect.showDialog();
-        dbRef.child(Helper.HISTORY)
-                .child(hid)
-                .child("eachPaymentList")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            dbRef.child(Helper.HISTORY)
+                    .child(hid)
+                    .child("eachPaymentList")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        dialogEffect.cancelDialog();
+                            dialogEffect.cancelDialog();
 
-                        eachPaymentList = new ArrayList<>();
+                            eachPaymentList = new ArrayList<>();
 
-                        for (DataSnapshot dataSnapshot1 :
-                                dataSnapshot.getChildren()) {
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
 
-                            PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-                            eachPaymentList.add(payTg);
+                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+                                eachPaymentList.add(payTg);
 
+                            }
+
+                            PaymentTakeGiveListAdapter paymentListAdapter = new PaymentTakeGiveListAdapter(context, eachPaymentList);
+                            lv_take_give.setAdapter(paymentListAdapter);
+
+                            setEachPayMent();
                         }
 
-                        PaymentTakeGiveListAdapter paymentListAdapter = new PaymentTakeGiveListAdapter(context, eachPaymentList);
-                        lv_take_give.setAdapter(paymentListAdapter);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                        setEachPayMent();
-                    }
+                        }
+                    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+        }else
+        {
+            Helper.showCheckInternet(context);
 
-                    }
-                });
-
+        }
 
     }
 
