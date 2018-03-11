@@ -8,10 +8,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +25,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
+import com.busyprojects.roomies.helper.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
@@ -36,10 +37,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PayNowActivity extends Activity {
 
@@ -49,9 +52,11 @@ public class PayNowActivity extends Activity {
     DialogEffect dialogEffect;
     EditText et_amount;
 
-    AutoCompleteTextView actv_paying_item;
+    EditText et_paying_item;
     int totalRoommates;
 
+    ImageView iv_main_paying_item;
+    RelativeLayout rel_main_paying_item_mage;
     boolean canTransfer = false;
     long totalAfterTransfer;
     String amount;
@@ -78,6 +83,9 @@ public class PayNowActivity extends Activity {
     List<PayTg> payTgList;
     List<PayTg> payTgListAt;
 
+    Map<String, String> mapItems;
+    String payingItemImageUrl="", defaultImageUrl;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -85,11 +93,19 @@ public class PayNowActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_now);
 
+
+       PayingItems payingItems = PayingItems.getInstance();
+       mapItems = payingItems.getItemsMap();
+
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        defaultImageUrl = getResources().getString(R.string.default_image);
 
         dialogEffect = new DialogEffect(this);
         spinner_roomy = findViewById(R.id.spinner_roomy);
+        rel_main_paying_item_mage = findViewById(R.id.rel_main_paying_item_mage);
+        rel_main_paying_item_mage.setVisibility(View.GONE);
+        iv_main_paying_item = findViewById(R.id.iv_main_paying_item);
         RelativeLayout rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
         ImageView iv_amount_to_pay = findViewById(R.id.iv_amount_to_pay);
         ImageView iv_paying_item = findViewById(R.id.iv_paying_item);
@@ -97,7 +113,7 @@ public class PayNowActivity extends Activity {
         Button but_pay = findViewById(R.id.but_pay);
         ll_paying_amount = findViewById(R.id.ll_paying_amount);
         ll_paying_item = findViewById(R.id.ll_paying_item);
-        actv_paying_item = findViewById(R.id.actv_paying_item);
+        et_paying_item = findViewById(R.id.et_paying_item);
 
         payTgListAt = new ArrayList<>();
         et_amount = findViewById(R.id.et_amount);
@@ -109,9 +125,8 @@ public class PayNowActivity extends Activity {
         db_ref = Helper.getFirebaseDatabseRef();
 
 
-        actv_paying_item = findViewById(R.id.actv_paying_item);
         setSpinneerAdapter();
-        setAutocompetionTextViewItems();
+        //setAutocompetionTextViewItems();
 
 
         totalAfterTransfer = 0;
@@ -135,103 +150,159 @@ public class PayNowActivity extends Activity {
         iv_paying_item.setImageResource(payingItem);
 
 
-        if (Build.VERSION.SDK_INT>=21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             et_amount.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
-            actv_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
+            et_paying_item.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
 
         }
 
         et_amount.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
 
 
-        actv_paying_item.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
+        et_paying_item.setTextColor(ColorStateList.valueOf(Color.parseColor(appColor)));
+
+
+        et_paying_item.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+                try {
+
+
+                    setPayinItemImage(s.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+
+
+
+    void setPayinItemImage(String imageName) {
+
+
+        if (mapItems.containsKey(imageName)) {
+            payingItemImageUrl = mapItems.get(imageName);
+            rel_main_paying_item_mage.setVisibility(View.VISIBLE);
+            Picasso.with(this).load(payingItemImageUrl).into(iv_main_paying_item);
+        } else {
+            rel_main_paying_item_mage.setVisibility(View.GONE);
+        }
 
     }
 
 
     public void payNowhere(View view) {
 
-        //getSelectedRoomy();
-        amount = et_amount.getText().toString();
-        String payingItem = actv_paying_item.getText().toString();
+        if (CheckInternetReceiver.isOnline(this)) {
+            //getSelectedRoomy();
+            amount = et_amount.getText().toString();
+            String payingItem = et_paying_item.getText().toString();
 
 
-        if (amount.equals("") || roomySelected.getName().equals(Helper.SELECT_ROOMY) ||
-                payingItem.equals("")) {
-            if (roomySelected.getName().equals(Helper.SELECT_ROOMY)) {
+            if (amount.equals("") || roomySelected.getName().equals(Helper.SELECT_ROOMY) ||
+                    payingItem.equals("")) {
+                if (roomySelected.getName().equals(Helper.SELECT_ROOMY)) {
 
-                animationManager.animateViewForEmptyField(spinner_roomy, context);
-            }
+                    animationManager.animateViewForEmptyField(spinner_roomy, context);
+                }
 
-            if (amount.equals("")) {
-                animationManager.animateViewForEmptyField(ll_paying_amount, context);
+                if (amount.equals("")) {
+                    animationManager.animateViewForEmptyField(ll_paying_amount, context);
 
-            }
+                }
 
-            if (payingItem.equals("")) {
-                animationManager.animateViewForEmptyField(ll_paying_item, context);
+                if (payingItem.equals("")) {
+                    animationManager.animateViewForEmptyField(ll_paying_item, context);
 
-            }
+                }
 
-            ToastManager.showToast(context, Helper.EMPTY_FIELD);
-
-
-        } else {
-
-            String pid = Helper.randomString(10);
-            // TODO: 1/27/2018 save payment;
-
-            String currentDateTime = Helper.getCurrentDateTime();
-
-            Payment payment = new Payment();
-            payment.setAmount(Long.parseLong(amount));
-            payment.setPaymentDateTime(currentDateTime);
-            payment.setPid(pid);
-            payment.setMobileLogged(mobileLogged);
-            payment.setRoomy(roomySelected);
-
-            payment.setPayingItem(payingItem);
+                ToastManager.showToast(context, Helper.EMPTY_FIELD);
 
 
-            db_ref.child(Helper.PAYMENT)
-                    .child(pid)
-                    .setValue(payment);
+            } else {
 
-            Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
+                String pid = Helper.randomString(10);
+                // TODO: 1/27/2018 save payment;
+
+                String currentDateTime = Helper.getCurrentDateTime();
+
+                Payment payment = new Payment();
+                payment.setAmount(Long.parseLong(amount));
+                payment.setPaymentDateTime(currentDateTime);
+                payment.setPid(pid);
+                payment.setMobileLogged(mobileLogged);
+                payment.setRoomy(roomySelected);
+
+                if (payingItemImageUrl == null)
+                {
+
+                    payingItemImageUrl  = defaultImageUrl;
+                }
+                payment.setPayinItemUrl(payingItemImageUrl);
+
+                payment.setPayingItem(payingItem);
 
 
-            TinyDb tinyDb = new TinyDb(context);
-            ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
-            ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
-
-            for (int i = 0; i < macAddList.size(); i++) {
-
-
-                // TODO: 1/27/2018 save payment notification;
-                db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                        .child(macAddList.get(i))
-                        .child(Helper.PAYMENT_LIST)
-                         .child(pid)
+                db_ref.child(Helper.PAYMENT)
+                        .child(pid)
                         .setValue(payment);
 
+                Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
-            }
+                payingItemImageUrl="";
+
+                TinyDb tinyDb = new TinyDb(context);
+                ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
+                ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
+
+                for (int i = 0; i < macAddList.size(); i++) {
 
 
-            // TODO: 2/18/2018   change------
-            try {
+                    // TODO: 1/27/2018 save payment notification;
+                    db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                            .child(macAddList.get(i))
+                            .child(Helper.PAYMENT_LIST)
+                            .child(pid)
+                            .setValue(payment);
 
 
-                updateAfterTransfer();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                }
+
+
+                // TODO: 2/18/2018   change------
+                try {
+
+
+                    updateAfterTransfer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 // TODO: 2/18/2018 do alllllllllllll below
 
-            onBackPressed();
+                onBackPressed();
 
+            }
+        } else {
+            Helper.showCheckInternet(this);
         }
-
     }
 
     Roomy roomySelected = null;
@@ -261,64 +332,63 @@ public class PayNowActivity extends Activity {
 
     private void getLatestAfterTransferToGetTotalAmountOfPayee() {
 
-    if (CheckInternetReceiver.isOnline(this)) {
-        dialogEffect.showDialog();
-        db_ref.child(Helper.AFTER_TRANSFER)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            db_ref.child(Helper.AFTER_TRANSFER)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        dialogEffect.cancelDialog();
-                        try {
+                            dialogEffect.cancelDialog();
+                            try {
 
-                            payTgListAt = new ArrayList<>();
+                                payTgListAt = new ArrayList<>();
 
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
+                                for (DataSnapshot dataSnapshot1 :
+                                        dataSnapshot.getChildren()) {
 
 
-                                PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+                                    PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
-                                if (payTg.getMobileLogged().equals(mobileLogged)) {
+                                    if (payTg.getMobileLogged().equals(mobileLogged)) {
 
-                                    if (payTg.getMobile().equals(roomySelected.getMobile())) {
-                                        totalAmountPaid = payTg.getAmountTg();
-                                        amountVariation = payTg.getAmountVariation();
-                                        haveTotalAmountPaid = true;
+                                        if (payTg.getMobile().equals(roomySelected.getMobile())) {
+                                            totalAmountPaid = payTg.getAmountTg();
+                                            amountVariation = payTg.getAmountVariation();
+                                            haveTotalAmountPaid = true;
+                                        }
+
+                                        payTgListAt.add(payTg);
                                     }
 
-                                    payTgListAt.add(payTg);
+
                                 }
+                                payTgListAt = Helper.getSortedPaymentTakeGiveList(payTgListAt);
 
 
+                                // getPayTgListAt();  // will give payTgListAt list also
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                                totalAmountPaid = 0;
+                                amountVariation = 0;
                             }
-                            payTgListAt = Helper.getSortedPaymentTakeGiveList(payTgListAt);
 
 
-                            // getPayTgListAt();  // will give payTgListAt list also
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-
-                            totalAmountPaid = 0;
-                            amountVariation = 0;
                         }
 
 
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
+                        }
+                    });
+        } else {
+            Helper.showCheckInternet(context);
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-    }else
-    {
-        Helper.showCheckInternet(context);
-
-    }
+        }
 
     }
 
@@ -380,8 +450,7 @@ public class PayNowActivity extends Activity {
 
                 }
             });
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -468,9 +537,9 @@ public class PayNowActivity extends Activity {
         List<String> payingItemsList = Arrays.asList(sr);
 
 
-        ArrayAdapter aa = new ArrayAdapter(context, R.layout.row_actv_paying_item,
-                payingItemsList);
-        actv_paying_item.setAdapter(aa);
+//        ArrayAdapter aa = new ArrayAdapter(context, R.layout.row_et_paying_item,
+//                payingItemsList);
+//        et_paying_item.setAdapter(aa);
 
 
     }

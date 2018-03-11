@@ -91,49 +91,54 @@ String appColor;
 
     public void saveRoomy(View view) {
 
-        dialogEffect.showDialog();
-        String rid = Helper.randomString(10);
-        String nameS = et_name.getText().toString();
-        String mobileS = et_mobile.getText().toString();
-        String registrationDateTime = Helper.getCurrentDateTime();
+     if (CheckInternetReceiver.isOnline(this)) {
+         dialogEffect.showDialog();
+         String rid = Helper.randomString(10);
+         String nameS = et_name.getText().toString();
+         String mobileS = et_mobile.getText().toString();
+         String registrationDateTime = Helper.getCurrentDateTime();
 
 
-        if (nameS.equals("") || mobileS.equals("")) {
+         if (nameS.equals("") || mobileS.equals("")) {
+             ToastManager.showToast(context, Helper.EMPTY_FIELD);
+         } else {
+             dialogEffect.cancelDialog();
 
-            ToastManager.showToast(context, Helper.EMPTY_FIELD);
-        } else {
-            dialogEffect.cancelDialog();
+             // TODO: 1/27/2018 save unique roomy here
+             Roomy roomy = new Roomy();
+             roomy.setMobile(mobileS);
+             roomy.setName(nameS);
+             roomy.setRid(rid);
+             roomy.setMacAddress(Helper.getMacAddr());
+             roomy.setMobileLogged(mobileLogged);
+             roomy.setRegistrationDateTime(registrationDateTime);
 
-            // TODO: 1/27/2018 save unique roomy here
-            Roomy roomy = new Roomy();
-            roomy.setMobile(mobileS);
-            roomy.setName(nameS);
-            roomy.setRid(rid);
-            roomy.setMacAddress(Helper.getMacAddr());
-            roomy.setMobileLogged(mobileLogged);
-            roomy.setRegistrationDateTime(registrationDateTime);
+             db_ref.child(Helper.ROOMY).child(rid)
+                     .setValue(roomy);
 
-            db_ref.child(Helper.ROOMY).child(rid)
-                    .setValue(roomy);
-
-            ToastManager.showToast(context, Helper.REGISTERD);
-
-
-            et_mobile.setText("");
-            et_name.setText("");
+             ToastManager.showToast(context, Helper.REGISTERD);
 
 
-            // TODO: 2/25/2018 reset transfer session 
-            spe = sp.edit();
-            spe.putBoolean(SessionManager.IS_TRANSFER, false);
-            spe.apply();
+             et_mobile.setText("");
+             et_name.setText("");
 
 
-            deleteAfterExistingTransfer();
+             // TODO: 2/25/2018 reset transfer session
+             spe = sp.edit();
+             spe.putBoolean(SessionManager.IS_TRANSFER, false);
+             spe.apply();
 
-            onBackPressed();
 
-        }
+             deleteAfterExistingTransfer();
+
+             onBackPressed();
+
+         }
+
+     }else
+     {
+         Helper.showCheckInternet(this);
+     }
 
     }
 

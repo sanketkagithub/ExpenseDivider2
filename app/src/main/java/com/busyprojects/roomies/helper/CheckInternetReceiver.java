@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
 
 /**
  * Created by sanket on 3/10/2018.
@@ -26,7 +25,7 @@ public class CheckInternetReceiver extends BroadcastReceiver
         SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
         SharedPreferences.Editor spe = sp.edit();
 
-        Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
 
 
 
@@ -44,7 +43,7 @@ public class CheckInternetReceiver extends BroadcastReceiver
           isInternet = false;
       }
 
-        Toast.makeText(context, isInternet + " ", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, isInternet + " ", Toast.LENGTH_SHORT).show();
 
 
     }

@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -58,6 +60,7 @@ public class PaymentListAdapter extends ArrayAdapter {
             viewHolder.ll_item = convertView.findViewById(R.id.ll_item);
             viewHolder.ll_transfer = convertView.findViewById(R.id.ll_transfer);
             viewHolder.tv_to = convertView.findViewById(R.id.tv_to);
+            viewHolder.iv_main_paying_item = convertView.findViewById(R.id.iv_main_paying_item);
 
             convertView.setTag(viewHolder);
         } else {
@@ -72,6 +75,18 @@ public class PaymentListAdapter extends ArrayAdapter {
             viewHolder.tv_paying_item.setText(paymentList.get(position).getPayingItem());
             viewHolder.ll_transfer.setVisibility(View.GONE);
             viewHolder.ll_item.setVisibility(View.VISIBLE);
+
+            try {
+
+
+                if (!paymentList.get(position).getPayinItemUrl().equals("")) {
+                    Picasso.with(context).load(paymentList.get(position).getPayinItemUrl()).into(viewHolder.iv_main_paying_item);
+                }
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         } else {
             viewHolder.ll_transfer.setVisibility(View.VISIBLE);
             viewHolder.ll_item.setVisibility(View.GONE);
@@ -80,6 +95,7 @@ public class PaymentListAdapter extends ArrayAdapter {
 
             viewHolder.tv_from.setText(paymentList.get(position).getRoomy().getName());
             viewHolder.tv_to.setText(paymentList.get(position).getToRoomy());
+
         }
 
 //        viewHolder.but_call_roomy_p.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +120,7 @@ class ViewHolder {
     TextView tv_roomy_name, tv_roomy_amount, tv_paying_item,
             tv_payment_date, tv_from, tv_to;
     LinearLayout ll_parent, ll_item, ll_transfer;
+    ImageView iv_main_paying_item;
 
     //  Button but_call_roomy_p;
 }

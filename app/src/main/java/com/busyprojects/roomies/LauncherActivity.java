@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.busyprojects.roomies.helper.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 
 public class LauncherActivity extends Activity {
@@ -63,6 +64,14 @@ public class LauncherActivity extends Activity {
                 finish();
             }
         }, 1500);
+
+
+        //set items map
+       PayingItems payingItems = PayingItems.getInstance();
+       payingItems.setPayingItemsMap(this);
+
+
+
     }
     public void getScreenInfo(){
         DisplayMetrics metrics = new DisplayMetrics();

@@ -11,6 +11,7 @@ public class Payment {
     private String mobileLogged;
     private String payingItem;
     private Roomy roomy;
+    private String payinItemUrl;
     private long amount;
     private String paymentDateTime;
 
@@ -18,22 +19,6 @@ public class Payment {
     private String toRoomy;
 
     public Payment() {
-    }
-
-    public boolean isTransferPayment() {
-        return isTransferPayment;
-    }
-
-    public void setTransferPayment(boolean transferPayment) {
-        isTransferPayment = transferPayment;
-    }
-
-    public String getToRoomy() {
-        return toRoomy;
-    }
-
-    public void setToRoomy(String toRoomy) {
-        this.toRoomy = toRoomy;
     }
 
 
@@ -69,6 +54,14 @@ public class Payment {
         this.roomy = roomy;
     }
 
+    public String getPayinItemUrl() {
+        return payinItemUrl;
+    }
+
+    public void setPayinItemUrl(String payinItemUrl) {
+        this.payinItemUrl = payinItemUrl;
+    }
+
     public long getAmount() {
         return amount;
     }
@@ -83,5 +76,21 @@ public class Payment {
 
     public void setPaymentDateTime(String paymentDateTime) {
         this.paymentDateTime = paymentDateTime;
+    }
+
+    public boolean isTransferPayment() {
+        return isTransferPayment;
+    }
+
+    public void setTransferPayment(boolean transferPayment) {
+        isTransferPayment = transferPayment;
+    }
+
+    public String getToRoomy() {
+        return toRoomy;
+    }
+
+    public void setToRoomy(String toRoomy) {
+        this.toRoomy = toRoomy;
     }
 }

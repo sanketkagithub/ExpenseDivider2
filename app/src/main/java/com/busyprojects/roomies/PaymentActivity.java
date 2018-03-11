@@ -723,6 +723,5 @@ if (CheckInternetReceiver.isOnline(this)) {
         dialogDeleteAlert.dismiss();
     }
 
-    public void payNowhere(View view) {
-    }
+
 }

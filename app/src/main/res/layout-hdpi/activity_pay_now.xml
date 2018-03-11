@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.PaymentActivity">
+    tools:context=".PayNowActivity">
 
 
     <LinearLayout
@@ -109,6 +109,20 @@
             </LinearLayout>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rel_main_paying_item_mage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.95"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_main_paying_item"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/pay" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -148,8 +162,8 @@
                     android:gravity="center"
                     android:paddingLeft="9dp">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/actv_paying_item"
+                    <EditText
+                        android:id="@+id/et_paying_item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -169,7 +183,9 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
+
+
+  <RelativeLayout
             android:id="@+id/rel_pay_roomy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

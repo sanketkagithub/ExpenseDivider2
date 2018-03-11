@@ -46,7 +46,8 @@
                 android:layout_height="50dp"
                 android:fontFamily="serif"
                 android:src="@drawable/paid"
-                android:text="Name" />
+                android:text="Name"
+                android:id="@+id/iv_main_paying_item"/>
 
             <TextView
                 android:id="@+id/tv_paying_item"
