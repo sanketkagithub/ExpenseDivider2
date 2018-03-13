@@ -12,13 +12,16 @@ import java.util.Map;
  */
 
 public  class PayingItems {
-    private static final PayingItems ourInstance = new PayingItems();
+    private static  PayingItems ourInstance;
 
     private Map<String,String> itemsMap;
    public static PayingItems getInstance() {
 
 
-
+       if (ourInstance==null)
+       {
+           ourInstance = new PayingItems();
+       }
         return ourInstance;
     }
 
@@ -28,7 +31,7 @@ public  class PayingItems {
 
 
 
-  public   void setPayingItemsMap(Context context)
+  public  void setPayingItemsMap(Context context)
     {
         itemsMap = new HashMap<>();
 
@@ -62,7 +65,7 @@ public  class PayingItems {
 
         itemsMap.put("chicken biryani", context.getResources().getString(R.string.beriyani));
         itemsMap.put("mutton biryani", context.getResources().getString(R.string.beriyani));
-        itemsMap.put("beriyani", context.getResources().getString(R.string.beriyani));
+        itemsMap.put("biryani", context.getResources().getString(R.string.beriyani));
         itemsMap.put("beriyani", context.getResources().getString(R.string.beriyani));
 
 
@@ -111,21 +114,21 @@ itemsMap.put("garlic", context.getResources().getString(R.string.garlic));
 itemsMap.put("ginger garlic paste", context.getResources().getString(R.string.gg_paste));
 itemsMap.put("ginger", context.getResources().getString(R.string.ginger));
 itemsMap.put("grapes", context.getResources().getString(R.string.grapes));
-itemsMap.put("green_chilli", context.getResources().getString(R.string.green_chilli));
+itemsMap.put("green chilli", context.getResources().getString(R.string.green_chilli));
 itemsMap.put("haldi", context.getResources().getString(R.string.haldi));
 itemsMap.put("internet", context.getResources().getString(R.string.internet));
 itemsMap.put("jeera", context.getResources().getString(R.string.jeera));
-itemsMap.put("jeera_powder", context.getResources().getString(R.string.jeera_powder));
+itemsMap.put("jeera powder", context.getResources().getString(R.string.jeera_powder));
 itemsMap.put("karela", context.getResources().getString(R.string.karela));
 itemsMap.put("lemon", context.getResources().getString(R.string.lemon));
-itemsMap.put("long_bean", context.getResources().getString(R.string.long_bean));
+itemsMap.put("long bean", context.getResources().getString(R.string.long_bean));
 itemsMap.put("maggi", context.getResources().getString(R.string.maggi));
 itemsMap.put("milk", context.getResources().getString(R.string.milk));
 itemsMap.put("mushroom", context.getResources().getString(R.string.mushroom));
 itemsMap.put("mustard", context.getResources().getString(R.string.mustard));
 itemsMap.put("mutter", context.getResources().getString(R.string.mutter));
 itemsMap.put("mutton", context.getResources().getString(R.string.mutton));
-itemsMap.put("mutton_masala", context.getResources().getString(R.string.mutton_masala));
+itemsMap.put("mutton masala", context.getResources().getString(R.string.mutton_masala));
 itemsMap.put("oats", context.getResources().getString(R.string.oats));
 itemsMap.put("oil", context.getResources().getString(R.string.oil));
 itemsMap.put("onion", context.getResources().getString(R.string.onion));

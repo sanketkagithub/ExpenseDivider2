@@ -32,5 +32,7 @@
     <dimen name="coin_wh">20dp</dimen>
     <dimen name="lv_text">11sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
+    <dimen name="testh">65dp</dimen>
+    <dimen name="pay_image">90dp</dimen>
 
 </resources>

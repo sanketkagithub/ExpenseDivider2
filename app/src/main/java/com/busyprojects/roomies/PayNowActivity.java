@@ -12,10 +12,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,7 +44,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class PayNowActivity extends Activity {
@@ -54,6 +59,10 @@ public class PayNowActivity extends Activity {
 
     EditText et_paying_item;
     int totalRoommates;
+
+    ProgressBar progressBarSuggImage;
+
+    ListView lv_items_suggestions;
 
     ImageView iv_main_paying_item;
     RelativeLayout rel_main_paying_item_mage;
@@ -93,9 +102,19 @@ public class PayNowActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_now);
 
+        lv_items_suggestions = findViewById(R.id.lv_items_suggestions);
+        progressBarSuggImage = findViewById(R.id.progressBarSuggImage);
+
+
 
        PayingItems payingItems = PayingItems.getInstance();
        mapItems = payingItems.getItemsMap();
+
+        payingItemsLinkedListAccu = new LinkedList<>();
+
+        setSuggestionsInList();
+
+        lv_items_suggestions.setVisibility(View.GONE);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
@@ -173,6 +192,9 @@ public class PayNowActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
+                lv_items_suggestions.setVisibility(View.VISIBLE);
+                filter_listview(s.toString());
+
             }
 
             @Override
@@ -190,6 +212,19 @@ public class PayNowActivity extends Activity {
             }
         });
 
+
+        lv_items_suggestions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                et_paying_item.setText(payingItemsLinkedList.get(position));
+
+                lv_items_suggestions.setVisibility(View.GONE);
+
+            }
+        });
+
+
     }
 
 
@@ -202,9 +237,14 @@ public class PayNowActivity extends Activity {
             payingItemImageUrl = mapItems.get(imageName);
             rel_main_paying_item_mage.setVisibility(View.VISIBLE);
             Picasso.with(this).load(payingItemImageUrl).into(iv_main_paying_item);
+
+            progressBarSuggImage.setVisibility(View.GONE);
+
         } else {
             rel_main_paying_item_mage.setVisibility(View.GONE);
         }
+
+
 
     }
 
@@ -543,8 +583,52 @@ public class PayNowActivity extends Activity {
 
 
     }
+    List<String> payingItemsLinkedList,payingItemsLinkedListAccu;
+    ArrayAdapter aa;
+    private void setSuggestionsInList()
+   {
+      payingItemsLinkedList = new LinkedList<>();
+
+       System.out.println(mapItems.size() + " " + mapItems);
+
+       for (Map.Entry<String, String> s:
+            mapItems.entrySet())
+       {
+
+         payingItemsLinkedList.add(s.getKey());
+
+       }
+
+
+     aa = new ArrayAdapter(this,R.layout.paying_item_lv_layout,
+             R.id.tv_paying_item_lv,
+             payingItemsLinkedList);
+       lv_items_suggestions.setAdapter(aa);
+       payingItemsLinkedListAccu.addAll(payingItemsLinkedList);
+
+
+   }
 
     public void cancelPayment(View view) {
         onBackPressed();
     }
+
+    // Filter Class
+    public void filter_listview(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        payingItemsLinkedList.clear();
+        if (charText.length() == 0) {
+            payingItemsLinkedList.addAll(payingItemsLinkedListAccu);
+        } else {
+            for (String pl : payingItemsLinkedListAccu)
+            {
+                if (pl.toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    payingItemsLinkedList.add(pl);
+                }
+            }
+        }
+        aa.notifyDataSetChanged();
+    }
+
 }
