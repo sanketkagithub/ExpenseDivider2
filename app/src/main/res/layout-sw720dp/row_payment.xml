@@ -21,9 +21,9 @@
 
         <LinearLayout
             android:id="@+id/ll_item"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="@dimen/paytg_ll_iv_ht_tablet"
+            android:gravity="center"
             android:orientation="horizontal">
 
 
@@ -32,18 +32,19 @@
                 android:layout_width="@dimen/paid_left_righ_et_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
-                android:text="Name"                android:gravity="center|left"
-                android:textSize="@dimen/et_text"
-                android:textColor="@color/black" />
+                android:gravity="center|left"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/et_text" />
 
             <ImageView
-                android:layout_marginStart="@dimen/paid_marging"
+                android:id="@+id/iv_main_paying_item"
+                android:layout_width="@dimen/paid_wd_ht"
+                android:layout_height="@dimen/paid_wd_ht"
                 android:layout_marginEnd="@dimen/paid_marging"
                 android:layout_marginLeft="@dimen/paid_marging"
                 android:layout_marginRight="@dimen/paid_marging"
-                android:layout_width="@dimen/paid_wd_ht"
-                android:layout_height="@dimen/paid_wd_ht"
-                android:id="@+id/iv_main_paying_item"
+                android:layout_marginStart="@dimen/paid_marging"
                 android:src="@drawable/paid" />
 
             <TextView
@@ -53,8 +54,8 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
-                android:textColor="@color/blue" />
+                android:textColor="@color/blue"
+                android:textSize="@dimen/et_text" />
 
 
         </LinearLayout>
@@ -75,16 +76,16 @@
                 android:fontFamily="serif"
                 android:gravity="center|left"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
-                android:textColor="@color/main_app_colorp" />
+                android:textColor="@color/main_app_colorp"
+                android:textSize="@dimen/et_text" />
 
             <ImageView
-                android:layout_marginStart="@dimen/paid_marging"
+                android:layout_width="@dimen/paid_wd_ht"
+                android:layout_height="@dimen/paid_wd_ht"
                 android:layout_marginEnd="@dimen/paid_marging"
                 android:layout_marginLeft="@dimen/paid_marging"
                 android:layout_marginRight="@dimen/paid_marging"
-                android:layout_width="@dimen/paid_wd_ht"
-                android:layout_height="@dimen/paid_wd_ht"
+                android:layout_marginStart="@dimen/paid_marging"
                 android:fontFamily="serif"
                 android:src="@drawable/transfer_money"
                 android:text="Name" />
@@ -96,8 +97,8 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
-                android:textColor="@color/main_app_colorp" />
+                android:textColor="@color/main_app_colorp"
+                android:textSize="@dimen/et_text" />
 
 
         </LinearLayout>
@@ -109,8 +110,8 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="00"
-            android:textSize="@dimen/et_text"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/et_text" />
 
 
         <TextView

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rel_launcher_back"
     android:background="@color/main_app_colorp"
-    tools:context="com.busyprojects.roomies.LauncherActivity">
+    tools:context="com.busyprojects.roomies.roomyActivities.LauncherActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

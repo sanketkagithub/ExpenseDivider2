@@ -38,8 +38,8 @@
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/transfer_iv"
+                android:layout_height="@dimen/transfer_iv"
                 android:fontFamily="serif"
                 android:src="@drawable/paid"
                 android:text="Name"

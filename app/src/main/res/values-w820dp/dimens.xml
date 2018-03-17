@@ -18,7 +18,6 @@
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">20sp</dimen>
     <dimen name="transactions_title">15sp</dimen>
-    <dimen name="paid">50dp</dimen>
     <dimen name="but_text">10sp</dimen>
 
     <dimen name="transfer_iv">40dp</dimen>
@@ -26,7 +25,6 @@
     <dimen name="coin_wh">20dp</dimen>
     <dimen name="lv_text">11sp</dimen>
     <dimen name="spin_ht">55dp</dimen>
-    <dimen name="spin_mar">25dp</dimen>
     <dimen name="lr_padd_transfer_lv">5dp</dimen>
     <dimen name="lv_pad">5dp</dimen>
     <dimen name="pay_now_item_ht">65dp</dimen>

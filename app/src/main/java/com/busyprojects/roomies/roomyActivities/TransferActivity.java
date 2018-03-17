@@ -1,4 +1,4 @@
-package com.busyprojects.roomies;
+package com.busyprojects.roomies.roomyActivities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAtAdapter;
+import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -30,7 +30,6 @@ public class TransferActivity extends AppCompatActivity {
     Context context = TransferActivity.this;
 
     SharedPreferences sp;
-    TextView tv_from,tv_to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

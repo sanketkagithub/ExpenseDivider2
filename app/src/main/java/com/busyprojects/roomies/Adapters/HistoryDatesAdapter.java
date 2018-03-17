@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
-import com.busyprojects.roomies.TotalEachPaymentHistoryActivity;
+import com.busyprojects.roomies.roomyActivities.TotalEachPaymentHistoryActivity;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.History;
 

@@ -1,4 +1,4 @@
-package com.busyprojects.roomies;
+package com.busyprojects.roomies.roomyActivities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.RoomySpinnerAdapterr;
+import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
@@ -50,7 +51,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class PayNowActivity extends Activity {
+public class
+PayNowActivity extends Activity {
 
     String mobileLogged;
 

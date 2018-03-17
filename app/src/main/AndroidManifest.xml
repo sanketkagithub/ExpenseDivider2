@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LauncherActivity"
+        <activity android:name=".roomyActivities.LauncherActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,27 +26,27 @@
 
 
         <activity
-            android:name=".AddRoomyActivity"
+            android:name=".roomyActivities.AddRoomyActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".HomeActivity"
+        <activity android:name=".roomyActivities.HomeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".RegisterLoginActivity"
+            android:name=".roomyActivities.RegisterLoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PayNowActivity"
+            android:name=".roomyActivities.PayNowActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HistoryDateActivity"
+            android:name=".roomyActivities.HistoryDateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TotalEachPaymentHistoryActivity"
+            android:name=".roomyActivities.TotalEachPaymentHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TransferActivity"
+            android:name=".roomyActivities.TransferActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PaymentActivity"
+            android:name=".roomyActivities.PaymentActivity"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".helper.CheckInternetReceiver">

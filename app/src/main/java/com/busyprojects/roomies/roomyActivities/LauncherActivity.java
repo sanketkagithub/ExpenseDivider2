@@ -1,4 +1,4 @@
-package com.busyprojects.roomies;
+package com.busyprojects.roomies.roomyActivities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 

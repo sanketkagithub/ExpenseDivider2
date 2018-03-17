@@ -1,4 +1,4 @@
-package com.busyprojects.roomies;
+package com.busyprojects.roomies.roomyActivities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.HistoryDatesAdapter;
+import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -79,8 +80,24 @@ public class PaymentListAdapter extends ArrayAdapter {
             try {
 
 
+
+                viewHolder.iv_main_paying_item.setImageResource(R.drawable.no_record);
                 if (!paymentList.get(position).getPayinItemUrl().equals("")) {
-                    Picasso.with(context).load(paymentList.get(position).getPayinItemUrl()).into(viewHolder.iv_main_paying_item);
+                    Picasso.with(context).load(paymentList.
+                            get(position).getPayinItemUrl())
+                            .into(viewHolder.iv_main_paying_item, new Callback() {
+                                @Override
+                                public void onSuccess() {
+
+
+
+                                }
+
+                                @Override
+                                public void onError() {
+
+                                }
+                            });
                 }
             }catch (Exception e)
             {

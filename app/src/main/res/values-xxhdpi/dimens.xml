@@ -7,7 +7,6 @@
     <dimen name="date">10sp</dimen>
     <dimen name="payment_lv_lr_margin">15dp</dimen>
     <dimen name="cursor_width">1dp</dimen>
-    <dimen name="transfer_but">10sp</dimen>
     <dimen name="top_image">40dp</dimen>
     <dimen name="et_left_image">20dp</dimen>
     <dimen name="ll_et_wd">220dp</dimen>
@@ -26,7 +25,6 @@
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">20sp</dimen>
     <dimen name="transactions_title">15sp</dimen>
-    <dimen name="paid">50dp</dimen>
     <dimen name="transfer_iv">40dp</dimen>
     <dimen name="but_text">10sp</dimen>
     <dimen name="change_color">25dp</dimen>

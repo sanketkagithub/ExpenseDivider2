@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.PaymentActivity">
+    tools:context="com.busyprojects.roomies.roomyActivities.PaymentActivity">
 
 
     <LinearLayout
@@ -143,12 +143,8 @@
                 android:id="@+id/lv_take_give"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/payment_lv_lr_margin"
-                android:layout_marginLeft="@dimen/payment_lv_lr_margin"
-                android:layout_marginRight="@dimen/payment_lv_lr_margin"
-                android:layout_marginStart="@dimen/payment_lv_lr_margin"
-                android:divider="@null"
-                android:dividerHeight="0dp"
+                android:divider="@color/lv_divider"
+                android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="10dp"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 

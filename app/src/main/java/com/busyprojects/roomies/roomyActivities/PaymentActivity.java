@@ -1,4 +1,4 @@
-package com.busyprojects.roomies;
+package com.busyprojects.roomies.roomyActivities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.busyprojects.roomies.Adapters.PaymentListAdapter;
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAdapter;
 import com.busyprojects.roomies.Adapters.PaymentTakeGiveListAtAdapter;
+import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
