@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/paytg_ht_tablet"
             android:layout_margin="2dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_name_gt"
-                android:layout_width="400dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:paddingLeft="3dp"
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_amount_gt"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:textSize="@dimen/lv_text"
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_amount_variation"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:fontFamily="serif"
@@ -59,7 +59,7 @@
 
             <ImageView
                 android:id="@+id/iv_roomy_variation"
-                android:layout_width="@dimen/lv_tg_iv"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/lv_tg_iv"
                 android:src="@drawable/take"
                 android:textColor="@color/white_color" />
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:gravity="center"
-                android:text="Manas will take 200/- "
+                android:text="Manas will take 200₹ "
                 android:textAllCaps="false"
                 android:textColor="@color/take" />
 

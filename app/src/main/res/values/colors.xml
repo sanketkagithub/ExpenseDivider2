@@ -12,7 +12,7 @@
     <color name="done">#0900FF</color>
     <color name="done_light">#DCDBFF</color>
 
-
+<color name="lv_divider">#949494</color>
     <color name="give">#C20017</color>
     <color name="take">#038F26</color>
     <color name="give_light">#ffeef0</color>

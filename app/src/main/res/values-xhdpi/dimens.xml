@@ -10,12 +10,14 @@
     <dimen name="transfer_but">10sp</dimen>
     <dimen name="top_image">40dp</dimen>
     <dimen name="et_left_image">20dp</dimen>
+    <dimen name="pay_image">90dp</dimen>
     <dimen name="ll_et_wd">220dp</dimen>
     <dimen name="lv_but_ht">25dp</dimen>
     <dimen name="et_text">12sp</dimen>
     <dimen name="ll_et_ht">40dp</dimen>
     <dimen name="image_buttons">25dp</dimen>
     <dimen name="bottom_iv_margin">5dp</dimen>
+    <dimen name="pay_now_item_ht">70dp</dimen>
     <dimen name="bell">40dp</dimen>
     <dimen name="bell_text">10sp</dimen>
     <dimen name="title">20sp</dimen>
@@ -31,5 +33,8 @@
     <dimen name="coin_wh">20dp</dimen>
     <dimen name="lv_text">11sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
+    <dimen name="pay_image_iv">80dp</dimen>
+    <dimen name="tv_each_key_wd">190dp</dimen>
 
+    <dimen name="lv_div_ht">0.5dp</dimen>
 </resources>

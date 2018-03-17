@@ -9,10 +9,6 @@
         android:id="@+id/ll_payment_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
         android:background="@drawable/lv_back"
         android:orientation="vertical"
         android:paddingBottom="2dp"
@@ -27,7 +23,7 @@
             android:id="@+id/ll_item"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/paytg_ll_iv_ht_tablet"
             android:orientation="horizontal">
 
 
@@ -47,9 +43,8 @@
                 android:layout_marginRight="@dimen/paid_marging"
                 android:layout_width="@dimen/paid_wd_ht"
                 android:layout_height="@dimen/paid_wd_ht"
-                android:fontFamily="serif"
-                android:src="@drawable/paid"
-                android:text="Name" />
+                android:id="@+id/iv_main_paying_item"
+                android:src="@drawable/paid" />
 
             <TextView
                 android:id="@+id/tv_paying_item"
@@ -68,7 +63,7 @@
         <LinearLayout
             android:id="@+id/ll_transfer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/paytg_ll_iv_ht_tablet"
             android:gravity="center"
             android:orientation="horizontal">
 

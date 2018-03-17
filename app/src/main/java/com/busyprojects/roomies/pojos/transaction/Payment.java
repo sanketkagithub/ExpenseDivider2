@@ -12,7 +12,7 @@ public class Payment {
     private String payingItem;
     private Roomy roomy;
     private String payinItemUrl;
-    private long amount;
+    private double amount;
     private String paymentDateTime;
 
     private boolean isTransferPayment;
@@ -62,11 +62,11 @@ public class Payment {
         this.payinItemUrl = payinItemUrl;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

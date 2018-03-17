@@ -9,10 +9,6 @@
         android:id="@+id/ll_payment_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
         android:background="@drawable/lv_back"
         android:orientation="vertical"
         android:paddingBottom="2dp"
@@ -45,6 +41,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:fontFamily="serif"
+                android:id="@+id/iv_main_paying_item"
                 android:src="@drawable/paid"
                 android:text="Name" />
 

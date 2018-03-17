@@ -36,5 +36,8 @@
     <dimen name="spin_ht">55dp</dimen>
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
+    <dimen name="pay_now_item_ht">20dp</dimen>
+    <dimen name="pay_image_iv">60dp</dimen>
 
+    <dimen name="lv_div_ht">0.5dp</dimen>
 </resources>

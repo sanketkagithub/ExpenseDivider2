@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/rel_iv_roomy_home"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:background="@color/main_app_colorp"
             android:gravity="center">
 
@@ -36,7 +36,7 @@
             android:id="@+id/rel_1"
             android:layout_below="@+id/rel_iv_roomy_home"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingStart="10dp">
@@ -56,7 +56,7 @@
             android:id="@+id/rel_2"
             android:layout_below="@+id/rel_1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingStart="10dp">
@@ -112,21 +112,21 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rel_main_paying_item_mage"
-        android:layout_below="@+id/rel_2"
+            android:layout_below="@+id/rel_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_image"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/iv_main_paying_item"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/pay_image_iv"
+                android:layout_height="@dimen/pay_image_iv"
                 android:src="@drawable/pay" />
             <ProgressBar
                 android:id="@+id/progressBarSuggImage"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="70dp"
-                android:layout_height="70dp" />
+                android:layout_width="@dimen/pay_image_iv"
+                android:layout_height="@dimen/pay_image_iv" />
 
         </RelativeLayout>
 
@@ -134,7 +134,7 @@
             android:id="@+id/rel_sugg"
             android:layout_below="@id/rel_main_paying_item_mage"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingStart="10dp">
@@ -192,11 +192,11 @@
 
 
 
-  <RelativeLayout
+        <RelativeLayout
             android:id="@+id/rel_pay_roomy"
-      android:layout_below="@id/rel_sugg"
+            android:layout_below="@id/rel_sugg"
             android:layout_width="match_parent"
-      android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:gravity="center">
 
             <Button
@@ -217,7 +217,7 @@
             android:id="@+id/rel_cancel"
             android:layout_below="@id/rel_pay_roomy"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/testh"
+            android:layout_height="@dimen/pay_now_item_ht"
             android:gravity="center">
 
             <Button

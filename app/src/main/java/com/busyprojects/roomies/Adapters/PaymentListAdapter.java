@@ -67,7 +67,7 @@ public class PaymentListAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tv_roomy_name.setText(paymentList.get(position).getRoomy().getName());
-        viewHolder.tv_roomy_amount.setText(paymentList.get(position).getAmount() + "₹");
+        viewHolder.tv_roomy_amount.setText(paymentList.get(position).getAmount() + " ₹");
         viewHolder.tv_payment_date.setText(paymentList.get(position).getPaymentDateTime());
 
 

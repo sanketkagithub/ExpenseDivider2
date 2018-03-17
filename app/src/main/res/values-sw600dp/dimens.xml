@@ -32,7 +32,8 @@
     <dimen name="launcher_div_iv_margin">100dp</dimen>
     <dimen name="coin_wh">40dp</dimen>
     <dimen name="lv_text">25sp</dimen>
-    <dimen name="paid_marging">40dp</dimen>
+    <dimen name="paid_marging">10dp</dimen>
+    <dimen name="pay_image">150dp</dimen>
     <dimen name="paid_left_righ_et_wd">180dp</dimen>
     <dimen name="paid_wd_ht">80dp</dimen>
     <dimen name="spin_ht">55dp</dimen>
@@ -40,5 +41,11 @@
     <dimen name="lr_padd_transfer_lv">20dp</dimen>
     <dimen name="lv_pad">5dp</dimen>
     <dimen name="transfer_but_marging">12dp</dimen>
+    <dimen name="pay_now_item_ht">130dp</dimen>
+    <dimen name="pay_image_iv">120dp</dimen>
+    <dimen name="paytg_ht_tablet">80dp</dimen>
+    <dimen name="paytg_ll_iv_ht_tablet">150dp</dimen>
+    <dimen name="tv_each_key_wd">300dp</dimen>
 
+    <dimen name="lv_div_ht">0.5dp</dimen>
 </resources>

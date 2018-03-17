@@ -184,9 +184,9 @@ public class TotalEachPaymentHistoryActivity extends Activity {
     }
 
 
-    long setEachPayMent() {
+    double setEachPayMent() {
 
-        long total = 0;
+        double total = 0;
 
 
         for (int i = 0; i < paymentList.size(); i++) {
@@ -196,11 +196,11 @@ public class TotalEachPaymentHistoryActivity extends Activity {
             }
         }
 
-        long eachAmount = total / totalRoomates;
+        double eachAmount = total / totalRoomates;
 
-        tv_total_amount.setText(total + "₹");
+        tv_total_amount.setText(total + " ₹");
         tv_total_roomies.setText(eachPaymentList.size() + "");
-        tv_each_payment.setText(eachAmount + "₹");
+        tv_each_payment.setText(eachAmount + " ₹");
 
         return eachAmount;
     }

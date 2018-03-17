@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="gfsdgds"
+    android:gravity="center"
+    android:textSize="@dimen/et_text"
     android:fontFamily="serif"
-    android:text="4jknsdjnjk"
+    android:background="@color/white_color"
     android:textColor="@color/main_app_colorp"
-    android:layout_height="wrap_content">
+    android:id="@+id/tv_paying_item_lv">
 
 </TextView>

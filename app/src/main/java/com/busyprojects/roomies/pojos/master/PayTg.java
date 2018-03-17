@@ -6,11 +6,12 @@ package com.busyprojects.roomies.pojos.master;
 
 public class PayTg {
     private String roomyName;
-    private long amountTg;
-    private long amountVariation;
+    private double amountTg;
+    private double amountVariation;
     private String mobile;
     private String mobileLogged;
    private  String payTgId;
+
 
     public String getRoomyName() {
         return roomyName;
@@ -20,19 +21,19 @@ public class PayTg {
         this.roomyName = roomyName;
     }
 
-    public long getAmountTg() {
+    public double getAmountTg() {
         return amountTg;
     }
 
-    public void setAmountTg(long amountTg) {
+    public void setAmountTg(double amountTg) {
         this.amountTg = amountTg;
     }
 
-    public long getAmountVariation() {
+    public double getAmountVariation() {
         return amountVariation;
     }
 
-    public void setAmountVariation(long amountVariation) {
+    public void setAmountVariation(double amountVariation) {
         this.amountVariation = amountVariation;
     }
 

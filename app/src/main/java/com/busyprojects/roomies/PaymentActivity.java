@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -67,7 +68,7 @@ public class PaymentActivity extends Activity {
     DatabaseReference db_ref;
 
   //  EditText et_sv;
-    long total;
+    double total;
     int totalRoommates;
 AnimationManager animationManager;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -369,6 +370,9 @@ AnimationManager animationManager;
 
                             paymentList = new Helper().getSortedTransactionList(paymentList);
 
+                            //get the latest payment first
+                            Collections.reverse(paymentList);
+
                             paymentListFiltered.addAll(paymentList);
 
 
@@ -528,7 +532,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                         Map<String, List<Payment>> paymentMap = new HashMap<>();
 
-                        Map<Roomy, Long> roomyTotalMap = new HashMap<>();
+                        Map<Roomy, Double> roomyTotalMap = new HashMap<>();
 
                         List<Payment> onesPAymentList = null;
 
@@ -539,7 +543,7 @@ if (CheckInternetReceiver.isOnline(this)) {
                         for (int i = 0; i < roomyListVp.size(); i++) {
 
                             onesPAymentList = new ArrayList<>();
-                            long totalPaidByOne = 0;
+                            double totalPaidByOne = 0;
                             for (int j = 0; j < paymentList.size(); j++) {
 
 
@@ -567,7 +571,7 @@ if (CheckInternetReceiver.isOnline(this)) {
                         // TODO: 2/3/2018 save paymentTg List (Each Payment total Map)
 
 
-                        long totalAmount = 0;
+                        double totalAmount = 0;
                         try {
                             totalAmount = setEachAndTotalTexts();
 
@@ -578,7 +582,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                         payTgList = new ArrayList<>();
 
-                        for (Map.Entry<Roomy, Long> s : roomyTotalMap.entrySet()) {
+                        for (Map.Entry<Roomy, Double> s : roomyTotalMap.entrySet()) {
 
                             System.out.println("esss" + s.getKey() + s.getValue());
 
@@ -642,7 +646,7 @@ if (CheckInternetReceiver.isOnline(this)) {
     }
 
 
-    long setEachAndTotalTexts() {
+    double setEachAndTotalTexts() {
         //  but_divide.setVisibility(View.GONE);
 
 //        ll_tot_each_roomy.setVisibility(View.VISIBLE);
@@ -658,7 +662,7 @@ if (CheckInternetReceiver.isOnline(this)) {
             }
         }
 
-        long eachAmount;
+        double eachAmount;
         try {
              eachAmount = total / totalRoommates;
 
@@ -668,9 +672,9 @@ if (CheckInternetReceiver.isOnline(this)) {
             eachAmount = 1;
         }
 
-        tv_total_amount.setText(total + "₹");
+        tv_total_amount.setText(total + " ₹");
         tv_total_roomies.setText(totalRoommates + "");
-        tv_each_payment.setText(eachAmount + "₹");
+        tv_each_payment.setText(eachAmount + " ₹");
 
 //        if (paymentList.size() != 0) {
 //            but_transfer_money.setVisibility(View.VISIBLE);

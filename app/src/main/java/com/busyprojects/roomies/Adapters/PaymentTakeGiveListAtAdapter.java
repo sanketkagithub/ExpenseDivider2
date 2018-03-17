@@ -56,7 +56,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     String appColor;
 
     public PaymentTakeGiveListAtAdapter(Context context, List<PayTg> payTgList) {
-        super(context, R.layout.row_payment, payTgList);
+        super(context, R.layout.row_take_give_payment_at, payTgList);
         this.context = context;
         this.payTgList = payTgList;
 
@@ -94,10 +94,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder = (ViewHolderTgAt) convertView.getTag();
         }
         viewHolder.tv_roomy_name.setText(payTgList.get(position).getRoomyName());
-        viewHolder.tv_roomy_amount.setText(payTgList.get(position).getAmountTg() + "/-");
+        viewHolder.tv_roomy_amount.setText(payTgList.get(position).getAmountTg() + " ₹");
 
-        long amountVariation = payTgList.get(position).getAmountVariation();
-        viewHolder.tv_roomy_amount_variation.setText(amountVariation + "/-");
+        double amountVariation = payTgList.get(position).getAmountVariation();
+        viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
 
         viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
 
@@ -145,7 +145,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         String message = payTgList.get(position).getRoomyName()
                 + " will " + takeGive +
-                " " + payTgList.get(position).getAmountVariation() + "/-";
+                " " + payTgList.get(position).getAmountVariation() + " ₹";
 
         message = message.replace("-", "");
         if (amountVariation != 0) {
@@ -341,7 +341,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     }
 
-    private long amountVarFrom, amountVarTo, fromTotalPaid, toTotalPaid;
+    private double amountVarFrom;
+    private double amountVarTo;
+    private double fromTotalPaid;
+    private double toTotalPaid;
 
     private void getFromToAmountVar(final String fromMobile, long amountToTransfer, final String toMobile) {
 
@@ -430,8 +433,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         if (!selectedFromRoomy.getMobile().equals("")) {
 
-            final long updatedFromAmountVar, updatedToAmountVar;
-            final long updatedTotalPaidFrom, updatedTotalPaidTo;
+            final double updatedFromAmountVar;
+            final double updatedToAmountVar;
+            final double updatedTotalPaidFrom;
+            final double updatedTotalPaidTo;
 
             updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
             updatedToAmountVar = amountVarTo - Long.parseLong(amountToTransfer);

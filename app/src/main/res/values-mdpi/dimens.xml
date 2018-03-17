@@ -24,6 +24,7 @@
     <dimen name="launcher_images">30dp</dimen>
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">20sp</dimen>
+    <dimen name="pay_image">80dp</dimen>
     <dimen name="transactions_title">15sp</dimen>
     <dimen name="paid">50dp</dimen>
     <dimen name="transfer_iv">40dp</dimen>
@@ -31,5 +32,8 @@
     <dimen name="coin_wh">20dp</dimen>
     <dimen name="lv_text">11sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
+    <dimen name="pay_now_item_ht">50dp</dimen>
+    <dimen name="pay_image_iv">50dp</dimen>
 
+    <dimen name="lv_div_ht">0.5dp</dimen>
 </resources>

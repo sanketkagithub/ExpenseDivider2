@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -67,10 +68,11 @@ public class PayNowActivity extends Activity {
     ImageView iv_main_paying_item;
     RelativeLayout rel_main_paying_item_mage;
     boolean canTransfer = false;
-    long totalAfterTransfer;
+    double totalAfterTransfer;
     String amount;
 
-    long totalAmountPaid, amountVariation;
+    double totalAmountPaid;
+    double amountVariation;
 
     boolean haveTotalAmountPaid;
 
@@ -221,6 +223,7 @@ public class PayNowActivity extends Activity {
 
                 lv_items_suggestions.setVisibility(View.GONE);
 
+
             }
         });
 
@@ -236,9 +239,23 @@ public class PayNowActivity extends Activity {
         if (mapItems.containsKey(imageName)) {
             payingItemImageUrl = mapItems.get(imageName);
             rel_main_paying_item_mage.setVisibility(View.VISIBLE);
-            Picasso.with(this).load(payingItemImageUrl).into(iv_main_paying_item);
 
-            progressBarSuggImage.setVisibility(View.GONE);
+            progressBarSuggImage.setVisibility(View.VISIBLE);
+
+            Picasso.with(this).load(payingItemImageUrl).into(iv_main_paying_item, new Callback() {
+                @Override
+                public void onSuccess() {
+
+               progressBarSuggImage.setVisibility(View.INVISIBLE);
+
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+
 
         } else {
             rel_main_paying_item_mage.setVisibility(View.GONE);
@@ -542,12 +559,12 @@ public class PayNowActivity extends Activity {
             }
 
 
-            long eachHasToPayAfterTransfer = totalAfterTransfer / totalRoomates;
+            double eachHasToPayAfterTransfer = totalAfterTransfer / totalRoomates;
 
             for (int i = 0; i < payTgListAt.size(); i++) {
 
 
-                long totalAmountVar = payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer;
+                double totalAmountVar = payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer;
 
                 db_ref.child(Helper.AFTER_TRANSFER)
                         .child(payTgListAt.get(i).getPayTgId())

@@ -29,5 +29,8 @@
     <dimen name="spin_mar">25dp</dimen>
     <dimen name="lr_padd_transfer_lv">5dp</dimen>
     <dimen name="lv_pad">5dp</dimen>
+    <dimen name="pay_now_item_ht">65dp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
+    <dimen name="pay_image_iv">60dp</dimen>
+    <dimen name="lv_div_ht">0.5dp</dimen>
 </resources>

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.45"
-            android:background="@color/white_color"
+            android:background="@color/grey_color"
             android:gravity="center">
 
 
@@ -43,7 +43,6 @@
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="@color/white_color"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="@string/transactions"
@@ -65,13 +64,8 @@
                 android:id="@+id/lv_payments"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginEnd="@dimen/payment_lv_lr_margin"
-                android:layout_marginLeft="@dimen/payment_lv_lr_margin"
-                android:layout_marginRight="@dimen/payment_lv_lr_margin"
-                android:layout_marginStart="@dimen/payment_lv_lr_margin"
-                android:layout_marginTop="4dp"
-                android:divider="@null"
-                android:dividerHeight="0dp"
+                android:divider="@color/lv_divider"
+                android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="10dp"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 
@@ -95,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.45"
-            android:background="@color/white_color"
+            android:background="@color/grey_color"
             android:gravity="center">
 
             <RelativeLayout
@@ -113,7 +107,6 @@
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
-                    android:background="@color/white_color"
                     android:fontFamily="serif"
                     android:gravity="center"
                     android:text="Each Paid"
@@ -149,12 +142,8 @@
                 android:id="@+id/lv_take_give"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginEnd="@dimen/payment_lv_lr_margin"
-                android:layout_marginLeft="@dimen/payment_lv_lr_margin"
-                android:layout_marginRight="@dimen/payment_lv_lr_margin"
-                android:layout_marginStart="@dimen/payment_lv_lr_margin"
-                android:divider="@null"
-                android:dividerHeight="0dp"
+                android:divider="@color/lv_divider"
+                android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="10dp"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 
@@ -182,27 +171,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/but_divide"
-                    android:layout_width="@dimen/but_w"
-                    android:layout_height="@dimen/button_ht"
-                    android:background="@drawable/buttons"
-                    android:fontFamily="serif"
-                    android:onClick="divideAmount"
-                    android:text="Divide"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white_color"
-                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/ll_tot_each_roomy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="3dp"
                     android:background="@drawable/calculation_back"
                     android:orientation="vertical">
 
@@ -226,7 +203,7 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="00000/-"
+                            android:text="00000₹"
                             android:textSize="@dimen/calculated_bottom_text" />
 
 
@@ -276,7 +253,7 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="00/-"
+                            android:text="00₹"
                             android:textSize="12sp" />
 
 
