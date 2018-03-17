@@ -9,10 +9,6 @@
         android:id="@+id/ll_take_give"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
         android:background="@color/white_color"
         android:orientation="vertical"
         android:padding="@dimen/lv_pad">
