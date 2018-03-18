@@ -19,13 +19,14 @@ public class RuntimePermissionsCs
     int PERMISSION_ALL = 1;
     Context context;
 
+
+
     public RuntimePermissionsCs(Context context) {
         this.context = context;
     }
 
-    String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_COARSE_LOCATION,
-    Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.ACCESS_WIFI_STATE};
+    String[] PERMISSIONS = {Manifest.permission.CALL_PHONE,
+            Manifest.permission.ACCESS_WIFI_STATE};
 
 
    public void getPermissions()

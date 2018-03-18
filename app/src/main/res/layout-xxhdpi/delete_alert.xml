@@ -2,54 +2,63 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
 
 
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/grey_color_tg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@drawable/whiite_del_back"
+        android:layout_width="@dimen/del_alert_wd"
+        android:layout_height="@dimen/del_alert_ht">
 
-    <TextView
-        android:id="@+id/tv_del_alert"
-        android:gravity="center"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:onClick="addRoomy"
-        android:text="Are You sure to delete ?"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
-
-
-    <LinearLayout
-        android:layout_below="@+id/tv_del_alert"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_del_alert"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textSize="@dimen/et_text"
+            android:onClick="addRoomy"
+            android:text="Are You sure to delete ?"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Yes"
-            android:onClick="deletePayment"
-            android:layout_marginRight="55dp"
-            android:textAllCaps="false"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="No"
-            android:onClick="cancelDelete"
-            android:textAllCaps="false"/>
+        <LinearLayout
+            android:layout_below="@+id/tv_del_alert"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/yn_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/del_but_ht"
+                android:text="Yes"
+                android:fontFamily="serif"
+                android:textSize="@dimen/et_text"
+                android:onClick="deletePayment"
+                android:layout_marginRight="@dimen/yes_right_mr"
+                android:textAllCaps="false"
+                android:layout_marginEnd="@dimen/yes_right_mr" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/del_but_ht"
+                android:textSize="@dimen/et_text"
+                android:fontFamily="serif"
+                android:text="No"
+                android:onClick="cancelDelete"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>

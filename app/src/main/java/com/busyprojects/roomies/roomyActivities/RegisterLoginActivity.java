@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
+import com.busyprojects.roomies.helper.RuntimePermissionsCs;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.User;
 import com.busyprojects.roomies.pojos.transaction.Payment;
@@ -42,6 +44,7 @@ public class RegisterLoginActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
+    RuntimePermissionsCs runtimePermissionsCs;
    // boolean CheckInternetReceiver.isOnline(this);
     RelativeLayout rel_login_reg, rel_login, rel_register;
 
@@ -68,6 +71,12 @@ public class RegisterLoginActivity extends Activity {
 
 
         setInitialVisibility();
+
+        if (Build.VERSION.SDK_INT>=23)
+        {
+        runtimePermissionsCs = new RuntimePermissionsCs(this);
+        runtimePermissionsCs.getPermissions();
+    }
     }
 
 

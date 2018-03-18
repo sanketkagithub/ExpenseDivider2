@@ -96,17 +96,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:gravity="center"
+            android:gravity="center|left"
             android:orientation="horizontal">
 
-            <TextView
+
+             <ImageView
+                 android:id="@+id/iv_call_roomy"
+                 android:layout_width="@dimen/call_button_wh"
+                 android:layout_marginLeft="@dimen/lef_mr_paytg_lv"
+                 android:layout_height="@dimen/call_button_wh"
+                 android:src="@drawable/call_roomy"
+                 android:textColor="@color/white_color" />
+             <TextView
                android:paddingLeft="15dp"
                 android:fontFamily="serif"
                 android:paddingRight="15dp"
                 android:id="@+id/tv_payment_info"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:textSize="@dimen/lv_text"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
