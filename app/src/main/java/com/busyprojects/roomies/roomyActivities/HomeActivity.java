@@ -296,6 +296,7 @@ public class HomeActivity extends Activity {
 
     public void selectedColor(View view) {
 
+        sp = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
         spe = sp.edit();
 
         Resources resources = getResources();

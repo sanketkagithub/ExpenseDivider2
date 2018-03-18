@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.busyprojects.roomies.R;
-import com.busyprojects.roomies.roomyActivities.TotalEachPaymentHistoryActivity;
+import com.busyprojects.roomies.roomyActivities.HistoryDetailsActivity;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.History;
 
@@ -69,7 +69,7 @@ public class HistoryDatesAdapter extends ArrayAdapter {
                 spe =sp.edit();
                 spe.putString(SessionManager.HID,historyList.get(position).getHid());
                 spe.apply();
-                context.startActivity(new Intent(context, TotalEachPaymentHistoryActivity.class));
+                context.startActivity(new Intent(context, HistoryDetailsActivity.class));
 
 
             }

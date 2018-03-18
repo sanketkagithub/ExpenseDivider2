@@ -51,7 +51,9 @@
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="Name"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Name jjbfsnfjdsnksdnfjn"
                 android:textSize="@dimen/et_text"
                 android:textColor="@color/blue" />
 

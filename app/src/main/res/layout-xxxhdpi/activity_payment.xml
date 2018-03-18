@@ -196,7 +196,7 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="195dp"
+                            android:layout_width="@dimen/tv_each_key_wd"
                             android:layout_height="wrap_content"
                             android:text="Total"
                             android:textSize="12sp" />
@@ -204,7 +204,8 @@
                         <TextView
                             android:id="@+id/tv_total_amount"
                             style="@style/payment_calculated_text_value"
-                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="00000₹"
                             android:textSize="@dimen/calculated_bottom_text" />
@@ -222,7 +223,7 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="200dp"
+                            android:layout_width="@dimen/tv_each_key_wd"
                             android:layout_height="wrap_content"
                             android:text="Roomies "
                             android:textSize="12sp" />
@@ -230,7 +231,8 @@
                         <TextView
                             android:id="@+id/tv_total_roomies"
                             style="@style/payment_calculated_text_value"
-                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="00" />
 
@@ -246,7 +248,7 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="200dp"
+                            android:layout_width="@dimen/tv_each_key_wd"
                             android:layout_height="wrap_content"
                             android:text="Each "
                             android:textSize="12sp" />
@@ -254,7 +256,8 @@
                         <TextView
                             android:id="@+id/tv_each_payment"
                             style="@style/payment_calculated_text_value"
-                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="00₹"
                             android:textSize="12sp" />

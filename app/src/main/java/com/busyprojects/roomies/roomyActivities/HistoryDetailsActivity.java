@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TotalEachPaymentHistoryActivity extends Activity {
+public class HistoryDetailsActivity extends Activity {
 
     ListView lv_payments, lv_take_give;
     SharedPreferences sp;
@@ -49,12 +49,12 @@ public class TotalEachPaymentHistoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_total_each_payment);
+        setContentView(R.layout.activity_history_details);
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
 
         dialogEffect = new DialogEffect(this);
 
-        context = TotalEachPaymentHistoryActivity.this;
+        context = HistoryDetailsActivity.this;
         dbRef = Helper.getFirebaseDatabseRef();
 
         totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);

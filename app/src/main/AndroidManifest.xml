@@ -40,7 +40,7 @@
             android:name=".roomyActivities.HistoryDateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".roomyActivities.TotalEachPaymentHistoryActivity"
+            android:name=".roomyActivities.HistoryDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".roomyActivities.TransferActivity"

@@ -36,6 +36,11 @@ public class LauncherActivity extends Activity {
 
           getScreenInfo();
 
+        //set items map
+        PayingItems payingItems = PayingItems.getInstance();
+        payingItems.setPayingItemsMap(this);
+
+
         Resources resources = getResources();
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
@@ -67,9 +72,6 @@ public class LauncherActivity extends Activity {
         }, 1500);
 
 
-        //set items map
-       PayingItems payingItems = PayingItems.getInstance();
-       payingItems.setPayingItemsMap(this);
 
 
 
