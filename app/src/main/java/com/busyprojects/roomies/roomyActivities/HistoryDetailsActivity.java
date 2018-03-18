@@ -87,9 +87,8 @@ public class HistoryDetailsActivity extends Activity {
         //  lv_payments.se(R.style.list_style);
        // lv_payments.setsc
 
-        if (Build.VERSION.SDK_INT>=21) {
-            lv_payments.setScrollIndicators(R.style.list_style);
-        }
+
+
     }
 
 

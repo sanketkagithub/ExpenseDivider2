@@ -18,6 +18,8 @@
             android:id="@+id/tv_log_reg_title"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="@dimen/title"

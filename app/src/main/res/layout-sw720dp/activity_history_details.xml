@@ -66,7 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:divider="@color/lv_divider"
-                android:dividerHeight="1dp"
+                android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="10dp"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 

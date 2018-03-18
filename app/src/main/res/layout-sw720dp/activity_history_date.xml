@@ -12,10 +12,10 @@
         android:background="@color/main_app_colorp"
         android:id="@+id/tv_history_date"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/history_title_ht"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/et_text"
         android:fontFamily="serif"
         android:text="@string/history"
         android:textColor="@color/white_color" />
@@ -45,7 +45,8 @@
 
         <ListView
             android:id="@+id/lv_history_dates"
-            android:divider="@null"
+            android:divider="@color/lv_divider"
+            android:dividerHeight="@dimen/lv_div_ht"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

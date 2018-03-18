@@ -25,6 +25,8 @@
                 android:id="@+id/tv_log_reg_title"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
                 android:gravity="center"

@@ -46,6 +46,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -112,12 +113,26 @@ PayNowActivity extends Activity {
 
 
        PayingItems payingItems = PayingItems.getInstance();
-       mapItems = payingItems.getItemsMap();
+
+       try {
+           mapItems = payingItems.getItemsMap();
+
+       }catch (Exception e)
+       {
+           e.printStackTrace();
+           mapItems = new HashMap<>();
+
+       }
 
         payingItemsLinkedListAccu = new LinkedList<>();
 
-        setSuggestionsInList();
+       try {
 
+           setSuggestionsInList();
+       }catch (Exception e)
+       {
+           e.printStackTrace();
+       }
         lv_items_suggestions.setVisibility(View.GONE);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);

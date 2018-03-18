@@ -25,6 +25,8 @@
 
             <TextView
                 android:id="@+id/tv_transaction"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -105,6 +107,8 @@
                     android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="serif"
@@ -214,6 +218,8 @@
                             android:id="@+id/tv_total_amount"
                             style="@style/payment_calculated_text_value"
                             android:layout_width="match_parent"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_height="wrap_content"
                             android:text="00000₹"
                             android:gravity="center"
@@ -232,6 +238,8 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_width="@dimen/tv_each_key_wd"
                             android:layout_height="wrap_content"
                             android:text="Roomies "
@@ -240,6 +248,8 @@
                         <TextView
                             android:id="@+id/tv_total_roomies"
                             style="@style/payment_calculated_text_value"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="00"

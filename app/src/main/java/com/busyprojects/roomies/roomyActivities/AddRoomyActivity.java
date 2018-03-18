@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
@@ -22,6 +23,7 @@ import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
+import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,56 +92,182 @@ String appColor;
     }
 
 
+    boolean isTransfer;
     public void saveRoomy(View view) {
 
-     if (CheckInternetReceiver.isOnline(this)) {
-         dialogEffect.showDialog();
-         String rid = Helper.randomString(10);
-         String nameS = et_name.getText().toString();
-         String mobileS = et_mobile.getText().toString();
-         String registrationDateTime = Helper.getCurrentDateTime();
+        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
 
 
-         if (nameS.equals("") || mobileS.equals("")) {
-             ToastManager.showToast(context, Helper.EMPTY_FIELD);
-         } else {
-             dialogEffect.cancelDialog();
+                    isTransfer = dataSnapshot.getValue(Boolean.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-             // TODO: 1/27/2018 save unique roomy here
-             Roomy roomy = new Roomy();
-             roomy.setMobile(mobileS);
-             roomy.setName(nameS);
-             roomy.setRid(rid);
-             roomy.setMacAddress(Helper.getMacAddr());
-             roomy.setMobileLogged(mobileLogged);
-             roomy.setRegistrationDateTime(registrationDateTime);
+                    isTransfer = false;
+                }
 
-             db_ref.child(Helper.ROOMY).child(rid)
-                     .setValue(roomy);
+                //   isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
 
-             ToastManager.showToast(context, Helper.REGISTERD);
+                if (isTransfer) {
+                    // TODO: 2/25/2018 remove all payment n paytg afterTransfer
+                  deletePaymentNpayTgAtIfTransfered();
+                }
 
+                saveRoommate();
 
-             et_mobile.setText("");
-             et_name.setText("");
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-             // TODO: 2/25/2018 reset transfer session
-             spe = sp.edit();
-             spe.putBoolean(SessionManager.IS_TRANSFER, false);
-             spe.apply();
+            }
+        });
 
 
-             deleteAfterExistingTransfer();
+    }
 
-             onBackPressed();
+    void deletePaymentNpayTgAtIfTransfered()
+    {
 
-         }
 
-     }else
-     {
-         Helper.showCheckInternet(this);
-     }
+        // TODO: 2/5/2018 delete current Payment
+
+        dialogEffect.showDialog();
+        db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        Payment payment = dataSnapshot1.getValue(Payment.class);
+
+                        if (payment.getMobileLogged().equals(mobileLogged)) {
+
+                            db_ref.child(Helper.PAYMENT)
+                                    .child(payment.getPid())
+                                    .removeValue();
+
+                        }
+
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                dialogEffect.cancelDialog();
+                try {
+
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                        if (payTg.getMobileLogged().equals(mobileLogged)) {
+                            db_ref.child(Helper.AFTER_TRANSFER)
+                                    .child(payTg.getPayTgId())
+                                    .removeValue();
+
+                        }
+
+
+                    }
+
+                } catch (Exception e) {
+                    spe = sp.edit();
+                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                    spe.apply();
+
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
+
+        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+
+    void saveRoommate()
+    {
+
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            String rid = Helper.randomString(10);
+            String nameS = et_name.getText().toString();
+            String mobileS = et_mobile.getText().toString();
+            String registrationDateTime = Helper.getCurrentDateTime();
+
+
+            if (nameS.equals("") || mobileS.equals("")) {
+                ToastManager.showToast(context, Helper.EMPTY_FIELD);
+            } else {
+                dialogEffect.cancelDialog();
+
+                // TODO: 1/27/2018 save unique roomy here
+                Roomy roomy = new Roomy();
+                roomy.setMobile(mobileS);
+                roomy.setName(nameS);
+                roomy.setRid(rid);
+                roomy.setMacAddress(Helper.getMacAddr());
+                roomy.setMobileLogged(mobileLogged);
+                roomy.setRegistrationDateTime(registrationDateTime);
+
+                db_ref.child(Helper.ROOMY).child(rid)
+                        .setValue(roomy);
+
+                ToastManager.showToast(context, Helper.REGISTERD);
+
+
+                et_mobile.setText("");
+                et_name.setText("");
+
+
+                // TODO: 2/25/2018 reset transfer session
+                spe = sp.edit();
+                spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                spe.apply();
+
+
+                //deleteAfterExistingTransfer();
+
+                onBackPressed();
+
+            }
+
+        }else
+        {
+            Helper.showCheckInternet(this);
+        }
 
     }
 

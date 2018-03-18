@@ -25,6 +25,8 @@
 
             <TextView
                 android:id="@+id/tv_transaction"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
@@ -106,6 +108,8 @@
                     android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="serif"
@@ -231,6 +235,8 @@
                         <TextView
                             android:id="@+id/tv_total_roomies"
                             style="@style/payment_calculated_text_value"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:layout_width="match_parent"
                             android:gravity="center"
                             android:layout_height="wrap_content"
@@ -255,6 +261,8 @@
 
                         <TextView
                             android:id="@+id/tv_each_payment"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             style="@style/payment_calculated_text_value"
                             android:layout_width="match_parent"
                             android:gravity="center"

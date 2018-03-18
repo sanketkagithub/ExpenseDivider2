@@ -26,6 +26,8 @@
                 android:id="@+id/tv_roomy_name_gt"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:inputType="textMultiLine"
                 android:paddingLeft="3dp"
                 android:paddingStart="3dp"
@@ -37,6 +39,8 @@
             <TextView
                 android:id="@+id/tv_roomy_amount_gt"
                 android:layout_width="190dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:textSize="@dimen/lv_text"
@@ -49,6 +53,8 @@
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="00"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:fontFamily="serif"
                 android:textSize="@dimen/lv_text"
                 android:textColor="@color/black" />
