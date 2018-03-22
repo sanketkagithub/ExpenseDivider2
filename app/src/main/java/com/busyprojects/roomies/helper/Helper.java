@@ -27,13 +27,14 @@ public class Helper {
     public static final String USER = "User";
     public static final String PAYMENT_LIST = "paymentList";
     public static final String MOBILE_LOGGED = "mobileLogged";
+    public static final String MOBILE = "mobile";
     public static final String PAYMENT_NOTIFICATION = "PaymentNotification";
     public static final String ROOMY = "Roomy";
     public static final String SELECT_ROOMY = "Select Roomy";
     public static final String EACH_TOTAL_PAMENT = "EachTotalPayment";
     public static final String AMOUNT_VARIATION = "amountVariation";
     public static final String TOTAL_PAID = "amountTg";
-    public static final String BLOCKED = "Blocked";
+    public static final String NAME = "name";
     public static int CURRENT_TAB = 0;
     public static final String ADMIN_ACCESS = "AdminAccess";
     public static final String APPROX_CONF_TIME_BY_ADMIN = "approxConfirmedTimeByAdmin";
@@ -224,5 +225,11 @@ public class Helper {
         return "";
     }
 
+
+   public double  getRoundedOffValue(double input)
+    {
+        return Math.round(input * 100.0) / 100.0;
+
+    }
 }
 

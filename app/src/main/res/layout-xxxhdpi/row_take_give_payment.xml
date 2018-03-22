@@ -95,7 +95,7 @@
                 android:id="@+id/iv_call_roomy"
                 android:layout_width="@dimen/call_button_wh"
                 android:layout_height="@dimen/call_button_wh"
-                android:src="@drawable/call_roomy"
+                android:src="@drawable/call_now"
                 android:textColor="@color/white_color" />
             <TextView
                 android:paddingLeft="15dp"

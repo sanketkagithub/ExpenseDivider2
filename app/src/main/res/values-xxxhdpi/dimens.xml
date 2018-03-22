@@ -28,7 +28,7 @@
     <dimen name="coin_wh">20dp</dimen>
     <dimen name="lv_text">11sp</dimen>
     <dimen name="pay_image_iv">90dp</dimen>
-    <dimen name="et_text">15sp</dimen>
+    <dimen name="et_text">19sp</dimen>
 
     <dimen name="lv_div_ht">0.5dp</dimen>
     <dimen name="history_lv_date_ht">90dp</dimen>
@@ -42,4 +42,9 @@
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">300dp</dimen>
     <dimen name="del_alert_ht">100dp</dimen>
+    <dimen name="profile_lv">40dp</dimen>
+    <dimen name="prof_iv_lv_pad">5dp</dimen>
+    <dimen name="roomy_lv_lef_padd">13dp</dimen>
+    <dimen name="prof_pad">9dp</dimen>
+    <dimen name="lv_prof_ht">80dp</dimen>
 </resources>

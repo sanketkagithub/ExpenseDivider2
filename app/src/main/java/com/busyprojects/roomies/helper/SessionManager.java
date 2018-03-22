@@ -37,8 +37,9 @@ public class SessionManager {
     public static final String YELLOWISH = "#deda00";
     public static final String BLACKISH = "#2c2c2c";
     public static final String REDISH = "#e30008";
-    public static final String PINKISH = "#e7009a";
-    public static final String VOILETISH = "#5102c0";
+    public static final String SELECT_ROOMY_TO_EDIT = "selRoomy";
+    public static final String SELECT_MOBILE_TO_EDIT = "selmOBILE";
+    public static final String SELECT_RID_TO_EDIT = "SELROOID";
 
 
     public static final String IS_TRANSFER = "isTransfer";

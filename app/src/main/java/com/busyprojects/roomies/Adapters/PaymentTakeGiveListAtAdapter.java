@@ -121,7 +121,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             // viewHolder.ll_take_give.setBackgroundColor(takeColor);
             viewHolder.but_transfer.setVisibility(View.GONE);
 
-        } else if (amountVariation == 0) {
+        } else if (amountVariation == 0.0) {
             int doneColor = context.getResources().getColor(R.color.done_light);
             int done = context.getResources().getColor(R.color.done);
 

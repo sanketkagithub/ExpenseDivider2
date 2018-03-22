@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.busyprojects.roomies.roomyActivities.TransferActivity">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rel_iv_roomy_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/main_app_colorp"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/tv_log_reg_title"
+                android:layout_width="@dimen/top_image"
+                android:layout_height="@dimen/top_image"
+                android:padding="2dp"
+                android:text="@string/add_roomy"
+                android:src="@drawable/add_roomy" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rel_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
+                android:background="@drawable/et_reg_back"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@drawable/et_drawable_back"
+                    android:gravity="center"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/iv_name"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
+                        android:src="@drawable/name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="9dp">
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="serif"
+                        android:hint="Name"
+                        android:textCursorDrawable="@drawable/cursor_background"
+                        android:backgroundTint="@color/voiletish"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/hint"
+                        android:textSize="@dimen/et_text" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rel_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="@dimen/ll_et_wd"
+                android:layout_height="@dimen/ll_et_ht"
+                android:background="@drawable/et_reg_back"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@drawable/et_drawable_back"
+                    android:gravity="center"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/iv_call"
+                        android:layout_width="@dimen/et_left_image"
+                        android:layout_height="@dimen/et_left_image"
+                        android:src="@drawable/call" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="9dp">
+
+                    <EditText
+                        android:id="@+id/et_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="serif"
+                        android:hint="Mobile"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColorHint="@color/hint"
+                        android:textSize="@dimen/et_text" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rel_save_roomy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/but_save"
+                android:layout_width="@dimen/but_w"
+                android:layout_height="@dimen/button_ht"
+                android:background="@drawable/buttons"
+                android:fontFamily="serif"
+                android:onClick="saveRoomy"
+                android:text="save"
+                android:textSize="@dimen/but_text"
+
+                android:textAllCaps="false"
+                android:textColor="@color/white_color" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rel_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/but_back"
+                android:layout_width="@dimen/but_w"
+                android:layout_height="@dimen/button_ht"
+                android:background="@drawable/buttons"
+                android:fontFamily="serif"
+                android:onClick="backToHome"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:textSize="@dimen/but_text"
+
+                android:textColor="@color/white_color" />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

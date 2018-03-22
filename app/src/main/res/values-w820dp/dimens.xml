@@ -42,4 +42,9 @@
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">200dp</dimen>
     <dimen name="del_alert_ht">100dp</dimen>
+    <dimen name="profile_lv">30dp</dimen>
+    <dimen name="prof_iv_lv_pad">5dp</dimen>
+    <dimen name="roomy_lv_lef_padd">13dp</dimen>
+    <dimen name="prof_pad">9dp</dimen>
+    <dimen name="lv_prof_ht">80dp</dimen>
 </resources>

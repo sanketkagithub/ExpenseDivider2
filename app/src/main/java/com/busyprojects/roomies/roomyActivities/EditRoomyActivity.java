@@ -16,38 +16,40 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
-import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
-import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class AddRoomyActivity extends Activity {
+public class EditRoomyActivity extends Activity {
 
     DialogEffect dialogEffect;
     DatabaseReference db_ref;
-    Context context = AddRoomyActivity.this;
+    Context context = EditRoomyActivity.this;
     String mobileLogged;
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
     EditText et_name, et_mobile;
 
-    RelativeLayout rel_iv_roomy_home;
+    AnimationManager animationManager;
+
+    RelativeLayout rel_name, rel_mobile, rel_iv_roomy_home;
     ImageView iv_name, iv_call;
-String appColor;
+    String appColor, roomyToEdit, mobileToEdit, ridToEdit;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_roomy);
+        setContentView(R.layout.activity_edit_roomy);
         et_name = findViewById(R.id.et_name);
         et_mobile = findViewById(R.id.et_mobile);
         Button but_save = findViewById(R.id.but_save);
@@ -57,22 +59,33 @@ String appColor;
         iv_call = findViewById(R.id.iv_call);
 
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
+        rel_name = findViewById(R.id.rel_name);
+        rel_mobile = findViewById(R.id.rel_mobile);
 
         db_ref = Helper.getFirebaseDatabseRef();
         dialogEffect = new DialogEffect(context);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
-        mobileLogged = sp.getString(SessionManager.MOBILE, "");
-         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
+        appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
+        roomyToEdit = sp.getString(SessionManager.SELECT_ROOMY_TO_EDIT, "");
+        mobileToEdit = sp.getString(SessionManager.SELECT_MOBILE_TO_EDIT, "");
+        ridToEdit = sp.getString(SessionManager.SELECT_RID_TO_EDIT, "");
 
 
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_save.setBackgroundColor(Color.parseColor(appColor));
         but_back.setBackgroundColor(Color.parseColor(appColor));
 
+        animationManager = AnimationManager.getInstance();
         setApptheme();
+        setOldData();
     }
 
+    void setOldData() {
+        et_name.setText(roomyToEdit);
+        et_mobile.setText(mobileToEdit);
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     void setApptheme() {
@@ -84,7 +97,7 @@ String appColor;
         iv_call.setImageResource(mobile);
 
 
-        if (Build.VERSION.SDK_INT>=21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             //SessionManager.setCursorColor(et_name,Color.parseColor(appColor));
             et_name.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
             et_mobile.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
@@ -93,44 +106,14 @@ String appColor;
 
 
     boolean isTransfer;
+
     public void saveRoomy(View view) {
 
-        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                try {
-
-
-                    isTransfer = dataSnapshot.getValue(Boolean.class);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                    isTransfer = false;
-                }
-
-                //   isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
-
-                if (isTransfer) {
-                    // TODO: 2/25/2018 remove all payment n paytg afterTransfer
-              //    deletePaymentNpayTgAtIfTransfered();
-                }
-
-                saveRoommate();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        saveUpdatedRoommate();
 
     }
 
-    void deletePaymentNpayTgAtIfTransfered()
-    {
+    void deletePaymentNpayTgAtIfTransfered() {
 
 
         // TODO: 2/5/2018 delete current Payment
@@ -217,55 +200,42 @@ String appColor;
     }
 
 
-    void saveRoommate()
-    {
+    void saveUpdatedRoommate() {
 
         if (CheckInternetReceiver.isOnline(this)) {
-            dialogEffect.showDialog();
-            String rid = Helper.randomString(10);
-            String nameS = et_name.getText().toString();
-            String mobileS = et_mobile.getText().toString();
-            String registrationDateTime = Helper.getCurrentDateTime();
+
+            String name = et_name.getText().toString();
+            String mobile = et_mobile.getText().toString();
 
 
-            if (nameS.equals("") || mobileS.equals("")) {
-                ToastManager.showToast(context, Helper.EMPTY_FIELD);
+            if (name.equals("") || mobile.equals("")) {
+
+
+                if (name.equals("")) {
+
+                    animationManager.animateViewForEmptyField(rel_name, context);
+                }
+
+                if (mobile.equals("")) {
+                    animationManager.animateViewForEmptyField(rel_mobile, context);
+                }
             } else {
-                dialogEffect.cancelDialog();
 
-                // TODO: 1/27/2018 save unique roomy here
-                Roomy roomy = new Roomy();
-                roomy.setMobile(mobileS);
-                roomy.setName(nameS);
-                roomy.setRid(rid);
-                roomy.setMacAddress(Helper.getMacAddr());
-                roomy.setMobileLogged(mobileLogged);
-                roomy.setRegistrationDateTime(registrationDateTime);
+                // TODO: 3/18/2018 update roomy
 
-                db_ref.child(Helper.ROOMY).child(rid)
-                        .setValue(roomy);
-
-                ToastManager.showToast(context, Helper.REGISTERD);
-
-
-                et_mobile.setText("");
-                et_name.setText("");
-
-
-                // TODO: 2/25/2018 reset transfer session
-                spe = sp.edit();
-                spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                spe.apply();
-
-
-                //deleteAfterExistingTransfer();
+                db_ref.child(Helper.ROOMY)
+                        .child(ridToEdit)
+                        .child(Helper.NAME).setValue(name);
+                db_ref.child(Helper.ROOMY)
+                        .child(ridToEdit)
+                        .child(Helper.MOBILE).setValue(mobile);
 
                 onBackPressed();
 
+                Toast.makeText(context, "Roomy Updated successfully", Toast.LENGTH_SHORT).show();
             }
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(this);
         }
 
@@ -316,8 +286,7 @@ String appColor;
                 }
             });
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
     }

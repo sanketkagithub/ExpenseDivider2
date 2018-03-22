@@ -23,6 +23,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
+import com.busyprojects.roomies.helper.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.pojos.master.Roomy;
@@ -62,7 +63,7 @@ public class HomeActivity extends Activity {
 
     RelativeLayout rel_iv_roomy_home;
     Button but_add_roomy;
-    Button but_pay;
+    Button but_pay,but_all_roomy;
     Button but_view_payment;
     Button but_history;
     Button but_logout;
@@ -80,12 +81,19 @@ public class HomeActivity extends Activity {
         tv_login_message = findViewById(R.id.tv_login_message);
 
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
+        but_all_roomy = findViewById(R.id.but_all_roomy);
 
         but_add_roomy = findViewById(R.id.but_add_roomy);
 
         iv_notification = findViewById(R.id.iv_notification);
         tv_notification_count = findViewById(R.id.tv_notification_count);
 
+        //set items map
+        PayingItems payingItems = PayingItems.getInstance();
+
+        if (payingItems.getItemsMap().size()==0) {
+            payingItems.setPayingItemsMap(this);
+        }
 
         try {
             iv_notification.setVisibility(View.GONE);
@@ -442,6 +450,7 @@ public class HomeActivity extends Activity {
         but_pay.setBackgroundColor(Color.parseColor(appColor));
         but_view_payment.setBackgroundColor(Color.parseColor(appColor));
         but_history.setBackgroundColor(Color.parseColor(appColor));
+        but_all_roomy.setBackgroundColor(Color.parseColor(appColor));
         but_logout.setBackgroundColor(Color.parseColor(appColor));
 
     }
@@ -602,6 +611,8 @@ public class HomeActivity extends Activity {
     }
 
 
+    public void viewRoomy(View view) {
+    startActivity(new Intent(this,AllRoomyActivity.class));}
 }
 
 

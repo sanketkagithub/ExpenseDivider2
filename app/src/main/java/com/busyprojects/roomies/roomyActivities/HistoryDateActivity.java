@@ -2,12 +2,15 @@ package com.busyprojects.roomies.roomyActivities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -178,4 +181,27 @@ public class HistoryDateActivity extends Activity {
 
     }
     }
+
+    String hid;
+    History history;
+    Dialog dialogDeleteAlert;
+    public void showDeleteRoomyListAlert(View view) {
+
+        if (CheckInternetReceiver.isOnline(this)) {
+            //animationManager.animateViewForEmptyField();
+            dialogDeleteAlert = new Dialog(this);
+            dialogDeleteAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            View v = LayoutInflater.from(context).inflate(R.layout.delete_alert, null);
+            dialogDeleteAlert.setContentView(v);
+            dialogDeleteAlert.setCancelable(false);
+            dialogDeleteAlert.show();
+
+        }else
+        {
+            Helper.showCheckInternet(context);
+
+        }
+    }
+
+
 }

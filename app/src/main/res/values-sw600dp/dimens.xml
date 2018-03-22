@@ -14,7 +14,7 @@
     <dimen name="date">18sp</dimen>
 
     <dimen name="lv_but_ht">25dp</dimen>
-    <dimen name="et_text">25sp</dimen>
+    <dimen name="et_text">35sp</dimen>
     <dimen name="image_buttons">35dp</dimen>
     <dimen name="bottom_iv_margin">19dp</dimen>
     <dimen name="bell">60dp</dimen>
@@ -56,4 +56,9 @@
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">500dp</dimen>
     <dimen name="del_alert_ht">250dp</dimen>
+    <dimen name="profile_lv">60dp</dimen>
+    <dimen name="prof_iv_lv_pad">5dp</dimen>
+    <dimen name="roomy_lv_lef_padd">20dp</dimen>
+    <dimen name="prof_pad">15dp</dimen>
+    <dimen name="lv_prof_ht">80dp</dimen>
 </resources>

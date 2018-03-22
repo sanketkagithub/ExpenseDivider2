@@ -41,12 +41,15 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
     String[] transferAmount = new String[1];
 
+    Helper helper;
 
     String appColor;
     public PaymentTakeGiveListAdapter(Context context, List<PayTg> payTgList) {
         super(context, R.layout.row_take_give_payment, payTgList);
         this.context = context;
         this.payTgList = payTgList;
+
+        helper = new Helper();
 
         dialogEffect = new DialogEffect(context);
 
@@ -85,7 +88,10 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
         viewHolder.tv_roomy_amount.setText(payTgList.get(position).getAmountTg() + " ₹");
 
         double amountVariation = payTgList.get(position).getAmountVariation();
-        viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
+
+        double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
+
+        viewHolder.tv_roomy_amount_variation.setText(amountVarRoundOff + " ₹");
 
 
 
@@ -128,10 +134,9 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
         }
 
         String message = payTgList.get(position).getRoomyName()
-                + " will " + takeGive +
-                " " + payTgList.get(position).getAmountVariation() + " ₹";
+                + " will " + takeGive + " "+
+                 amountVarRoundOff + " ₹";
 
-        message = message.replace("-", "");
         if (amountVariation!=0) {
             viewHolder.tv_payment_info.setText(message);
         }else

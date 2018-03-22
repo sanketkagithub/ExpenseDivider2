@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
+
+
+
+    <TextView
+        android:background="@color/main_app_colorp"
+        android:id="@+id/tv_roomy_title"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="@dimen/title"
+        android:fontFamily="serif"
+        android:text="@string/roomies"
+        android:textColor="@color/white_color" />
+
+
+
+
+    <RelativeLayout
+        android:layout_below="@id/tv_roomy_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_all_roomy"
+            android:dividerHeight="@dimen/lv_div_ht"
+            android:divider="@color/lv_divider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+        <ImageView
+            android:id="@+id/iv_no_history_record_found"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/no_record"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

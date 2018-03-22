@@ -13,7 +13,7 @@
     <dimen name="ll_et_wd">220dp</dimen>
     <dimen name="et_text">12sp</dimen>
     <dimen name="image_buttons">22dp</dimen>
-    <dimen name="bottom_iv_margin">7dp</dimen>
+    <dimen name="bottom_iv_margin">17dp</dimen>
     <dimen name="bell">30dp</dimen>
     <dimen name="bell_text">10sp</dimen>
     <dimen name="title">19sp</dimen>
@@ -45,4 +45,9 @@
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">250dp</dimen>
     <dimen name="del_alert_ht">100dp</dimen>
+    <dimen name="profile_lv">22dp</dimen>
+    <dimen name="prof_iv_lv_pad">5dp</dimen>
+    <dimen name="roomy_lv_lef_padd">13dp</dimen>
+    <dimen name="prof_pad">9dp</dimen>
+    <dimen name="lv_prof_ht">80dp</dimen>
 </resources>

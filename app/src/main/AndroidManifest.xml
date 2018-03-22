@@ -45,6 +45,9 @@
         <activity
             android:name=".roomyActivities.PaymentActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".roomyActivities.AllRoomyActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".roomyActivities.EditRoomyActivity" />
 
         <receiver android:name=".helper.CheckInternetReceiver">
             <intent-filter>

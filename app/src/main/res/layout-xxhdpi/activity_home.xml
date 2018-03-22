@@ -163,6 +163,25 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/but_all_roomy"
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="viewRoomy"
+            android:text="Roomies"
+            android:textAllCaps="false"
+            android:textSize="@dimen/but_text"
+            android:textColor="@color/white_color" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rel_view_history"

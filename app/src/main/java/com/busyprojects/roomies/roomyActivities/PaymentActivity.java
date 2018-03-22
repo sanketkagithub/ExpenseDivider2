@@ -60,6 +60,7 @@ public class PaymentActivity extends Activity {
     ImageView iv_no_pay, iv_no_transfer;
     SharedPreferences.Editor spe;
     ListView lv_payments, lv_take_give;
+    Helper helper;
 
     Button but_delete_payment, but_transfer_money;
 
@@ -86,6 +87,7 @@ AnimationManager animationManager;
 
         totalRoommates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
+        helper = new Helper();
 
        // et_sv = findViewById(R.id.et_sv);
         but_delete_payment = findViewById(R.id.but_delete_payment);
@@ -132,30 +134,6 @@ AnimationManager animationManager;
         }
 
 
-
-        // filter list
-    /*    et_sv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-               String searchedText = et_sv.getText().toString().toLowerCase(Locale.getDefault());
-                 filter_listview(searchedText);
-
-
-
-            }
-        });
-    */
 
     }
 
@@ -429,12 +407,33 @@ AnimationManager animationManager;
         showPayTgListfromAfterTransfer();
     }
 
+
+    void savePayTgListToAfterTransfer() {
+
+        System.out.println(payTgList);
+        // TODO: 2/17/2018 save to AfterTransfer
+        for (int i = 0; i < payTgList.size(); i++) {
+
+
+            db_ref.child(Helper.AFTER_TRANSFER)
+                    .child(payTgList.get(i).getPayTgId())
+                    .setValue(payTgList.get(i));
+
+
+        }
+
+        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(true);
+
+        // setPaymentListNcallPaymentTakeGive(paymentList);
+
+
+    }
     private void showPayTgListfromAfterTransfer() {
 
         if (CheckInternetReceiver.isOnline(this)) {
             payTgList = new ArrayList<>();
             db_ref.child(Helper.AFTER_TRANSFER)
-                    .addValueEventListener(new ValueEventListener() {
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -451,6 +450,12 @@ AnimationManager animationManager;
                             }
 
                             if (payTgList.size() != 0) {
+
+
+                                if (payTgList.size()<totalRoommates)
+                                {
+                                    deletePaymentNpayTgAtIfTransfered();
+                                }
                                 payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
 
                                 PaymentTakeGiveListAtAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
@@ -673,9 +678,10 @@ if (CheckInternetReceiver.isOnline(this)) {
             eachAmount = 1;
         }
 
+
         tv_total_amount.setText(total + " ₹");
         tv_total_roomies.setText(totalRoommates + "");
-        tv_each_payment.setText(eachAmount + " ₹");
+        tv_each_payment.setText(helper.getRoundedOffValue(eachAmount) + " ₹");
 
 //        if (paymentList.size() != 0) {
 //            but_transfer_money.setVisibility(View.VISIBLE);
@@ -684,27 +690,6 @@ if (CheckInternetReceiver.isOnline(this)) {
         return eachAmount;
     }
 
-
-    void savePayTgListToAfterTransfer() {
-
-        System.out.println(payTgList);
-        // TODO: 2/17/2018 save to AfterTransfer
-        for (int i = 0; i < payTgList.size(); i++) {
-
-
-            db_ref.child(Helper.AFTER_TRANSFER)
-                    .child(payTgList.get(i).getPayTgId())
-                    .setValue(payTgList.get(i));
-
-
-        }
-        
-        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(true);
-        
-        // setPaymentListNcallPaymentTakeGive(paymentList);
-
-
-    }
 
     public void cancelPayment(View view) {
 
@@ -728,5 +713,92 @@ if (CheckInternetReceiver.isOnline(this)) {
         dialogDeleteAlert.dismiss();
     }
 
+
+    void deletePaymentNpayTgAtIfTransfered()
+    {
+
+
+        // TODO: 2/5/2018 delete current Payment
+
+        dialogEffect.showDialog();
+        db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        Payment payment = dataSnapshot1.getValue(Payment.class);
+
+                        if (payment.getMobileLogged().equals(mobileLogged)) {
+
+                            db_ref.child(Helper.PAYMENT)
+                                    .child(payment.getPid())
+                                    .removeValue();
+
+                        }
+
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                dialogEffect.cancelDialog();
+                try {
+
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                        if (payTg.getMobileLogged().equals(mobileLogged)) {
+                            db_ref.child(Helper.AFTER_TRANSFER)
+                                    .child(payTg.getPayTgId())
+                                    .removeValue();
+
+                        }
+
+
+                    }
+
+                } catch (Exception e) {
+                    spe = sp.edit();
+                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                    spe.apply();
+
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
+
+        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
+
+
+    }
 
 }
