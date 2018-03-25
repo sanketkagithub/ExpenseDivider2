@@ -29,7 +29,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.helper.PayingItems;
+import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
@@ -46,7 +46,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -106,25 +105,15 @@ PayNowActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_now);
+        db_ref = Helper.getFirebaseDatabseRef();
 
         lv_items_suggestions = findViewById(R.id.lv_items_suggestions);
         progressBarSuggImage = findViewById(R.id.progressBarSuggImage);
 
 
+        dialogEffect = new DialogEffect(this);
 
-       PayingItems payingItems = PayingItems.getInstance();
 
-       try {
-           mapItems = payingItems.getItemsMap();
-
-       }catch (Exception e)
-       {
-           e.printStackTrace();
-           mapItems = new HashMap<>();
-
-       }
-
-        payingItemsLinkedListAccu = new LinkedList<>();
 
        try {
 
@@ -139,7 +128,6 @@ PayNowActivity extends Activity {
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         defaultImageUrl = getResources().getString(R.string.default_image);
 
-        dialogEffect = new DialogEffect(this);
         spinner_roomy = findViewById(R.id.spinner_roomy);
         rel_main_paying_item_mage = findViewById(R.id.rel_main_paying_item_mage);
         rel_main_paying_item_mage.setVisibility(View.GONE);
@@ -160,7 +148,6 @@ PayNowActivity extends Activity {
 
         animationManager = AnimationManager.getInstance();
 
-        db_ref = Helper.getFirebaseDatabseRef();
 
 
         setSpinneerAdapter();
@@ -621,24 +608,66 @@ PayNowActivity extends Activity {
     ArrayAdapter aa;
     private void setSuggestionsInList()
    {
-      payingItemsLinkedList = new LinkedList<>();
 
-       System.out.println(mapItems.size() + " " + mapItems);
+       dialogEffect.showDialog();
+     // payingItemsLinkedList = new LinkedList<>();
 
-       for (Map.Entry<String, String> s:
-            mapItems.entrySet())
-       {
+     //  System.out.println(mapItems.size() + " " + mapItems);
 
-         payingItemsLinkedList.add(s.getKey());
+      db_ref.child(Helper.PAYING_ITEMS)
+     //  db_ref.child("PayingItemsTest")
+              .addValueEventListener(new ValueEventListener() {
+                  @Override
+                  public void onDataChange(DataSnapshot dataSnapshot) {
 
-       }
+                      dialogEffect.cancelDialog();
+                      payingItemsLinkedList = new LinkedList<>();
+                      payingItemsLinkedListAccu = new LinkedList<>();
+
+                      // TODO: 3/24/2018 get all map items
+
+                    /*  for (DataSnapshot dataSnapshot1:
+                           dataSnapshot.getChildren()) {
+*/
+
+                         PayingItems payingItems =  dataSnapshot.getValue(PayingItems.class);
+                          mapItems = payingItems.getItemsMap();
+  //                    }
+
+                      try {
 
 
-     aa = new ArrayAdapter(this,R.layout.paying_item_lv_layout,
-             R.id.tv_paying_item_lv,
-             payingItemsLinkedList);
-       lv_items_suggestions.setAdapter(aa);
-       payingItemsLinkedListAccu.addAll(payingItemsLinkedList);
+                          for (Map.Entry<String, String> s :
+                                  mapItems.entrySet()) {
+
+                              payingItemsLinkedList.add(s.getKey());
+
+                          }
+
+                      }catch (Exception e)
+                      {
+                          e.printStackTrace();
+                      }
+
+
+                      aa = new ArrayAdapter(context,R.layout.paying_item_lv_layout,
+                              R.id.tv_paying_item_lv,
+                              payingItemsLinkedList);
+                      lv_items_suggestions.setAdapter(aa);
+                      payingItemsLinkedListAccu.addAll(payingItemsLinkedList);
+
+
+
+
+                  }
+
+                  @Override
+                  public void onCancelled(DatabaseError databaseError) {
+
+                  }
+              });
+
+
 
 
    }

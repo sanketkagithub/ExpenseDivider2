@@ -164,7 +164,7 @@
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
                 android:fontFamily="serif"
-                android:onClick="saveRoomy"
+                android:onClick="saveRoomyNdeletePaymenPAytfIfIsTransfer"
                 android:text="save"
                 android:textSize="@dimen/but_text"
                 android:textAllCaps="false"

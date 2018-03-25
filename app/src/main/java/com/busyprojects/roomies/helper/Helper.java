@@ -65,7 +65,7 @@ public class Helper {
     public static final String CONFIRMATION_SHOWN = "confirmationShown";
 
     public static final String USER_ALLOWED = "userAllowed";
-    public static final String USER_INSIDE = "userInside";
+    public static final String PAYING_ITEMS = "PayingItems";
 
 
     public static final String SDF_FORMAT = "HH:mm:ss dd-MMM-yyyy";

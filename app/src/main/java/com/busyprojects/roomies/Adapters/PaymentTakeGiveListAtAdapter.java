@@ -57,12 +57,14 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     String[] transferAmount = new String[1];
     AnimationManager animationManager;
     String appColor;
+    Helper helper;
 
     public PaymentTakeGiveListAtAdapter(Context context, List<PayTg> payTgList) {
         super(context, R.layout.row_take_give_payment_at, payTgList);
         this.context = context;
         this.payTgList = payTgList;
 
+        helper = new Helper();
         dialogEffect = new DialogEffect(context);
 
         animationManager = AnimationManager.getInstance();
@@ -101,7 +103,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         viewHolder.tv_roomy_amount.setText(payTgList.get(position).getAmountTg() + " ₹");
 
         double amountVariation = payTgList.get(position).getAmountVariation();
-        viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
+
+        double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
+
+        viewHolder.tv_roomy_amount_variation.setText(amountVarRoundOff + " ₹");
 
         viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
 
@@ -209,6 +214,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         // TODO: 2/11/2018 from
         tvFrom.setText(fromPayTg.getRoomyName());
+
+        et_transfer_amount.setText(fromPayTg.getAmountVariation() +"");
 
         tv_from_bottom.setText(fromPayTg.getRoomyName());
 

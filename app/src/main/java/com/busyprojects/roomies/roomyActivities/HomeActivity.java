@@ -11,10 +11,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.helper.PayingItems;
+import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.pojos.master.Roomy;
@@ -52,7 +54,7 @@ public class HomeActivity extends Activity {
     RelativeLayout iv_notification;
     AnimationManager animationManager = null;
 
-
+ImageView iv_internet;
     int totalRoomates;
 
     DialogEffect dialogEffect;
@@ -69,6 +71,7 @@ public class HomeActivity extends Activity {
     Button but_logout;
     String appColor;
 
+    PayingItems payingItems;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -79,7 +82,9 @@ public class HomeActivity extends Activity {
 
         dialogEffect = new DialogEffect(context);
         tv_login_message = findViewById(R.id.tv_login_message);
+        iv_internet = findViewById(R.id.iv_internet);
 
+        iv_internet.setVisibility(View.GONE);
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
         but_all_roomy = findViewById(R.id.but_all_roomy);
 
@@ -89,11 +94,9 @@ public class HomeActivity extends Activity {
         tv_notification_count = findViewById(R.id.tv_notification_count);
 
         //set items map
-        PayingItems payingItems = PayingItems.getInstance();
+      payingItems = PayingItems.getInstance();
 
-        if (payingItems.getItemsMap().size()==0) {
-            payingItems.setPayingItemsMap(this);
-        }
+
 
         try {
             iv_notification.setVisibility(View.GONE);
@@ -145,6 +148,9 @@ public class HomeActivity extends Activity {
         {
             Helper.showCheckInternet(context);
         }
+
+        callContinuosCheckInternetIcon();
+
     }
 
     void setNotificationSound() {
@@ -613,6 +619,50 @@ public class HomeActivity extends Activity {
 
     public void viewRoomy(View view) {
     startActivity(new Intent(this,AllRoomyActivity.class));}
+
+
+    void checkInternetNsetIcon()
+    {
+        if (CheckInternetReceiver.isOnline(context))
+        {
+            iv_internet.setVisibility(View.GONE);
+        }else
+        {
+            iv_internet.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    Handler handler;
+    void callContinuosCheckInternetIcon()
+    {
+        handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                checkInternetNsetIcon();
+                callContinuosCheckInternetIcon();
+            }
+        },2000);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

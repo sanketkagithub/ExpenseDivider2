@@ -23,7 +23,7 @@ public class SessionManager {
     public static final String MOBILE = "mobile";
     public static final String TOTAL_ROOMMATES = "totalRoomates";
     public static final String LOGGED_MOBILE_UC = "loggedMobileUc";
-    public static final String NOTIF_ID = "notifId";
+    public static final String ROOMY_MOBILE_LIST = "roomyMobileList";
     public static final String BID = "bookingId";
     public static final String APPOINTMENT_ADDRESS = "appointmentAddress";
     public static final String APPOINTMENT_TIME = "appointmentTime";

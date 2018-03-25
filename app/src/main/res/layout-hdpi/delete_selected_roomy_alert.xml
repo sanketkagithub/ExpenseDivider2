@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_del_alert"
+        android:id="@+id/tv_del_sel_roomy_alert"
         android:gravity="center"
         android:ellipsize="end"
         android:maxLines="1"
@@ -44,11 +44,12 @@
             android:text="Yes"
             android:fontFamily="serif"
             android:textSize="@dimen/et_text"
-            android:id="@+id/but_del_roomy"
+            android:id="@+id/but_yes_del_sel_roomy"
             android:onClick="deleteRoomy"
             android:layout_marginRight="@dimen/yes_right_mr"
             android:textAllCaps="false"/>
         <Button
+            android:id="@+id/but_no_del_sel_roomy"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/del_but_ht"
             android:textSize="@dimen/et_text"

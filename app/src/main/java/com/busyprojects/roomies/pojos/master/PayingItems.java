@@ -1,4 +1,4 @@
-package com.busyprojects.roomies.helper;
+package com.busyprojects.roomies.pojos.master;
 
 import android.content.Context;
 

@@ -23,7 +23,9 @@ import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
+import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +42,8 @@ public class AllRoomyActivity extends Activity {
 
     SharedPreferences sp;
     String mobileLogged;
+
+    List<String> ridList;
 
 
     DatabaseReference dbRef;
@@ -90,6 +94,7 @@ public class AllRoomyActivity extends Activity {
 
                     dialogEffect.cancelDialog();
                     roomyList  = new ArrayList<>();
+                    ridList  = new ArrayList<>();
 
 
                     for (DataSnapshot dataSnapshot1 :
@@ -98,11 +103,15 @@ public class AllRoomyActivity extends Activity {
                         // TODO: 1/27/2018  add one by one roomy in list
                         Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                        if (mobileLogged.equals(roomy.getMobileLogged())) {
-                            roomyList.add(roomy);
 
+                        if (isAllRoomiesDeleted==false) {
+                            if (mobileLogged.equals(roomy.getMobileLogged())) {
+                                roomyList.add(roomy);
+
+                                ridList.add(roomy.getRid());
+
+                            }
                         }
-
                     }
 
 
@@ -129,8 +138,14 @@ public class AllRoomyActivity extends Activity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+    isAllRoomiesDeleted = false;
+    }
 
+    boolean isAllRoomiesDeleted;
 
     Dialog dialogDeleteAlert;
     public void showRoomyDeleteListAlert(View view)
@@ -158,6 +173,7 @@ public class AllRoomyActivity extends Activity {
     {
         if (CheckInternetReceiver.isOnline(this)) {
             deleteAllRoomy();
+            isAllRoomiesDeleted=true;
             dialogDeleteAlert.dismiss();
         }else
         {
@@ -168,14 +184,54 @@ public class AllRoomyActivity extends Activity {
 
 
 
-    void deleteAllRoomy()
+ void deleteAllRoomy()
+    {
+
+
+        for (int r = 0; r <  ridList.size() ; r++) {
+
+            dbRef.child(Helper.ROOMY)
+                    .child(ridList.get(r))
+                    .removeValue();
+
+        }
+
+
+        roomyList.clear();
+
+        AllRoomyListAdapter roomySpinnerAdapterr = new AllRoomyListAdapter(context, roomyList);
+        roomySpinnerAdapterr.notifyDataSetChanged();
+        lv_all_roomy.setAdapter(roomySpinnerAdapterr);
+
+
+
+      deletePaymentNpayTgAtIfTransfered();
+
+        Toast.makeText(context, "Transactions Deleted", Toast.LENGTH_SHORT).show();
+
+        resetIsTransfer();
+
+        //  dbRef.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
+
+
+       // deleteAllRoomy();
+
+    }
+
+    public void cancelRoomyDelete(View view)
+    {
+
+        dialogEffect.cancelDialog();
+    }
+
+    void deletePaymentNpayTgAtIfTransfered()
     {
 
 
         // TODO: 2/5/2018 delete current Payment
 
         dialogEffect.showDialog();
-        dbRef.child(Helper.ROOMY).addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRef.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -185,22 +241,15 @@ public class AllRoomyActivity extends Activity {
                     for (DataSnapshot dataSnapshot1 :
                             dataSnapshot.getChildren()) {
 
-                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                        Payment payment = dataSnapshot1.getValue(Payment.class);
 
-                        if (roomy.getMobileLogged().equals(mobileLogged)) {
+                        if (payment.getMobileLogged().equals(mobileLogged)) {
 
-                            dbRef.child(Helper.ROOMY)
-                                    .child(roomy.getRid())
+                            dbRef.child(Helper.PAYMENT)
+                                    .child(payment.getPid())
                                     .removeValue();
 
                         }
-
-
-
-                        roomyList.clear();
-
-
-                        Toast.makeText(context, "Roomies deleted Successfully", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -215,18 +264,64 @@ public class AllRoomyActivity extends Activity {
             }
         });
 
-             //  dbRef.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
 
+        dbRef.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                dialogEffect.cancelDialog();
+                try {
+
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
+
+                        if (payTg.getMobileLogged().equals(mobileLogged)) {
+                            dbRef.child(Helper.AFTER_TRANSFER)
+                                    .child(payTg.getPayTgId())
+                                    .removeValue();
+
+                        }
+
+
+                    }
+
+                } catch (Exception e) {
+                  /*  spe = sp.edit();
+                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                    spe.apply();*/
+
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        dbRef.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
+
+        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
 
 
     }
 
-    public void cancelRoomyDelete(View view)
+
+    void resetIsTransfer()
     {
 
-        dialogEffect.cancelDialog();
+        // TODO: 3/25/2018 reset isTransfer
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putBoolean(SessionManager.IS_TRANSFER, false);
+        spe.apply();
+
     }
-
-
-
 }
+
+
+

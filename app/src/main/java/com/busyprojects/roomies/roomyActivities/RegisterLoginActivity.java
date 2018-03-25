@@ -138,8 +138,17 @@ public class RegisterLoginActivity extends Activity {
 
 
                                 } else {
-                                    Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
 
+                                    // TODO: 3/24/2018  open admin
+                                    if (mobileLogin.equals("0000"))
+                                    {
+
+
+
+                                    }
+                                    else {
+                                        Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
 
                             }

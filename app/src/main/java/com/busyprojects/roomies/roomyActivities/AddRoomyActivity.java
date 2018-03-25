@@ -37,6 +37,7 @@ public class AddRoomyActivity extends Activity {
     String mobileLogged;
     SharedPreferences sp;
     SharedPreferences.Editor spe;
+    boolean isTransfer;
 
     EditText et_name, et_mobile;
 
@@ -63,6 +64,7 @@ String appColor;
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
          appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
 
@@ -92,40 +94,8 @@ String appColor;
     }
 
 
-    boolean isTransfer;
-    public void saveRoomy(View view) {
-
-        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                try {
-
-
-                    isTransfer = dataSnapshot.getValue(Boolean.class);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                    isTransfer = false;
-                }
-
-                //   isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
-
-                if (isTransfer) {
-                    // TODO: 2/25/2018 remove all payment n paytg afterTransfer
-              //    deletePaymentNpayTgAtIfTransfered();
-                }
-
-                saveRoommate();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+    public void saveRoomyNdeletePaymenPAytfIfIsTransfer(View view) {
+        saveRoommate();
 
     }
 
@@ -194,9 +164,6 @@ String appColor;
                     }
 
                 } catch (Exception e) {
-                    spe = sp.edit();
-                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                    spe.apply();
 
                     e.printStackTrace();
                 }
@@ -252,18 +219,27 @@ String appColor;
                 et_name.setText("");
 
 
-                // TODO: 2/25/2018 reset transfer session
-                spe = sp.edit();
-                spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                spe.apply();
+
+                // TODO: 3/25/2018 delete pp if isTransfered
+                if (isTransfer)
+                {
 
 
-                //deleteAfterExistingTransfer();
+                    deleteAfterExistingTransfer();
+                    // TODO: 2/25/2018 reset transfer session
+                    spe = sp.edit();
+                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                    spe.apply();
+
+
+                }
+
 
                 onBackPressed();
 
             }
 
+           // deletePaymentNpayTgAtIfTransfered();
         }else
         {
             Helper.showCheckInternet(this);

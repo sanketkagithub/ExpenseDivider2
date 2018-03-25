@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.busyprojects.roomies.R;
-import com.busyprojects.roomies.helper.PayingItems;
+import com.busyprojects.roomies.helper.Helper;
+import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.google.firebase.database.DatabaseReference;
 
 public class LauncherActivity extends Activity {
 
@@ -24,7 +26,8 @@ public class LauncherActivity extends Activity {
     SharedPreferences sp;
     String mobileLogged, appColor;
 
-
+    PayingItems payingItems;
+    DatabaseReference dbRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +37,11 @@ public class LauncherActivity extends Activity {
         iv_centre_down = findViewById(R.id.iv_centre_down);
         final RelativeLayout rel_launcher_back = findViewById(R.id.rel_launcher_back);
 
+        dbRef = Helper.getFirebaseDatabseRef();
           getScreenInfo();
 
         //set items map
-        PayingItems payingItems = PayingItems.getInstance();
-        payingItems.setPayingItemsMap(this);
+      payingItems = PayingItems.getInstance();
 
 
         Resources resources = getResources();
@@ -111,5 +114,7 @@ public class LauncherActivity extends Activity {
 
 
     }
+
+
 
 }

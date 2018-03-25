@@ -41,10 +41,10 @@
 
 
             <ImageView
-                android:id="@+id/iv_edit_roomy"
-                android:layout_width="@dimen/profile_lv"
+                android:id="@+id/iv_del_roomy"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/profile_lv"
-                android:src="@drawable/edit_roomy"
+                android:src="@drawable/del"
                 android:textColor="@color/white_color" />
 
 
