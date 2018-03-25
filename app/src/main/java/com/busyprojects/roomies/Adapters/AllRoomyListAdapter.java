@@ -133,9 +133,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
              context.startActivity(intentEditRoomy);
 */
 
-                showSelectedRoomyDeleteRoomyAlert(roomyList.get(position).getRid(),
-                        roomyList.get(position).getName()
-                ,roomyList.get(position).getMobile());
+                showSelectedRoomyDeleteRoomyAlert(roomyList.get(position));
 
             }
         });
@@ -150,9 +148,9 @@ public class AllRoomyListAdapter extends ArrayAdapter {
         ImageView iv_call_roomy, iv_del_roomy;
     }
 
-    Dialog dialogDeleteSelectedRoomyAlert,dialodDeleteTranserAlert;
+    Dialog dialogDeleteSelectedRoomyAlert;
 
-    public void showSelectedRoomyDeleteRoomyAlert(final String rId, final String roomyName, final String roomyMobile) {
+    public void showSelectedRoomyDeleteRoomyAlert(final Roomy roomy) {
 
         if (CheckInternetReceiver.isOnline(context)) {
             //animationManager.animateViewForEmptyField();
@@ -163,7 +161,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
             Button but_yes_del_sel_roomy = v.findViewById(R.id.but_yes_del_sel_roomy);
              Button but_no_del_sel_roomy = v.findViewById(R.id.but_no_del_sel_roomy);
 
-            tv_del_sel_roomy_alert.setText("Are You sure to delete "+ roomyName + " ?");
+            tv_del_sel_roomy_alert.setText("Are You sure to delete "+ roomy.getName() + " ?");
 
             but_yes_del_sel_roomy.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -171,26 +169,20 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
 
 
-                    if (roomyMobList.contains(roomyMobile) ) {
+                    if (roomyMobList.contains(roomy.getMobile()) ) {
 
 
-                        showTransactionsDeleteAlert(rId,roomyName);
+                        showTransactionsDeleteAlert(roomy.getRid(),roomy.getName());
 
                      }else if (isTransfer)
                     {
-                        resetIsTransfer();
-                        deleteAfterExistingTransfer();
-                        // deletePaymentNpayTgAtIfTransfered();
-                        // TODO: 3/24/2018 delete selected roomy
 
-                        // TODO: 3/25/2018 del sel roomy
-                        db_ref.child(Helper.ROOMY)
-                                .child(rId)
-                                .removeValue();
 
-                        dialogDeleteSelectedRoomyAlert.dismiss();
+                        showAfterTransfersDeleteAlert(roomy);
 
-                        Toast.makeText(context, "Roomy " + roomyName + " deleted ", Toast.LENGTH_SHORT).show();
+
+
+
                     }
                      else
                     {
@@ -198,12 +190,12 @@ public class AllRoomyListAdapter extends ArrayAdapter {
                         // TODO: 3/24/2018 delete selected roomy
                         // TODO: 3/25/2018 del sel roomy
                         db_ref.child(Helper.ROOMY)
-                                .child(rId)
+                                .child(roomy.getRid())
                                 .removeValue();
 
                         dialogDeleteSelectedRoomyAlert.dismiss();
 
-                        Toast.makeText(context, "Roomy " + roomyName + " deleted ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Roomy " + roomy.getName() + " deleted ", Toast.LENGTH_SHORT).show();
 
 
                         // TODO: 3/25/2018 reset isTransfer
@@ -457,6 +449,66 @@ public class AllRoomyListAdapter extends ArrayAdapter {
         }else
         {
             Helper.showCheckInternet(context);
+        }
+    }
+
+
+    Dialog dialodDeleteTranserAlert;
+
+    public void showAfterTransfersDeleteAlert(final Roomy roomy) {
+
+        if (CheckInternetReceiver.isOnline(context)) {
+            //animationManager.animateViewForEmptyField();
+            dialodDeleteTranserAlert = new Dialog(context);
+            dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            View v = LayoutInflater.from(context).inflate(R.layout.delete_transfer_del_alert, null);
+            Button but_yes_del_transfer_t = v.findViewById(R.id.but_yes_del_transfer_t);
+            final Button but_no_del_transfer_t = v.findViewById(R.id.but_no_del_transfer_t);
+
+
+            but_yes_del_transfer_t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+
+                    resetIsTransfer();
+                    deleteAfterExistingTransfer();
+                    // deletePaymentNpayTgAtIfTransfered();
+                    // TODO: 3/24/2018 delete selected roomy
+
+                    // TODO: 3/25/2018 del sel roomy
+                    db_ref.child(Helper.ROOMY)
+                            .child(roomy.getRid())
+                            .removeValue();
+
+                    dialodDeleteTranserAlert.dismiss();
+                    dialogDeleteSelectedRoomyAlert.dismiss();
+
+                    Toast.makeText(context, "Roomy " + roomy.getName() + " deleted ", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+
+            but_no_del_transfer_t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    dialodDeleteTranserAlert.dismiss();
+                    dialogDeleteSelectedRoomyAlert.dismiss();
+                }
+            });
+
+            dialodDeleteTranserAlert.setContentView(v);
+            dialodDeleteTranserAlert.setCancelable(false);
+            dialodDeleteTranserAlert.show();
+
+        } else {
+            Helper.showCheckInternet(context);
+
         }
     }
 

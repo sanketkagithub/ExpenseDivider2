@@ -1,13 +1,16 @@
 package com.busyprojects.roomies.roomyActivities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -209,14 +212,6 @@ String appColor;
                 roomy.setMobileLogged(mobileLogged);
                 roomy.setRegistrationDateTime(registrationDateTime);
 
-                db_ref.child(Helper.ROOMY).child(rid)
-                        .setValue(roomy);
-
-                ToastManager.showToast(context, Helper.REGISTERD);
-
-
-                et_mobile.setText("");
-                et_name.setText("");
 
 
 
@@ -224,18 +219,23 @@ String appColor;
                 if (isTransfer)
                 {
 
+                showAfterTransfersDeleteAlert(roomy);
 
-                    deleteAfterExistingTransfer();
-                    // TODO: 2/25/2018 reset transfer session
-                    spe = sp.edit();
-                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                    spe.apply();
+                }else
+                {
+                    db_ref.child(Helper.ROOMY).child(rid)
+                            .setValue(roomy);
 
+                    ToastManager.showToast(context, Helper.REGISTERD);
+
+
+                    et_mobile.setText("");
+                    et_name.setText("");
+                    onBackPressed();
 
                 }
 
 
-                onBackPressed();
 
             }
 
@@ -301,4 +301,73 @@ String appColor;
     public void backToHome(View view) {
         onBackPressed();
     }
+
+
+
+
+
+    Dialog dialodDeleteTranserAlert;
+
+    public void showAfterTransfersDeleteAlert(final Roomy roomy) {
+
+        if (CheckInternetReceiver.isOnline(context)) {
+            //animationManager.animateViewForEmptyField();
+            dialodDeleteTranserAlert = new Dialog(context);
+            dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            View v = LayoutInflater.from(context).inflate(R.layout.delete_transfer_add_alert, null);
+            Button but_yes_del_transfer_t = v.findViewById(R.id.but_yes_del_transfer_t);
+            final Button but_no_del_transfer_t = v.findViewById(R.id.but_no_del_transfer_t);
+
+
+            but_yes_del_transfer_t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+                    deleteAfterExistingTransfer();
+                    // TODO: 2/25/2018 reset transfer session
+                    spe = sp.edit();
+                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                    spe.apply();
+
+
+
+                    db_ref.child(Helper.ROOMY).child(roomy.getRid())
+                            .setValue(roomy);
+
+                    ToastManager.showToast(context, Helper.REGISTERD);
+
+                    Toast.makeText(AddRoomyActivity.this, "Transfered payments are Deleted", Toast.LENGTH_SHORT).show();
+
+                    et_mobile.setText("");
+                    et_name.setText("");
+                    onBackPressed();
+
+                }
+            });
+
+
+            but_no_del_transfer_t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dialodDeleteTranserAlert.dismiss();
+                    onBackPressed();
+                }
+            });
+
+            dialodDeleteTranserAlert.setContentView(v);
+            dialodDeleteTranserAlert.setCancelable(false);
+            dialodDeleteTranserAlert.show();
+
+        } else {
+            Helper.showCheckInternet(context);
+
+        }
+    }
+
+
+
+
 }

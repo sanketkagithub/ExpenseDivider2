@@ -221,7 +221,7 @@ public class AllRoomyActivity extends Activity {
     public void cancelRoomyDelete(View view)
     {
 
-        dialogEffect.cancelDialog();
+        dialogDeleteAlert.dismiss();
     }
 
     void deletePaymentNpayTgAtIfTransfered()

@@ -14,7 +14,7 @@
     <dimen name="date">18sp</dimen>
 
     <dimen name="lv_but_ht">25dp</dimen>
-    <dimen name="et_text">35sp</dimen>
+    <dimen name="et_text">30sp</dimen>
     <dimen name="image_buttons">35dp</dimen>
     <dimen name="bottom_iv_margin">19dp</dimen>
     <dimen name="bell">60dp</dimen>
@@ -48,7 +48,7 @@
     <dimen name="history_lv_date_ht">150dp</dimen>
     <dimen name="history_title_ht">150dp</dimen>
     <dimen name="del_but_ht">60dp</dimen>
-    <dimen name="yn_top_margin">80dp</dimen>
+    <dimen name="yn_top_margin">40dp</dimen>
     <dimen name="corner_radius_del_back">9dp</dimen>
     <dimen name="yes_right_mr">180dp</dimen>
     <dimen name="call_button_wh">70dp</dimen>

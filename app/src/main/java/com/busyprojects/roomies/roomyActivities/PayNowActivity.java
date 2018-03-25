@@ -306,7 +306,7 @@ PayNowActivity extends Activity {
                 String currentDateTime = Helper.getCurrentDateTime();
 
                 Payment payment = new Payment();
-                payment.setAmount(Long.parseLong(amount));
+                payment.setAmount(Double.parseDouble(amount));
                 payment.setPaymentDateTime(currentDateTime);
                 payment.setPid(pid);
                 payment.setMobileLogged(mobileLogged);
@@ -529,7 +529,7 @@ PayNowActivity extends Activity {
 
                     if (payTgListAt.get(i).getMobile().equals(roomySelected.getMobile())) {
                         // TODO: 2/12/2018 add total amount paid  to atList
-                        totalAmountPaid = totalAmountPaid + Long.parseLong(amount);
+                        totalAmountPaid = totalAmountPaid + Double.parseDouble(amount);
 
 
                         db_ref.child(Helper.AFTER_TRANSFER)

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -813,5 +814,14 @@ if (CheckInternetReceiver.isOnline(this)) {
     }
 
 
+    @Override
+    public void onBackPressed() {
 
+        Intent intent = new Intent(context,HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        context.startActivity(intent);
+
+        finish();
+
+    }
 }

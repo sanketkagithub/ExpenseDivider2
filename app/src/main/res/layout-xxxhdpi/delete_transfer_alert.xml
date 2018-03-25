@@ -14,17 +14,16 @@
         android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_del_alert"
+        android:id="@+id/tv_del_sel_roomy_alert"
         android:gravity="center"
         android:ellipsize="end"
-        android:maxLines="1"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:textSize="@dimen/et_text"
         android:onClick="addRoomy"
-        android:text="Are You sure to delete all Roomies ?"
+        android:text="All Transactions will be deleted, if you delete a Roommate. Are You sure to proceed ?"
         android:textAllCaps="false"
         android:textColor="@color/black" />
 
@@ -33,6 +32,7 @@
         android:layout_below="@+id/tv_del_alert"
         android:orientation="horizontal"
         android:gravity="center"
+        android:paddingBottom="10dp"
         android:layout_marginTop="@dimen/yn_top_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -44,15 +44,15 @@
             android:text="Yes"
             android:fontFamily="serif"
             android:textSize="@dimen/et_text"
-            android:id="@+id/but_del_roomy"
+            android:id="@+id/but_yes_del_transfer_t"
             android:onClick="deleteRoomy"
             android:layout_marginRight="@dimen/yes_right_mr"
             android:textAllCaps="false"/>
         <Button
-            android:id="@+id/but_no_del_all_roomy"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/del_but_ht"
             android:textSize="@dimen/et_text"
+            android:id="@+id/but_no_del_transfer_t"
             android:fontFamily="serif"
             android:text="No"
             android:onClick="cancelRoomyDelete"

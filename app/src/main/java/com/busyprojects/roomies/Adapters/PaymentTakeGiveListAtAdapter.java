@@ -1,6 +1,7 @@
 package com.busyprojects.roomies.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.busyprojects.roomies.roomyActivities.PaymentActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -154,7 +156,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         String message = payTgList.get(position).getRoomyName()
                 + " will " + takeGive +
-                " " + payTgList.get(position).getAmountVariation() + " ₹";
+                " " + amountVarRoundOff + " ₹";
 
         message = message.replace("-", "");
         if (amountVariation != 0) {
@@ -215,7 +217,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         // TODO: 2/11/2018 from
         tvFrom.setText(fromPayTg.getRoomyName());
 
-        et_transfer_amount.setText(fromPayTg.getAmountVariation() +"");
+        String removed_AmVar = fromPayTg.getAmountVariation() + "";
+               removed_AmVar = removed_AmVar.replace("-","");
+
+        et_transfer_amount.setText(removed_AmVar +"");
 
         tv_from_bottom.setText(fromPayTg.getRoomyName());
 
@@ -279,8 +284,16 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                 } else {
 
-                    getFromToAmountVar(fromMobile, Long.parseLong(amountToTransfer), toMobile);
+                    double amountToTransferDouble =   Double.parseDouble(amountToTransfer);
+                 //  long amountToTransferLong = Double.parseDouble(amountToTransfer);
+
+                    setIsTransfer(true);
+
+                    getFromToAmountVar(fromMobile,amountToTransferDouble , toMobile);
                     setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
+
+
+
                 }
 
             }
@@ -303,7 +316,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         payment.setPayingItem("*");
         payment.setPid(pid);
         payment.setTransferPayment(true);
-        payment.setAmount(Long.parseLong(amountToTransfer));
+        payment.setAmount(Double.parseDouble(amountToTransfer));
         payment.setMobileLogged(mobileLogged);
         payment.setPaymentDateTime(Helper.getCurrentDateTime());
         payment.setToRoomy(roomyTo);
@@ -372,7 +385,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     private double fromTotalPaid;
     private double toTotalPaid;
 
-    private void getFromToAmountVar(final String fromMobile, long amountToTransfer, final String toMobile) {
+    private void getFromToAmountVar(final String fromMobile, double amountToTransfer, final String toMobile) {
 
 //        // TODO: 2/3/2018 save from  (add)
 //
@@ -464,11 +477,11 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             final double updatedTotalPaidFrom;
             final double updatedTotalPaidTo;
 
-            updatedFromAmountVar = amountVarFrom + Long.parseLong(amountToTransfer);
-            updatedToAmountVar = amountVarTo - Long.parseLong(amountToTransfer);
+            updatedFromAmountVar = amountVarFrom + Double.parseDouble(amountToTransfer);
+            updatedToAmountVar = amountVarTo - Double.parseDouble(amountToTransfer);
 
-            updatedTotalPaidFrom = fromTotalPaid + Long.parseLong(amountToTransfer);
-            updatedTotalPaidTo = toTotalPaid - Long.parseLong(amountToTransfer);
+            updatedTotalPaidFrom = fromTotalPaid + Double.parseDouble(amountToTransfer);
+            updatedTotalPaidTo = toTotalPaid - Double.parseDouble(amountToTransfer);
 
 
             for (int i = 0; i < payTgList.size(); i++) {
@@ -508,6 +521,14 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
             dialog.dismiss();
+
+            Intent intent = new Intent(context,PaymentActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                   context.startActivity(intent);
+
+                   Activity a =  (Activity) context;
+            a.finish();
+
             Toast.makeText(context, "Amount Transfered Successfully", Toast.LENGTH_SHORT).show();
 
         } else {
@@ -516,6 +537,15 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
     }
 
 
+    void setIsTransfer(boolean isTransfer)
+    {
+        // TODO: 2/25/2018 reset transfer session
+       SharedPreferences.Editor spe = sp.edit();
+        spe.putBoolean(SessionManager.IS_TRANSFER, isTransfer);
+        spe.apply();
+
+
+    }
 }
 
 
