@@ -26,17 +26,17 @@
     <dimen name="title_login">20sp</dimen>
     <dimen name="transactions_title">15sp</dimen>
     <dimen name="transfer_iv">40dp</dimen>
-    <dimen name="but_text">12sp</dimen>
+    <dimen name="but_text">15sp</dimen>
     <dimen name="change_color">25dp</dimen>
     <dimen name="coin_wh">20dp</dimen>
-    <dimen name="lv_text">11sp</dimen>
+    <dimen name="lv_text">14sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
     <dimen name="pay_image_iv">73dp</dimen>
 
     <dimen name="lv_div_ht">0.5dp</dimen>
     <dimen name="history_lv_date_ht">90dp</dimen>
     <dimen name="history_title_ht">150dp</dimen>
-    <dimen name="del_but_ht">35dp</dimen>
+    <dimen name="del_but_ht">40dp</dimen>
     <dimen name="yn_top_margin">15dp</dimen>
     <dimen name="corner_radius_del_back">2dp</dimen>
     <dimen name="yes_right_mr">55dp</dimen>
@@ -45,9 +45,20 @@
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">320dp</dimen>
     <dimen name="del_alert_ht">100dp</dimen>
-    <dimen name="profile_lv">35dp</dimen>
+    <dimen name="profile_lv">25dp</dimen>
     <dimen name="prof_iv_lv_pad">5dp</dimen>
     <dimen name="roomy_lv_lef_padd">13dp</dimen>
     <dimen name="prof_pad">9dp</dimen>
     <dimen name="lv_prof_ht">80dp</dimen>
+    <dimen name="t_50dp">50dp</dimen>
+    <dimen name="t_250dp">250dp</dimen>
+    <dimen name="t_30dp">30dp</dimen>
+    <dimen name="t_70dp">70dp</dimen>
+    <dimen name="t_15dp">15dp</dimen>
+    <dimen name="t_120dp">120dp</dimen>
+    <dimen name="t_200dp">250dp</dimen>
+    <dimen name="history_title">50dp</dimen>
+    <dimen name="lr_paying_item_mar">8dp</dimen>
+    <dimen name="lv_ll_del_roomy">70dp</dimen>
+    <dimen name="tg_l_ht">40dp</dimen>
 </resources>

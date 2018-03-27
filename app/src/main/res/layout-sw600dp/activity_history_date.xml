@@ -15,7 +15,7 @@
         android:layout_height="@dimen/history_title_ht"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textSize="@dimen/et_text"
+        android:textSize="@dimen/history_title"
         android:fontFamily="serif"
         android:text="@string/history"
         android:textColor="@color/white_color" />

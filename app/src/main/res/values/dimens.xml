@@ -53,4 +53,15 @@
     <dimen name="roomy_lv_lef_padd">13dp</dimen>
     <dimen name="prof_pad">9dp</dimen>
     <dimen name="lv_prof_ht">80dp</dimen>
+    <dimen name="t_50dp">50dp</dimen>
+    <dimen name="t_250dp">250dp</dimen>
+    <dimen name="t_30dp">30dp</dimen>
+    <dimen name="t_70dp">70dp</dimen>
+    <dimen name="t_15dp">15dp</dimen>
+    <dimen name="t_120dp">120dp</dimen>
+    <dimen name="t_200dp">200dp</dimen>
+    <dimen name="history_title">50dp</dimen>
+    <dimen name="lr_paying_item_mar">5dp</dimen>
+    <dimen name="lv_ll_del_roomy">40dp</dimen>
+    <dimen name="tg_l_ht">40dp</dimen>
 </resources>

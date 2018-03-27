@@ -19,10 +19,8 @@
         <TextView
             android:id="@+id/tv_log_reg_title"
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:layout_marginTop="100dp"
             android:scaleType="centerCrop"
             android:gravity="center"

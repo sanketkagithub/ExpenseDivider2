@@ -51,9 +51,10 @@ public class AllRoomyActivity extends Activity {
 
     List<Roomy> roomyList;
 
-   // Button but_delete_payment;
+    // Button but_delete_payment;
     ImageView iv_no_history_record_found;
 
+    boolean isLAstOneDelete;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -65,23 +66,24 @@ public class AllRoomyActivity extends Activity {
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
 
+       isLAstOneDelete = sp.getBoolean(SessionManager.IS_SEL_LAST_ROOMY_DEL, false);
+
+
         lv_all_roomy = findViewById(R.id.lv_all_roomy);
         iv_no_history_record_found = findViewById(R.id.iv_no_history_record_found);
-       TextView tv_roomy_title = findViewById(R.id.tv_roomy_title);
+        TextView tv_roomy_title = findViewById(R.id.tv_roomy_title);
         iv_no_history_record_found.setVisibility(View.GONE);
         dbRef = Helper.getFirebaseDatabseRef();
 
         String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
-        int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
+        int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
 
         tv_roomy_title.setBackgroundColor(Color.parseColor(appColor));
 
 
-          setRoomyList();
+        setRoomyList();
 
     }
-
-
 
 
     void setRoomyList() {
@@ -93,8 +95,8 @@ public class AllRoomyActivity extends Activity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     dialogEffect.cancelDialog();
-                    roomyList  = new ArrayList<>();
-                    ridList  = new ArrayList<>();
+                    roomyList = new ArrayList<>();
+                    ridList = new ArrayList<>();
 
 
                     for (DataSnapshot dataSnapshot1 :
@@ -104,25 +106,31 @@ public class AllRoomyActivity extends Activity {
                         Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
 
-                        if (isAllRoomiesDeleted==false) {
                             if (mobileLogged.equals(roomy.getMobileLogged())) {
                                 roomyList.add(roomy);
 
                                 ridList.add(roomy.getRid());
 
                             }
-                        }
+
                     }
 
-
-                    if (roomyList.size()>0) {
+                    AllRoomyListAdapter roomySpinnerAdapterr = null;
+                    if (roomyList.size() > 0) {
                         // TODO: 1/27/2018 set roomy list in spinner
-                        AllRoomyListAdapter roomySpinnerAdapterr = new AllRoomyListAdapter(context, roomyList);
+                        roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
                         lv_all_roomy.setAdapter(roomySpinnerAdapterr);
-                    }else
-                    {
+
+                        iv_no_history_record_found.setVisibility(View.GONE);
+
+
+                    } else {
                         roomyList.clear();
                         iv_no_history_record_found.setVisibility(View.VISIBLE);
+                        roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
+                        roomySpinnerAdapterr.notifyDataSetChanged();
+                        lv_all_roomy.setAdapter(roomySpinnerAdapterr);
+
                     }
                     //          getSelectedRoomy();
                 }
@@ -142,14 +150,14 @@ public class AllRoomyActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
 
-    isAllRoomiesDeleted = false;
+        isAllRoomiesDeleted = false;
     }
 
-    boolean isAllRoomiesDeleted;
+    public boolean isAllRoomiesDeleted;
 
     Dialog dialogDeleteAlert;
-    public void showRoomyDeleteListAlert(View view)
-    {
+
+    public void showRoomyDeleteListAlert(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
             //animationManager.animateViewForEmptyField();
@@ -160,35 +168,32 @@ public class AllRoomyActivity extends Activity {
             dialogDeleteAlert.setCancelable(false);
             dialogDeleteAlert.show();
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
     }
 
 
-
-    public void deleteRoomy(View view)
-    {
+    public void deleteRoomy(View view) {
         if (CheckInternetReceiver.isOnline(this)) {
             deleteAllRoomy();
-            isAllRoomiesDeleted=true;
+            isAllRoomiesDeleted = true;
+            SharedPreferences.Editor spe = sp.edit();
+            spe.putBoolean(SessionManager.IS_SEL_LAST_ROOMY_DEL, true);
+            spe.apply();
             dialogDeleteAlert.dismiss();
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
     }
 
 
-
- void deleteAllRoomy()
-    {
+    void deleteAllRoomy() {
 
 
-        for (int r = 0; r <  ridList.size() ; r++) {
+        for (int r = 0; r < ridList.size(); r++) {
 
             dbRef.child(Helper.ROOMY)
                     .child(ridList.get(r))
@@ -204,8 +209,7 @@ public class AllRoomyActivity extends Activity {
         lv_all_roomy.setAdapter(roomySpinnerAdapterr);
 
 
-
-      deletePaymentNpayTgAtIfTransfered();
+        deletePaymentNpayTgAtIfTransfered();
 
         Toast.makeText(context, "Transactions Deleted", Toast.LENGTH_SHORT).show();
 
@@ -214,18 +218,16 @@ public class AllRoomyActivity extends Activity {
         //  dbRef.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
 
 
-       // deleteAllRoomy();
+        // deleteAllRoomy();
 
     }
 
-    public void cancelRoomyDelete(View view)
-    {
+    public void cancelRoomyDelete(View view) {
 
         dialogDeleteAlert.dismiss();
     }
 
-    void deletePaymentNpayTgAtIfTransfered()
-    {
+    void deletePaymentNpayTgAtIfTransfered() {
 
 
         // TODO: 2/5/2018 delete current Payment
@@ -312,13 +314,13 @@ public class AllRoomyActivity extends Activity {
     }
 
 
-    void resetIsTransfer()
-    {
+    void resetIsTransfer() {
 
         // TODO: 3/25/2018 reset isTransfer
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean(SessionManager.IS_TRANSFER, false);
         spe.apply();
+        Helper.setRemoteIstransfer(mobileLogged, false);
 
     }
 }

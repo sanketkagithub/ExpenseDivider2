@@ -231,5 +231,18 @@ public class Helper {
         return Math.round(input * 100.0) / 100.0;
 
     }
+
+
+
+
+
+    public static void setRemoteIstransfer(String mobileLogged,boolean isTransferValue)
+    {
+       DatabaseReference dbRef = getFirebaseDatabseRef();
+
+       dbRef.child(SessionManager.IS_TRANSFER).child(mobileLogged).setValue(isTransferValue);
+
+    }
+
 }
 

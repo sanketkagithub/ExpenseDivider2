@@ -89,9 +89,9 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
         double amountVariation = payTgList.get(position).getAmountVariation();
 
-        double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
+       // double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
 
-        viewHolder.tv_roomy_amount_variation.setText(amountVarRoundOff + " ₹");
+        viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
 
 
 
@@ -135,7 +135,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
         String message = payTgList.get(position).getRoomyName()
                 + " will " + takeGive + " "+
-                 amountVarRoundOff + " ₹";
+                 amountVariation + " ₹";
 
         if (amountVariation!=0) {
             viewHolder.tv_payment_info.setText(message);

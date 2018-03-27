@@ -56,17 +56,21 @@
 
         <include layout="@layout/login_layout" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rel_register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="194dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="gone">
 
-    <RelativeLayout
-        android:id="@+id/rel_register"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+            <include layout="@layout/register_layout" />
 
-        <include layout="@layout/register_layout" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -67,6 +67,7 @@ String appColor;
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+       Helper.setRemoteIstransfer(mobileLogged,false);
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
          appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
@@ -281,6 +282,7 @@ String appColor;
                         spe = sp.edit();
                         spe.putBoolean(SessionManager.IS_TRANSFER, false);
                         spe.apply();
+                        Helper.setRemoteIstransfer(mobileLogged,false);
 
                         e.printStackTrace();
                     }
@@ -330,6 +332,7 @@ String appColor;
                     spe = sp.edit();
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
+                    Helper.setRemoteIstransfer(mobileLogged,false);
 
 
 

@@ -8,12 +8,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/t_50dp"
         android:gravity="center">
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/t_250dp"
+            android:layout_height="@dimen/t_30dp"
             android:background="@drawable/from_to"
             android:fontFamily="serif"
             android:gravity="center"
@@ -26,13 +26,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/t_70dp"
         android:gravity="center">
 
         <TextView
             android:id="@+id/tv_from"
-            android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/t_250dp"
+            android:layout_height="@dimen/t_30dp"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="Sanket"
@@ -44,12 +44,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/t_50dp"
         android:gravity="center">
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/t_250dp"
+            android:layout_height="@dimen/t_30dp"
             android:background="@drawable/from_to"
             android:fontFamily="serif"
             android:gravity="center"
@@ -62,14 +62,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/t_70dp"
         android:gravity="center">
 
         <Spinner
             android:id="@+id/spinner_roomy"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
+            android:layout_height="@dimen/t_50dp"
+            android:layout_margin="@dimen/t_15dp"
             android:background="@android:color/transparent"
             android:backgroundTint="#000"
             android:popupBackground="@android:color/transparent" />
@@ -135,7 +135,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/t_70dp"
         android:gravity="center">
 
         <Button
@@ -167,7 +167,7 @@
 
             <TextView
                 android:id="@+id/tv_from_bottom"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/t_120dp"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center"
@@ -184,7 +184,7 @@
 
             <TextView
                 android:id="@+id/tv_to_bottom"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/t_120dp"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center"

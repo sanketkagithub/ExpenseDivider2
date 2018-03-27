@@ -92,6 +92,7 @@ PayNowActivity extends Activity {
     AnimationManager animationManager;
     LinearLayout ll_paying_amount, ll_paying_item;
 
+    Helper helper;
 
     List<PayTg> payTgList;
     List<PayTg> payTgListAt;
@@ -107,6 +108,7 @@ PayNowActivity extends Activity {
         setContentView(R.layout.activity_pay_now);
         db_ref = Helper.getFirebaseDatabseRef();
 
+        helper = new Helper();
         lv_items_suggestions = findViewById(R.id.lv_items_suggestions);
         progressBarSuggImage = findViewById(R.id.progressBarSuggImage);
 
@@ -306,7 +308,8 @@ PayNowActivity extends Activity {
                 String currentDateTime = Helper.getCurrentDateTime();
 
                 Payment payment = new Payment();
-                payment.setAmount(Double.parseDouble(amount));
+                double amtRf =  helper.getRoundedOffValue(Double.parseDouble(amount)) ;
+                payment.setAmount(amtRf);
                 payment.setPaymentDateTime(currentDateTime);
                 payment.setPid(pid);
                 payment.setMobileLogged(mobileLogged);
@@ -529,7 +532,9 @@ PayNowActivity extends Activity {
 
                     if (payTgListAt.get(i).getMobile().equals(roomySelected.getMobile())) {
                         // TODO: 2/12/2018 add total amount paid  to atList
-                        totalAmountPaid = totalAmountPaid + Double.parseDouble(amount);
+                        totalAmountPaid = helper.getRoundedOffValue(totalAmountPaid) + helper.getRoundedOffValue(Double.parseDouble(amount));
+
+                       totalAmountPaid = helper.getRoundedOffValue(totalAmountPaid);
 
 
                         db_ref.child(Helper.AFTER_TRANSFER)
@@ -540,6 +545,7 @@ PayNowActivity extends Activity {
                         // TODO: 2/21/2018 update new total paid of payee
 
                         PayTg payTg = payTgListAt.get(i);
+
                         payTg.setAmountTg(totalAmountPaid);
 
 
@@ -558,17 +564,23 @@ PayNowActivity extends Activity {
 
                 // TODO: 2/12/2018 find total.......total/roomysize......each
                 // TODO: 2/12/2018    totPaid -  each =   amountVar
-                totalAfterTransfer = totalAfterTransfer + payTgListAt.get(i).getAmountTg();
+                totalAfterTransfer = helper.getRoundedOffValue(totalAfterTransfer) +
+                        helper.getRoundedOffValue(payTgListAt.get(i).getAmountTg());
 
             }
 
 
             double eachHasToPayAfterTransfer = totalAfterTransfer / totalRoomates;
 
+           eachHasToPayAfterTransfer = helper.getRoundedOffValue(eachHasToPayAfterTransfer);
+
+
             for (int i = 0; i < payTgListAt.size(); i++) {
 
 
                 double totalAmountVar = payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer;
+
+               totalAmountVar = helper.getRoundedOffValue(totalAmountVar);
 
                 db_ref.child(Helper.AFTER_TRANSFER)
                         .child(payTgListAt.get(i).getPayTgId())

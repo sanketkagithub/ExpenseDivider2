@@ -34,7 +34,7 @@
                 android:fontFamily="serif"
                 android:text="Name"
                 android:gravity="center"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:textColor="@color/black" />
 
             <ImageView

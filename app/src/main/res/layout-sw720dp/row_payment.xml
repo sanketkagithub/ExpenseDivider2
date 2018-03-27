@@ -35,7 +35,7 @@
                 android:gravity="center|left"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/et_text" />
+                android:textSize="@dimen/lv_text" />
 
             <ImageView
                 android:id="@+id/iv_main_paying_item"
@@ -55,7 +55,7 @@
                 android:gravity="center"
                 android:text="Name"
                 android:textColor="@color/blue"
-                android:textSize="@dimen/et_text" />
+                android:textSize="@dimen/lv_text" />
 
 
         </LinearLayout>
@@ -77,7 +77,7 @@
                 android:gravity="center|left"
                 android:text="Name"
                 android:textColor="@color/main_app_colorp"
-                android:textSize="@dimen/et_text" />
+                android:textSize="@dimen/lv_text" />
 
             <ImageView
                 android:layout_width="@dimen/paid_wd_ht"
@@ -98,7 +98,7 @@
                 android:gravity="center"
                 android:text="Name"
                 android:textColor="@color/main_app_colorp"
-                android:textSize="@dimen/et_text" />
+                android:textSize="@dimen/lv_text" />
 
 
         </LinearLayout>
@@ -111,7 +111,7 @@
             android:gravity="center"
             android:text="00"
             android:textColor="@color/black"
-            android:textSize="@dimen/et_text" />
+            android:textSize="@dimen/lv_text" />
 
 
         <TextView

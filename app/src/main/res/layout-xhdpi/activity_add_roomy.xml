@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.busyprojects.roomies.roomyActivities.TransferActivity">
 
- <LinearLayout
-     android:layout_width="match_parent"
-       android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -166,6 +166,8 @@
                 android:fontFamily="serif"
                 android:onClick="saveRoomyNdeletePaymenPAytfIfIsTransfer"
                 android:text="save"
+                android:textSize="@dimen/but_text"
+
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
@@ -188,6 +190,8 @@
                 android:onClick="backToHome"
                 android:text="Back"
                 android:textAllCaps="false"
+                android:textSize="@dimen/but_text"
+
                 android:textColor="@color/white_color" />
 
         </RelativeLayout>

@@ -36,19 +36,7 @@
                 android:textSize="@dimen/transactions_title" />
 
 
-            <Button
-                android:id="@+id/but_delete_payment"
-                android:layout_width="@dimen/image_buttons"
-                android:layout_height="@dimen/image_buttons"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/bottom_iv_margin"
-                android:layout_marginRight="@dimen/bottom_iv_margin"
-                android:background="@drawable/delete_payment"
-                android:gravity="center"
-                android:onClick="showSaveDeleteListAlert"
-                android:textAllCaps="false"
-                android:textColor="@color/white_color" />
+
 
         </RelativeLayout>
 
@@ -113,18 +101,7 @@
                     android:textColor="@color/main_app_colorp"
                     android:textSize="@dimen/transactions_title" />
 
-                <Button
-                    android:id="@+id/but_transfer_money"
-                    android:layout_width="@dimen/image_buttons"
-                    android:layout_height="@dimen/image_buttons"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/bottom_iv_margin"
-                    android:layout_marginRight="@dimen/bottom_iv_margin"
-                    android:background="@drawable/transfer_payment"
-                    android:onClick="saveAndShowAfterTransferPayTgList"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white_color" />
+
 
 
             </RelativeLayout>

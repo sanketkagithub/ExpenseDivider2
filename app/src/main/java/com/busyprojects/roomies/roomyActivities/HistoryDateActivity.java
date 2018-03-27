@@ -115,6 +115,7 @@ public class HistoryDateActivity extends Activity {
                                 Collections.reverse(historyList);
                                 HistoryDatesAdapter historyDatesAdapter = new HistoryDatesAdapter(context, historyList);
                                 lv_history_dates.setAdapter(historyDatesAdapter);
+                                but_delete_payment.setVisibility(View.VISIBLE);
                             } else {
                                 lv_history_dates.setVisibility(View.GONE);
                                 iv_no_history_record_found.setVisibility(View.VISIBLE);
@@ -138,9 +139,44 @@ public class HistoryDateActivity extends Activity {
     }
 
 
+
+
+
+
     public void deleteHistoryList(View view) {
 
-    if (CheckInternetReceiver.isOnline(this)) {
+
+        showDeleteHistoryListAlert();
+
+
+    }
+
+    String hid;
+    History history;
+    Dialog dialogDeleteAlert;
+    public void showDeleteHistoryListAlert() {
+
+        if (CheckInternetReceiver.isOnline(this)) {
+            //animationManager.animateViewForEmptyField();
+            dialogDeleteAlert = new Dialog(this);
+            dialogDeleteAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            View v = LayoutInflater.from(context).inflate(R.layout.delete_history_alert, null);
+            dialogDeleteAlert.setContentView(v);
+            dialogDeleteAlert.setCancelable(false);
+            dialogDeleteAlert.show();
+
+        }else
+        {
+            Helper.showCheckInternet(context);
+
+        }
+    }
+
+
+
+
+    void deleteHistory()
+    { if (CheckInternetReceiver.isOnline(this)) {
         dialogEffect.showDialog();
         dbRef.child(Helper.HISTORY)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -160,10 +196,13 @@ public class HistoryDateActivity extends Activity {
                                     dbRef.child(Helper.HISTORY).child(history.getHid())
                                             .removeValue();
                                 }
-                                Toast.makeText(context, "History deleted successfully", Toast.LENGTH_SHORT).show();
 
 
                             }
+                            Toast.makeText(context, "History deleted successfully", Toast.LENGTH_SHORT).show();
+
+                       dialogDeleteAlert.dismiss();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -179,29 +218,16 @@ public class HistoryDateActivity extends Activity {
     {
         Helper.showCheckInternet(context);
 
-    }
-    }
+    }}
 
-    String hid;
-    History history;
-    Dialog dialogDeleteAlert;
-    public void showDeleteRoomyListAlert(View view) {
-
-        if (CheckInternetReceiver.isOnline(this)) {
-            //animationManager.animateViewForEmptyField();
-            dialogDeleteAlert = new Dialog(this);
-            dialogDeleteAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            View v = LayoutInflater.from(context).inflate(R.layout.delete_alert, null);
-            dialogDeleteAlert.setContentView(v);
-            dialogDeleteAlert.setCancelable(false);
-            dialogDeleteAlert.show();
-
-        }else
-        {
-            Helper.showCheckInternet(context);
-
-        }
+    public void yesDeleteHistory(View view)
+    {
+    deleteHistory();
     }
 
 
+    public void noDeleteHistory(View view)
+    {
+        dialogDeleteAlert.dismiss();
+    }
 }

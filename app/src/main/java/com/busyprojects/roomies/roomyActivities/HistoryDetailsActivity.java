@@ -39,6 +39,7 @@ public class HistoryDetailsActivity extends Activity {
     DialogEffect dialogEffect;
     DatabaseReference dbRef;
 
+    Helper helper;
     int totalRoomates;
 
 
@@ -56,6 +57,8 @@ public class HistoryDetailsActivity extends Activity {
 
         context = HistoryDetailsActivity.this;
         dbRef = Helper.getFirebaseDatabseRef();
+
+        helper = new Helper();
 
         totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
         lv_payments = findViewById(R.id.lv_payments);
@@ -197,6 +200,8 @@ public class HistoryDetailsActivity extends Activity {
         }
 
         double eachAmount = total / totalRoomates;
+
+       eachAmount = helper.getRoundedOffValue(eachAmount);
 
         tv_total_amount.setText(total + " ₹");
         tv_total_roomies.setText(eachPaymentList.size() + "");

@@ -15,9 +15,12 @@ import android.widget.RelativeLayout;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.pojos.master.PayingItems;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.DatabaseReference;
+
+import io.fabric.sdk.android.Fabric;
 
 public class LauncherActivity extends Activity {
 
@@ -37,11 +40,17 @@ public class LauncherActivity extends Activity {
         iv_centre_down = findViewById(R.id.iv_centre_down);
         final RelativeLayout rel_launcher_back = findViewById(R.id.rel_launcher_back);
 
+
+        Fabric.with(this,new Crashlytics());
+
         dbRef = Helper.getFirebaseDatabseRef();
           getScreenInfo();
 
+
+
         //set items map
       payingItems = PayingItems.getInstance();
+
 
 
         Resources resources = getResources();
@@ -114,6 +123,8 @@ public class LauncherActivity extends Activity {
 
 
     }
+
+
 
 
 

@@ -106,9 +106,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         double amountVariation = payTgList.get(position).getAmountVariation();
 
-        double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
+        //double amountVarRoundOff = helper.getRoundedOffValue(amountVariation);
 
-        viewHolder.tv_roomy_amount_variation.setText(amountVarRoundOff + " ₹");
+        viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
 
         viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
 
@@ -156,7 +156,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         String message = payTgList.get(position).getRoomyName()
                 + " will " + takeGive +
-                " " + amountVarRoundOff + " ₹";
+                " " + amountVariation + " ₹";
 
         message = message.replace("-", "");
         if (amountVariation != 0) {
@@ -265,6 +265,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 // TODO: 2/25/2018 final transfer
 
 
+
+
                 amountToTransfer = et_transfer_amount.getText().toString();
 
                 if (amountToTransfer.equals("") || spin_roomy.getSelectedItemPosition() == 0) {
@@ -284,20 +286,30 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                 } else {
 
-                    double amountToTransferDouble =   Double.parseDouble(amountToTransfer);
-                 //  long amountToTransferLong = Double.parseDouble(amountToTransfer);
 
-                    setIsTransfer(true);
+                    try {
+                        double amountToTransferDouble = Double.parseDouble(amountToTransfer);
 
-                    getFromToAmountVar(fromMobile,amountToTransferDouble , toMobile);
-                    setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
+                        amountToTransferDouble = helper.getRoundedOffValue(amountToTransferDouble);
+                        //  long amountToTransferLong = Double.parseDouble(amountToTransfer);
 
+                        setIsTransfer(true);
+
+                        getFromToAmountVar(fromMobile, amountToTransferDouble, toMobile);
+                        setTransferPayMent(fromPayTg.getRoomyName(), selectedFromRoomy.getName());
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        Toast.makeText(context, "Please Enter valid Amount", Toast.LENGTH_SHORT).show();
+                    }
 
 
                 }
 
             }
         });
+
+
 
 
     }
@@ -316,7 +328,11 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         payment.setPayingItem("*");
         payment.setPid(pid);
         payment.setTransferPayment(true);
-        payment.setAmount(Double.parseDouble(amountToTransfer));
+
+
+     double amtRf =  helper.getRoundedOffValue(Double.parseDouble(amountToTransfer)) ;
+        payment.setAmount(amtRf);
+
         payment.setMobileLogged(mobileLogged);
         payment.setPaymentDateTime(Helper.getCurrentDateTime());
         payment.setToRoomy(roomyTo);
@@ -432,14 +448,14 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                                     if (payTg.getMobileLogged().equals(mobileLogged)) {
 
                                         if (payTg.getMobile().equals(fromMobile)) {
-                                            amountVarFrom = payTg.getAmountVariation();
-                                            fromTotalPaid = payTg.getAmountTg();
+                                            amountVarFrom = helper.getRoundedOffValue(payTg.getAmountVariation());
+                                            fromTotalPaid = helper.getRoundedOffValue(payTg.getAmountTg());
                                         }
 
                                         if (payTg.getMobile().equals(toMobile)) {
 
-                                            amountVarTo = payTg.getAmountVariation();
-                                            toTotalPaid = payTg.getAmountTg();
+                                            amountVarTo = helper.getRoundedOffValue(payTg.getAmountVariation());
+                                            toTotalPaid = helper.getRoundedOffValue(payTg.getAmountTg());
 
                                         }
 
@@ -472,16 +488,27 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
         if (!selectedFromRoomy.getMobile().equals("")) {
 
-            final double updatedFromAmountVar;
-            final double updatedToAmountVar;
+            double updatedFromAmountVar;
+            double updatedToAmountVar;
             final double updatedTotalPaidFrom;
             final double updatedTotalPaidTo;
 
-            updatedFromAmountVar = amountVarFrom + Double.parseDouble(amountToTransfer);
-            updatedToAmountVar = amountVarTo - Double.parseDouble(amountToTransfer);
+            updatedFromAmountVar = helper.getRoundedOffValue(amountVarFrom) + helper.getRoundedOffValue(Double.parseDouble(amountToTransfer));
+            updatedToAmountVar = helper.getRoundedOffValue(amountVarTo) - helper.getRoundedOffValue(Double.parseDouble(amountToTransfer));
 
-            updatedTotalPaidFrom = fromTotalPaid + Double.parseDouble(amountToTransfer);
-            updatedTotalPaidTo = toTotalPaid - Double.parseDouble(amountToTransfer);
+            if (updatedFromAmountVar<=0.99 && updatedFromAmountVar>=-0.99)
+            {
+                updatedFromAmountVar = 0.0;
+            }
+
+            if (updatedToAmountVar<=0.99 && updatedToAmountVar>=-0.99)
+            {
+                updatedToAmountVar = 0.0;
+            }
+
+
+            updatedTotalPaidFrom = helper.getRoundedOffValue(fromTotalPaid) + helper.getRoundedOffValue(Double.parseDouble(amountToTransfer));
+            updatedTotalPaidTo = helper.getRoundedOffValue(toTotalPaid) - helper.getRoundedOffValue(Double.parseDouble(amountToTransfer));
 
 
             for (int i = 0; i < payTgList.size(); i++) {
@@ -493,13 +520,13 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                         db_ref.child(Helper.AFTER_TRANSFER)
                                 .child(payTgList.get(i).getPayTgId())
                                 .child(Helper.TOTAL_PAID)
-                                .setValue(updatedTotalPaidFrom);
+                                .setValue(helper.getRoundedOffValue(updatedTotalPaidFrom));
 
 
                         db_ref.child(Helper.AFTER_TRANSFER)
                                 .child(payTgList.get(i).getPayTgId())
                                 .child(Helper.AMOUNT_VARIATION)
-                                .setValue(updatedFromAmountVar);
+                                .setValue(helper.getRoundedOffValue(updatedFromAmountVar));
                     }
 
                     // TODO: 2/19/2018 set to values
@@ -507,12 +534,12 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                         db_ref.child(Helper.AFTER_TRANSFER)
                                 .child(payTgList.get(i).getPayTgId())
                                 .child(Helper.AMOUNT_VARIATION)
-                                .setValue(updatedToAmountVar);
+                                .setValue(helper.getRoundedOffValue(updatedToAmountVar));
 
                         db_ref.child(Helper.AFTER_TRANSFER)
                                 .child(payTgList.get(i).getPayTgId())
                                 .child(Helper.TOTAL_PAID)
-                                .setValue(updatedTotalPaidTo);
+                                .setValue(helper.getRoundedOffValue(updatedTotalPaidTo));
 
                     }
                 }
@@ -543,6 +570,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
        SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean(SessionManager.IS_TRANSFER, isTransfer);
         spe.apply();
+
+        Helper.setRemoteIstransfer(mobileLogged,isTransfer);
 
 
     }

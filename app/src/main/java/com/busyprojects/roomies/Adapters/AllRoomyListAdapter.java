@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,8 +91,8 @@ public class AllRoomyListAdapter extends ArrayAdapter {
             convertView = li.inflate(R.layout.row_all_roomy, parent, false);
             viewHolder.tv_roomy_mobile = convertView.findViewById(R.id.tv_roomy_mobile);
             viewHolder.tv_roomy_name_all_roomy = convertView.findViewById(R.id.tv_roomy_name_all_roomy);
-            viewHolder.iv_call_roomy = convertView.findViewById(R.id.iv_call_roomy);
-            viewHolder.iv_del_roomy = convertView.findViewById(R.id.iv_del_roomy);
+            viewHolder.but_call_roomy = convertView.findViewById(R.id.but_call_roomy);
+            viewHolder.but_del_sel_roomy = convertView.findViewById(R.id.but_del_sel_roomy);
 
             convertView.setTag(viewHolder);
         } else {
@@ -103,7 +102,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
         viewHolder.tv_roomy_mobile.setText(roomyList.get(position).getMobile());
 
 
-        viewHolder.iv_call_roomy.setOnClickListener(new View.OnClickListener() {
+        viewHolder.but_call_roomy.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
@@ -117,7 +116,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
             }
         });
 
-        viewHolder.iv_del_roomy.setOnClickListener(new View.OnClickListener() {
+        viewHolder.but_del_sel_roomy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -145,7 +144,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
     class ViewHolderTg {
         TextView tv_roomy_name_all_roomy, tv_roomy_mobile;
-        ImageView iv_call_roomy, iv_del_roomy;
+      Button but_call_roomy,but_del_sel_roomy;
     }
 
     Dialog dialogDeleteSelectedRoomyAlert;
@@ -349,6 +348,11 @@ public class AllRoomyListAdapter extends ArrayAdapter {
                             .child(rId)
                             .removeValue();
 
+                    if (roomyList.size()==1) {
+                        SharedPreferences.Editor spe = sp.edit();
+                        spe.putBoolean(SessionManager.IS_SEL_LAST_ROOMY_DEL, true);
+                        spe.apply();
+                    }
 
 
                     deletePaymentNpayTgAtIfTransfered();
@@ -363,6 +367,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
                     SharedPreferences.Editor spe = sp.edit();
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
+                    Helper.setRemoteIstransfer(mobileLogged,false);
 
                     dialodDeleteTranserAlert.dismiss();
                     dialogDeleteSelectedRoomyAlert.dismiss();
@@ -399,6 +404,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
         SharedPreferences.Editor spe = sp.edit();
         spe.putBoolean(SessionManager.IS_TRANSFER, false);
         spe.apply();
+        Helper.setRemoteIstransfer(mobileLogged,false);
 
     }
 
@@ -435,6 +441,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
                      SharedPreferences.Editor spe = sp.edit();
                         spe.putBoolean(SessionManager.IS_TRANSFER, false);
                         spe.apply();
+                        Helper.setRemoteIstransfer(mobileLogged,false);
 
                         e.printStackTrace();
                     }
