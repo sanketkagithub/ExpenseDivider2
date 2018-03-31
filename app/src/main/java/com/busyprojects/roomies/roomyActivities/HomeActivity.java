@@ -54,7 +54,7 @@ public class HomeActivity extends Activity {
     RelativeLayout iv_notification;
     AnimationManager animationManager = null;
 
-ImageView iv_internet;
+ImageView iv_internet,iv_info;
     int totalRoomates;
 
     DialogEffect dialogEffect;
@@ -83,6 +83,7 @@ ImageView iv_internet;
         dialogEffect = new DialogEffect(context);
         tv_login_message = findViewById(R.id.tv_login_message);
         iv_internet = findViewById(R.id.iv_internet);
+        iv_info = findViewById(R.id.iv_info);
 
         iv_internet.setVisibility(View.GONE);
         rel_iv_roomy_home = findViewById(R.id.rel_iv_roomy_home);
@@ -626,9 +627,11 @@ ImageView iv_internet;
         if (CheckInternetReceiver.isOnline(context))
         {
             iv_internet.setVisibility(View.GONE);
+            iv_info.setVisibility(View.VISIBLE);
         }else
         {
             iv_internet.setVisibility(View.VISIBLE);
+            iv_info.setVisibility(View.GONE);
         }
 
     }
@@ -653,13 +656,14 @@ ImageView iv_internet;
     }
 
 
+    public void showInfo(View view)
+    {
+    Intent intentAppInfo = new Intent(context,AppInfoActivity.class);
+    intentAppInfo.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    startActivity(intentAppInfo);
 
 
-
-
-
-
-
+    }
 
 
 

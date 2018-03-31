@@ -4,14 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
 
-    </RelativeLayout>
+
+
+
 
     <RelativeLayout
         android:visibility="visible"
@@ -32,12 +28,20 @@
             android:textColor="@color/white_color"
             android:id="@+id/button2" />
 
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
         <Button
             android:layout_width="@dimen/but_w"
             android:layout_height="@dimen/button_ht"
-            android:layout_alignLeft="@+id/button2"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/button2"
             android:layout_marginBottom="87dp"
             android:background="@drawable/buttons"
             android:fontFamily="serif"
@@ -46,6 +50,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white_color"
             android:textSize="@dimen/but_text" />
+
 
     </RelativeLayout>
 

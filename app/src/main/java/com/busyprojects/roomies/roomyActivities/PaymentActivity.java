@@ -212,7 +212,6 @@ AnimationManager animationManager;
         Helper.setRemoteIstransfer(mobileLogged,false);
 
 
-
         hid = Helper.randomString(10);
 
         history = new History();

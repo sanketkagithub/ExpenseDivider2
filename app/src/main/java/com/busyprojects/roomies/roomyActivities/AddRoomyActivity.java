@@ -3,12 +3,14 @@ package com.busyprojects.roomies.roomyActivities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,11 @@ public class AddRoomyActivity extends Activity {
     RelativeLayout rel_iv_roomy_home;
     ImageView iv_name, iv_call;
 String appColor;
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+Helper helper;
+Runnable runnable;
+
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,19 @@ String appColor;
         et_mobile = findViewById(R.id.et_mobile);
         Button but_save = findViewById(R.id.but_save);
         Button but_back = findViewById(R.id.but_back);
+
+
+        //callContinuosCheckInternetToExitToHome();
+
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                checkInternetExitToHome();
+                callContinuosCheckInternetToExitToHome();
+            }
+        };
+        helper = new Helper();
 
         iv_name = findViewById(R.id.iv_name);
         iv_call = findViewById(R.id.iv_call);
@@ -77,6 +96,7 @@ String appColor;
         but_back.setBackgroundColor(Color.parseColor(appColor));
 
         setApptheme();
+
     }
 
 
@@ -192,7 +212,6 @@ String appColor;
     {
 
         if (CheckInternetReceiver.isOnline(this)) {
-            dialogEffect.showDialog();
             String rid = Helper.randomString(10);
             String nameS = et_name.getText().toString();
             String mobileS = et_mobile.getText().toString();
@@ -202,7 +221,7 @@ String appColor;
             if (nameS.equals("") || mobileS.equals("")) {
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
             } else {
-                dialogEffect.cancelDialog();
+                dialogEffect.showDialog();
 
                 // TODO: 1/27/2018 save unique roomy here
                 Roomy roomy = new Roomy();
@@ -226,6 +245,7 @@ String appColor;
                 {
                     db_ref.child(Helper.ROOMY).child(rid)
                             .setValue(roomy);
+                    dialogEffect.cancelDialog();
 
                     ToastManager.showToast(context, Helper.REGISTERD);
 
@@ -335,7 +355,7 @@ String appColor;
                     Helper.setRemoteIstransfer(mobileLogged,false);
 
 
-
+                    // TODO: 3/31/2018 then as usual save roomy 
                     db_ref.child(Helper.ROOMY).child(roomy.getRid())
                             .setValue(roomy);
 
@@ -369,6 +389,53 @@ String appColor;
 
         }
     }
+
+
+
+    void checkInternetExitToHome()
+    {
+        if (CheckInternetReceiver.isOnline(context))
+        {
+
+        }else
+        {
+            Intent intentExitToHome = new Intent(context,HomeActivity.class);
+            intentExitToHome.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            context.startActivity(intentExitToHome);
+
+            handler.removeCallbacks(runnable);
+        }
+
+    }
+
+    Handler handler;
+    public   void callContinuosCheckInternetToExitToHome()
+    {
+        handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                checkInternetExitToHome();
+                callContinuosCheckInternetToExitToHome();
+            }
+        },2000);
+
+
+
+    }
+
+
+/*
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    handler.removeCallbacks(runnable);
+    }
+*/
 
 
 

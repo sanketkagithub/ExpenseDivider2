@@ -36,7 +36,8 @@ public class Helper {
     public static final String TOTAL_PAID = "amountTg";
     public static final String NAME = "name";
     public static int CURRENT_TAB = 0;
-    public static final String ADMIN_ACCESS = "AdminAccess";
+    public static final String APP_INFO = "AppInfo";
+    public static final String INFO = "info";
     public static final String APPROX_CONF_TIME_BY_ADMIN = "approxConfirmedTimeByAdmin";
 
     public static final String AFTER_TRANSFER = "AfterTransfer";
@@ -243,6 +244,20 @@ public class Helper {
        dbRef.child(SessionManager.IS_TRANSFER).child(mobileLogged).setValue(isTransferValue);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

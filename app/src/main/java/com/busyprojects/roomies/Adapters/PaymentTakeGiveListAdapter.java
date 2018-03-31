@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,7 +76,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
             viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name_gt);
             viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount_gt);
             viewHolder.tv_roomy_amount_variation = convertView.findViewById(R.id.tv_roomy_amount_variation);
-            viewHolder.iv_call_roomy = convertView.findViewById(R.id.iv_call_roomy);
+            viewHolder.but_call_roomy = convertView.findViewById(R.id.but_call_roomy);
             viewHolder.iv_roomy_variation = convertView.findViewById(R.id.iv_roomy_variation);
           //  viewHolder.but_transfer = convertView.findViewById(R.id.but_transfer);
             viewHolder.tv_payment_info = convertView.findViewById(R.id.tv_payment_info);
@@ -94,6 +96,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
         viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
 
 
+        viewHolder.but_call_roomy.setBackgroundColor(Color.parseColor(appColor));
 
         String takeGive;
         if (amountVariation > 0) {
@@ -147,7 +150,7 @@ public class PaymentTakeGiveListAdapter extends ArrayAdapter {
 
         }
 
-        viewHolder.iv_call_roomy.setOnClickListener(new View.OnClickListener() {
+        viewHolder.but_call_roomy.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
@@ -179,7 +182,7 @@ class ViewHolderTg {
 
     ImageView iv_roomy_variation;
     LinearLayout ll_take_give;
-    ImageView iv_call_roomy;
+    Button but_call_roomy;
 }
 
 

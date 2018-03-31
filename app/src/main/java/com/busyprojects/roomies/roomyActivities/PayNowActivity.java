@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -29,11 +30,11 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
+import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.google.firebase.database.DataSnapshot;
@@ -271,13 +272,13 @@ PayNowActivity extends Activity {
 
     }
 
-
+    String payingItem;
     public void payNowhere(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
             //getSelectedRoomy();
             amount = et_amount.getText().toString();
-            String payingItem = et_paying_item.getText().toString();
+           payingItem = et_paying_item.getText().toString();
 
 
             if (amount.equals("") || roomySelected.getName().equals(Helper.SELECT_ROOMY) ||
@@ -302,7 +303,10 @@ PayNowActivity extends Activity {
 
             } else {
 
-                String pid = Helper.randomString(10);
+                // TODO: 3/31/2018 payAsync
+                        new PayAsyncTask().execute();
+
+               /* String pid = Helper.randomString(10);
                 // TODO: 1/27/2018 save payment;
 
                 String currentDateTime = Helper.getCurrentDateTime();
@@ -362,7 +366,7 @@ PayNowActivity extends Activity {
 // TODO: 2/18/2018 do alllllllllllll below
 
                 onBackPressed();
-
+*/
             }
         } else {
             Helper.showCheckInternet(this);
@@ -704,6 +708,105 @@ PayNowActivity extends Activity {
             }
         }
         aa.notifyDataSetChanged();
+    }
+
+
+    class PayAsyncTask extends AsyncTask<Void,Void,Void>
+    {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBarSuggImage.setVisibility(View.VISIBLE);
+
+          /*  dialogEffect = new DialogEffect(context);
+            dialogEffect.showDialog();
+*/
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+
+
+
+
+
+            String pid = Helper.randomString(10);
+            // TODO: 1/27/2018 save payment;
+
+            String currentDateTime = Helper.getCurrentDateTime();
+
+            Payment payment = new Payment();
+            double amtRf =  helper.getRoundedOffValue(Double.parseDouble(amount)) ;
+            payment.setAmount(amtRf);
+            payment.setPaymentDateTime(currentDateTime);
+            payment.setPid(pid);
+            payment.setMobileLogged(mobileLogged);
+            payment.setRoomy(roomySelected);
+
+            if (payingItemImageUrl == null)
+            {
+
+                payingItemImageUrl  = defaultImageUrl;
+            }
+            payment.setPayinItemUrl(payingItemImageUrl);
+
+            payment.setPayingItem(payingItem);
+
+
+            db_ref.child(Helper.PAYMENT)
+                    .child(pid)
+                    .setValue(payment);
+
+
+            payingItemImageUrl="";
+
+            TinyDb tinyDb = new TinyDb(context);
+            ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
+            ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
+
+            for (int i = 0; i < macAddList.size(); i++) {
+
+
+                // TODO: 1/27/2018 save payment notification;
+                db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                        .child(macAddList.get(i))
+                        .child(Helper.PAYMENT_LIST)
+                        .child(pid)
+                        .setValue(payment);
+
+
+            }
+
+
+            // TODO: 2/18/2018   change------
+            try {
+
+
+                updateAfterTransfer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+// TODO: 2/18/2
+            return null;
+
+
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+           // dialogEffect.cancelDialog();
+            Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
+
+            progressBarSuggImage.setVisibility(View.GONE);
+            onBackPressed();
+        }
+
+
     }
 
 }

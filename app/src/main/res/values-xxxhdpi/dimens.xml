@@ -58,4 +58,8 @@
     <dimen name="lr_paying_item_mar">5dp</dimen>
     <dimen name="lv_ll_del_roomy">80dp</dimen>
     <dimen name="tg_l_ht">60dp</dimen>
+    <dimen name="lv_but_cent_mar">50dp</dimen>
+    <dimen name="but_lv_tb_mar">2dp</dimen>
+    <dimen name="app_info_text_wd">300dp</dimen>
+    <dimen name="tv_tg_message_ht">19dp</dimen>
 </resources>

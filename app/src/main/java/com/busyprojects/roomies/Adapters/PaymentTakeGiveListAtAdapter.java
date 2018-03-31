@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,9 +91,10 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             convertView = li.inflate(R.layout.row_take_give_payment_at, parent, false);
             viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name_gt);
             viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount_gt);
-            viewHolder.iv_call_roomy = convertView.findViewById(R.id.iv_call_roomy);
+            viewHolder.but_call_roomy = convertView.findViewById(R.id.but_call_roomy);
             viewHolder.tv_roomy_amount_variation = convertView.findViewById(R.id.tv_roomy_amount_variation);
             viewHolder.iv_roomy_variation = convertView.findViewById(R.id.iv_roomy_variation);
+            viewHolder.rel_but_transfer = convertView.findViewById(R.id.rel_but_transfer);
             viewHolder.but_transfer = convertView.findViewById(R.id.but_transfer);
             viewHolder.tv_payment_info = convertView.findViewById(R.id.tv_payment_info);
             viewHolder.ll_take_give = convertView.findViewById(R.id.ll_take_give);
@@ -111,6 +113,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         viewHolder.tv_roomy_amount_variation.setText(amountVariation + " ₹");
 
         viewHolder.but_transfer.setBackgroundColor(Color.parseColor(appColor));
+        viewHolder.but_call_roomy.setBackgroundColor(Color.parseColor(appColor));
 
 
         String takeGive;
@@ -127,6 +130,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
             // viewHolder.ll_take_give.setBackgroundColor(takeColor);
             viewHolder.but_transfer.setVisibility(View.GONE);
+            viewHolder.rel_but_transfer.setVisibility(View.GONE);
 
         } else if (amountVariation == 0.0) {
             int doneColor = context.getResources().getColor(R.color.done_light);
@@ -135,6 +139,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder.tv_roomy_amount_variation.setTextColor(done);
             viewHolder.tv_payment_info.setTextColor(done);
             viewHolder.iv_roomy_variation.setImageResource(R.drawable.done);
+            viewHolder.rel_but_transfer.setVisibility(View.GONE);
             viewHolder.but_transfer.setVisibility(View.GONE);
 
             takeGive = "done";
@@ -152,6 +157,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             takeGive = "give";
             //  viewHolder.ll_take_give.setBackgroundColor(giveColor);
             viewHolder.but_transfer.setVisibility(View.VISIBLE);
+            viewHolder.rel_but_transfer.setVisibility(View.VISIBLE);
         }
 
         String message = payTgList.get(position).getRoomyName()
@@ -176,7 +182,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             }
         });
 
-        viewHolder.iv_call_roomy.setOnClickListener(new View.OnClickListener() {
+        viewHolder.but_call_roomy.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
@@ -583,8 +589,10 @@ class ViewHolderTgAt {
             tv_payment_info;
 
     ImageView iv_roomy_variation;
+
+    RelativeLayout rel_but_transfer;
     Button but_transfer;
-    ImageView iv_call_roomy;
+    Button but_call_roomy;
 
     LinearLayout ll_take_give;
 }

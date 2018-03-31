@@ -35,7 +35,7 @@
 
     <dimen name="lv_div_ht">0.5dp</dimen>
     <dimen name="history_lv_date_ht">90dp</dimen>
-    <dimen name="history_title_ht">150dp</dimen>
+    <dimen name="history_title_ht">100dp</dimen>
     <dimen name="del_but_ht">40dp</dimen>
     <dimen name="yn_top_margin">15dp</dimen>
     <dimen name="corner_radius_del_back">2dp</dimen>
@@ -61,4 +61,8 @@
     <dimen name="lr_paying_item_mar">8dp</dimen>
     <dimen name="lv_ll_del_roomy">70dp</dimen>
     <dimen name="tg_l_ht">40dp</dimen>
+    <dimen name="lv_but_cent_mar">50dp</dimen>
+    <dimen name="but_lv_tb_mar">2dp</dimen>
+    <dimen name="app_info_text_wd">300dp</dimen>
+    <dimen name="tv_tg_message_ht">37dp</dimen>
 </resources>

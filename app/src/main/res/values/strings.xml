@@ -47,6 +47,9 @@
     </string-array>
 
 
+    <string name="app_info">\n\n1.Click Button Add Roomy to add a new Roommate \n\n 2.Click Button Pay to do payment for any product. \n\n 3.Click Button View Payment to see all the payments and amount divided. \n\n 4.Click Button Roomies, to see all roommates, also to delete a Roommate.</string>
+
+
     <string name="default_color">#89003f</string>
     <string name="sky_bluish">#03abff</string>
     <string name="greenish">#1E5142</string>
@@ -144,4 +147,5 @@
     <string name="default_image">https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png</string>
     <string name="roomies">Roomies</string>
     <string name="call">Call</string>
+    <string name="how_to_use">How To Use ?</string>
 </resources>

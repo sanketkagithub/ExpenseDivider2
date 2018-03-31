@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_amount_gt"
-                android:layout_width="70dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/et_text"
                 android:text="00"
@@ -46,7 +46,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_amount_variation"
-                android:layout_width="70dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:textSize="@dimen/et_text"
@@ -97,7 +97,7 @@
                 android:id="@+id/tv_payment_info"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/et_text"
-                android:layout_height="19dp"
+                android:layout_height="@dimen/tv_tg_message_ht"
                 android:paddingLeft="3dp"
                 android:paddingStart="3dp"
                 android:gravity="center"

@@ -23,6 +23,16 @@
             android:src="@drawable/no_internet"
             android:gravity="center" />
 
+        <ImageView
+            android:id="@+id/iv_info"
+            android:layout_width="@dimen/change_color"
+            android:layout_height="@dimen/change_color"
+            android:layout_alignParentLeft="true"
+            android:onClick="showInfo"
+            android:layout_marginStart="@dimen/bottom_iv_margin"
+            android:layout_marginLeft="@dimen/bottom_iv_margin"
+            android:src="@drawable/info"
+            android:gravity="center" />
         <TextView
             android:id="@+id/tv_log_reg_title"
             android:layout_width="match_parent"
