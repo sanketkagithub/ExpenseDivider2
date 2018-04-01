@@ -90,6 +90,7 @@ Runnable runnable;
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
          appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
+ takeRemoteIsTransfer();
 
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_save.setBackgroundColor(Color.parseColor(appColor));
@@ -236,7 +237,7 @@ Runnable runnable;
 
 
                 // TODO: 3/25/2018 delete pp if isTransfered
-                if (isTransfer)
+                if (isTransfer||isRemoteTransfer)
                 {
 
                 showAfterTransfersDeleteAlert(roomy);
@@ -439,5 +440,34 @@ Runnable runnable;
 
 
 
+
+    boolean isRemoteTransfer;
+    void takeRemoteIsTransfer()
+    {
+        dialogEffect.showDialog();
+        db_ref.child(Helper.IS_TRANSFER)
+                .child(mobileLogged)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        dialogEffect.cancelDialog();
+
+                        try {
+                            isRemoteTransfer = dataSnapshot.getValue(Boolean.class);
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                            isRemoteTransfer = false;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
 
 }

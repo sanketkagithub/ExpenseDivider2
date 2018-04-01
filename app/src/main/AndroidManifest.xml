@@ -47,9 +47,12 @@
             android:screenOrientation="portrait" />
         <activity android:name=".roomyActivities.AllRoomyActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".roomyActivities.EditRoomyActivity" />
         <activity android:name=".roomyActivities.AppInfoActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".roomyActivities.LoginActivity" />
+        <activity android:name=".roomyActivities.RegistrationActivity" />
+        <activity android:name=".roomyActivities.RoomRegistrationActivity" />
+        <activity android:name=".roomyActivities.RoomLoginActivity" />
 
         <receiver android:name=".helper.CheckInternetReceiver">
             <intent-filter>

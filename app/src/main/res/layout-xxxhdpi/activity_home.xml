@@ -10,48 +10,85 @@
         android:id="@+id/rel_iv_roomy_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.92"
         android:background="@color/main_app_colorp"
         android:gravity="center">
+
 
         <ImageView
             android:id="@+id/iv_internet"
             android:layout_width="@dimen/change_color"
             android:layout_height="@dimen/change_color"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="@dimen/bottom_iv_margin"
-            android:layout_marginLeft="@dimen/bottom_iv_margin"
-            android:src="@drawable/no_internet"
-            android:gravity="center" />
+            android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_marginTop="@dimen/top_margin_top_two_iv"
+            android:gravity="center"
+            android:src="@drawable/no_internet" />
+
         <ImageView
             android:id="@+id/iv_info"
             android:layout_width="@dimen/change_color"
             android:layout_height="@dimen/change_color"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_marginTop="@dimen/top_margin_top_two_iv"
+            android:gravity="center"
             android:onClick="showInfo"
-            android:layout_marginStart="@dimen/bottom_iv_margin"
-            android:layout_marginLeft="@dimen/bottom_iv_margin"
-            android:src="@drawable/info"
-            android:gravity="center" />
-        <TextView
+            android:src="@drawable/info" />
+
+
+        <ImageView
             android:id="@+id/tv_log_reg_title"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/ed_home_ht"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="@dimen/title"
+            android:ellipsize="end"
+            android:rotation="2.5"
             android:fontFamily="serif"
-            android:text="@string/app_name"
-            android:textColor="@color/white_color" />
+            android:padding="@dimen/ed_home_iv"
+            android:gravity="center"
+            android:src="@drawable/ed_main_home"/>
 
+
+        <TextView
+            android:id="@+id/tv_loggedRoomyName"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/lr_margin_top_two_iv"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
+            android:paddingBottom="@dimen/pad_name_b"
+            android:text="jhjhkjhjhjhhfghfghfhf"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/tv_logged_roomy_name" />
+
+        <TextView
+            android:id="@+id/tv_loggedRoomyMobile"
+            android:layout_below="@+id/tv_roomy_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lr_margin_top_two_iv"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
+            android:text="jhjhkjhjhjhhfghfghfhf"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/tv_logged_roomy_name" />
 
         <Button
             android:id="@+id/but_delete_payment"
             android:layout_width="@dimen/change_color"
             android:layout_height="@dimen/change_color"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="@dimen/bottom_iv_margin"
-            android:layout_marginRight="@dimen/bottom_iv_margin"
+            android:layout_marginEnd="@dimen/lr_margin_top_two_iv"
+            android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+            android:layout_marginTop="@dimen/top_margin_top_two_iv"
             android:background="@drawable/change_color"
             android:gravity="center"
             android:onClick="changeAppColor"
@@ -59,59 +96,92 @@
             android:textColor="@color/white_color" />
 
 
-
-
     </RelativeLayout>
-
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.95"
-        android:background="@color/grey_color_tg">
-
-        <TextView
-            android:id="@+id/tv_login_message"
-            android:gravity="center"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           android:fontFamily="serif"
-            android:textSize="@dimen/et_text"
-            android:onClick="addRoomy"
-            android:text="Every Roommate of this room must login with 7777777777"
-            android:textAllCaps="false"
-            android:textColor="@color/blue" />
+        android:layout_height="wrap_content"
+        android:background="@color/grey_color_tg"
+        android:gravity="center">
 
         <RelativeLayout
-            android:background="@drawable/notification"
-            android:id="@+id/iv_notification"
-            android:onClick="showNotifiedData"
-            android:layout_marginTop="2dp"
-            android:layout_centerHorizontal="true"
-             android:layout_below="@+id/tv_login_message"
-            android:layout_width="@dimen/bell"
-            android:layout_height="@dimen/bell" >
+            android:id="@+id/rel_home_room"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/iv_home_room"
+            android:layout_centerHorizontal="true">
+
+
+            <ImageView
+
+                android:src="@drawable/house1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_notification_count"
-                android:textSize="@dimen/bell_text"
-                android:text="00"
-                android:gravity="center"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/white_color"
+                android:id="@+id/tv_login_static_message"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/room_no_tv_ht"
+                android:layout_marginTop="@dimen/room_no_top_mar"
                 android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:onClick="addRoomy"
+                android:text="Room No:"
+                android:textAllCaps="false"
+                android:textColor="@color/grey_color"
+                android:textSize="@dimen/home_room_text" />
+            <TextView
+                android:id="@+id/tv_login_message"
+                android:layout_below="@id/tv_login_static_message"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/room_no_tv_ht"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:onClick="addRoomy"
+                android:text="  7058590000"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/home_room_text" />
+
+
+
+            <RelativeLayout
+                android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+                android:layout_marginTop="@dimen/lr_margin_top_two_iv"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_notification"
+                android:layout_width="@dimen/bell"
+                android:layout_height="@dimen/bell"
+                android:background="@drawable/notification"
+                android:onClick="showNotifiedData"
+                android:layout_marginEnd="@dimen/lr_margin_top_two_iv">
+
+                <TextView
+                    android:id="@+id/tv_notification_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/bell_text" />
+            </RelativeLayout>
 
         </RelativeLayout>
 
 
+
+
+
+
+
     </RelativeLayout>
-  <RelativeLayout
+
+    <RelativeLayout
         android:id="@+id/rel_add_roomy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -127,11 +197,10 @@
             android:onClick="addRoomy"
             android:text="@string/add_roomy"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -150,14 +219,10 @@
             android:onClick="payNow"
             android:text="@string/pay"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
-
-
-
-
 
 
     <RelativeLayout
@@ -176,8 +241,8 @@
             android:onClick="viewPayment"
             android:text="@string/view_payments"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
 
@@ -196,8 +261,8 @@
             android:onClick="viewRoomy"
             android:text="Roomies"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
 
@@ -217,12 +282,12 @@
             android:onClick="viewHistory"
             android:text="History"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
 
- <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -237,14 +302,10 @@
             android:onClick="logout"
             android:text="@string/logout"
             android:textAllCaps="false"
-            android:textSize="@dimen/but_text"
-            android:textColor="@color/white_color" />
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/but_text" />
 
     </RelativeLayout>
-
-
-
-
 
 
 </LinearLayout>

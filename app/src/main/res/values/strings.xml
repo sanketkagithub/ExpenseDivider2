@@ -148,4 +148,6 @@
     <string name="roomies">Roomies</string>
     <string name="call">Call</string>
     <string name="how_to_use">How To Use ?</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

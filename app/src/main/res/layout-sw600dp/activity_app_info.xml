@@ -8,17 +8,18 @@
     tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
 
 
-
     <TextView
         android:background="@color/main_app_colorp"
-        android:id="@+id/tv_history_date"
+        android:id="@+id/tv_roomy_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/history_title_ht"
+        android:layout_height="@dimen/history_title"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="@dimen/title"
         android:fontFamily="serif"
         android:text="@string/how_to_use"
         android:textColor="@color/white_color" />
+
 
 
     <TextView

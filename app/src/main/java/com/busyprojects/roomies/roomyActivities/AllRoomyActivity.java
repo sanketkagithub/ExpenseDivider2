@@ -23,6 +23,7 @@ import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
@@ -51,6 +52,8 @@ public class AllRoomyActivity extends Activity {
 
     List<Roomy> roomyList;
 
+    TextView tv_total_roomy_count;
+
     // Button but_delete_payment;
     ImageView iv_no_history_record_found;
 
@@ -70,6 +73,7 @@ public class AllRoomyActivity extends Activity {
 
 
         lv_all_roomy = findViewById(R.id.lv_all_roomy);
+        tv_total_roomy_count = findViewById(R.id.tv_total_roomy_count);
         iv_no_history_record_found = findViewById(R.id.iv_no_history_record_found);
         TextView tv_roomy_title = findViewById(R.id.tv_roomy_title);
         iv_no_history_record_found.setVisibility(View.GONE);
@@ -82,69 +86,72 @@ public class AllRoomyActivity extends Activity {
 
 
         setRoomyList();
+        setPAyingRoomyMobileListInSession();
 
     }
 
 
-    void setRoomyList() {
+        void setRoomyList() {
 
-        if (CheckInternetReceiver.isOnline(this)) {
-            dialogEffect.showDialog();
-            dbRef.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+            if (CheckInternetReceiver.isOnline(this)) {
+                dialogEffect.showDialog();
+                dbRef.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    dialogEffect.cancelDialog();
-                    roomyList = new ArrayList<>();
-                    ridList = new ArrayList<>();
-
-
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
-
-                        // TODO: 1/27/2018  add one by one roomy in list
-                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                        dialogEffect.cancelDialog();
+                        roomyList = new ArrayList<>();
+                        ridList = new ArrayList<>();
 
 
-                            if (mobileLogged.equals(roomy.getMobileLogged())) {
-                                roomyList.add(roomy);
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
 
-                                ridList.add(roomy.getRid());
+                            // TODO: 1/27/2018  add one by one roomy in list
+                            Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                            }
 
+                                if (mobileLogged.equals(roomy.getMobileLogged())) {
+                                    roomyList.add(roomy);
+
+                                    ridList.add(roomy.getRid());
+
+                                }
+
+                        }
+
+                        AllRoomyListAdapter roomySpinnerAdapterr = null;
+                        if (roomyList.size() > 0) {
+                            // TODO: 1/27/2018 set roomy list in spinner
+                            roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
+                            lv_all_roomy.setAdapter(roomySpinnerAdapterr);
+
+                            iv_no_history_record_found.setVisibility(View.GONE);
+
+
+                            tv_total_roomy_count.setText(roomyList.size() + "");
+                        } else {
+                            roomyList.clear();
+                            iv_no_history_record_found.setVisibility(View.VISIBLE);
+                            roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
+                            roomySpinnerAdapterr.notifyDataSetChanged();
+                            lv_all_roomy.setAdapter(roomySpinnerAdapterr);
+
+                            tv_total_roomy_count.setText("00");
+                        }
+                        //          getSelectedRoomy();
                     }
 
-                    AllRoomyListAdapter roomySpinnerAdapterr = null;
-                    if (roomyList.size() > 0) {
-                        // TODO: 1/27/2018 set roomy list in spinner
-                        roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
-                        lv_all_roomy.setAdapter(roomySpinnerAdapterr);
-
-                        iv_no_history_record_found.setVisibility(View.GONE);
-
-
-                    } else {
-                        roomyList.clear();
-                        iv_no_history_record_found.setVisibility(View.VISIBLE);
-                        roomySpinnerAdapterr   = new AllRoomyListAdapter(context, roomyList);
-                        roomySpinnerAdapterr.notifyDataSetChanged();
-                        lv_all_roomy.setAdapter(roomySpinnerAdapterr);
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
                     }
-                    //          getSelectedRoomy();
-                }
+                });
+            } else {
+                Helper.showCheckInternet(context);
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        } else {
-            Helper.showCheckInternet(context);
-
+            }
         }
-    }
 
     @Override
     public void onBackPressed() {
@@ -321,6 +328,50 @@ public class AllRoomyActivity extends Activity {
         spe.putBoolean(SessionManager.IS_TRANSFER, false);
         spe.apply();
         Helper.setRemoteIstransfer(mobileLogged, false);
+
+    }
+    void setPAyingRoomyMobileListInSession() {
+
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            dbRef.child(Helper.PAYMENT)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            dialogEffect.cancelDialog();
+
+                         ArrayList<String>   paymentList = new ArrayList<>();
+
+                            // TODO: 2/17/2018 add paymentList
+                            for (DataSnapshot dataSnapshot1 :
+                                    dataSnapshot.getChildren()) {
+
+                                Payment payment = dataSnapshot1.getValue(Payment.class);
+
+                                if (mobileLogged.equals(payment.getMobileLogged())) {
+                                    paymentList.add(payment.getRoomy().getMobile());
+                                }
+                            }
+
+
+
+                            TinyDb tinyDb = new TinyDb(context);
+                            tinyDb.putListString(SessionManager.PAYING_ROOMY_LIST,paymentList);
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+        }else
+        {
+            Helper.showCheckInternet(context);
+
+        }
 
     }
 }

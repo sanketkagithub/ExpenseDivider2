@@ -322,6 +322,9 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
     void setTransferPayMent(String roomyFrom, String roomyTo) {
+
+        dialogEffect.showDialog();
+
         String pid = Helper.randomString(10);
 
         Payment payment = new Payment();
@@ -346,6 +349,8 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         db_ref.child(Helper.PAYMENT)
                 .child(pid)
                 .setValue(payment);
+
+        dialogEffect.cancelDialog();
     }
 
 
@@ -437,11 +442,13 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
         if (CheckInternetReceiver.isOnline(context)) {
             // TODO: 2/11/2018 get fromAmountVar   &&  // TODO: 2/11/2018 get toAmountVar
 
+            dialogEffect.showDialog();
             db_ref.child(Helper.AFTER_TRANSFER)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            dialogEffect.cancelDialog();
                             try {
 
 

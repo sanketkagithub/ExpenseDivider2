@@ -15,12 +15,13 @@ public class SessionManager {
     public static final String MAC_ADDRESS = "macAddress";
     public static final String HID = "hid";
     public static final String MAC_ADD_LIST = "macAddList";
-    public static final String IS_INTERNET = "isInternet";
+    public static final String PAYING_ROOMY_LIST = "payingRoomyList";
     public static final String PNID_LIST = "pnidList";
     public static final String PNID_LIST_SIZE = "pnidList_size";
     public static final String FILE_UC = "fileUc";
-    public static final String ADDRESS = "adddress";
     public static final String MOBILE = "mobile";
+    public static final String ROOMY_MOBILE = "roomyMobile";
+    public static final String ROOMY_NAME = "roomyName";
     public static final String TOTAL_ROOMMATES = "totalRoomates";
     public static final String LOGGED_MOBILE_UC = "loggedMobileUc";
     public static final String ROOMY_MOBILE_LIST = "roomyMobileList";

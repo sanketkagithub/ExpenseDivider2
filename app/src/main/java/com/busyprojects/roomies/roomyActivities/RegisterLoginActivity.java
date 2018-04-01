@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
@@ -34,7 +33,7 @@ public class RegisterLoginActivity extends Activity {
     Context context = RegisterLoginActivity.this;
 
     EditText et_register, et_login;
-    TextView tv_log_reg_title;
+ //   TextView tv_log_reg_title;
 
 
     DatabaseReference db_ref;
@@ -63,14 +62,14 @@ public class RegisterLoginActivity extends Activity {
         et_login = findViewById(R.id.et_login);
         et_register = findViewById(R.id.et_register);
 
-        tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
+        //tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
         rel_login_reg = findViewById(R.id.rel_log_reg);
         rel_login = findViewById(R.id.rel_login);
         rel_register = findViewById(R.id.rel_register);
 
 
-        setInitialVisibility();
+
 
         if (Build.VERSION.SDK_INT>=23)
         {
@@ -80,17 +79,15 @@ public class RegisterLoginActivity extends Activity {
     }
 
 
-    void setInitialVisibility() {
 
-        rel_login_reg.setVisibility(View.VISIBLE);
-        rel_login.setVisibility(View.GONE);
-        rel_register.setVisibility(View.GONE);
-    }
 
 
     String mobileLogin;
 
-    public void loginRoomy(View view) {
+
+
+
+    public void loginRoomyold(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
             mobileLogin = et_login.getText().toString();
@@ -216,6 +213,7 @@ public class RegisterLoginActivity extends Activity {
 
     }
 
+/*
     public void registerRoomy(View view) {
 
 if (CheckInternetReceiver.isOnline(this)) {
@@ -279,40 +277,28 @@ if (CheckInternetReceiver.isOnline(this)) {
 
 }
     }
+*/
 
 
-    void setLoginVisibilities() {
-
-        SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
-        String mobile = spUc.getString(SessionManager.LOGGED_MOBILE_UC, "");
-
-        et_login.setText(mobile);
-
-        rel_login_reg.setVisibility(View.GONE);
-
-        rel_login.setVisibility(View.VISIBLE);
-        rel_register.setVisibility(View.GONE);
-        tv_log_reg_title.setText("Login");
-    }
-
-    void setRegisterationVisibilities() {
 
 
-        rel_login_reg.setVisibility(View.GONE);
 
-        rel_login.setVisibility(View.GONE);
-        rel_register.setVisibility(View.VISIBLE);
-        tv_log_reg_title.setText("Register");
+
+
+    public void goToLoginActivity(View view)
+    {
+
+        Intent intentLogin = new Intent(context,RoomLoginActivity.class);
+        intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intentLogin);
 
     }
 
+    public void goToRegisterActivity(View view)
+    {
+        Intent intentLogin = new Intent(context,RoomRegistrationActivity.class);
+        intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intentLogin);
 
-    public void showLogin(View view) {
-        setLoginVisibilities();
-    }
-
-
-    public void showRegister(View view) {
-        setRegisterationVisibilities();
     }
 }

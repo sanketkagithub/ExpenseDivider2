@@ -69,7 +69,7 @@
     <dimen name="t_15dp">30dp</dimen>
     <dimen name="t_120dp">220dp</dimen>
     <dimen name="t_200dp">600dp</dimen>
-    <dimen name="history_title">50dp</dimen>
+    <dimen name="history_title">250dp</dimen>
     <dimen name="lr_paying_item_mar">5dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
     <dimen name="tg_l_ht">40dp</dimen>
@@ -79,4 +79,17 @@
     <dimen name="tc_ll_top_mar">15dp</dimen>
     <dimen name="app_info_text_wd">550dp</dimen>
     <dimen name="tv_tg_message_ht">19dp</dimen>
+    <dimen name="room_no_login_iv_wh">300dp</dimen>
+    <dimen name="pad_name_b">5dp</dimen>
+    <dimen name="lt_mar_c_theme">9dp</dimen>
+    <dimen name="lr_margin_top_two_iv">25dp</dimen>
+    <dimen name="top_margin_top_two_iv">10dp</dimen>
+    <dimen name="tv_logged_roomy_name">19sp</dimen>
+    <dimen name="iv_home_room">100dp</dimen>
+    <dimen name="home_room_text">19sp</dimen>
+    <dimen name="ed_home_iv">8dp</dimen>
+    <dimen name="room_no_top_mar">25dp</dimen>
+    <dimen name="room_no_tv_ht">24dp</dimen>
+    <dimen name="ed_home_ht">100dp</dimen>
+    <dimen name="ed_reg_log_pad">140dp</dimen>
 </resources>

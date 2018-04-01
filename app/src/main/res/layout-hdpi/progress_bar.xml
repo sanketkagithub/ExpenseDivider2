@@ -18,10 +18,69 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <ProgressBar
-        android:background="@android:color/transparent"
-        style="?android:attr/progressBarStyle"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="0.6">
+
+
+        <ImageView
+            android:layout_width="@dimen/launcher_images"
+            android:layout_height="@dimen/launcher_images"
+            android:layout_above="@+id/iv_centre_right"
+            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_toLeftOf="@+id/iv_centre_right"
+            android:src="@drawable/roomy_launcher" />
+
+
+        <ImageView
+            android:layout_width="@dimen/launcher_images"
+            android:layout_height="@dimen/launcher_images"
+            android:layout_above="@+id/iv_centre_right"
+
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_toRightOf="@+id/iv_centre_right"
+            android:src="@drawable/roomy_launcher" />
+
+
+        <ImageView
+            android:layout_width="@dimen/launcher_images"
+            android:layout_height="@dimen/launcher_images"
+            android:layout_below="@+id/iv_centre_right"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/roomy_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_centre_right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/share_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_centre_left"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/share_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_centre_down"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/share_launcher" />
+
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

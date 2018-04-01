@@ -763,15 +763,15 @@ PayNowActivity extends Activity {
             payingItemImageUrl="";
 
             TinyDb tinyDb = new TinyDb(context);
-            ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
+            ArrayList<String> roomyMobileList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
             ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
 
-            for (int i = 0; i < macAddList.size(); i++) {
+            for (int i = 0; i < roomyMobileList.size(); i++) {
 
 
                 // TODO: 1/27/2018 save payment notification;
                 db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                        .child(macAddList.get(i))
+                        .child(roomyMobileList.get(i))
                         .child(Helper.PAYMENT_LIST)
                         .child(pid)
                         .setValue(payment);

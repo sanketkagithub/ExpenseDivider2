@@ -55,7 +55,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
     String appColor;
 
     TinyDb tinyDb;
-    ArrayList<String> roomyMobList;
+    ArrayList<String> payingroomyMobList;
 
     boolean isTransfer;
     public AllRoomyListAdapter(Context context, List<Roomy> roomyList) {
@@ -70,7 +70,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
         sp = context.getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
 
-       roomyMobList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
+       payingroomyMobList = tinyDb.getListString(SessionManager.PAYING_ROOMY_LIST);
 
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
@@ -100,6 +100,11 @@ public class AllRoomyListAdapter extends ArrayAdapter {
         }
         viewHolder.tv_roomy_name_all_roomy.setText(roomyList.get(position).getName());
         viewHolder.tv_roomy_mobile.setText(roomyList.get(position).getMobile());
+
+
+        viewHolder.but_call_roomy.setBackgroundColor(Color.parseColor(appColor));
+        viewHolder.but_del_sel_roomy.setBackgroundColor(Color.parseColor(appColor));
+
 
 
         viewHolder.but_call_roomy.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +173,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
 
 
-                    if (roomyMobList.contains(roomy.getMobile()) ) {
+                    if (payingroomyMobList.contains(roomy.getMobile()) ) {
 
 
                         showTransactionsDeleteAlert(roomy.getRid(),roomy.getName());

@@ -11,60 +11,60 @@
         android:id="@+id/rel_iv_roomy_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.6"
+        android:layout_weight="1"
         android:background="@color/main_app_colorp"
         android:gravity="center">
 
-
-        <TextView
-            android:id="@+id/tv_log_reg_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:padding="@dimen/ed_reg_log_pad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:scaleType="centerCrop"
             android:gravity="center"
-            android:textSize="@dimen/title_login"
+            android:rotation="2.5"
+            android:src="@drawable/ed_main_home" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
             android:fontFamily="serif"
-            android:text="@string/app_name"
+            android:onClick="goToLoginActivity"
+            android:text="Login"
+            android:textSize="@dimen/but_text"
+            android:textAllCaps="false"
             android:textColor="@color/white_color" />
 
     </RelativeLayout>
 
-
     <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/rel_log_reg"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center">
 
-        <include
-            layout="@layout/log_reg_layout" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rel_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <include layout="@layout/login_layout" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rel_register"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <include layout="@layout/register_layout" />
+        <Button
+            android:layout_width="@dimen/but_w"
+            android:layout_height="@dimen/button_ht"
+            android:background="@drawable/buttons"
+            android:fontFamily="serif"
+            android:onClick="goToRegisterActivity"
+            android:text="Register"
+            android:textSize="@dimen/but_text"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
 
     </RelativeLayout>
 

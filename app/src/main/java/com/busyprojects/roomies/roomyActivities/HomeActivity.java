@@ -25,9 +25,9 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.TinyDb;
+import com.busyprojects.roomies.pojos.master.PayingItems;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
 import com.busyprojects.roomies.pojos.transaction.PaymentNotification;
@@ -50,31 +50,32 @@ public class HomeActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
-    TextView tv_login_message, tv_notification_count;
+    TextView tv_login_message, tv_notification_count,tv_loggedRoomyName,tv_loggedRoomyMobile;
     RelativeLayout iv_notification;
     AnimationManager animationManager = null;
 
-ImageView iv_internet,iv_info;
+    ImageView iv_internet, iv_info;
     int totalRoomates;
 
     DialogEffect dialogEffect;
     Context context = HomeActivity.this;
 
 
-    String mobileLogged, macAdd;
+    String loggedRoomyMobile;
+    String mobileLogged, macAdd,loggedRoomyNameToShow;
 
     RelativeLayout rel_iv_roomy_home;
     Button but_add_roomy;
-    Button but_pay,but_all_roomy;
+    Button but_pay, but_all_roomy;
     Button but_view_payment;
     Button but_history;
     Button but_logout;
     String appColor;
 
     PayingItems payingItems;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -82,6 +83,7 @@ ImageView iv_internet,iv_info;
 
         dialogEffect = new DialogEffect(context);
         tv_login_message = findViewById(R.id.tv_login_message);
+        tv_loggedRoomyMobile = findViewById(R.id.tv_loggedRoomyMobile);
         iv_internet = findViewById(R.id.iv_internet);
         iv_info = findViewById(R.id.iv_info);
 
@@ -91,30 +93,27 @@ ImageView iv_internet,iv_info;
 
         but_add_roomy = findViewById(R.id.but_add_roomy);
 
+
         iv_notification = findViewById(R.id.iv_notification);
         tv_notification_count = findViewById(R.id.tv_notification_count);
 
         //set items map
-      payingItems = PayingItems.getInstance();
-
-
-
-        try {
+        payingItems = PayingItems.getInstance();
+  try {
             iv_notification.setVisibility(View.GONE);
             tv_notification_count.setVisibility(View.GONE);
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         but_pay = findViewById(R.id.but_pay);
+        tv_loggedRoomyName = findViewById(R.id.tv_loggedRoomyName);
         but_view_payment = findViewById(R.id.but_view_payment);
         but_history = findViewById(R.id.but_history);
         but_logout = findViewById(R.id.but_logout);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
-
 
 
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
@@ -125,10 +124,13 @@ ImageView iv_internet,iv_info;
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
 
+        loggedRoomyMobile = Helper.getRoomyMobileFromSession(context);
 
+        tv_loggedRoomyMobile.setText(loggedRoomyMobile);
+        loggedRoomyNameToShow = Helper.getRoomyNameFromSession(context);
 
-        tv_login_message.setText("Every Roommate of this room must login with " + mobileLogged);
-        tv_login_message.setTextColor(Color.parseColor(appColor));
+        tv_login_message.setText(mobileLogged);
+       // tv_login_message.setTextColor(Color.parseColor(appColor));
 
         //  rel_iv_roomy_home.setBackgroundColor(Color.parseColor("#F5F1F1"));
 
@@ -145,13 +147,14 @@ ImageView iv_internet,iv_info;
             setItemsColor();
             getNewNotifyObjects();
             getRoomsAllMacAddressListInSession();
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 
         callContinuosCheckInternetIcon();
 
+        saveRoomyMobileList();
+        tv_loggedRoomyName.setText(loggedRoomyNameToShow);
     }
 
     void setNotificationSound() {
@@ -206,8 +209,7 @@ ImageView iv_internet,iv_info;
                 }
             });
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 
@@ -217,8 +219,7 @@ ImageView iv_internet,iv_info;
     public void addRoomy(View view) {
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, AddRoomyActivity.class));
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 
@@ -229,8 +230,7 @@ ImageView iv_internet,iv_info;
 
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, PayNowActivity.class));
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 
@@ -241,9 +241,9 @@ ImageView iv_internet,iv_info;
         // TODO: 1/27/2018 get All Sessions list  firstly
 
         if (CheckInternetReceiver.isOnline(this)) {
+            removeViewedPaymentNotification();
             startActivity(new Intent(context, PaymentActivity.class));
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 //        rel_iv_roomy_home.setVisibility(View.GONE);
@@ -265,6 +265,30 @@ ImageView iv_internet,iv_info;
     }
 
 
+
+    void removeViewedPaymentNotification()
+    {  if (CheckInternetReceiver.isOnline(this)) {
+        // TODO: 3/1/2018 remove notification data
+        db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                .child(loggedRoomyMobile)
+                .child(Helper.PAYMENT_LIST)
+                .removeValue();
+
+
+        SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+
+        spe = spuc.edit();
+        spe.putInt(SessionManager.PNID_LIST, 0);
+
+        spe.apply();
+
+    } else {
+        Helper.showCheckInternet(context);
+    }
+    }
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBackPressed() {
@@ -273,15 +297,13 @@ ImageView iv_internet,iv_info;
     }
 
 
-    public void viewHistory(View view)
-    {
+    public void viewHistory(View view) {
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, HistoryDateActivity.class));
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
-        }
+    }
 
     public void logout(View view) {
 
@@ -450,7 +472,7 @@ ImageView iv_internet,iv_info;
     }
 
     void setItemsColor() {
-        tv_login_message.setTextColor(Color.parseColor(appColor));
+        //tv_login_message.setTextColor(Color.parseColor(appColor));
 
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_add_roomy.setBackgroundColor(Color.parseColor(appColor));
@@ -468,7 +490,7 @@ ImageView iv_internet,iv_info;
 
         if (CheckInternetReceiver.isOnline(this)) {
             db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                    .child(macAdd)
+                    .child(loggedRoomyMobile)
                     .child(Helper.PAYMENT_LIST)
                     .addValueEventListener(new ValueEventListener() {
                         @Override
@@ -483,9 +505,9 @@ ImageView iv_internet,iv_info;
                                 try {
                                     Payment payment = dataSnapshot1.getValue(Payment.class);
 
-                                    if (payment.getMobileLogged().equals(mobileLogged)) {
+                                  //  if (payment.getMobileLogged().equals(mobileLogged)) {
                                         paymentListNotify.add(payment.getPid());
-                                    }
+                                  //  }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -527,8 +549,7 @@ ImageView iv_internet,iv_info;
 
                         }
                     });
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -537,11 +558,10 @@ ImageView iv_internet,iv_info;
 
     public void showNotifiedData(View view) {
 
-        if (CheckInternetReceiver.isOnline(this))
-        {
+        if (CheckInternetReceiver.isOnline(this)) {
             // TODO: 3/1/2018 remove notification data
             db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                    .child(macAdd)
+                    .child(loggedRoomyMobile)
                     .child(Helper.PAYMENT_LIST)
                     .removeValue();
 
@@ -554,8 +574,7 @@ ImageView iv_internet,iv_info;
             spe.apply();
 
             startActivity(new Intent(this, PaymentActivity.class));
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
     }
@@ -610,8 +629,7 @@ ImageView iv_internet,iv_info;
 
                         }
                     });
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -619,17 +637,22 @@ ImageView iv_internet,iv_info;
 
 
     public void viewRoomy(View view) {
-    startActivity(new Intent(this,AllRoomyActivity.class));}
 
-
-    void checkInternetNsetIcon()
-    {
         if (CheckInternetReceiver.isOnline(context))
         {
+        startActivity(new Intent(this, AllRoomyActivity.class));
+    }else
+        {
+        Helper.showCheckInternet(context);
+        }
+    }
+
+
+    void checkInternetNsetIcon() {
+        if (CheckInternetReceiver.isOnline(context)) {
             iv_internet.setVisibility(View.GONE);
             iv_info.setVisibility(View.VISIBLE);
-        }else
-        {
+        } else {
             iv_internet.setVisibility(View.VISIBLE);
             iv_info.setVisibility(View.GONE);
         }
@@ -637,8 +660,8 @@ ImageView iv_internet,iv_info;
     }
 
     Handler handler;
-    void callContinuosCheckInternetIcon()
-    {
+
+    void callContinuosCheckInternetIcon() {
         handler = new Handler();
 
         handler.postDelayed(new Runnable() {
@@ -649,22 +672,62 @@ ImageView iv_internet,iv_info;
                 checkInternetNsetIcon();
                 callContinuosCheckInternetIcon();
             }
-        },2000);
+        }, 2000);
 
+
+    }
+
+
+    public void showInfo(View view) {
+        Intent intentAppInfo = new Intent(context, AppInfoActivity.class);
+        intentAppInfo.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intentAppInfo);
 
 
     }
 
 
-    public void showInfo(View view)
-    {
-    Intent intentAppInfo = new Intent(context,AppInfoActivity.class);
-    intentAppInfo.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    startActivity(intentAppInfo);
+    void saveRoomyMobileList() {
+
+        if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
+            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    dialogEffect.cancelDialog();
+                    ArrayList<String> roomyMobList = new ArrayList<>();
+
+                    for (DataSnapshot dataSnapshot1 :
+                            dataSnapshot.getChildren()) {
+
+                        // TODO: 1/27/2018  add one by one roomy in list
+                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
 
+                        if (mobileLogged.equals(roomy.getMobileLogged())) {
+                            roomyMobList.add(roomy.getMobile());
+                        }
+
+
+                    }
+                    TinyDb tinyDb = new TinyDb(context);
+                    tinyDb.putListString(SessionManager.ROOMY_MOBILE_LIST, roomyMobList);
+
+
+                    //          getSelectedRoomy();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        } else {
+            Helper.showCheckInternet(context);
+
+        }
     }
-
 
 
 }

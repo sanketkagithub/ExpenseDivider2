@@ -1,6 +1,7 @@
 package com.busyprojects.roomies.helper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.pojos.master.History;
@@ -255,8 +256,72 @@ public class Helper {
 
 
 
+public  static  void setRoomNoIsSession(Context context, String roomNo)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   SharedPreferences.Editor spe = sp.edit();
+    spe.putString(SessionManager.MOBILE,roomNo);
+    spe.apply();
+
+}
 
 
+
+
+public  static  String getRoomNoFromSession(Context context)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   return sp.getString(SessionManager.MOBILE,"");
+
+
+}
+
+public  static  void setRoomyMobileIsSession(Context context, String roomyMobile)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   SharedPreferences.Editor spe = sp.edit();
+    spe.putString(SessionManager.ROOMY_MOBILE,roomyMobile);
+    spe.apply();
+
+}
+
+
+
+
+public  static  String getRoomyMobileFromSession(Context context)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   return sp.getString(SessionManager.ROOMY_MOBILE,"");
+
+
+}
+
+
+public  static  void setRoomyNameIsSession(Context context, String roomyName)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   SharedPreferences.Editor spe = sp.edit();
+    spe.putString(SessionManager.ROOMY_NAME,roomyName);
+    spe.apply();
+
+}
+
+
+
+
+public  static  String getRoomyNameFromSession(Context context)
+{
+
+   SharedPreferences sp = context.getSharedPreferences(SessionManager.FILE_WTC,Context.MODE_PRIVATE);
+   return sp.getString(SessionManager.ROOMY_NAME,"");
+
+
+}
 
 
 }
