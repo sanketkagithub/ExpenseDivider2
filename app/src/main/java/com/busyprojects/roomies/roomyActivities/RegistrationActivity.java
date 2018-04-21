@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -47,7 +48,7 @@ public class RegistrationActivity extends Activity {
 
     SharedPreferences sp;
     SharedPreferences.Editor spe;
-
+private AnimationManager animationManager;
     String roomNoInSession;
 
     RuntimePermissionsCs runtimePermissionsCs;
@@ -66,6 +67,7 @@ public class RegistrationActivity extends Activity {
 //        CheckInternetReceiver.isOnline(this) = sp.getBoolean(SessionManager.IS_INTERNET, false);
         //CheckInternetReceiver.isOnline(this) = CheckInternetReceiver.isOnline(this);
         db_ref = Helper.getFirebaseDatabseRef();
+        animationManager = AnimationManager.getInstance();
 
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
         mobileLogin = sp.getString(SessionManager.MOBILE, "");
@@ -237,8 +239,8 @@ takeRemoteIsTransfer();
     public void registerRoomy(View view) {
 
 if (CheckInternetReceiver.isOnline(this)) {
-    final String roomyReg = et_reg_mob.getText().toString();
-    final String roomyName = et_reg_name.getText().toString();
+    final String roomyReg = et_reg_mob.getText().toString().trim();
+    final String roomyName = et_reg_name.getText().toString().trim();
 
     if (roomyReg.equals("")||roomyName.equals("")) {
         Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
@@ -337,6 +339,23 @@ if (CheckInternetReceiver.isOnline(this)) {
 
             if (nameS.equals("") || mobileS.equals("")) {
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
+                if (nameS.equals(""))
+                {
+                    et_reg_name.setText("");
+                    animationManager.animateViewForEmptyField(et_reg_name,context);
+                }
+
+
+                if (mobileS.equals(""))
+                {
+                    et_reg_mob.setText("");
+                    animationManager.animateViewForEmptyField(et_reg_mob,context);
+                }
+
+
+
+
+
             } else {
                 dialogEffect.showDialog();
 

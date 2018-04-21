@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -35,6 +36,7 @@ public class RoomRegistrationActivity extends Activity {
     EditText et_reg_room_no;
     TextView tv_log_reg_title;
 
+    private AnimationManager animationManager;
 
     DatabaseReference db_ref;
 
@@ -58,6 +60,7 @@ public class RoomRegistrationActivity extends Activity {
         //CheckInternetReceiver.isOnline(this) = CheckInternetReceiver.isOnline(this);
         db_ref = Helper.getFirebaseDatabseRef();
 
+        animationManager  = AnimationManager.getInstance();
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
         dialogEffect = new DialogEffect(context);
 
@@ -94,13 +97,14 @@ public class RoomRegistrationActivity extends Activity {
     public void registerRoomNo(View view) {
 
 if (CheckInternetReceiver.isOnline(this)) {
-    final String roomNo = et_reg_room_no.getText().toString();
+    final String roomNo = et_reg_room_no.getText().toString().trim();
 
     if (roomNo.equals(""))
     {
+        et_reg_room_no.setText("");
+        animationManager.animateViewForEmptyField(et_reg_room_no,context);
         Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
     } else {
-
 
         if (CheckInternetReceiver.isOnline(context)) {
 

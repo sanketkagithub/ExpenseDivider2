@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AppInfoActivity extends Activity {
 
-    TextView tv_app_info;
+    TextView tv_app_info,tv_app_info_title;
 
     Context context = AppInfoActivity.this;
 
@@ -47,11 +48,14 @@ public class AppInfoActivity extends Activity {
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
 
         tv_app_info = findViewById(R.id.tv_app_info);
+        tv_app_info_title = findViewById(R.id.tv_app_info_title);
 
+        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
+
+        tv_app_info_title.setBackgroundColor(Color.parseColor(appColor));
         dbRef = Helper.getFirebaseDatabseRef();
 
 
-        String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
         int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
 
 

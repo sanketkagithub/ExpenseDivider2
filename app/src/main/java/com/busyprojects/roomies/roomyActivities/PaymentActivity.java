@@ -97,6 +97,9 @@ public class PaymentActivity extends Activity {
         // et_sv = findViewById(R.id.et_sv);
         but_delete_payment = findViewById(R.id.but_delete_payment);
         but_transfer_money = findViewById(R.id.but_transfer_money);
+
+
+        hideButtons();
         tv_total_amount = findViewById(R.id.tv_total_amount);
         TextView tv_transaction = findViewById(R.id.tv_transaction);
         TextView tv_each_paid = findViewById(R.id.tv_each_paid);
@@ -106,9 +109,14 @@ public class PaymentActivity extends Activity {
         iv_no_pay = findViewById(R.id.iv_no_payment_record_found);
         iv_no_transfer = findViewById(R.id.iv_no_transfer_record_found);
 
+
+
+
+
         db_ref = Helper.getFirebaseDatabseRef();
 
         dialogEffect = new DialogEffect(this);
+        dialogEffect.showDialog();
 
         getIsTransferRemote();
 
@@ -145,6 +153,24 @@ public class PaymentActivity extends Activity {
         setTotalRoomieesCountInSession();
 
     }
+
+
+    void hideButtons()
+    {
+
+        but_transfer_money.setVisibility(View.GONE);
+        but_delete_payment.setVisibility(View.GONE);
+
+    }
+
+      void showButtons()
+    {
+
+        but_transfer_money.setVisibility(View.VISIBLE);
+        but_delete_payment.setVisibility(View.VISIBLE);
+
+    }
+
 
 
     // Filter Class
@@ -391,6 +417,8 @@ public class PaymentActivity extends Activity {
                                 paymentListAdapter = new PaymentListAdapter(context, paymentList);
                                 lv_payments.setAdapter(paymentListAdapter);
 
+                                showButtons();
+
 
                                 setEachAndTotalTexts();
 
@@ -429,6 +457,7 @@ public class PaymentActivity extends Activity {
                                 //but_transfer_money.setVisibility(View.GONE);
                                 //but_delete_payment.setVisibility(View.GONE);
 
+                                hideButtons();
                             }
 
                         }

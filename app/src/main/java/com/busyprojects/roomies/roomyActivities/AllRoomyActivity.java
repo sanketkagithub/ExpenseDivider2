@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class AllRoomyActivity extends Activity {
     // Button but_delete_payment;
     ImageView iv_no_history_record_found;
 
+
     boolean isLAstOneDelete;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -73,6 +75,7 @@ public class AllRoomyActivity extends Activity {
 
 
         lv_all_roomy = findViewById(R.id.lv_all_roomy);
+       Button but_delete_all_roomy = findViewById(R.id.but_delete_all_roomy);
         tv_total_roomy_count = findViewById(R.id.tv_total_roomy_count);
         iv_no_history_record_found = findViewById(R.id.iv_no_history_record_found);
         TextView tv_roomy_title = findViewById(R.id.tv_roomy_title);
@@ -88,6 +91,12 @@ public class AllRoomyActivity extends Activity {
         setRoomyList();
         setPAyingRoomyMobileListInSession();
 
+        try {
+            but_delete_all_roomy.setBackgroundColor(Color.parseColor(appColor));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 

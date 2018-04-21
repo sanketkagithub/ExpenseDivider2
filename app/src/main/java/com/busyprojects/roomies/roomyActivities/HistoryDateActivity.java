@@ -149,6 +149,7 @@ public class HistoryDateActivity extends Activity {
         showDeleteHistoryListAlert();
 
 
+
     }
 
     String hid;

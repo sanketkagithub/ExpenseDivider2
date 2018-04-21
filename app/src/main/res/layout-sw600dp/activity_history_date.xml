@@ -10,10 +10,12 @@
 
     <TextView
         android:background="@color/main_app_colorp"
-        android:id="@+id/tv_roomy_title"
+        android:id="@+id/tv_history_date"
         android:layout_width="match_parent"
         android:layout_height="@dimen/history_title"
         android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:gravity="center"
         android:textSize="@dimen/title"
         android:fontFamily="serif"
@@ -21,28 +23,9 @@
         android:textColor="@color/white_color" />
 
 
-    <Button
-        android:id="@+id/but_delete_payment"
-        android:layout_width="@dimen/delete_all_wid"
-        android:layout_height="@dimen/delete_all_ht"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/bottom_iv_margin"
-        android:layout_marginEnd="@dimen/bottom_iv_margin"
-        android:layout_marginRight="@dimen/bottom_iv_margin"
-        android:text="@string/delete_all"
-        android:background="@drawable/buttons"
-        android:gravity="center"
-        android:fontFamily="serif"
-        android:onClick="deleteHistoryList"
-        android:textAllCaps="false"
-        android:textSize="@dimen/lv_text"
-        android:textColor="@color/white_color" />
-
-
 
     <RelativeLayout
-        android:layout_below="@id/tv_roomy_title"
+        android:layout_below="@id/tv_history_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -51,23 +34,42 @@
             android:id="@+id/lv_history_dates"
             android:divider="@color/lv_divider"
             android:dividerHeight="@dimen/lv_div_ht"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </ListView>
-    <ImageView
-        android:id="@+id/iv_no_history_record_found"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/no_record"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        </ListView>
+        <ImageView
+            android:id="@+id/iv_no_history_record_found"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/no_record"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/but_delete_payment"
+            android:layout_width="@dimen/delete_all_wid"
+            android:layout_height="@dimen/delete_all_ht"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/bottom_iv_margin"
+            android:layout_marginEnd="@dimen/bottom_iv_margin"
+            android:layout_marginRight="@dimen/bottom_iv_margin"
+            android:text="@string/delete_all"
+            android:background="@drawable/buttons"
+            android:gravity="center"
+            android:fontFamily="serif"
+            android:onClick="deleteHistoryList"
+            android:textAllCaps="false"
+            android:textSize="@dimen/lv_text"
+            android:textColor="@color/white_color" />
+
 
     </RelativeLayout>
+
+</RelativeLayout>

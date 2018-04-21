@@ -30,13 +30,15 @@ public class DialogEffect {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             View v = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
 
-           ImageView iv_centre_right = v.findViewById(R.id.iv_centre_right);
+           /*ImageView iv_centre_right = v.findViewById(R.id.iv_centre_right);
            ImageView iv_centre_left = v.findViewById(R.id.iv_centre_left);
            ImageView iv_centre_down = v.findViewById(R.id.iv_centre_down);
+           */
+
             dialog.setContentView(v);
             dialog.setCancelable(false);
 
-            animateSharing(iv_centre_right,iv_centre_left,iv_centre_down);
+         //   animateSharing(iv_centre_right,iv_centre_left,iv_centre_down);
             dialog.show();
         }catch (Exception e)
         {

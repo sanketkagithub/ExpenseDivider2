@@ -44,6 +44,7 @@ public class LoginActivity extends Activity {
     // boolean CheckInternetReceiver.isOnline(this);
 
     String roomNo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,6 @@ public class LoginActivity extends Activity {
         tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
 
-
         if (Build.VERSION.SDK_INT >= 23) {
             runtimePermissionsCs = new RuntimePermissionsCs(this);
             runtimePermissionsCs.getPermissions();
@@ -70,105 +70,90 @@ public class LoginActivity extends Activity {
     }
 
 
+    void clearFields() {
+
+        et_roommate_login.setText("");
+
+    }
 
 
-    public void loginRoomy(View view)
-    {
+    public void loginRoomy(View view) {
 
-   String roomyNoIp = et_roommate_login.getText().toString();
+        String roomyNoIp = et_roommate_login.getText().toString().trim();
 
-   if (roomyNoIp.equals(""))
-   {
-       Toast.makeText(context, "Please check All Empty Fields.", Toast.LENGTH_SHORT).show();
-   }else
-   {
+        if (roomyNoIp.equals("")) {
+            Toast.makeText(context, "Please check All Empty Fields.", Toast.LENGTH_SHORT).show();
+            clearFields();
+        } else {
 
 
-       if (CheckInternetReceiver.isOnline(context)) {
-           validateRoomyMobile(roomyNoIp);
-       }else
-       {
-           Helper.showCheckInternet(context);
-       }
-   }
-
+            if (CheckInternetReceiver.isOnline(context)) {
+                validateRoomyMobile(roomyNoIp);
+            } else {
+                Helper.showCheckInternet(context);
+            }
+        }
 
 
     }
 
 
-
-    void  validateRoomyMobile(final String roomyMobileIp)
-    {
+    void validateRoomyMobile(final String roomyMobileIp) {
 
         db_ref.child(Helper.ROOMY)
-        .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                List<String> roomyMobList = new LinkedList<>();
-                List<Roomy> roomyList = new LinkedList<>();
+                        List<String> roomyMobList = new LinkedList<>();
+                        List<Roomy> roomyList = new LinkedList<>();
 
-                for (DataSnapshot dataSnapshot1:
-                     dataSnapshot.getChildren()) {
-
-
-
-                   Roomy roomy = dataSnapshot1.getValue(Roomy.class);
-
-                   if (roomy.getMobileLogged().equals(roomNo)) {
-                       roomyMobList.add(roomy.getMobile());
-                       roomyList.add(roomy);
-                   }
-
-                }
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
 
 
-                if (roomyMobList.contains(roomyMobileIp))
-                {
-                    Helper.setRoomyMobileIsSession(context,roomyMobileIp);
+                            Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                    for (int i = 0; i < roomyList.size(); i++)
-                    {
-
-                        if (roomyList.get(i).getMobile().equals(roomyMobileIp))
-                        {
-                            Helper.setRoomyNameIsSession(context,roomyList.get(i).getName());
+                            if (roomy.getMobileLogged().equals(roomNo)) {
+                                roomyMobList.add(roomy.getMobile());
+                                roomyList.add(roomy);
+                            }
 
                         }
 
+
+                        if (roomyMobList.contains(roomyMobileIp)) {
+                            Helper.setRoomyMobileIsSession(context, roomyMobileIp);
+
+                            for (int i = 0; i < roomyList.size(); i++) {
+
+                                if (roomyList.get(i).getMobile().equals(roomyMobileIp)) {
+                                    Helper.setRoomyNameIsSession(context, roomyList.get(i).getName());
+
+                                }
+
+                            }
+
+
+                            startActivity(new Intent(context, HomeActivity.class));
+
+
+                        } else {
+                            Toast.makeText(context, "Invalid Roomate Mobile", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
                     }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                    startActivity(new Intent(context, HomeActivity.class));
-
-
-
-                }else
-                {
-                    Toast.makeText(context, "Invalid Roomate Mobile", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-
-
-
-
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                    }
+                });
 
     }
-
-
 
 
 }

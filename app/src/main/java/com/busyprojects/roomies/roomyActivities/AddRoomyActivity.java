@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -44,16 +45,18 @@ public class AddRoomyActivity extends Activity {
     SharedPreferences.Editor spe;
     boolean isTransfer;
 
+    private AnimationManager animationManager;
+
     EditText et_name, et_mobile;
 
     RelativeLayout rel_iv_roomy_home;
     ImageView iv_name, iv_call;
-String appColor;
+    String appColor;
 
-Helper helper;
-Runnable runnable;
+    Helper helper;
+    Runnable runnable;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ Runnable runnable;
         Button but_save = findViewById(R.id.but_save);
         Button but_back = findViewById(R.id.but_back);
 
-
+ animationManager = AnimationManager.getInstance();
         //callContinuosCheckInternetToExitToHome();
 
         runnable = new Runnable() {
@@ -86,11 +89,11 @@ Runnable runnable;
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
-       Helper.setRemoteIstransfer(mobileLogged,false);
+        Helper.setRemoteIstransfer(mobileLogged, false);
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
-         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
+        appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
- takeRemoteIsTransfer();
+        takeRemoteIsTransfer();
 
         rel_iv_roomy_home.setBackgroundColor(Color.parseColor(appColor));
         but_save.setBackgroundColor(Color.parseColor(appColor));
@@ -111,7 +114,7 @@ Runnable runnable;
         iv_call.setImageResource(mobile);
 
 
-        if (Build.VERSION.SDK_INT>=21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             //SessionManager.setCursorColor(et_name,Color.parseColor(appColor));
             et_name.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
             et_mobile.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(appColor)));
@@ -124,8 +127,7 @@ Runnable runnable;
 
     }
 
-    void deletePaymentNpayTgAtIfTransfered()
-    {
+  /*  void deletePaymentNpayTgAtIfTransfered() {
 
 
         // TODO: 2/5/2018 delete current Payment
@@ -207,20 +209,31 @@ Runnable runnable;
 
 
     }
+*/
 
-
-    void saveRoommate()
-    {
+    void saveRoommate() {
 
         if (CheckInternetReceiver.isOnline(this)) {
             String rid = Helper.randomString(10);
-            String nameS = et_name.getText().toString();
-            String mobileS = et_mobile.getText().toString();
+            String nameS = et_name.getText().toString().trim();
+            String mobileS = et_mobile.getText().toString().trim();
             String registrationDateTime = Helper.getCurrentDateTime();
 
 
             if (nameS.equals("") || mobileS.equals("")) {
+
+                if (nameS.equals("")) {
+                    animationManager.animateViewForEmptyField(et_name, context);
+
+                    et_name.setText("");
+                }
+                if (mobileS.equals("")) {
+                    et_mobile.setText("");
+                    animationManager.animateViewForEmptyField(et_mobile, context);
+                }
+
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
+
             } else {
                 dialogEffect.showDialog();
 
@@ -234,16 +247,12 @@ Runnable runnable;
                 roomy.setRegistrationDateTime(registrationDateTime);
 
 
-
-
                 // TODO: 3/25/2018 delete pp if isTransfered
-                if (isTransfer||isRemoteTransfer)
-                {
+                if (isTransfer || isRemoteTransfer) {
 
-                showAfterTransfersDeleteAlert(roomy);
+                    showAfterTransfersDeleteAlert(roomy);
 
-                }else
-                {
+                } else {
                     db_ref.child(Helper.ROOMY).child(rid)
                             .setValue(roomy);
                     dialogEffect.cancelDialog();
@@ -258,12 +267,10 @@ Runnable runnable;
                 }
 
 
-
             }
 
-           // deletePaymentNpayTgAtIfTransfered();
-        }else
-        {
+            // deletePaymentNpayTgAtIfTransfered();
+        } else {
             Helper.showCheckInternet(this);
         }
 
@@ -289,6 +296,7 @@ Runnable runnable;
 
                             PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
+                            assert payTg != null;
                             if (payTg.getMobileLogged().equals(mobileLogged)) {
                                 db_ref.child(Helper.AFTER_TRANSFER)
                                         .child(payTg.getPayTgId())
@@ -303,7 +311,7 @@ Runnable runnable;
                         spe = sp.edit();
                         spe.putBoolean(SessionManager.IS_TRANSFER, false);
                         spe.apply();
-                        Helper.setRemoteIstransfer(mobileLogged,false);
+                        Helper.setRemoteIstransfer(mobileLogged, false);
 
                         e.printStackTrace();
                     }
@@ -315,8 +323,7 @@ Runnable runnable;
                 }
             });
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
     }
@@ -326,9 +333,6 @@ Runnable runnable;
     }
 
 
-
-
-
     Dialog dialodDeleteTranserAlert;
 
     public void showAfterTransfersDeleteAlert(final Roomy roomy) {
@@ -336,7 +340,13 @@ Runnable runnable;
         if (CheckInternetReceiver.isOnline(context)) {
             //animationManager.animateViewForEmptyField();
             dialodDeleteTranserAlert = new Dialog(context);
-            dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            try {
+                dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
             View v = LayoutInflater.from(context).inflate(R.layout.delete_transfer_add_alert, null);
             Button but_yes_del_transfer_t = v.findViewById(R.id.but_yes_del_transfer_t);
             final Button but_no_del_transfer_t = v.findViewById(R.id.but_no_del_transfer_t);
@@ -347,13 +357,12 @@ Runnable runnable;
                 public void onClick(View v) {
 
 
-
                     deleteAfterExistingTransfer();
                     // TODO: 2/25/2018 reset transfer session
                     spe = sp.edit();
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
-                    Helper.setRemoteIstransfer(mobileLogged,false);
+                    Helper.setRemoteIstransfer(mobileLogged, false);
 
 
                     // TODO: 3/31/2018 then as usual save roomy 
@@ -392,15 +401,11 @@ Runnable runnable;
     }
 
 
+    void checkInternetExitToHome() {
+        if (CheckInternetReceiver.isOnline(context)) {
 
-    void checkInternetExitToHome()
-    {
-        if (CheckInternetReceiver.isOnline(context))
-        {
-
-        }else
-        {
-            Intent intentExitToHome = new Intent(context,HomeActivity.class);
+        } else {
+            Intent intentExitToHome = new Intent(context, HomeActivity.class);
             intentExitToHome.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             context.startActivity(intentExitToHome);
 
@@ -410,8 +415,8 @@ Runnable runnable;
     }
 
     Handler handler;
-    public   void callContinuosCheckInternetToExitToHome()
-    {
+
+    public void callContinuosCheckInternetToExitToHome() {
         handler = new Handler();
 
         handler.postDelayed(new Runnable() {
@@ -422,8 +427,7 @@ Runnable runnable;
                 checkInternetExitToHome();
                 callContinuosCheckInternetToExitToHome();
             }
-        },2000);
-
+        }, 2000);
 
 
     }
@@ -439,11 +443,9 @@ Runnable runnable;
 */
 
 
-
-
     boolean isRemoteTransfer;
-    void takeRemoteIsTransfer()
-    {
+
+    void takeRemoteIsTransfer() {
         dialogEffect.showDialog();
         db_ref.child(Helper.IS_TRANSFER)
                 .child(mobileLogged)
@@ -454,8 +456,7 @@ Runnable runnable;
 
                         try {
                             isRemoteTransfer = dataSnapshot.getValue(Boolean.class);
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             isRemoteTransfer = false;
                         }

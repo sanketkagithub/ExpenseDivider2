@@ -21,9 +21,6 @@
         android:text="@string/roomies"
         android:textColor="@color/white_color" />
 
-    android:textColor="@color/white_color" />
-
-
 
 
     <RelativeLayout
@@ -54,14 +51,14 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <Button
-            android:id="@+id/but_delete_payment"
+            android:id="@+id/but_delete_all_roomy"
             android:layout_width="@dimen/delete_all_wid"
             android:layout_height="@dimen/delete_all_ht"
             android:fontFamily="serif"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="@dimen/bottom_iv_margin"
-            android:layout_marginRight="@dimen/bottom_iv_margin"
+            android:layout_marginStart="@dimen/bottom_iv_margin"
+            android:layout_marginLeft="@dimen/bottom_iv_margin"
             android:text="@string/delete_all"
             android:background="@drawable/buttons"
             android:gravity="center"

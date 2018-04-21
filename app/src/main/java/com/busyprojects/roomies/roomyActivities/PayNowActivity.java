@@ -279,18 +279,17 @@ PayNowActivity extends Activity {
             if (amount.equals("") || roomySelected.getName().equals(Helper.SELECT_ROOMY) ||
                     payingItem.equals("")) {
                 if (roomySelected.getName().equals(Helper.SELECT_ROOMY)) {
-
                     animationManager.animateViewForEmptyField(spinner_roomy, context);
                 }
 
                 if (amount.equals("")) {
                     animationManager.animateViewForEmptyField(ll_paying_amount, context);
-
+                       et_amount.setText("");
                 }
 
                 if (payingItem.equals("")) {
                     animationManager.animateViewForEmptyField(ll_paying_item, context);
-
+                         et_paying_item.setText("");
                 }
 
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);

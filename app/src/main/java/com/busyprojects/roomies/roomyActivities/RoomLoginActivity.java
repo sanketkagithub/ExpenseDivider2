@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -37,6 +38,7 @@ public class RoomLoginActivity extends Activity {
     DatabaseReference db_ref;
 
     DialogEffect dialogEffect;
+    private AnimationManager animationManager;
 
     SharedPreferences sp;
     SharedPreferences.Editor spe;
@@ -56,6 +58,7 @@ public class RoomLoginActivity extends Activity {
 
         dialogEffect = new DialogEffect(context);
 
+        animationManager  = AnimationManager.getInstance();
         et_log_room_no = findViewById(R.id.et_log_room_no);
 
         tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
@@ -79,10 +82,13 @@ public class RoomLoginActivity extends Activity {
     public void roomLogin(View view)
     {
 
-       String roomNoIp = et_log_room_no.getText().toString();
+       String roomNoIp = et_log_room_no.getText().toString().trim();
 
        if (roomNoIp.equals(""))
        {
+           et_log_room_no.setText("");
+
+           animationManager.animateViewForEmptyField(et_log_room_no,context);
            Toast.makeText(context, "Please check Empty Fields", Toast.LENGTH_SHORT).show();
        }else
        {
