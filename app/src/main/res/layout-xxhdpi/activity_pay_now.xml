@@ -100,7 +100,7 @@
                         android:ems="10"
                         android:fontFamily="serif"
                         android:hint="Paying Item"
-                        android:inputType="textAutoComplete"
+                        android:inputType="textNoSuggestions"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="@dimen/et_text" />
