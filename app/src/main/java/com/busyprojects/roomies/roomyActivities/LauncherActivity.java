@@ -31,6 +31,7 @@ public class LauncherActivity extends Activity {
 
     PayingItems payingItems;
     DatabaseReference dbRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +42,19 @@ public class LauncherActivity extends Activity {
         final RelativeLayout rel_launcher_back = findViewById(R.id.rel_launcher_back);
 
 
-        Fabric.with(this,new Crashlytics());
+        Fabric.with(this, new Crashlytics());
 
         dbRef = Helper.getFirebaseDatabseRef();
-          getScreenInfo();
 
+        try {
+            getScreenInfo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         //set items map
-      payingItems = PayingItems.getInstance();
-
+        payingItems = PayingItems.getInstance();
 
 
         Resources resources = getResources();
@@ -68,8 +72,6 @@ public class LauncherActivity extends Activity {
             public void run() {
 
 
-
-
                 if (mobileLogged.equals("")) {
                     startActivity(new Intent(context, RegisterLoginActivity.class));
 
@@ -84,24 +86,23 @@ public class LauncherActivity extends Activity {
         }, 1500);
 
 
-
-
-
     }
-    public void getScreenInfo(){
+
+    public void getScreenInfo() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-     int   heightPixels = metrics.heightPixels;
+        int heightPixels = metrics.heightPixels;
         int widthPixels = metrics.widthPixels;
         float density = metrics.density;
-        int    densityDpi = metrics.densityDpi;
+        int densityDpi = metrics.densityDpi;
 
-        System.out.println("heightPixels " +heightPixels + "\n" + "widthPixels " +widthPixels + "\n"
+        System.out.println("heightPixels " + heightPixels + "\n" + "widthPixels " + widthPixels + "\n"
 
                 + density + "\n" + densityDpi);
 
     }
+
     void animateSharing() {
 
         iv_centre_right.startAnimation(AnimationUtils.loadAnimation(this, R.anim.share_money_launcher_right));
@@ -123,9 +124,6 @@ public class LauncherActivity extends Activity {
 
 
     }
-
-
-
 
 
 }

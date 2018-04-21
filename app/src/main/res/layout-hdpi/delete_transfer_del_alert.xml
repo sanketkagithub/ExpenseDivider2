@@ -1,63 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/whiite_del_back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/tv_del_sel_roomy_alert"
-        android:gravity="center"
-        android:ellipsize="end"
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:textSize="@dimen/et_text"
-        android:onClick="addRoomy"
-        android:text="Trnsferred Payments will be deleted, if you delete a Roommate. Are You sure to proceed ?"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
-
-
-    <LinearLayout
-        android:layout_below="@+id/tv_del_alert"
-        android:orientation="horizontal"
+        android:background="@drawable/whiite_del_back"
         android:gravity="center"
-        android:layout_marginTop="@dimen/yn_top_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/del_but_ht"
-            android:text="Yes"
+        <TextView
+            android:id="@+id/tv_del_sel_roomy_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="serif"
-            android:textSize="@dimen/et_text"
-            android:id="@+id/but_yes_del_transfer_t"
-            android:onClick="deleteRoomy"
-            android:layout_marginRight="@dimen/yes_right_mr"
-            android:textAllCaps="false"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/del_but_ht"
-            android:textSize="@dimen/et_text"
-            android:id="@+id/but_no_del_transfer_t"
-            android:fontFamily="serif"
-            android:text="No"
-            android:onClick="cancelRoomyDelete"
-            android:textAllCaps="false"/>
+            android:gravity="center"
+            android:onClick="addRoomy"
+            android:padding="5dp"
+            android:text="@string/transferred_p_det"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/et_text" />
 
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_del_alert"
+            android:layout_marginTop="@dimen/yn_top_margin"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/but_yes_del_transfer_t"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/del_but_ht"
+                android:layout_marginRight="@dimen/yes_right_mr"
+                android:fontFamily="serif"
+                android:onClick="deleteRoomy"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:textSize="@dimen/et_text" />
+
+            <Button
+                android:id="@+id/but_no_del_transfer_t"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/del_but_ht"
+                android:fontFamily="serif"
+                android:onClick="cancelRoomyDelete"
+                android:text="No"
+                android:textAllCaps="false"
+                android:textSize="@dimen/et_text" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

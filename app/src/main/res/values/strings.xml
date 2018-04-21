@@ -73,4 +73,5 @@
     <string name="room_no">Room No</string>
     <string name="delete_all">Delete All</string>
     <string name="transfer">Transfer</string>
+    <string name="transferred_p_det">Transferred Payments will be deleted, if you delete a Roommate. Are You sure to proceed ?</string>
 </resources>

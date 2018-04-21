@@ -23,7 +23,7 @@
         android:fontFamily="serif"
         android:textSize="@dimen/et_text"
         android:onClick="addRoomy"
-        android:text="Trnsferred Payments will be deleted, if you delete a Roommate. Are You sure to proceed ?"
+        android:text="@string/transferred_p_det"
         android:textAllCaps="false"
         android:textColor="@color/black" />
 
