@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
+    tools:context="com.busyprojects.roomies.roomyActivities.AllRoomyActivity">
 
 
 
@@ -20,6 +20,29 @@
         android:text="@string/roomies"
         android:textColor="@color/white_color" />
 
+
+    <RelativeLayout
+        android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+        android:layout_marginTop="@dimen/lr_margin_top_two_iv"
+        android:layout_alignParentRight="true"
+        android:id="@+id/iv_notification"
+        android:layout_width="@dimen/bell"
+        android:layout_height="@dimen/bell"
+        android:background="@drawable/total_roomy"
+        android:layout_marginEnd="@dimen/lr_margin_top_two_iv">
+
+        <TextView
+            android:id="@+id/tv_total_roomy_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="00"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/bell_text" />
+    </RelativeLayout>
 
 
 
@@ -37,7 +60,6 @@
             android:layout_height="match_parent">
 
         </ListView>
-
         <ImageView
             android:id="@+id/iv_no_history_record_found"
             android:layout_width="200dp"
@@ -67,7 +89,6 @@
             android:onClick="showRoomyDeleteListAlert"
             android:textAllCaps="false"
             android:textColor="@color/white_color" />
-
 
     </RelativeLayout>
 

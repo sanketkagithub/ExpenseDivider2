@@ -18,7 +18,7 @@
     <dimen name="pay_now_item_ht">72dp</dimen>
     <dimen name="ll_et_ht">40dp</dimen>
     <dimen name="bell">40dp</dimen>
-    <dimen name="bell_text">10sp</dimen>
+    <dimen name="bell_text">13sp</dimen>
     <dimen name="title">20sp</dimen>
     <dimen name="launcher_title">30sp</dimen>
     <dimen name="launcher_images">50dp</dimen>

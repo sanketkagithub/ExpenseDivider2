@@ -99,7 +99,7 @@ public class PaymentActivity extends Activity {
         but_transfer_money = findViewById(R.id.but_transfer_money);
 
 
-        hideButtons();
+        //hideButtons();
         tv_total_amount = findViewById(R.id.tv_total_amount);
         TextView tv_transaction = findViewById(R.id.tv_transaction);
         TextView tv_each_paid = findViewById(R.id.tv_each_paid);
@@ -116,7 +116,7 @@ public class PaymentActivity extends Activity {
         db_ref = Helper.getFirebaseDatabseRef();
 
         dialogEffect = new DialogEffect(this);
-        dialogEffect.showDialog();
+      //  dialogEffect.showDialog();
 
         getIsTransferRemote();
 
@@ -155,21 +155,7 @@ public class PaymentActivity extends Activity {
     }
 
 
-    void hideButtons()
-    {
 
-        but_transfer_money.setVisibility(View.GONE);
-        but_delete_payment.setVisibility(View.GONE);
-
-    }
-
-      void showButtons()
-    {
-
-        but_transfer_money.setVisibility(View.VISIBLE);
-        but_delete_payment.setVisibility(View.VISIBLE);
-
-    }
 
 
 
@@ -263,6 +249,7 @@ public class PaymentActivity extends Activity {
 
         // TODO: 2/5/2018 delete current Payment
 
+        dialogEffect = new DialogEffect(this);
         dialogEffect.showDialog();
         db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -357,6 +344,8 @@ public class PaymentActivity extends Activity {
 
     void setPaymentList() {
 
+        final DialogEffect dialogEffect = new DialogEffect(this);
+
         if (CheckInternetReceiver.isOnline(this)) {
             dialogEffect.showDialog();
             db_ref.child(Helper.PAYMENT)
@@ -392,14 +381,6 @@ public class PaymentActivity extends Activity {
 
                             tinyDb.putListString(SessionManager.ROOMY_MOBILE_LIST, roomyMobilesList);
 
-//                        if (paymentList.size() > 0) {
-//                            but_delete_payment.setVisibility(View.VISIBLE);
-//                            iv_no_pay.setVisibility(View.GONE);
-//                        } else {
-//                            but_delete_payment.setVisibility(View.GONE);
-//                            iv_no_pay.setVisibility(View.VISIBLE);
-//
-//                        }
 
 
                             paymentList = new Helper().getSortedTransactionList(paymentList);
@@ -417,7 +398,7 @@ public class PaymentActivity extends Activity {
                                 paymentListAdapter = new PaymentListAdapter(context, paymentList);
                                 lv_payments.setAdapter(paymentListAdapter);
 
-                                showButtons();
+                                //showButtons();
 
 
                                 setEachAndTotalTexts();
@@ -457,7 +438,8 @@ public class PaymentActivity extends Activity {
                                 //but_transfer_money.setVisibility(View.GONE);
                                 //but_delete_payment.setVisibility(View.GONE);
 
-                                hideButtons();
+                                //hideButtons();
+
                             }
 
                         }
@@ -517,13 +499,17 @@ public class PaymentActivity extends Activity {
 
     private void showPayTgListfromAfterTransfer() {
 
+       final DialogEffect dialogEffect = new DialogEffect(this);
+
         if (CheckInternetReceiver.isOnline(this)) {
+            dialogEffect.showDialog();
             payTgList = new ArrayList<>();
             db_ref.child(Helper.AFTER_TRANSFER)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            dialogEffect.cancelDialog();
 
                             payTgList = new ArrayList<>();
                             for (DataSnapshot dataSnapshot1 :
@@ -593,6 +579,8 @@ public class PaymentActivity extends Activity {
             } else {
                 but_transfer_money.setVisibility(View.VISIBLE);
                 // TODO: 2/25/2018 show regulr list
+                final DialogEffect dialogEffect = new DialogEffect(this);
+
                 dialogEffect.showDialog();
                 db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -710,6 +698,8 @@ public class PaymentActivity extends Activity {
                                 lv_take_give.setAdapter(paymentTakeGiveListAdapter);
 
 
+                                dialogEffect.cancelDialog();
+
                             } else {
 
 
@@ -809,6 +799,7 @@ public class PaymentActivity extends Activity {
     }
 
 
+/*
     void deletePaymentNpayTgAtIfTransfered() {
 
 
@@ -896,6 +887,7 @@ public class PaymentActivity extends Activity {
 
 
     }
+*/
 
 
     @Override
@@ -913,6 +905,7 @@ public class PaymentActivity extends Activity {
 
     void getIsTransferRemote() {
 
+       final DialogEffect dialogEffect = new DialogEffect(this);
         dialogEffect.showDialog();
         db_ref.child(SessionManager.IS_TRANSFER)
                 .child(mobileLogged)
@@ -955,6 +948,7 @@ public class PaymentActivity extends Activity {
 
     private void setTotalRoomieesCountInSession() {
 
+        final DialogEffect dialogEffect = new DialogEffect(this);
         dialogEffect.showDialog();
 
         if (CheckInternetReceiver.isOnline(this)) {
@@ -991,7 +985,7 @@ public class PaymentActivity extends Activity {
 
 
                     setEachAndTotalTexts();
-                    setPaymentList();
+                    //setPaymentList();
 
 
                 }

@@ -199,6 +199,7 @@ PayNowActivity extends Activity {
 
 
                 lv_items_suggestions.setVisibility(View.VISIBLE);
+
                 filter_listview(s.toString());
 
             }
@@ -681,7 +682,14 @@ PayNowActivity extends Activity {
     // Filter Class
     public void filter_listview(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        payingItemsLinkedList.clear();
+
+        try {
+
+            payingItemsLinkedList.clear();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         if (charText.length() == 0) {
             payingItemsLinkedList.addAll(payingItemsLinkedListAccu);
         } else {
