@@ -51,6 +51,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <Button
+            android:id="@+id/but_delete_payment"
+            android:layout_width="@dimen/delete_all_wid"
+            android:layout_height="@dimen/delete_all_ht"
+            android:fontFamily="serif"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/bottom_iv_margin"
+            android:layout_marginRight="@dimen/bottom_iv_margin"
+            android:text="@string/delete_all"
+            android:background="@drawable/buttons"
+            android:gravity="center"
+            android:textSize="@dimen/but_text"
+            android:layout_marginBottom="@dimen/bottom_iv_margin"
+            android:onClick="showRoomyDeleteListAlert"
+            android:textAllCaps="false"
+            android:textColor="@color/white_color" />
+
     </RelativeLayout>
 
 </RelativeLayout>

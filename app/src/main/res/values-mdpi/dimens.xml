@@ -80,4 +80,6 @@
     <dimen name="ed_reg_log_pad">20dp</dimen>
     <dimen name="lr_mar_plate">70dp</dimen>
     <dimen name="tb_mar_plate">20dp</dimen>
+    <dimen name="delete_all_wid">170dp</dimen>
+    <dimen name="delete_all_ht">30dp</dimen>
 </resources>

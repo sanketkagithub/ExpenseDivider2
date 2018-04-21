@@ -58,7 +58,7 @@ public class PaymentActivity extends Activity {
     List<PayTg> payTgList;
     String mobileLogged;
     TextView tv_total_amount, tv_each_payment, tv_total_roomies;
-    boolean isTransfer,isTransferRemote;
+    boolean isTransfer, isTransferRemote;
     ImageView iv_no_pay, iv_no_transfer;
     SharedPreferences.Editor spe;
     ListView lv_payments, lv_take_give;
@@ -71,10 +71,11 @@ public class PaymentActivity extends Activity {
     DialogEffect dialogEffect;
     DatabaseReference db_ref;
 
-  //  EditText et_sv;
+    //  EditText et_sv;
     double total;
     int totalRoommates;
-AnimationManager animationManager;
+    AnimationManager animationManager;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -83,24 +84,23 @@ AnimationManager animationManager;
         setContentView(R.layout.activity_payment);
 
         paymentListFiltered = new ArrayList<>();
-       animationManager = AnimationManager.getInstance();
+        animationManager = AnimationManager.getInstance();
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
-
 
 
         totalRoommates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
         helper = new Helper();
 
-       // et_sv = findViewById(R.id.et_sv);
+        // et_sv = findViewById(R.id.et_sv);
         but_delete_payment = findViewById(R.id.but_delete_payment);
         but_transfer_money = findViewById(R.id.but_transfer_money);
         tv_total_amount = findViewById(R.id.tv_total_amount);
-       TextView tv_transaction = findViewById(R.id.tv_transaction);
-       TextView tv_each_paid = findViewById(R.id.tv_each_paid);
-       LinearLayout ll_tot_each_roomy = findViewById(R.id.ll_tot_each_roomy);
+        TextView tv_transaction = findViewById(R.id.tv_transaction);
+        TextView tv_each_paid = findViewById(R.id.tv_each_paid);
+        LinearLayout ll_tot_each_roomy = findViewById(R.id.ll_tot_each_roomy);
         tv_each_payment = findViewById(R.id.tv_each_payment);
         tv_total_roomies = findViewById(R.id.tv_total_roomies);
         iv_no_pay = findViewById(R.id.iv_no_payment_record_found);
@@ -121,9 +121,9 @@ AnimationManager animationManager;
         lv_take_give.setVisibility(View.VISIBLE);
 
         setPaymentList();
-        String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
-  int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
- int transferPayment =  sp.getInt(SessionManager.IV_TRANSFER,R.drawable.transfer_payment);
+        String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
+        int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
+        int transferPayment = sp.getInt(SessionManager.IV_TRANSFER, R.drawable.transfer_payment);
 
 
         // TODO: 2/27/2018  appColor
@@ -133,12 +133,11 @@ AnimationManager animationManager;
 
         try {
 
-          //  if (Build.VERSION>=21)
-            but_delete_payment.setBackground(getResources().getDrawable(deletePayment));
-            but_transfer_money.setBackground(getResources().getDrawable(transferPayment));
+            //  if (Build.VERSION>=21)
+            but_delete_payment.setBackgroundColor(Color.parseColor(appColor));
+            but_transfer_money.setBackgroundColor(Color.parseColor(appColor));
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 //saveIsTransfer();
@@ -148,8 +147,6 @@ AnimationManager animationManager;
     }
 
 
-
-
     // Filter Class
     public void filter_listview(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
@@ -157,8 +154,7 @@ AnimationManager animationManager;
         if (charText.length() == 0) {
             paymentList.addAll(paymentListFiltered);
         } else {
-            for (Payment pl : paymentListFiltered)
-            {
+            for (Payment pl : paymentListFiltered) {
                 if (pl.getRoomy().getName().toLowerCase(Locale.getDefault())
                         .contains(charText)) {
                     paymentList.add(pl);
@@ -169,10 +165,10 @@ AnimationManager animationManager;
     }
 
 
-
     String hid;
     History history;
     Dialog dialogDeleteAlert;
+
     public void showSaveDeleteListAlert(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
@@ -184,8 +180,7 @@ AnimationManager animationManager;
             dialogDeleteAlert.setCancelable(false);
             dialogDeleteAlert.show();
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -193,8 +188,8 @@ AnimationManager animationManager;
 
 
     boolean isAllTransactionsDeleted;
-    void saveNdelete()
-    {
+
+    void saveNdelete() {
 
 
         // TODO: 3/25/2018 reset isTransfer  
@@ -209,7 +204,7 @@ AnimationManager animationManager;
         spe = sp.edit();
         spe.putBoolean(SessionManager.IS_TRANSFER, false);
         spe.apply();
-        Helper.setRemoteIstransfer(mobileLogged,false);
+        Helper.setRemoteIstransfer(mobileLogged, false);
 
 
         hid = Helper.randomString(10);
@@ -267,8 +262,6 @@ AnimationManager animationManager;
                         lv_take_give.setVisibility(View.GONE);
 
 
-
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -313,7 +306,7 @@ AnimationManager animationManager;
                     spe = sp.edit();
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
-                    Helper.setRemoteIstransfer(mobileLogged,false);
+                    Helper.setRemoteIstransfer(mobileLogged, false);
 
                     e.printStackTrace();
                 }
@@ -334,9 +327,6 @@ AnimationManager animationManager;
 
 
     }
-
-
-
 
 
     void setPaymentList() {
@@ -364,18 +354,17 @@ AnimationManager animationManager;
                             }
 
 
-
                             setDeleteButtonVisibility(paymentList);
                             TinyDb tinyDb = new TinyDb(context);
 
                             ArrayList<String> roomyMobilesList = new ArrayList<>();
 
-                            for (int i = 0; i <paymentList.size() ; i++) {
+                            for (int i = 0; i < paymentList.size(); i++) {
 
                                 roomyMobilesList.add(paymentList.get(i).getRoomy().getMobile());
                             }
 
-                            tinyDb.putListString(SessionManager.ROOMY_MOBILE_LIST,roomyMobilesList);
+                            tinyDb.putListString(SessionManager.ROOMY_MOBILE_LIST, roomyMobilesList);
 
 //                        if (paymentList.size() > 0) {
 //                            but_delete_payment.setVisibility(View.VISIBLE);
@@ -412,11 +401,11 @@ AnimationManager animationManager;
 
                                 paymentList.clear();
                                 paymentListAdapter = new PaymentListAdapter(context, paymentList);
-                               paymentListAdapter.notifyDataSetChanged();
+                                paymentListAdapter.notifyDataSetChanged();
                                 lv_payments.setAdapter(paymentListAdapter);
 
 
-                              payTgList = new ArrayList<>();
+                                payTgList = new ArrayList<>();
                                 paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
                                 paymentTakeGiveListAdapter.notifyDataSetChanged();
                                 lv_take_give.setAdapter(paymentTakeGiveListAdapter);
@@ -437,7 +426,6 @@ AnimationManager animationManager;
                                },1000);*/
 
 
-
                                 //but_transfer_money.setVisibility(View.GONE);
                                 //but_delete_payment.setVisibility(View.GONE);
 
@@ -450,8 +438,7 @@ AnimationManager animationManager;
 
                         }
                     });
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -494,10 +481,11 @@ AnimationManager animationManager;
         spe = sp.edit();
         spe.putBoolean(SessionManager.IS_TRANSFER, true);
         spe.apply();
-        Helper.setRemoteIstransfer(mobileLogged,true);
+        Helper.setRemoteIstransfer(mobileLogged, true);
 
 
     }
+
     private void showPayTgListfromAfterTransfer() {
 
         if (CheckInternetReceiver.isOnline(this)) {
@@ -506,7 +494,6 @@ AnimationManager animationManager;
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
 
 
                             payTgList = new ArrayList<>();
@@ -531,16 +518,15 @@ AnimationManager animationManager;
                                 payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
 
 
-                                   paymentTakeGiveListAdapter  = new PaymentTakeGiveListAtAdapter(context, payTgList);
-                                    lv_take_give.setAdapter(paymentTakeGiveListAdapter);
+                                paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
+                                lv_take_give.setAdapter(paymentTakeGiveListAdapter);
 
-                            
-                            
+
                             } else {
 
                                 payTgList.clear();
                                 paymentTakeGiveListAdapter = new PaymentTakeGiveListAtAdapter(context, payTgList);
-                               paymentTakeGiveListAdapter.notifyDataSetChanged();
+                                paymentTakeGiveListAdapter.notifyDataSetChanged();
                                 lv_take_give.setAdapter(paymentTakeGiveListAdapter);
 
                                 lv_take_give.setVisibility(View.GONE);
@@ -567,174 +553,165 @@ AnimationManager animationManager;
 
     void checkTransferNsetPayTgList() {
 
-if (CheckInternetReceiver.isOnline(this)) {
+        if (CheckInternetReceiver.isOnline(this)) {
 
-        if (isTransfer || isTransferRemote) {
-            // TODO: 2/25/2018 show from afterTransfer
-            showPayTgListfromAfterTransfer();
+            if (isTransfer || isTransferRemote) {
+                // TODO: 2/25/2018 show from afterTransfer
+                showPayTgListfromAfterTransfer();
 
-            but_transfer_money.setVisibility(View.GONE);
+                but_transfer_money.setVisibility(View.GONE);
 
-        } else {
-            but_transfer_money.setVisibility(View.VISIBLE);
-            // TODO: 2/25/2018 show regulr list
-            dialogEffect.showDialog();
-            db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
+            } else {
+                but_transfer_money.setVisibility(View.VISIBLE);
+                // TODO: 2/25/2018 show regulr list
+                dialogEffect.showDialog();
+                db_ref.child(Helper.ROOMY).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                    roomyListVp = new ArrayList<>();
+                        roomyListVp = new ArrayList<>();
 
-                    dialogEffect.cancelDialog();
-                    // roomyList.clear();
+                        dialogEffect.cancelDialog();
+                        // roomyList.clear();
 
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot1 :
+                                dataSnapshot.getChildren()) {
 
-                        // TODO: 1/27/2018  add one by one roomy in list
-                        Roomy roomy = dataSnapshot1.getValue(Roomy.class);
+                            // TODO: 1/27/2018  add one by one roomy in list
+                            Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
-                        if (mobileLogged.equals(roomy.getMobileLogged())) {
-                            roomyListVp.add(roomy);
-                        }
-
-                    }
-
-
-                  //  Log.i("====pp", paymentList.toString());
-
-                    Map<String, List<Payment>> paymentMap = new HashMap<>();
-                    Map<Roomy, Double> roomyTotalMap = new HashMap<>();
-                    List<Payment> onesPAymentList = null;
-                    System.out.println(roomyListVp.size() + "");
-
-
-                    for (int i = 0; i < roomyListVp.size(); i++) {
-                        onesPAymentList = new ArrayList<>();
-                        double totalPaidByOne = 0;
-
-
-                   if (paymentList==null)
-                   {
-                       paymentList = new ArrayList<>();
-                   }
-                        for (int j = 0; j < paymentList.size(); j++) {
-
-                            if (roomyListVp.get(i).getMobile().equals(paymentList.get(j).getRoomy().getMobile())) {
-                                onesPAymentList.add(paymentList.get(j));
-
-                                totalPaidByOne = totalPaidByOne + paymentList.get(j).getAmount();
+                            if (mobileLogged.equals(roomy.getMobileLogged())) {
+                                roomyListVp.add(roomy);
                             }
 
-                            // TODO: 1/31/2018 each total
+                        }
+
+
+                        //  Log.i("====pp", paymentList.toString());
+
+                        Map<String, List<Payment>> paymentMap = new HashMap<>();
+                        Map<Roomy, Double> roomyTotalMap = new HashMap<>();
+                        List<Payment> onesPAymentList = null;
+                        System.out.println(roomyListVp.size() + "");
+
+
+                        for (int i = 0; i < roomyListVp.size(); i++) {
+                            onesPAymentList = new ArrayList<>();
+                            double totalPaidByOne = 0;
+
+
+                            if (paymentList == null) {
+                                paymentList = new ArrayList<>();
+                            }
+                            for (int j = 0; j < paymentList.size(); j++) {
+
+                                if (roomyListVp.get(i).getMobile().equals(paymentList.get(j).getRoomy().getMobile())) {
+                                    onesPAymentList.add(paymentList.get(j));
+
+                                    totalPaidByOne = totalPaidByOne + paymentList.get(j).getAmount();
+                                }
+
+                                // TODO: 1/31/2018 each total
+
+                            }
+
+                            paymentMap.put(roomyListVp.get(i).getName(), onesPAymentList);
+
+                            roomyTotalMap.put(roomyListVp.get(i), totalPaidByOne);
 
                         }
 
-                        paymentMap.put(roomyListVp.get(i).getName(), onesPAymentList);
+                        System.out.println(roomyTotalMap);
+                        System.out.println(paymentMap.size());
 
-                        roomyTotalMap.put(roomyListVp.get(i), totalPaidByOne);
-
-                    }
-
-                    System.out.println(roomyTotalMap);
-                    System.out.println(paymentMap.size());
-
-                    // TODO: 2/3/2018 save paymentTg List (Each Payment total Map)
+                        // TODO: 2/3/2018 save paymentTg List (Each Payment total Map)
 
 
-                    double totalAmount = 0;
-                    try {
-                        totalAmount = setEachAndTotalTexts();
+                        double totalAmount = 0;
+                        try {
+                            totalAmount = setEachAndTotalTexts();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    payTgList = new ArrayList<>();
-
-                    for (Map.Entry<Roomy, Double> s : roomyTotalMap.entrySet()) {
-
-                        System.out.println("esss" + s.getKey() + s.getValue());
-
-                        // TODO: 2/17/2018 save payTgList
-                        PayTg payTg = new PayTg();
-                        payTg.setRoomyName(s.getKey().getName());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
 
-                        double amTgRf = helper.getRoundedOffValue(s.getValue());
-                        payTg.setAmountTg(amTgRf);
+                        payTgList = new ArrayList<>();
+
+                        for (Map.Entry<Roomy, Double> s : roomyTotalMap.entrySet()) {
+
+                            System.out.println("esss" + s.getKey() + s.getValue());
+
+                            // TODO: 2/17/2018 save payTgList
+                            PayTg payTg = new PayTg();
+                            payTg.setRoomyName(s.getKey().getName());
 
 
-                        payTg.setMobile(s.getKey().getMobile());
-                        payTg.setMobileLogged(mobileLogged);
-                        payTg.setPayTgId(Helper.randomString(10));
-
-                      double amVarRf =  helper.getRoundedOffValue(s.getValue() - totalAmount);
-                        payTg.setAmountVariation(amVarRf);
-
-                        payTgList.add(payTg);
-
-                    }
+                            double amTgRf = helper.getRoundedOffValue(s.getValue());
+                            payTg.setAmountTg(amTgRf);
 
 
-                    try {
+                            payTg.setMobile(s.getKey().getMobile());
+                            payTg.setMobileLogged(mobileLogged);
+                            payTg.setPayTgId(Helper.randomString(10));
+
+                            double amVarRf = helper.getRoundedOffValue(s.getValue() - totalAmount);
+                            payTg.setAmountVariation(amVarRf);
+
+                            payTgList.add(payTg);
+
+                        }
 
 
-                        if (paymentList.size() > 0) {
-                            lv_take_give.setVisibility(View.VISIBLE);
-                            // rel_divide_payment.setVisibility(View.VISIBLE);
-                            iv_no_transfer.setVisibility(View.GONE);
-                            // TODO: 2/16/2018 sort list
-
-                            payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
+                        try {
 
 
-                            // TODO: 2/3/2018  save PaymentTg(Each Total PAyment List) to db
-                            PaymentTakeGiveListAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAdapter(context, payTgList);
-                            lv_take_give.setAdapter(paymentTakeGiveListAdapter);
+                            if (paymentList.size() > 0) {
+                                lv_take_give.setVisibility(View.VISIBLE);
+                                // rel_divide_payment.setVisibility(View.VISIBLE);
+                                iv_no_transfer.setVisibility(View.GONE);
+                                // TODO: 2/16/2018 sort list
+
+                                payTgList = Helper.getSortedPaymentTakeGiveList(payTgList);
 
 
-                        } else {
+                                // TODO: 2/3/2018  save PaymentTg(Each Total PAyment List) to db
+                                PaymentTakeGiveListAdapter paymentTakeGiveListAdapter = new PaymentTakeGiveListAdapter(context, payTgList);
+                                lv_take_give.setAdapter(paymentTakeGiveListAdapter);
 
 
-                            lv_take_give.setVisibility(View.GONE);
+                            } else {
+
+
+                                lv_take_give.setVisibility(View.GONE);
+                                iv_no_transfer.setVisibility(View.VISIBLE);
+                                lv_take_give.setVisibility(View.GONE);
+                                //rel_divide_payment.setVisibility(View.GONE);
+                            }
+                        } catch (Exception e) {
                             iv_no_transfer.setVisibility(View.VISIBLE);
                             lv_take_give.setVisibility(View.GONE);
-                            //rel_divide_payment.setVisibility(View.GONE);
+
                         }
-                    }catch (Exception e)
-                    {
-                        iv_no_transfer.setVisibility(View.VISIBLE);
-                        lv_take_give.setVisibility(View.GONE);
+
 
                     }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
+            }
 
 
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
+        } else {
+            Helper.showCheckInternet(context);
 
         }
-
-
-}else
-{
-    Helper.showCheckInternet(context);
-
-}
     }
 
 
@@ -757,17 +734,15 @@ if (CheckInternetReceiver.isOnline(this)) {
                     total = total + paymentList.get(i).getAmount();
                 }
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         double eachAmount;
         try {
-             eachAmount = total / totalRoommates;
+            eachAmount = total / totalRoommates;
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             eachAmount = 1;
         }
@@ -790,26 +765,22 @@ if (CheckInternetReceiver.isOnline(this)) {
         onBackPressed();
     }
 
-    public void deletePayment(View view)
-    {
+    public void deletePayment(View view) {
         if (CheckInternetReceiver.isOnline(this)) {
             saveNdelete();
             dialogDeleteAlert.dismiss();
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
     }
 
-    public void cancelDelete(View view)
-    {
+    public void cancelDelete(View view) {
         dialogDeleteAlert.dismiss();
     }
 
 
-    void deletePaymentNpayTgAtIfTransfered()
-    {
+    void deletePaymentNpayTgAtIfTransfered() {
 
 
         // TODO: 2/5/2018 delete current Payment
@@ -877,7 +848,7 @@ if (CheckInternetReceiver.isOnline(this)) {
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
 
-                    Helper.setRemoteIstransfer(mobileLogged,false);
+                    Helper.setRemoteIstransfer(mobileLogged, false);
 
                     e.printStackTrace();
                 }
@@ -901,7 +872,7 @@ if (CheckInternetReceiver.isOnline(this)) {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(context,HomeActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         context.startActivity(intent);
 
@@ -911,8 +882,7 @@ if (CheckInternetReceiver.isOnline(this)) {
     }
 
 
-    void  getIsTransferRemote()
-    {
+    void getIsTransferRemote() {
 
         dialogEffect.showDialog();
         db_ref.child(SessionManager.IS_TRANSFER)
@@ -927,7 +897,6 @@ if (CheckInternetReceiver.isOnline(this)) {
                         checkTransferNsetPayTgList();
 
 
-
                     }
 
                     @Override
@@ -940,21 +909,17 @@ if (CheckInternetReceiver.isOnline(this)) {
     }
 
 
+    void setDeleteButtonVisibility(List<Payment> list) {
 
-    void setDeleteButtonVisibility(List<Payment> list)
-    {
+        if (list.size() > 0) {
+            but_delete_payment.setVisibility(View.VISIBLE);
+            // but_transfer_money.setVisibility(View.VISIBLE);
 
-      if (list.size()>0)
-      {
-          but_delete_payment.setVisibility(View.VISIBLE);
-         // but_transfer_money.setVisibility(View.VISIBLE);
+        } else {
+            but_delete_payment.setVisibility(View.GONE);
+            but_transfer_money.setVisibility(View.GONE);
 
-      }else
-      {
-          but_delete_payment.setVisibility(View.GONE);
-          but_transfer_money.setVisibility(View.GONE);
-
-      }
+        }
 
     }
 
@@ -968,7 +933,7 @@ if (CheckInternetReceiver.isOnline(this)) {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                   List roomysList = new ArrayList<>();
+                    List roomysList = new ArrayList<>();
                     dialogEffect.cancelDialog();
 
 
@@ -996,7 +961,6 @@ if (CheckInternetReceiver.isOnline(this)) {
                     spe.apply();
 
 
-
                     setEachAndTotalTexts();
                     setPaymentList();
 
@@ -1009,16 +973,11 @@ if (CheckInternetReceiver.isOnline(this)) {
                 }
             });
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
 
     }
-
-
-
-
 
 
 }

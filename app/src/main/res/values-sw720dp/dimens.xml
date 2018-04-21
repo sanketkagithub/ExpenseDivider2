@@ -94,4 +94,6 @@
     <dimen name="ed_reg_log_pad">140dp</dimen>
     <dimen name="lr_mar_plate">180dp</dimen>
     <dimen name="tb_mar_plate">90dp</dimen>
+    <dimen name="delete_all_wid">170dp</dimen>
+    <dimen name="delete_all_ht">60dp</dimen>
 </resources>

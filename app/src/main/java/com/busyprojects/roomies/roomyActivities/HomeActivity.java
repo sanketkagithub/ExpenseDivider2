@@ -349,7 +349,7 @@ public class HomeActivity extends Activity {
                 spe.putInt(SessionManager.IV_RUPEE, R.drawable.rupee_blu);
                 spe.putInt(SessionManager.IV_PAYING_ITEM, R.drawable.cart_blu);
 
-                spe.putInt(SessionManager.IV_DELETE, R.drawable.del_blu);
+                spe.putInt(SessionManager.IV_DELETE, R.drawable.buttons);
                 spe.putInt(SessionManager.IV_TRANSFER, R.drawable.tp_blu);
 
 
