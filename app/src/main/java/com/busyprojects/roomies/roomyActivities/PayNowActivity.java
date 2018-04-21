@@ -99,7 +99,7 @@ PayNowActivity extends Activity {
     List<PayTg> payTgListAt;
 
     Map<String, String> mapItems;
-    String payingItemImageUrl="", defaultImageUrl;
+    String payingItemImageUrl = "", defaultImageUrl;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -117,14 +117,12 @@ PayNowActivity extends Activity {
         dialogEffect = new DialogEffect(this);
 
 
+        try {
 
-       try {
-
-           setSuggestionsInList();
-       }catch (Exception e)
-       {
-           e.printStackTrace();
-       }
+            setSuggestionsInList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         lv_items_suggestions.setVisibility(View.GONE);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
@@ -150,7 +148,6 @@ PayNowActivity extends Activity {
         totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
 
         animationManager = AnimationManager.getInstance();
-
 
 
         setSpinneerAdapter();
@@ -238,8 +235,6 @@ PayNowActivity extends Activity {
     }
 
 
-
-
     void setPayinItemImage(String imageName) {
 
 
@@ -253,7 +248,7 @@ PayNowActivity extends Activity {
                 @Override
                 public void onSuccess() {
 
-               progressBarSuggImage.setVisibility(View.INVISIBLE);
+                    progressBarSuggImage.setVisibility(View.INVISIBLE);
 
                 }
 
@@ -269,16 +264,16 @@ PayNowActivity extends Activity {
         }
 
 
-
     }
 
     String payingItem;
+
     public void payNowhere(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
             //getSelectedRoomy();
             amount = et_amount.getText().toString();
-           payingItem = et_paying_item.getText().toString();
+            payingItem = et_paying_item.getText().toString();
 
 
             if (amount.equals("") || roomySelected.getName().equals(Helper.SELECT_ROOMY) ||
@@ -304,7 +299,7 @@ PayNowActivity extends Activity {
             } else {
 
                 // TODO: 3/31/2018 payAsync
-                        new PayAsyncTask().execute();
+                new PayAsyncTask().execute();
 
                /* String pid = Helper.randomString(10);
                 // TODO: 1/27/2018 save payment;
@@ -538,7 +533,7 @@ PayNowActivity extends Activity {
                         // TODO: 2/12/2018 add total amount paid  to atList
                         totalAmountPaid = helper.getRoundedOffValue(totalAmountPaid) + helper.getRoundedOffValue(Double.parseDouble(amount));
 
-                       totalAmountPaid = helper.getRoundedOffValue(totalAmountPaid);
+                        totalAmountPaid = helper.getRoundedOffValue(totalAmountPaid);
 
 
                         db_ref.child(Helper.AFTER_TRANSFER)
@@ -576,7 +571,7 @@ PayNowActivity extends Activity {
 
             double eachHasToPayAfterTransfer = totalAfterTransfer / totalRoomates;
 
-           eachHasToPayAfterTransfer = helper.getRoundedOffValue(eachHasToPayAfterTransfer);
+            eachHasToPayAfterTransfer = helper.getRoundedOffValue(eachHasToPayAfterTransfer);
 
 
             for (int i = 0; i < payTgListAt.size(); i++) {
@@ -584,7 +579,7 @@ PayNowActivity extends Activity {
 
                 double totalAmountVar = payTgListAt.get(i).getAmountTg() - eachHasToPayAfterTransfer;
 
-               totalAmountVar = helper.getRoundedOffValue(totalAmountVar);
+                totalAmountVar = helper.getRoundedOffValue(totalAmountVar);
 
                 db_ref.child(Helper.AFTER_TRANSFER)
                         .child(payTgListAt.get(i).getPayTgId())
@@ -620,73 +615,65 @@ PayNowActivity extends Activity {
 
 
     }
-    List<String> payingItemsLinkedList,payingItemsLinkedListAccu;
+
+    List<String> payingItemsLinkedList, payingItemsLinkedListAccu;
     ArrayAdapter aa;
-    private void setSuggestionsInList()
-   {
 
-       dialogEffect.showDialog();
-     // payingItemsLinkedList = new LinkedList<>();
+    private void setSuggestionsInList() {
 
-     //  System.out.println(mapItems.size() + " " + mapItems);
+        dialogEffect.showDialog();
+        // payingItemsLinkedList = new LinkedList<>();
 
-      db_ref.child(Helper.PAYING_ITEMS)
-     //  db_ref.child("PayingItemsTest")
-              .addValueEventListener(new ValueEventListener() {
-                  @Override
-                  public void onDataChange(DataSnapshot dataSnapshot) {
+        //  System.out.println(mapItems.size() + " " + mapItems);
 
-                      dialogEffect.cancelDialog();
-                      payingItemsLinkedList = new LinkedList<>();
-                      payingItemsLinkedListAccu = new LinkedList<>();
+        db_ref.child(Helper.PAYING_ITEMS)
+                //  db_ref.child("PayingItemsTest")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                      // TODO: 3/24/2018 get all map items
+                        dialogEffect.cancelDialog();
+                        payingItemsLinkedList = new LinkedList<>();
+                        payingItemsLinkedListAccu = new LinkedList<>();
 
-                    /*  for (DataSnapshot dataSnapshot1:
-                           dataSnapshot.getChildren()) {
-*/
+                        // TODO: 3/24/2018 get all map items
 
-                         PayingItems payingItems =  dataSnapshot.getValue(PayingItems.class);
-                          mapItems = payingItems.getItemsMap();
-  //                    }
+                        PayingItems payingItems = dataSnapshot.getValue(PayingItems.class);
+                        mapItems = payingItems.getItemsMap();
+                        //                    }
 
-                      try {
+                        try {
 
 
-                          for (Map.Entry<String, String> s :
-                                  mapItems.entrySet()) {
+                            for (Map.Entry<String, String> s :
+                                    mapItems.entrySet()) {
 
-                              payingItemsLinkedList.add(s.getKey());
+                                payingItemsLinkedList.add(s.getKey());
 
-                          }
+                            }
 
-                      }catch (Exception e)
-                      {
-                          e.printStackTrace();
-                      }
-
-
-                      aa = new ArrayAdapter(context,R.layout.paying_item_lv_layout,
-                              R.id.tv_paying_item_lv,
-                              payingItemsLinkedList);
-                      lv_items_suggestions.setAdapter(aa);
-                      payingItemsLinkedListAccu.addAll(payingItemsLinkedList);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
 
+                        aa = new ArrayAdapter(context, R.layout.paying_item_lv_layout,
+                                R.id.tv_paying_item_lv,
+                                payingItemsLinkedList);
+                        lv_items_suggestions.setAdapter(aa);
+                        payingItemsLinkedListAccu.addAll(payingItemsLinkedList);
 
 
-                  }
+                    }
 
-                  @Override
-                  public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                  }
-              });
-
-
+                    }
+                });
 
 
-   }
+    }
 
     public void cancelPayment(View view) {
         onBackPressed();
@@ -699,8 +686,7 @@ PayNowActivity extends Activity {
         if (charText.length() == 0) {
             payingItemsLinkedList.addAll(payingItemsLinkedListAccu);
         } else {
-            for (String pl : payingItemsLinkedListAccu)
-            {
+            for (String pl : payingItemsLinkedListAccu) {
                 if (pl.toLowerCase(Locale.getDefault())
                         .contains(charText)) {
                     payingItemsLinkedList.add(pl);
@@ -711,8 +697,7 @@ PayNowActivity extends Activity {
     }
 
 
-    class PayAsyncTask extends AsyncTask<Void,Void,Void>
-    {
+    class PayAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -728,27 +713,22 @@ PayNowActivity extends Activity {
         protected Void doInBackground(Void... voids) {
 
 
-
-
-
-
             String pid = Helper.randomString(10);
             // TODO: 1/27/2018 save payment;
 
             String currentDateTime = Helper.getCurrentDateTime();
 
             Payment payment = new Payment();
-            double amtRf =  helper.getRoundedOffValue(Double.parseDouble(amount)) ;
+            double amtRf = helper.getRoundedOffValue(Double.parseDouble(amount));
             payment.setAmount(amtRf);
             payment.setPaymentDateTime(currentDateTime);
             payment.setPid(pid);
             payment.setMobileLogged(mobileLogged);
             payment.setRoomy(roomySelected);
 
-            if (payingItemImageUrl == null)
-            {
+            if (payingItemImageUrl == null) {
 
-                payingItemImageUrl  = defaultImageUrl;
+                payingItemImageUrl = defaultImageUrl;
             }
             payment.setPayinItemUrl(payingItemImageUrl);
 
@@ -760,7 +740,7 @@ PayNowActivity extends Activity {
                     .setValue(payment);
 
 
-            payingItemImageUrl="";
+            payingItemImageUrl = "";
 
             TinyDb tinyDb = new TinyDb(context);
             ArrayList<String> roomyMobileList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
@@ -799,7 +779,7 @@ PayNowActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-           // dialogEffect.cancelDialog();
+            // dialogEffect.cancelDialog();
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
             progressBarSuggImage.setVisibility(View.GONE);

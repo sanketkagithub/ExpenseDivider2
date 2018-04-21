@@ -78,4 +78,6 @@
     <dimen name="room_no_tv_ht">15dp</dimen>
     <dimen name="ed_home_ht">60dp</dimen>
     <dimen name="ed_reg_log_pad">20dp</dimen>
+    <dimen name="lr_mar_plate">70dp</dimen>
+    <dimen name="tb_mar_plate">20dp</dimen>
 </resources>
