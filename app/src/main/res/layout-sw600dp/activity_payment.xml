@@ -42,16 +42,16 @@
             <Button
                 android:id="@+id/but_delete_payment"
                 android:layout_width="@dimen/del_alert_wd"
-                android:layout_height="@dimen/del_alert_ht"
+                android:layout_height="@dimen/image_buttons"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/bottom_iv_margin"
                 android:layout_marginRight="@dimen/bottom_iv_margin"
+                android:textSize="@dimen/lv_text"
                 android:background="@drawable/buttons"
                 android:gravity="center"
                 android:text="@string/delete_all"
                 android:fontFamily="serif"
-                android:textSize="@dimen/but_text"
                 android:onClick="showSaveDeleteListAlert"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
@@ -125,7 +125,7 @@
                 <Button
                     android:id="@+id/but_transfer_money"
                     android:layout_width="@dimen/del_alert_wd"
-                    android:layout_height="@dimen/del_alert_ht"
+                    android:layout_height="@dimen/image_buttons"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"

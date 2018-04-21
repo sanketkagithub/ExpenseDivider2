@@ -23,19 +23,6 @@
             android:gravity="center">
 
 
-            <Button
-                android:id="@+id/but_delete_payment"
-                android:layout_width="@dimen/image_buttons"
-                android:layout_height="@dimen/image_buttons"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/bottom_iv_margin"
-                android:layout_marginRight="@dimen/bottom_iv_margin"
-                android:background="@drawable/delete_payment"
-                android:gravity="center"
-                android:onClick="showSaveDeleteListAlert"
-                android:textAllCaps="false"
-                android:textColor="@color/white_color" />
 
             <TextView
                 android:id="@+id/tv_transaction"
@@ -44,11 +31,28 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="serif"
-                android:gravity="center"
+                android:paddingLeft="@dimen/bottom_iv_margin"
+                android:gravity="center|left"
                 android:text="@string/transactions"
                 android:textColor="@color/main_app_colorp"
                 android:textSize="@dimen/transactions_title" />
 
+            <Button
+                android:id="@+id/but_delete_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/image_buttons"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/bottom_iv_margin"
+                android:layout_marginRight="@dimen/bottom_iv_margin"
+                android:background="@drawable/buttons"
+                android:gravity="center"
+                android:textSize="@dimen/lv_text"
+                android:text="@string/delete_all"
+                android:fontFamily="serif"
+                android:onClick="showSaveDeleteListAlert"
+                android:textAllCaps="false"
+                android:textColor="@color/white_color" />
 
         </RelativeLayout>
 
@@ -108,20 +112,24 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="serif"
-                    android:gravity="center"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/bottom_iv_margin"
                     android:text="Each Paid"
                     android:textColor="@color/main_app_colorp"
                     android:textSize="@dimen/transactions_title" />
 
                 <Button
                     android:id="@+id/but_transfer_money"
-                    android:layout_width="@dimen/image_buttons"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/image_buttons"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
-                    android:background="@drawable/transfer_payment"
+                    android:text="Transfer"
+                    android:fontFamily="serif"
+                    android:textSize="@dimen/lv_text"
+                    android:background="@drawable/buttons"
                     android:onClick="saveAndShowAfterTransferPayTgList"
                     android:textAllCaps="false"
                     android:textColor="@color/white_color" />
@@ -171,7 +179,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="1dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -180,6 +188,7 @@
                     android:id="@+id/ll_tot_each_roomy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="1dp"
                     android:background="@drawable/calculation_back"
                     android:orientation="vertical">
 

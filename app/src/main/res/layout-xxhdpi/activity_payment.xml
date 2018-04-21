@@ -47,6 +47,7 @@
                 android:layout_marginRight="@dimen/bottom_iv_margin"
                 android:background="@drawable/buttons"
                 android:gravity="center"
+                android:textSize="@dimen/lv_text"
                 android:text="@string/delete_all"
                 android:fontFamily="serif"
                 android:onClick="showSaveDeleteListAlert"
@@ -123,6 +124,8 @@
                     android:layout_height="@dimen/image_buttons"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+
+                    android:textSize="@dimen/lv_text"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
                     android:text="Transfer"
