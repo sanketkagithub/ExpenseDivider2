@@ -71,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:textColor="@color/white_color"
                     android:fontFamily="serif"
                     android:hint="@string/room_no"
                     android:inputType="phone"

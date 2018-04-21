@@ -62,6 +62,7 @@
                     android:id="@+id/et_reg_room_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white_color"
                     android:ems="10"
                     android:gravity="center"
                     android:fontFamily="serif"

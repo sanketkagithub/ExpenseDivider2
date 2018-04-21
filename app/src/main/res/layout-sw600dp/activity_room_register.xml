@@ -64,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="center"
+                    android:textColor="@color/white_color"
                     android:fontFamily="serif"
                     android:hint="@string/room_no"
                     android:inputType="phone"
