@@ -62,7 +62,7 @@
             android:text="@string/delete_all"
             android:background="@drawable/buttons"
             android:gravity="center"
-            android:textSize="@dimen/but_text"
+            android:textSize="@dimen/lv_text"
             android:layout_marginBottom="@dimen/bottom_iv_margin"
             android:onClick="showRoomyDeleteListAlert"
             android:textAllCaps="false"

@@ -55,7 +55,7 @@
     <dimen name="call_button_wh">80dp</dimen>
     <dimen name="lef_mr_paytg_lv">30dp</dimen>
     <dimen name="lv_tg_iv">55dp</dimen>
-    <dimen name="del_alert_wd">700dp</dimen>
+    <dimen name="del_alert_wd">170dp</dimen>
     <dimen name="del_alert_ht">300dp</dimen>
     <dimen name="profile_lv">50dp</dimen>
     <dimen name="prof_iv_lv_pad">5dp</dimen>

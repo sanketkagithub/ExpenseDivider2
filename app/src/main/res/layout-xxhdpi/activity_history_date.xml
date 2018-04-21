@@ -19,22 +19,23 @@
         android:fontFamily="serif"
         android:text="@string/history"
         android:textColor="@color/white_color" />
-
     <Button
         android:id="@+id/but_delete_payment"
-        android:layout_width="@dimen/image_buttons"
-        android:layout_height="@dimen/image_buttons"
+        android:layout_width="@dimen/delete_all_wid"
+        android:layout_height="@dimen/delete_all_ht"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/bottom_iv_margin"
         android:layout_marginEnd="@dimen/bottom_iv_margin"
         android:layout_marginRight="@dimen/bottom_iv_margin"
-        android:background="@drawable/delete_payment"
+        android:text="@string/delete_all"
+        android:background="@drawable/buttons"
         android:gravity="center"
+        android:fontFamily="serif"
         android:onClick="deleteHistoryList"
         android:textAllCaps="false"
+        android:textSize="@dimen/lv_text"
         android:textColor="@color/white_color" />
-
 
 
     <RelativeLayout

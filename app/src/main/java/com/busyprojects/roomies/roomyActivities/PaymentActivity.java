@@ -122,8 +122,8 @@ public class PaymentActivity extends Activity {
 
         setPaymentList();
         String appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
-        int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
-        int transferPayment = sp.getInt(SessionManager.IV_TRANSFER, R.drawable.transfer_payment);
+      //  int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
+       // int transferPayment = sp.getInt(SessionManager.IV_TRANSFER, R.drawable.transfer_payment);
 
 
         // TODO: 2/27/2018  appColor

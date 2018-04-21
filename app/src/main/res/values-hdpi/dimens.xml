@@ -13,7 +13,7 @@
     <dimen name="ll_et_wd">220dp</dimen>
     <dimen name="et_text">12sp</dimen>
     <dimen name="image_buttons">22dp</dimen>
-    <dimen name="bottom_iv_margin">17dp</dimen>
+    <dimen name="bottom_iv_margin">5dp</dimen>
     <dimen name="bell">30dp</dimen>
     <dimen name="bell_text">10sp</dimen>
     <dimen name="title">19sp</dimen>
