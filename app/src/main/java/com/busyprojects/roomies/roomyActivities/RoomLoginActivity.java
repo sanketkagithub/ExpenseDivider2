@@ -82,6 +82,7 @@ public class RoomLoginActivity extends Activity {
     public void roomLogin(View view)
     {
 
+        animationManager.animateButton(view,context);
        String roomNoIp = et_log_room_no.getText().toString().trim();
 
        if (roomNoIp.equals(""))

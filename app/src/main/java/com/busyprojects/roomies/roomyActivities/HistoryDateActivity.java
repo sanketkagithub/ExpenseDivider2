@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.HistoryDatesAdapter;
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -38,6 +39,7 @@ public class HistoryDateActivity extends Activity {
 
     ListView lv_history_dates;
 
+    AnimationManager animationManager;
     Context context = HistoryDateActivity.this;
 
     SharedPreferences sp;
@@ -56,6 +58,7 @@ public class HistoryDateActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_date);
 
+        animationManager = AnimationManager.getInstance();
         dialogEffect = new DialogEffect(this);
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
@@ -145,6 +148,7 @@ public class HistoryDateActivity extends Activity {
 
     public void deleteHistoryList(View view) {
 
+        animationManager.animateButton(view,context);
 
         showDeleteHistoryListAlert();
 
@@ -223,7 +227,9 @@ public class HistoryDateActivity extends Activity {
 
     public void yesDeleteHistory(View view)
     {
-    deleteHistory();
+        animationManager.animateButton(view,context);
+
+        deleteHistory();
     }
 
 

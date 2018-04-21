@@ -177,6 +177,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
 
+                animationManager.animateButton(view,context);
                 showTransferPayment(payTgList.get(position));
 
             }
@@ -241,6 +242,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                animationManager.animateButton(view,context);
 
                 toMobile = roomyListTransferSpinner.get(i).getMobile();
                 selectedFromRoomy = roomyListTransferSpinner.get(i);
@@ -271,6 +273,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                 // TODO: 2/25/2018 final transfer
 
 
+                animationManager.animateButton(view,context);
 
 
                 amountToTransfer = et_transfer_amount.getText().toString();

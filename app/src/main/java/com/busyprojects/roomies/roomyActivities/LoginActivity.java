@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -45,6 +46,7 @@ public class LoginActivity extends Activity {
 
     String roomNo;
 
+    AnimationManager animationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,8 @@ public class LoginActivity extends Activity {
         db_ref = Helper.getFirebaseDatabseRef();
 
         dialogEffect = new DialogEffect(context);
+
+        animationManager = AnimationManager.getInstance();
 
         roomNo = Helper.getRoomNoFromSession(context);
 
@@ -79,6 +83,7 @@ public class LoginActivity extends Activity {
 
     public void loginRoomy(View view) {
 
+        animationManager.animateButton(view,context);
         String roomyNoIp = et_roommate_login.getText().toString().trim();
 
         if (roomyNoIp.equals("")) {

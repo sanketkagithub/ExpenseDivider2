@@ -95,6 +95,7 @@ public class RoomRegistrationActivity extends Activity {
 
 
     public void registerRoomNo(View view) {
+        animationManager.animateButton(view,context);
 
 if (CheckInternetReceiver.isOnline(this)) {
     final String roomNo = et_reg_room_no.getText().toString().trim();

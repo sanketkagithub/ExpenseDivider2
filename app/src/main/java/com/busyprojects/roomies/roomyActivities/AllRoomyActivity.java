@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.busyprojects.roomies.Adapters.AllRoomyListAdapter;
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -38,6 +39,7 @@ import java.util.List;
 
 public class AllRoomyActivity extends Activity {
 
+    AnimationManager animationManager;
     ListView lv_all_roomy;
 
     Context context = AllRoomyActivity.this;
@@ -67,6 +69,7 @@ public class AllRoomyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_roomy);
 
+        animationManager = AnimationManager.getInstance();
         dialogEffect = new DialogEffect(this);
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
@@ -174,6 +177,7 @@ public class AllRoomyActivity extends Activity {
     Dialog dialogDeleteAlert;
 
     public void showRoomyDeleteListAlert(View view) {
+        animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             //animationManager.animateViewForEmptyField();
@@ -192,6 +196,7 @@ public class AllRoomyActivity extends Activity {
 
 
     public void deleteRoomy(View view) {
+        animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             deleteAllRoomy();
             isAllRoomiesDeleted = true;
@@ -239,6 +244,7 @@ public class AllRoomyActivity extends Activity {
     }
 
     public void cancelRoomyDelete(View view) {
+        animationManager.animateButton(view,context);
 
         dialogDeleteAlert.dismiss();
     }

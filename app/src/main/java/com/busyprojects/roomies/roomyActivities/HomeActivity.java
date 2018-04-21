@@ -217,6 +217,7 @@ public class HomeActivity extends Activity {
 
 
     public void addRoomy(View view) {
+        animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, AddRoomyActivity.class));
         } else {
@@ -228,6 +229,7 @@ public class HomeActivity extends Activity {
 
     public void payNow(View view) {
 
+        animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, PayNowActivity.class));
         } else {
@@ -239,6 +241,8 @@ public class HomeActivity extends Activity {
 
     public void viewPayment(View view) {
         // TODO: 1/27/2018 get All Sessions list  firstly
+
+        animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             removeViewedPaymentNotification();
@@ -298,6 +302,7 @@ public class HomeActivity extends Activity {
 
 
     public void viewHistory(View view) {
+        animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             startActivity(new Intent(this, HistoryDateActivity.class));
         } else {
@@ -307,6 +312,7 @@ public class HomeActivity extends Activity {
 
     public void logout(View view) {
 
+        animationManager.animateButton(view,context);
         spe = sp.edit();
         spe.clear();
         spe.apply();
@@ -318,6 +324,7 @@ public class HomeActivity extends Activity {
     Dialog dialog;
 
     public void changeAppColor(View view) {
+        animationManager.animateButton(view,context);
         dialog = new Dialog(context);
         View v = LayoutInflater.from(context).inflate(R.layout.change_color_layout, null);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -332,6 +339,7 @@ public class HomeActivity extends Activity {
 
 
     public void selectedColor(View view) {
+        animationManager.animateButton(view,context);
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         spe = sp.edit();
@@ -557,6 +565,7 @@ public class HomeActivity extends Activity {
 
 
     public void showNotifiedData(View view) {
+        animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             // TODO: 3/1/2018 remove notification data
@@ -637,6 +646,7 @@ public class HomeActivity extends Activity {
 
 
     public void viewRoomy(View view) {
+        animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(context))
         {
@@ -679,6 +689,7 @@ public class HomeActivity extends Activity {
 
 
     public void showInfo(View view) {
+        animationManager.animateButton(view,context);
         Intent intentAppInfo = new Intent(context, AppInfoActivity.class);
         intentAppInfo.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentAppInfo);

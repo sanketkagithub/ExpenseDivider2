@@ -33,5 +33,10 @@ public class AnimationManager
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.invalid_login));
     }
 
+public   void animateButton(View view, Context context)
+    {
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.button_click_anim));
+    }
+
 
 }

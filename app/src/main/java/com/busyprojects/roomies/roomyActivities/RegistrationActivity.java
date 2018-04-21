@@ -42,6 +42,7 @@ public class RegistrationActivity extends Activity {
     TextView tv_log_reg_title;
 
 
+
     DatabaseReference db_ref;
 
     DialogEffect dialogEffect;
@@ -106,6 +107,7 @@ takeRemoteIsTransfer();
 /*
     public void loginRoomyold(View view) {
 
+ani
         if (CheckInternetReceiver.isOnline(this)) {
             mobileLogin = et_reg_room_no.getText().toString();
             rooomyMobile = et_reg_mob.getText().toString();
@@ -238,6 +240,7 @@ takeRemoteIsTransfer();
 
     public void registerRoomy(View view) {
 
+        animationManager.animateButton(view,context);
 if (CheckInternetReceiver.isOnline(this)) {
     final String roomyReg = et_reg_mob.getText().toString().trim();
     final String roomyName = et_reg_name.getText().toString().trim();

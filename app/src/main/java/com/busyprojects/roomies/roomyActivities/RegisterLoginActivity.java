@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
+import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
@@ -34,6 +36,7 @@ public class RegisterLoginActivity extends Activity {
 
     EditText et_register, et_login;
  //   TextView tv_log_reg_title;
+    AnimationManager animationManager;
 
 
     DatabaseReference db_ref;
@@ -63,6 +66,7 @@ public class RegisterLoginActivity extends Activity {
         et_register = findViewById(R.id.et_register);
 
         //tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
+        animationManager = AnimationManager.getInstance();
 
         rel_login_reg = findViewById(R.id.rel_log_reg);
         rel_login = findViewById(R.id.rel_login);
@@ -287,6 +291,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
     public void goToLoginActivity(View view)
     {
+        animationManager.animateButton(view,context);
 
         Intent intentLogin = new Intent(context,RoomLoginActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -296,9 +301,18 @@ if (CheckInternetReceiver.isOnline(this)) {
 
     public void goToRegisterActivity(View view)
     {
+        animationManager.animateButton(view,context);
         Intent intentLogin = new Intent(context,RoomRegistrationActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentLogin);
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onBackPressed() {
+
+        finishAffinity();
+      finish();
     }
 }

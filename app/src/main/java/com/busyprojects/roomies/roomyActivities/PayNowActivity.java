@@ -57,6 +57,7 @@ PayNowActivity extends Activity {
 
     String mobileLogged;
 
+
     Context context = PayNowActivity.this;
     DialogEffect dialogEffect;
     EditText et_amount;
@@ -227,6 +228,7 @@ PayNowActivity extends Activity {
                 et_paying_item.setText(payingItemsLinkedList.get(position));
 
                 lv_items_suggestions.setVisibility(View.GONE);
+                animationManager.animateButton(view,context);
 
 
             }
@@ -270,6 +272,8 @@ PayNowActivity extends Activity {
     String payingItem;
 
     public void payNowhere(View view) {
+
+        animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             //getSelectedRoomy();
@@ -375,6 +379,7 @@ PayNowActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                animationManager.animateButton(view,context);
 
                 roomySelected = roomyList.get(i);
 
@@ -676,8 +681,10 @@ PayNowActivity extends Activity {
     }
 
     public void cancelPayment(View view) {
+        animationManager.animateButton(view,context);
         onBackPressed();
     }
+
 
     // Filter Class
     public void filter_listview(String charText) {
