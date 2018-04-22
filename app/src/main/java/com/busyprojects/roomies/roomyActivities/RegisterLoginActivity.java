@@ -36,7 +36,7 @@ public class RegisterLoginActivity extends Activity {
     Context context = RegisterLoginActivity.this;
 
     EditText et_register, et_login;
- //   TextView tv_log_reg_title;
+    //   TextView tv_log_reg_title;
     AnimationManager animationManager;
 
 
@@ -48,7 +48,7 @@ public class RegisterLoginActivity extends Activity {
     SharedPreferences.Editor spe;
 
     RuntimePermissionsCs runtimePermissionsCs;
-   // boolean CheckInternetReceiver.isOnline(this);
+    // boolean CheckInternetReceiver.isOnline(this);
     RelativeLayout rel_login_reg, rel_login, rel_register;
 
     @Override
@@ -74,22 +74,14 @@ public class RegisterLoginActivity extends Activity {
         rel_register = findViewById(R.id.rel_register);
 
 
-
-
-        if (Build.VERSION.SDK_INT>=23)
-        {
-        runtimePermissionsCs = new RuntimePermissionsCs(this);
-        runtimePermissionsCs.getPermissions();
+        if (Build.VERSION.SDK_INT >= 23) {
+            runtimePermissionsCs = new RuntimePermissionsCs(this);
+            runtimePermissionsCs.getPermissions();
+        }
     }
-    }
-
-
-
 
 
     String mobileLogin;
-
-
 
 
     public void loginRoomyold(View view) {
@@ -142,13 +134,10 @@ public class RegisterLoginActivity extends Activity {
                                 } else {
 
                                     // TODO: 3/24/2018  open admin
-                                    if (mobileLogin.equals("0000"))
-                                    {
+                                    if (mobileLogin.equals("0000")) {
 
 
-
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -164,8 +153,7 @@ public class RegisterLoginActivity extends Activity {
 
             }
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
@@ -183,7 +171,7 @@ public class RegisterLoginActivity extends Activity {
         spe.apply();
 
 
-       SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC,MODE_PRIVATE);
+        SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
         int payNotfSize = spUc.getInt(SessionManager.PNID_LIST, 0);
 
         System.out.println(payNotfSize + " payNotfSize ");
@@ -285,51 +273,44 @@ if (CheckInternetReceiver.isOnline(this)) {
 */
 
 
-
-
     String[] PERMISSIONS = {android.Manifest.permission.CALL_PHONE,
             android.Manifest.permission.ACCESS_WIFI_STATE};
-    void requestPermission()
-    {
+
+    void requestPermission() {
         ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, 1);
 
     }
 
 
-    public void goToLoginActivity(View view)
-    {
+    public void goToLoginActivity(View view) {
         animationManager.animateButton(view, context);
 
-        if (Build.VERSION.SDK_INT>=23)
-        {
-            if (!RuntimePermissionsCs.hasPermissions(this,PERMISSIONS))
-            {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!RuntimePermissionsCs.hasPermissions(this, PERMISSIONS)) {
                 requestPermission();
-            }else
-            {
-             enterRoomLogin();
+            } else {
+                enterRoomLogin();
             }
 
 
-        }else {
-enterRoomLogin();
-         }
+        } else {
+            enterRoomLogin();
+        }
 
-        Toast.makeText(context, "" + RuntimePermissionsCs.hasPermissions(this,PERMISSIONS), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + RuntimePermissionsCs.hasPermissions(this, PERMISSIONS), Toast.LENGTH_SHORT).show();
     }
 
-    void  enterRoomLogin()
-    {
+    void enterRoomLogin() {
 
         Intent intentLogin = new Intent(context, RoomLoginActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentLogin);
 
     }
-    public void goToRegisterActivity(View view)
-    {
-        animationManager.animateButton(view,context);
-        Intent intentLogin = new Intent(context,RoomRegistrationActivity.class);
+
+    public void goToRegisterActivity(View view) {
+        animationManager.animateButton(view, context);
+        Intent intentLogin = new Intent(context, RoomRegistrationActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentLogin);
 
@@ -340,6 +321,6 @@ enterRoomLogin();
     public void onBackPressed() {
 
         finishAffinity();
-      finish();
+        finish();
     }
 }

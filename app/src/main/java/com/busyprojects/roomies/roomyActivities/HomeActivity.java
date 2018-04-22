@@ -157,12 +157,12 @@ public class HomeActivity extends Activity {
         tv_loggedRoomyName.setText(loggedRoomyNameToShow);
     }
 
-    void setNotificationSound() {
+    /*void setNotificationSound() {
         mp = MediaPlayer.create(this, R.raw.ghanti);
         // mp.prepare();
         mp.start();
     }
-
+*/
     List<String> roomysList;
 
     private void setTotalRoomieesCountInSession() {
@@ -185,11 +185,10 @@ public class HomeActivity extends Activity {
                         Roomy roomy = dataSnapshot1.getValue(Roomy.class);
 
 
+                        assert roomy != null;
                         if (mobileLogged.equals(roomy.getMobileLogged())) {
-                            if (roomy != null) {
                                 roomysList.add(roomy.getName());
-                            }
-                        }
+                           }
 
                     }
 
@@ -327,8 +326,12 @@ public class HomeActivity extends Activity {
         animationManager.animateButton(view,context);
         dialog = new Dialog(context);
         View v = LayoutInflater.from(context).inflate(R.layout.change_color_layout, null);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        try {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         dialog.setContentView(v);
 
 

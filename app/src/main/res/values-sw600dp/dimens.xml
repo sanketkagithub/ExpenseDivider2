@@ -5,7 +5,6 @@
     <dimen name="button_ht">50dp</dimen>
     <dimen name="but_w">300dp</dimen>
 
-    <dimen name="payment_lv_lr_margin">15dp</dimen>
     <dimen name="but_text">25sp</dimen>
     <dimen name="top_image">80dp</dimen>
     <dimen name="et_left_image">30dp</dimen>
@@ -13,7 +12,6 @@
     <dimen name="ll_et_ht">50dp</dimen>
     <dimen name="date">18sp</dimen>
 
-    <dimen name="lv_but_ht">25dp</dimen>
     <dimen name="et_text">23sp</dimen>
     <dimen name="image_buttons">35dp</dimen>
     <dimen name="bottom_iv_margin">19dp</dimen>
@@ -37,7 +35,6 @@
     <dimen name="spin_ht">55dp</dimen>
     <dimen name="lr_padd_transfer_lv">20dp</dimen>
     <dimen name="lv_pad">5dp</dimen>
-    <dimen name="transfer_but_marging">12dp</dimen>
     <dimen name="pay_now_item_ht">130dp</dimen>
     <dimen name="pay_image_iv">120dp</dimen>
     <dimen name="paytg_ht_tablet">80dp</dimen>
@@ -52,15 +49,12 @@
     <dimen name="corner_radius_del_back">9dp</dimen>
     <dimen name="yes_right_mr">180dp</dimen>
     <dimen name="call_button_wh">70dp</dimen>
-    <dimen name="lef_mr_paytg_lv">30dp</dimen>
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">160dp</dimen>
     <dimen name="del_alert_ht">250dp</dimen>
     <dimen name="profile_lv">40dp</dimen>
-    <dimen name="prof_iv_lv_pad">5dp</dimen>
     <dimen name="roomy_lv_lef_padd">20dp</dimen>
     <dimen name="prof_pad">15dp</dimen>
-    <dimen name="lv_prof_ht">80dp</dimen>
     <dimen name="t_50dp">90dp</dimen>
     <dimen name="t_250dp">350dp</dimen>
     <dimen name="t_30dp">60dp</dimen>
@@ -69,18 +63,14 @@
     <dimen name="t_120dp">220dp</dimen>
     <dimen name="t_200dp">400dp</dimen>
     <dimen name="history_title">180dp</dimen>
-    <dimen name="lr_paying_item_mar">5dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
     <dimen name="tg_l_ht">40dp</dimen>
-    <dimen name="lv_but_cent_mar">50dp</dimen>
     <dimen name="but_lv_tb_mar">2dp</dimen>
     <dimen name="but_wd">150dp</dimen>
     <dimen name="tc_ll_top_mar">10dp</dimen>
     <dimen name="app_info_text_wd">450dp</dimen>
     <dimen name="tv_tg_message_ht">19dp</dimen>
-    <dimen name="room_no_login_iv_wh">250dp</dimen>
     <dimen name="pad_name_b">5dp</dimen>
-    <dimen name="lt_mar_c_theme">9dp</dimen>
     <dimen name="lr_margin_top_two_iv">18dp</dimen>
     <dimen name="top_margin_top_two_iv">10dp</dimen>
     <dimen name="tv_logged_roomy_name">17sp</dimen>

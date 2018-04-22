@@ -62,10 +62,7 @@ public class LoginActivity extends Activity {
         tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            runtimePermissionsCs = new RuntimePermissionsCs(this);
-            runtimePermissionsCs.getPermissions();
-        }
+
     }
 
     void clearFields() {

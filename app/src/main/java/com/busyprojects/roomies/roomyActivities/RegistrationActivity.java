@@ -88,11 +88,6 @@ takeRemoteIsTransfer();
 
         setInitialVisibility();
 */
-        if (Build.VERSION.SDK_INT>=23)
-        {
-        runtimePermissionsCs = new RuntimePermissionsCs(this);
-        runtimePermissionsCs.getPermissions();
-    }
     }
 
 

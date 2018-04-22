@@ -67,10 +67,8 @@ public class RoomLoginActivity extends Activity {
         rel_login = findViewById(R.id.rel_login);
         rel_register = findViewById(R.id.rel_register);
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            runtimePermissionsCs = new RuntimePermissionsCs(this);
-            runtimePermissionsCs.getPermissions();
-        }
+
+
     }
 
 

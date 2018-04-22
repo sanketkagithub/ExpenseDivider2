@@ -26,10 +26,4 @@
     </style>
 
 
-    <style name="list_style">
-
-        <item name="android:scrollbarThumbVertical">@drawable/list_scroller</item>
-
-    </style>
-
 </resources>
