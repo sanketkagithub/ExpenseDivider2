@@ -35,7 +35,7 @@ public class RuntimePermissionsCs
         if (!hasPermissions(context, PERMISSIONS)) {
             ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, PERMISSION_ALL);
         } else {
-            Toast.makeText(context, "granted", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, "granted", Toast.LENGTH_SHORT).show();
         }
 
 

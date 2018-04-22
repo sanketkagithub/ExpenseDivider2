@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -286,19 +287,45 @@ if (CheckInternetReceiver.isOnline(this)) {
 
 
 
+    String[] PERMISSIONS = {android.Manifest.permission.CALL_PHONE,
+            android.Manifest.permission.ACCESS_WIFI_STATE};
+    void requestPermission()
+    {
+        ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, 1);
 
+    }
 
 
     public void goToLoginActivity(View view)
     {
-        animationManager.animateButton(view,context);
+        animationManager.animateButton(view, context);
 
-        Intent intentLogin = new Intent(context,RoomLoginActivity.class);
+        if (Build.VERSION.SDK_INT>=23)
+        {
+            if (!RuntimePermissionsCs.hasPermissions(this,PERMISSIONS))
+            {
+                requestPermission();
+            }else
+            {
+             enterRoomLogin();
+            }
+
+
+        }else {
+enterRoomLogin();
+         }
+
+        Toast.makeText(context, "" + RuntimePermissionsCs.hasPermissions(this,PERMISSIONS), Toast.LENGTH_SHORT).show();
+    }
+
+    void  enterRoomLogin()
+    {
+
+        Intent intentLogin = new Intent(context, RoomLoginActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentLogin);
 
     }
-
     public void goToRegisterActivity(View view)
     {
         animationManager.animateButton(view,context);

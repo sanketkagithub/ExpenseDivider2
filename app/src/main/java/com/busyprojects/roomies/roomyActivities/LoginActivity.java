@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.busyprojects.roomies.Manifest;
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
@@ -72,25 +74,60 @@ public class LoginActivity extends Activity {
 
     }
 
+    String[] PERMISSIONS = {android.Manifest.permission.CALL_PHONE,
+            android.Manifest.permission.ACCESS_WIFI_STATE};
+    void requestPermission()
+    {
+        ActivityCompat.requestPermissions((Activity) context, PERMISSIONS, 1);
+
+    }
     public void loginRoomy(View view) {
 
-        animationManager.animateButton(view,context);
-        String roomyNoIp = et_roommate_login.getText().toString().trim();
+        if (Build.VERSION.SDK_INT>=26)
+        {
+        if (!RuntimePermissionsCs.hasPermissions(context,PERMISSIONS))
+        {
+            requestPermission();
+        }else {
 
-        if (roomyNoIp.equals("")) {
-            Toast.makeText(context, "Please check All Empty Fields.", Toast.LENGTH_SHORT).show();
-            clearFields();
-        } else {
 
+            animationManager.animateButton(view, context);
+            String roomyNoIp = et_roommate_login.getText().toString().trim();
 
-            if (CheckInternetReceiver.isOnline(context)) {
-                validateRoomyMobile(roomyNoIp);
+            if (roomyNoIp.equals("")) {
+                Toast.makeText(context, "Please check All Empty Fields.", Toast.LENGTH_SHORT).show();
+                clearFields();
             } else {
-                Helper.showCheckInternet(context);
+
+
+                if (CheckInternetReceiver.isOnline(context)) {
+                    validateRoomyMobile(roomyNoIp);
+                } else {
+                    Helper.showCheckInternet(context);
+                }
             }
+
+
         }
+        }else
+        {
+            animationManager.animateButton(view, context);
+            String roomyNoIp = et_roommate_login.getText().toString().trim();
+
+            if (roomyNoIp.equals("")) {
+                Toast.makeText(context, "Please check All Empty Fields.", Toast.LENGTH_SHORT).show();
+                clearFields();
+            } else {
 
 
+                if (CheckInternetReceiver.isOnline(context)) {
+                    validateRoomyMobile(roomyNoIp);
+                } else {
+                    Helper.showCheckInternet(context);
+                }
+            }
+
+        }
     }
 
     void validateRoomyMobile(final String roomyMobileIp) {
