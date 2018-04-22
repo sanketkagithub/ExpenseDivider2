@@ -32,20 +32,13 @@ public class LoginActivity extends Activity {
 
     EditText et_roommate_login;
     TextView tv_log_reg_title;
-
-
     DatabaseReference db_ref;
-
     DialogEffect dialogEffect;
-
     SharedPreferences sp;
     SharedPreferences.Editor spe;
-
     RuntimePermissionsCs runtimePermissionsCs;
     // boolean CheckInternetReceiver.isOnline(this);
-
     String roomNo;
-
     AnimationManager animationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +66,11 @@ public class LoginActivity extends Activity {
         }
     }
 
-
     void clearFields() {
 
         et_roommate_login.setText("");
 
     }
-
 
     public void loginRoomy(View view) {
 
@@ -101,7 +92,6 @@ public class LoginActivity extends Activity {
 
 
     }
-
 
     void validateRoomyMobile(final String roomyMobileIp) {
 
