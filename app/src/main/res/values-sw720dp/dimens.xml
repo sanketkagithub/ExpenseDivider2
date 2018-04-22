@@ -86,4 +86,5 @@
     <dimen name="tb_mar_plate">90dp</dimen>
     <dimen name="delete_all_wid">170dp</dimen>
     <dimen name="delete_all_ht">60dp</dimen>
+    <dimen name="del_tran_title_back_ht">30dp</dimen>
 </resources>

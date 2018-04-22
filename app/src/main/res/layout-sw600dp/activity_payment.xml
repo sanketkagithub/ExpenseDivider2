@@ -10,6 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="5dp">
@@ -22,39 +25,48 @@
             android:background="@color/grey_color"
             android:gravity="center">
 
-
-            <TextView
-                android:id="@+id/tv_transaction"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/bottom_iv_margin"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
                 android:fontFamily="serif"
-                android:gravity="center|left"
-                android:text="@string/transactions"
-                android:textColor="@color/main_app_colorp"
-                android:textSize="@dimen/transactions_title" />
-
-
-            <Button
-                android:id="@+id/but_delete_payment"
-                android:layout_width="@dimen/del_alert_wd"
-                android:layout_height="@dimen/image_buttons"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/bottom_iv_margin"
-                android:layout_marginRight="@dimen/bottom_iv_margin"
-                android:textSize="@dimen/lv_text"
-                android:background="@drawable/buttons"
                 android:gravity="center"
-                android:text="@string/delete_all"
-                android:fontFamily="serif"
-                android:onClick="showSaveDeleteListAlert"
-                android:textAllCaps="false"
-                android:textColor="@color/white_color" />
+                android:textSize="15sp">
+
+
+                <TextView
+                    android:id="@+id/tv_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="end"
+                    android:fontFamily="serif"
+                    android:gravity="center|left"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/bottom_iv_margin"
+                    android:text="@string/transactions"
+                    android:textColor="@color/main_app_colorp"
+                    android:textSize="@dimen/transactions_title" />
+
+                <Button
+                    android:id="@+id/but_delete_payment"
+                    android:layout_width="@dimen/del_alert_wd"
+                    android:layout_height="@dimen/image_buttons"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/bottom_iv_margin"
+                    android:layout_marginRight="@dimen/bottom_iv_margin"
+                    android:background="@drawable/buttons"
+                    android:fontFamily="serif"
+                    android:onClick="showSaveDeleteListAlert"
+                    android:text="@string/delete_all"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/but_text" />
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -111,13 +123,13 @@
                     android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/bottom_iv_margin"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
+                    android:ellipsize="end"
                     android:fontFamily="serif"
                     android:gravity="center|left"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/bottom_iv_margin"
                     android:text="Each Paid"
                     android:textColor="@color/main_app_colorp"
                     android:textSize="@dimen/transactions_title" />
@@ -131,12 +143,12 @@
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
                     android:background="@drawable/buttons"
-                    android:onClick="saveAndShowAfterTransferPayTgList"
-                    android:textAllCaps="false"
                     android:fontFamily="serif"
+                    android:onClick="saveAndShowAfterTransferPayTgList"
                     android:text="@string/transfer"
-                    android:textSize="@dimen/but_text"
-                    android:textColor="@color/white_color" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/but_text" />
 
 
             </RelativeLayout>
@@ -226,11 +238,11 @@
                             android:id="@+id/tv_total_amount"
                             style="@style/payment_calculated_text_value"
                             android:layout_width="match_parent"
-                            android:ellipsize="end"
-                            android:maxLines="1"
                             android:layout_height="wrap_content"
-                            android:text="00000₹"
+                            android:ellipsize="end"
                             android:gravity="center"
+                            android:maxLines="1"
+                            android:text="00000₹"
                             android:textSize="@dimen/et_text" />
 
 
@@ -246,23 +258,23 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:ellipsize="end"
-                            android:maxLines="1"
                             android:layout_width="@dimen/tv_each_key_wd"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:text="Roomies "
                             android:textSize="@dimen/et_text" />
 
                         <TextView
                             android:id="@+id/tv_total_roomies"
                             style="@style/payment_calculated_text_value"
-                            android:ellipsize="end"
-                            android:maxLines="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="00"
+                            android:ellipsize="end"
                             android:gravity="center"
-                            android:textSize="@dimen/et_text"/>
+                            android:maxLines="1"
+                            android:text="00"
+                            android:textSize="@dimen/et_text" />
 
 
                     </LinearLayout>
@@ -286,8 +298,8 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="00₹"
                             android:gravity="center"
+                            android:text="00₹"
                             android:textSize="@dimen/et_text" />
 
 

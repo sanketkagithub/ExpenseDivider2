@@ -22,39 +22,48 @@
             android:background="@color/grey_color"
             android:gravity="center">
 
-
-            <TextView
-                android:id="@+id/tv_transaction"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/bottom_iv_margin"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
                 android:fontFamily="serif"
-                android:gravity="center|left"
-                android:text="@string/transactions"
-                android:textColor="@color/main_app_colorp"
-                android:textSize="@dimen/transactions_title" />
-
-
-            <Button
-                android:id="@+id/but_delete_payment"
-                android:layout_width="@dimen/del_alert_wd"
-                android:layout_height="@dimen/image_buttons"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/bottom_iv_margin"
-                android:layout_marginRight="@dimen/bottom_iv_margin"
-                android:background="@drawable/buttons"
                 android:gravity="center"
-                android:text="@string/delete_all"
-                android:fontFamily="serif"
-                android:textSize="@dimen/lv_text"
-                android:onClick="showSaveDeleteListAlert"
-                android:textAllCaps="false"
-                android:textColor="@color/white_color" />
+                android:textSize="15sp">
+
+
+                <TextView
+                    android:id="@+id/tv_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/bottom_iv_margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="serif"
+                    android:gravity="center|left"
+                    android:text="@string/transactions"
+                    android:textColor="@color/main_app_colorp"
+                    android:textSize="@dimen/transactions_title" />
+
+                <Button
+                    android:id="@+id/but_delete_payment"
+                    android:layout_width="@dimen/del_alert_wd"
+                    android:layout_height="@dimen/image_buttons"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/bottom_iv_margin"
+                    android:layout_marginRight="@dimen/bottom_iv_margin"
+                    android:background="@drawable/buttons"
+                    android:onClick="showSaveDeleteListAlert"
+                    android:textAllCaps="false"
+                    android:fontFamily="serif"
+                    android:text="@string/delete_all"
+                    android:textSize="@dimen/but_text"
+                    android:textColor="@color/white_color" />
+
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
