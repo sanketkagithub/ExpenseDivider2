@@ -53,10 +53,11 @@ public class AppInfoActivity extends Activity {
         String appColor =  sp.getString(SessionManager.APP_COLOR,SessionManager.DEFAULT_APP_COLOR);
 
         tv_app_info_title.setBackgroundColor(Color.parseColor(appColor));
+
         dbRef = Helper.getFirebaseDatabseRef();
 
 
-        int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
+       // int deletePayment = sp.getInt(SessionManager.IV_DELETE, R.drawable.delete_payment);
 
 
         setAppInfo();

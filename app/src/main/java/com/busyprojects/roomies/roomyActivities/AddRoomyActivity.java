@@ -26,6 +26,7 @@ import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
@@ -34,6 +35,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddRoomyActivity extends Activity {
 
@@ -55,6 +59,9 @@ public class AddRoomyActivity extends Activity {
 
     Helper helper;
     Runnable runnable;
+    TinyDb tinyDb;
+
+    ArrayList<String> roomyMobList ;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -66,6 +73,7 @@ public class AddRoomyActivity extends Activity {
         Button but_save = findViewById(R.id.but_save);
         Button but_back = findViewById(R.id.but_back);
 
+        tinyDb = new TinyDb(context);
  animationManager = AnimationManager.getInstance();
         //callContinuosCheckInternetToExitToHome();
 
@@ -89,6 +97,7 @@ public class AddRoomyActivity extends Activity {
 
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+        roomyMobList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
         Helper.setRemoteIstransfer(mobileLogged, false);
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
@@ -213,6 +222,13 @@ public class AddRoomyActivity extends Activity {
     }
 */
 
+  boolean isRoomyMobileExist(String roomyMobile)
+  {
+
+      return  roomyMobList.contains(roomyMobile);
+
+  }
+
     void saveRoommate() {
 
         if (CheckInternetReceiver.isOnline(this)) {
@@ -237,39 +253,37 @@ public class AddRoomyActivity extends Activity {
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
 
             } else {
-                dialogEffect.showDialog();
 
-                // TODO: 1/27/2018 save unique roomy here
-                Roomy roomy = new Roomy();
-                roomy.setMobile(mobileS);
-                roomy.setName(nameS);
-                roomy.setRid(rid);
-                roomy.setMacAddress(Helper.getMacAddr());
-                roomy.setMobileLogged(mobileLogged);
-                roomy.setRegistrationDateTime(registrationDateTime);
-
-
-                // TODO: 3/25/2018 delete pp if isTransfered
-                if (isTransfer || isRemoteTransfer) {
-
-                    showAfterTransfersDeleteAlert(roomy);
-
-                } else {
-                    db_ref.child(Helper.ROOMY).child(rid)
-                            .setValue(roomy);
-                    dialogEffect.cancelDialog();
-
-                    ToastManager.showToast(context, Helper.REGISTERD);
-
-
-                    et_mobile.setText("");
-                    et_name.setText("");
-                    onBackPressed();
-
+                if (!isRoomyMobileExist(mobileS)) {
+                    dialogEffect.showDialog();
+                    // TODO: 1/27/2018 save unique roomy here
+                    Roomy roomy = new Roomy();
+                    roomy.setMobile(mobileS);
+                    roomy.setName(nameS);
+                    roomy.setRid(rid);
+                    roomy.setMacAddress(Helper.getMacAddr());
+                    roomy.setMobileLogged(mobileLogged);
+                    roomy.setRegistrationDateTime(registrationDateTime);
+                    // TODO: 3/25/2018 delete pp if isTransfered
+                    if (isTransfer || isRemoteTransfer) {
+                        showAfterTransfersDeleteAlert(roomy);
+                    } else {
+                        db_ref.child(Helper.ROOMY).child(rid)
+                                .setValue(roomy);
+                        dialogEffect.cancelDialog();
+                        ToastManager.showToast(context, Helper.REGISTERD);
+                        et_mobile.setText("");
+                        et_name.setText("");
+                        onBackPressed();
+                    }
+                }else
+                {
+                    Toast.makeText(context, "Mobile Already Exist" +
+                            "", Toast.LENGTH_SHORT).show();
                 }
 
-
             }
+
 
             // deletePaymentNpayTgAtIfTransfered();
         } else {

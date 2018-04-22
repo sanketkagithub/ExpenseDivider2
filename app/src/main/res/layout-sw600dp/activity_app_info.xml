@@ -10,7 +10,7 @@
 
     <TextView
         android:background="@color/main_app_colorp"
-        android:id="@+id/tv_roomy_title"
+        android:id="@+id/tv_app_info_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/history_title"
         android:layout_centerHorizontal="true"
