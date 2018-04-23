@@ -4,7 +4,12 @@
 
     <dimen name="button_ht">40dp</dimen>
     <dimen name="but_w">200dp</dimen>
+<<<<<<< HEAD
     <dimen name="date">10sp</dimen>
+=======
+    <dimen name="date">12sp</dimen>
+    <dimen name="payment_lv_lr_margin">15dp</dimen>
+>>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
     <dimen name="cursor_width">1dp</dimen>
     <dimen name="top_image">40dp</dimen>
     <dimen name="image_buttons">25dp</dimen>
@@ -20,7 +25,7 @@
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">20sp</dimen>
     <dimen name="transactions_title">15sp</dimen>
-    <dimen name="transfer_iv">40dp</dimen>
+    <dimen name="transfer_iv">45dp</dimen>
     <dimen name="but_text">17sp</dimen>
     <dimen name="change_color">25dp</dimen>
     <dimen name="coin_wh">20dp</dimen>
@@ -70,5 +75,27 @@
     <dimen name="tb_mar_plate">50dp</dimen>
     <dimen name="delete_all_wid">120dp</dimen>
     <dimen name="delete_all_ht">30dp</dimen>
+<<<<<<< HEAD
     <dimen name="del_tran_title_back_ht">30dp</dimen>
+=======
+    <dimen name="pb_lv">2dp</dimen>
+    <dimen name="pe">9dp</dimen>
+    <dimen name="pl">9dp</dimen>
+    <dimen name="pr">9dp</dimen>
+    <dimen name="ps">9dp</dimen>
+    <dimen name="pt">2dp</dimen>
+    <dimen name="pt_item">10dp</dimen>
+    <dimen name="pb_item">10dp</dimen>
+    <dimen name="lv_names_wd">150dp</dimen>
+    <dimen name="price_ht">18dp</dimen>
+    <dimen name="pb_date_lv">10dp</dimen>
+    <dimen name="lv_tg_name">140dp</dimen>
+    <dimen name="lv_tg_0">90dp</dimen>
+    <dimen name="lv_tg_1">90dp</dimen>
+    <dimen name="iv_tg_ht">20dp</dimen>
+    <dimen name="mar_tg_0">2dp</dimen>
+    <dimen name="mar_tg_call">2dp</dimen>
+    <dimen name="mar_tg_lv_mes">2dp</dimen>
+    <dimen name="pl_tg_name">3dp</dimen>
+>>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
 </resources>
