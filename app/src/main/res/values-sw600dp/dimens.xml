@@ -12,10 +12,7 @@
     <dimen name="ll_et_ht">50dp</dimen>
     <dimen name="date">18sp</dimen>
 
-<<<<<<< HEAD
-=======
     <dimen name="lv_but_ht">50dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
     <dimen name="et_text">23sp</dimen>
     <dimen name="image_buttons">35dp</dimen>
     <dimen name="bottom_iv_margin">19dp</dimen>
@@ -68,9 +65,6 @@
     <dimen name="t_200dp">400dp</dimen>
     <dimen name="history_title">180dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
-<<<<<<< HEAD
-    <dimen name="tg_l_ht">40dp</dimen>
-=======
     <dimen name="tg_l_ht">50dp</dimen>
     <dimen name="lv_but_cent_mar">50dp</dimen>
 >>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
@@ -78,12 +72,8 @@
     <dimen name="but_wd">150dp</dimen>
     <dimen name="tc_ll_top_mar">10dp</dimen>
     <dimen name="app_info_text_wd">450dp</dimen>
-<<<<<<< HEAD
-    <dimen name="tv_tg_message_ht">19dp</dimen>
-=======
     <dimen name="tv_tg_message_ht">40dp</dimen>
     <dimen name="room_no_login_iv_wh">250dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lr_margin_top_two_iv">18dp</dimen>
     <dimen name="top_margin_top_two_iv">10dp</dimen>
@@ -99,9 +89,7 @@
     <dimen name="tb_mar_plate">80dp</dimen>
     <dimen name="delete_all_wid">170dp</dimen>
     <dimen name="delete_all_ht">50dp</dimen>
-<<<<<<< HEAD
     <dimen name="del_tran_title_back_ht">30dp</dimen>
-=======
     <dimen name="pb_lv">2dp</dimen>
     <dimen name="pe">9dp</dimen>
     <dimen name="pl">9dp</dimen>
@@ -120,6 +108,5 @@
     <dimen name="mar_tg_0">2dp</dimen>
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
-    <dimen name="pl_tg_name">50dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
+   <dimen name="pl_tg_name">50dp</dimen>
 </resources>

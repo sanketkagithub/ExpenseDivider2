@@ -27,9 +27,10 @@
     <dimen name="but_text">15sp</dimen>
     <dimen name="change_color">25dp</dimen>
     <dimen name="coin_wh">20dp</dimen>
-<<<<<<< HEAD
+<!--
     <dimen name="lv_text">14sp</dimen>
 =======
+-->
     <dimen name="lv_text">13sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
 >>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
@@ -77,9 +78,7 @@
     <dimen name="tb_mar_plate">45dp</dimen>
     <dimen name="delete_all_wid">100dp</dimen>
     <dimen name="delete_all_ht">30dp</dimen>
-<<<<<<< HEAD
     <dimen name="del_tran_title_back_ht">30dp</dimen>
-=======
     <dimen name="pb_lv">2dp</dimen>
     <dimen name="pe">9dp</dimen>
     <dimen name="pl">9dp</dimen>
@@ -99,5 +98,4 @@
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
     <dimen name="pl_tg_name">5dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
 </resources>

@@ -6,10 +6,9 @@
     <dimen name="but_w">200dp</dimen>
     <dimen name="date">10sp</dimen>
     <dimen name="cursor_width">1dp</dimen>
-<<<<<<< HEAD
-=======
+
+
     <dimen name="lv_but_ht">30dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
     <dimen name="top_image">40dp</dimen>
     <dimen name="et_left_image">20dp</dimen>
     <dimen name="ll_et_wd">220dp</dimen>
@@ -76,9 +75,7 @@
     <dimen name="tb_mar_plate">45dp</dimen>
     <dimen name="delete_all_wid">90dp</dimen>
     <dimen name="delete_all_ht">30dp</dimen>
-<<<<<<< HEAD
     <dimen name="del_tran_title_back_ht">30dp</dimen>
-=======
     <dimen name="pb_lv">2dp</dimen>
     <dimen name="pe">9dp</dimen>
     <dimen name="pl">9dp</dimen>
@@ -98,5 +95,5 @@
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
     <dimen name="pl_tg_name">3dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
+
 </resources>

@@ -71,9 +71,7 @@
     <dimen name="tb_mar_plate">20dp</dimen>
     <dimen name="delete_all_wid">170dp</dimen>
     <dimen name="delete_all_ht">30dp</dimen>
-<<<<<<< HEAD
     <dimen name="del_tran_title_back_ht">30dp</dimen>
-=======
     <dimen name="pb_lv">2dp</dimen>
     <dimen name="pe">9dp</dimen>
     <dimen name="pl">9dp</dimen>
@@ -93,5 +91,4 @@
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
     <dimen name="pl_tg_name">3dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
 </resources>
