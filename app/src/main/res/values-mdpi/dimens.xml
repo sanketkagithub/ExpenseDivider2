@@ -82,4 +82,15 @@
     <dimen name="tb_mar_plate">20dp</dimen>
     <dimen name="delete_all_wid">80dp</dimen>
     <dimen name="delete_all_ht">30dp</dimen>
+    <dimen name="pb_lv">2dp</dimen>
+    <dimen name="pe">9dp</dimen>
+    <dimen name="pl">9dp</dimen>
+    <dimen name="pr">9dp</dimen>
+    <dimen name="ps">9dp</dimen>
+    <dimen name="pt">2dp</dimen>
+    <dimen name="pt_item">10dp</dimen>
+    <dimen name="pb_item">10dp</dimen>
+    <dimen name="lv_names_wd">120dp</dimen>
+    <dimen name="price_ht">18dp</dimen>
+    <dimen name="pb_date_lv">10dp</dimen>
 </resources>

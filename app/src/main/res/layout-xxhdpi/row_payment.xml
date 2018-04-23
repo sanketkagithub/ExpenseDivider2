@@ -11,19 +11,19 @@
         android:layout_height="wrap_content"
         android:background="@drawable/lv_back"
         android:orientation="vertical"
-        android:paddingBottom="2dp"
-        android:paddingEnd="9dp"
-        android:paddingLeft="9dp"
-        android:paddingRight="9dp"
-        android:paddingStart="9dp"
-        android:paddingTop="2dp">
+        android:paddingBottom="@dimen/pb_lv"
+        android:paddingEnd="@dimen/pe"
+        android:paddingLeft="@dimen/pl"
+        android:paddingRight="@dimen/pr"
+        android:paddingStart="@dimen/ps"
+        android:paddingTop="@dimen/pt">
 
 
         <LinearLayout
             android:id="@+id/ll_item"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/pt_item"
+            android:paddingBottom="@dimen/pb_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tv_roomy_name"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/lv_names_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:text="Name"
@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/tv_paying_item"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/lv_names_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center|right"
@@ -65,15 +65,15 @@
             android:id="@+id/ll_transfer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/pt_item"
+            android:paddingBottom="@dimen/pb_item"
             android:gravity="center"
             android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/tv_from"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/lv_names_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center|left"
@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tv_to"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/lv_names_wd"
                 android:layout_height="match_parent"
                 android:fontFamily="serif"
                 android:gravity="center|right"
@@ -104,12 +104,12 @@
         <TextView
             android:id="@+id/tv_roomy_amount"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/price_ht"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="00"
-            android:textSize="@dimen/lv_text"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/lv_text" />
 
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingBottom="10dp"
+            android:paddingBottom="@dimen/pb_date_lv"
             android:gravity="center"
             android:text="00/00/0000"
             android:textColor="@color/black"

@@ -26,11 +26,11 @@
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">40sp</dimen>
     <dimen name="transactions_title">37sp</dimen>
-    <dimen name="transfer_iv">150dp</dimen>
+    <dimen name="transfer_iv">80dp</dimen>
     <dimen name="change_color">45dp</dimen>
     <dimen name="launcher_div_iv_margin">100dp</dimen>
     <dimen name="coin_wh">40dp</dimen>
-    <dimen name="lv_text">28sp</dimen>
+    <dimen name="lv_text">20sp</dimen>
     <dimen name="paid_marging">3dp</dimen>
     <dimen name="paid_left_righ_et_wd">250dp</dimen>
     <dimen name="pay_image">190dp</dimen>
@@ -96,4 +96,15 @@
     <dimen name="tb_mar_plate">90dp</dimen>
     <dimen name="delete_all_wid">170dp</dimen>
     <dimen name="delete_all_ht">60dp</dimen>
+    <dimen name="pb_lv">2dp</dimen>
+    <dimen name="pe">9dp</dimen>
+    <dimen name="pl">9dp</dimen>
+    <dimen name="pr">9dp</dimen>
+    <dimen name="ps">9dp</dimen>
+    <dimen name="pt">2dp</dimen>
+    <dimen name="pt_item">10dp</dimen>
+    <dimen name="pb_item">10dp</dimen>
+    <dimen name="lv_names_wd">250dp</dimen>
+    <dimen name="price_ht">25dp</dimen>
+    <dimen name="pb_date_lv">10dp</dimen>
 </resources>
