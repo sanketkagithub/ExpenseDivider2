@@ -94,4 +94,12 @@
     <dimen name="lv_names_wd">120dp</dimen>
     <dimen name="price_ht">18dp</dimen>
     <dimen name="pb_date_lv">10dp</dimen>
+    <dimen name="lv_tg_name">140dp</dimen>
+    <dimen name="lv_tg_0">90dp</dimen>
+    <dimen name="lv_tg_1">90dp</dimen>
+    <dimen name="iv_tg_ht">20dp</dimen>
+    <dimen name="mar_tg_0">2dp</dimen>
+    <dimen name="mar_tg_call">2dp</dimen>
+    <dimen name="mar_tg_lv_mes">2dp</dimen>
+    <dimen name="pl_tg_name">3dp</dimen>
 </resources>

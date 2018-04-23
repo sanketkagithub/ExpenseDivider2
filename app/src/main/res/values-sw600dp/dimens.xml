@@ -13,7 +13,7 @@
     <dimen name="ll_et_ht">50dp</dimen>
     <dimen name="date">18sp</dimen>
 
-    <dimen name="lv_but_ht">25dp</dimen>
+    <dimen name="lv_but_ht">50dp</dimen>
     <dimen name="et_text">23sp</dimen>
     <dimen name="image_buttons">35dp</dimen>
     <dimen name="bottom_iv_margin">19dp</dimen>
@@ -71,13 +71,13 @@
     <dimen name="history_title">180dp</dimen>
     <dimen name="lr_paying_item_mar">5dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
-    <dimen name="tg_l_ht">40dp</dimen>
+    <dimen name="tg_l_ht">60dp</dimen>
     <dimen name="lv_but_cent_mar">50dp</dimen>
     <dimen name="but_lv_tb_mar">2dp</dimen>
     <dimen name="but_wd">150dp</dimen>
     <dimen name="tc_ll_top_mar">10dp</dimen>
     <dimen name="app_info_text_wd">450dp</dimen>
-    <dimen name="tv_tg_message_ht">19dp</dimen>
+    <dimen name="tv_tg_message_ht">60dp</dimen>
     <dimen name="room_no_login_iv_wh">250dp</dimen>
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lt_mar_c_theme">9dp</dimen>
@@ -106,4 +106,12 @@
     <dimen name="lv_names_wd">220dp</dimen>
     <dimen name="price_ht">22dp</dimen>
     <dimen name="pb_date_lv">10dp</dimen>
+    <dimen name="lv_tg_name">300dp</dimen>
+    <dimen name="lv_tg_0">90dp</dimen>
+    <dimen name="lv_tg_1">90dp</dimen>
+    <dimen name="iv_tg_ht">30dp</dimen>
+    <dimen name="mar_tg_0">2dp</dimen>
+    <dimen name="mar_tg_call">2dp</dimen>
+    <dimen name="mar_tg_lv_mes">2dp</dimen>
+    <dimen name="pl_tg_name">50dp</dimen>
 </resources>
