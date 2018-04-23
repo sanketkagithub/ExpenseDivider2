@@ -78,7 +78,7 @@
     <dimen name="but_wd">200dp</dimen>
     <dimen name="tc_ll_top_mar">15dp</dimen>
     <dimen name="app_info_text_wd">550dp</dimen>
-    <dimen name="tv_tg_message_ht">70dp</dimen>
+    <dimen name="tv_tg_message_ht">45dp</dimen>
     <dimen name="room_no_login_iv_wh">300dp</dimen>
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lt_mar_c_theme">9dp</dimen>
@@ -114,5 +114,5 @@
     <dimen name="mar_tg_0">2dp</dimen>
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
-    <dimen name="pl_tg_name">3dp</dimen>
+    <dimen name="pl_tg_name">60dp</dimen>
 </resources>

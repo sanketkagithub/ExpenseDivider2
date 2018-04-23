@@ -71,13 +71,13 @@
     <dimen name="history_title">180dp</dimen>
     <dimen name="lr_paying_item_mar">5dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
-    <dimen name="tg_l_ht">60dp</dimen>
+    <dimen name="tg_l_ht">50dp</dimen>
     <dimen name="lv_but_cent_mar">50dp</dimen>
     <dimen name="but_lv_tb_mar">2dp</dimen>
     <dimen name="but_wd">150dp</dimen>
     <dimen name="tc_ll_top_mar">10dp</dimen>
     <dimen name="app_info_text_wd">450dp</dimen>
-    <dimen name="tv_tg_message_ht">60dp</dimen>
+    <dimen name="tv_tg_message_ht">40dp</dimen>
     <dimen name="room_no_login_iv_wh">250dp</dimen>
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lt_mar_c_theme">9dp</dimen>

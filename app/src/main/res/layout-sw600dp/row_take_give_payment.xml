@@ -27,6 +27,7 @@
                 android:layout_width="@dimen/lv_tg_name"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
+                android:gravity="left"
                 android:inputType="textMultiLine"
                 android:paddingLeft="@dimen/pl_tg_name"
                 android:paddingStart="@dimen/pl_tg_name"

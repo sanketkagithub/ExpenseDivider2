@@ -29,7 +29,7 @@
     <dimen name="but_text">15sp</dimen>
     <dimen name="change_color">25dp</dimen>
     <dimen name="coin_wh">20dp</dimen>
-    <dimen name="lv_text">14sp</dimen>
+    <dimen name="lv_text">13sp</dimen>
     <dimen name="transfer_but_marging">2dp</dimen>
     <dimen name="pay_image_iv">73dp</dimen>
 
@@ -95,10 +95,10 @@
     <dimen name="pb_date_lv">10dp</dimen>
     <dimen name="lv_tg_name">140dp</dimen>
     <dimen name="lv_tg_0">90dp</dimen>
-    <dimen name="lv_tg_1">90dp</dimen>
+    <dimen name="lv_tg_1">80dp</dimen>
     <dimen name="iv_tg_ht">20dp</dimen>
     <dimen name="mar_tg_0">2dp</dimen>
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
-    <dimen name="pl_tg_name">3dp</dimen>
+    <dimen name="pl_tg_name">5dp</dimen>
 </resources>
