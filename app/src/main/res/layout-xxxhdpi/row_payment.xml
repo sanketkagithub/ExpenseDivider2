@@ -34,7 +34,7 @@
                 android:fontFamily="serif"
                 android:text="Name"
                 android:gravity="center"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:textColor="@color/black" />
 
             <ImageView
@@ -52,7 +52,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:textColor="@color/blue" />
 
 
@@ -74,7 +74,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:textColor="@color/main_app_colorp" />
 
             <ImageView
@@ -91,7 +91,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:textColor="@color/main_app_colorp" />
 
 
@@ -104,7 +104,7 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:text="00"
-            android:textSize="@dimen/et_text"
+            android:textSize="@dimen/lv_text"
             android:textColor="@color/black" />
 
 

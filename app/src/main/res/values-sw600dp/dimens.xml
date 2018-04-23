@@ -25,11 +25,11 @@
     <dimen name="calculated_bottom_text">12sp</dimen>
     <dimen name="title_login">35sp</dimen>
     <dimen name="transactions_title">30sp</dimen>
-    <dimen name="transfer_iv">120dp</dimen>
+    <dimen name="transfer_iv">80dp</dimen>
     <dimen name="change_color">40dp</dimen>
     <dimen name="launcher_div_iv_margin">100dp</dimen>
     <dimen name="coin_wh">40dp</dimen>
-    <dimen name="lv_text">25sp</dimen>
+    <dimen name="lv_text">20sp</dimen>
     <dimen name="paid_marging">2dp</dimen>
     <dimen name="pay_image">150dp</dimen>
     <dimen name="paid_left_righ_et_wd">180dp</dimen>
@@ -91,4 +91,6 @@
     <dimen name="room_no_tv_ht">22dp</dimen>
     <dimen name="ed_home_ht">90dp</dimen>
     <dimen name="ed_reg_log_pad">100dp</dimen>
+    <dimen name="lv_price">30dp</dimen>
+    <dimen name="pay_roomy">220dp</dimen>
 </resources>

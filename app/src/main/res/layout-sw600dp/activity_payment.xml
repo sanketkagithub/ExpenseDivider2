@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.45"
-            android:background="@color/grey_color"
+            android:background="@color/greenish"
             android:gravity="center">
 
 
