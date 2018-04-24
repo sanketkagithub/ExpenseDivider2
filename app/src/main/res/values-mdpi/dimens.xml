@@ -94,5 +94,14 @@
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
     <dimen name="pl_tg_name">3dp</dimen>
+    <dimen name="pad_lv_tg_back">2dp</dimen>
+    <dimen name="lv_but_wd">200dp</dimen>
+    <dimen name="del_all_but_text">10sp</dimen>
+    <dimen name="ll_ht_paymnt_01">60dp</dimen>
+    <dimen name="lv_ht_paymnt">200dp</dimen>
+    <dimen name="scrollbar">10dp</dimen>
+    <dimen name="no_rec_lv">100dp</dimen>
+    <dimen name="pb_paymnt_lv0">4dp</dimen>
+    <dimen name="cal_bot_item_wd">195dp</dimen>
 
 </resources>

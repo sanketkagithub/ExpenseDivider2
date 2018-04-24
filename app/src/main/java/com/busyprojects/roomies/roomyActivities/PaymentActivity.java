@@ -256,6 +256,7 @@ public class PaymentActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                dialogEffect.cancelDialog();
                 try {
 
 
@@ -395,6 +396,7 @@ public class PaymentActivity extends Activity {
                             if (paymentList.size() != 0) {
                                 lv_payments.setVisibility(View.VISIBLE);
                                 iv_no_pay.setVisibility(View.GONE);
+                                iv_no_transfer.setVisibility(View.GONE);
 
                                 paymentListAdapter = new PaymentListAdapter(context, paymentList);
                                 lv_payments.setAdapter(paymentListAdapter);
@@ -804,95 +806,6 @@ public class PaymentActivity extends Activity {
     }
 
 
-/*
-    void deletePaymentNpayTgAtIfTransfered() {
-
-
-        // TODO: 2/5/2018 delete current Payment
-
-        dialogEffect.showDialog();
-        db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                try {
-
-
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
-
-                        Payment payment = dataSnapshot1.getValue(Payment.class);
-
-                        if (payment.getMobileLogged().equals(mobileLogged)) {
-
-                            db_ref.child(Helper.PAYMENT)
-                                    .child(payment.getPid())
-                                    .removeValue();
-
-                        }
-
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                dialogEffect.cancelDialog();
-                try {
-
-
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
-
-                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-
-                        if (payTg.getMobileLogged().equals(mobileLogged)) {
-                            db_ref.child(Helper.AFTER_TRANSFER)
-                                    .child(payTg.getPayTgId())
-                                    .removeValue();
-
-                        }
-
-
-                    }
-
-                } catch (Exception e) {
-                    spe = sp.edit();
-                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                    spe.apply();
-
-                    Helper.setRemoteIstransfer(mobileLogged, false);
-
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
-
-        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
-
-
-    }
-*/
 
 
     @Override
@@ -1008,4 +921,7 @@ public class PaymentActivity extends Activity {
     }
 
 
+
 }
+
+

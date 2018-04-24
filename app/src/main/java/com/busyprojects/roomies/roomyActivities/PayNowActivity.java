@@ -607,19 +607,6 @@ PayNowActivity extends Activity {
 
     }
 
-    void setAutocompetionTextViewItems() {
-
-        String sr[] = getResources().getStringArray(R.array.payingItems);
-
-        List<String> payingItemsList = Arrays.asList(sr);
-
-
-//        ArrayAdapter aa = new ArrayAdapter(context, R.layout.row_et_paying_item,
-//                payingItemsList);
-//        et_paying_item.setAdapter(aa);
-
-
-    }
 
     List<String> payingItemsLinkedList, payingItemsLinkedListAccu;
     ArrayAdapter aa;
@@ -716,7 +703,8 @@ PayNowActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBarSuggImage.setVisibility(View.VISIBLE);
+
+            dialogEffect.showDialog();
 
           /*  dialogEffect = new DialogEffect(context);
             dialogEffect.showDialog();
@@ -793,7 +781,7 @@ PayNowActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            // dialogEffect.cancelDialog();
+             dialogEffect.cancelDialog();
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
             progressBarSuggImage.setVisibility(View.GONE);

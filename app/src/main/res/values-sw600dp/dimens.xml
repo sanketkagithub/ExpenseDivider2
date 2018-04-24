@@ -65,9 +65,8 @@
     <dimen name="t_200dp">400dp</dimen>
     <dimen name="history_title">180dp</dimen>
     <dimen name="lv_ll_del_roomy">100dp</dimen>
-    <dimen name="tg_l_ht">50dp</dimen>
+    <dimen name="tg_l_ht">80dp</dimen>
     <dimen name="lv_but_cent_mar">50dp</dimen>
->>>>>>> 65f2288d290f5b0ccbe1d77460f717d97dbc8ff7
     <dimen name="but_lv_tb_mar">2dp</dimen>
     <dimen name="but_wd">150dp</dimen>
     <dimen name="tc_ll_top_mar">10dp</dimen>
@@ -109,4 +108,13 @@
     <dimen name="mar_tg_call">2dp</dimen>
     <dimen name="mar_tg_lv_mes">2dp</dimen>
    <dimen name="pl_tg_name">50dp</dimen>
+    <dimen name="pad_lv_tg_back">2dp</dimen>
+    <dimen name="lv_but_wd">200dp</dimen>
+    <dimen name="del_all_but_text">10sp</dimen>
+    <dimen name="ll_ht_paymnt_01">60dp</dimen>
+    <dimen name="lv_ht_paymnt">400dp</dimen>
+    <dimen name="scrollbar">10dp</dimen>
+    <dimen name="no_rec_lv">200dp</dimen>
+    <dimen name="pb_paymnt_lv0">4dp</dimen>
+    <dimen name="cal_bot_item_wd">350dp</dimen>
 </resources>

@@ -23,11 +23,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/ll_ht_paymnt_01"
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
-                android:gravity="center"
-                android:textSize="15sp">
+                android:gravity="center">
 
 
                 <TextView
@@ -41,16 +40,16 @@
                     android:paddingLeft="@dimen/bottom_iv_margin"
                     android:text="@string/transactions"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="@dimen/transactions_title" />
+                    android:textSize="@dimen/lv_text" />
 
                 <Button
                     android:id="@+id/but_delete_payment"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/lv_but_wd"
                     android:layout_height="@dimen/image_buttons"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
-                    android:textSize="@dimen/lv_text"
+                    android:textSize="@dimen/del_all_but_text"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
                     android:text="@string/delete_all"
                     android:fontFamily="serif"
@@ -70,29 +69,24 @@
             android:layout_weight="1"
             android:background="@color/white_color"
             android:gravity="center"
-            android:paddingBottom="4dp">
+            android:paddingBottom="@dimen/pb_paymnt_lv0">
 
             <ListView
                 android:id="@+id/lv_payments"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/lv_ht_paymnt"
                 android:divider="@color/lv_divider"
                 android:dividerHeight="@dimen/lv_div_ht"
-                android:scrollbarSize="10dp"
+                android:scrollbarSize="@dimen/scrollbar"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 
             <ImageView
                 android:id="@+id/iv_no_payment_record_found"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/no_rec_lv"
+                android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:src="@drawable/no_record"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:visibility="visible" />
 
         </RelativeLayout>
 
@@ -106,11 +100,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/ll_ht_paymnt_01"
                 android:layout_centerInParent="true"
                 android:fontFamily="serif"
-                android:gravity="center"
-                android:textSize="15sp">
+                android:gravity="center">
 
 
                 <TextView
@@ -122,9 +115,9 @@
                     android:fontFamily="serif"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/bottom_iv_margin"
-                    android:text="Each Paid"
+                    android:text="@string/each_paid"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="@dimen/transactions_title" />
+                    android:textSize="@dimen/lv_text" />
 
                 <Button
                     android:id="@+id/but_transfer_money"
@@ -133,9 +126,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
-                    android:textSize="@dimen/lv_text"
+                    android:textSize="@dimen/del_all_but_text"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
-                    android:text="Transfer"
+                    android:text="@string/transfer"
                     android:fontFamily="serif"
                     android:background="@drawable/buttons"
                     android:onClick="saveAndShowAfterTransferPayTgList"
@@ -157,24 +150,19 @@
             <ListView
                 android:id="@+id/lv_take_give"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/lv_ht_paymnt"
                 android:divider="@color/lv_divider"
                 android:dividerHeight="@dimen/lv_div_ht"
-                android:scrollbarSize="10dp"
+                android:scrollbarSize="@dimen/scrollbar"
                 android:scrollbarThumbVertical="@drawable/list_scroller" />
 
             <ImageView
                 android:id="@+id/iv_no_transfer_record_found"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/no_rec_lv"
+                android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:src="@drawable/no_record"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:visibility="visible" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -187,7 +175,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -196,7 +183,6 @@
                     android:id="@+id/ll_tot_each_roomy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="1dp"
                     android:background="@drawable/calculation_back"
                     android:orientation="vertical">
 
@@ -210,10 +196,10 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="195dp"
+                            android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
                             android:text="Total"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/calculated_bottom_text" />
 
                         <TextView
                             android:id="@+id/tv_total_amount"
@@ -236,17 +222,18 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="200dp"
+                            android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
                             android:text="Roomies "
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/calculated_bottom_text" />
 
                         <TextView
                             android:id="@+id/tv_total_roomies"
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="00" />
+                            android:text="00"
+                            android:textSize="@dimen/calculated_bottom_text"/>
 
 
                     </LinearLayout>
@@ -260,10 +247,10 @@
 
                         <TextView
                             style="@style/payment_calculated_text"
-                            android:layout_width="200dp"
+                            android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
                             android:text="Each "
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/calculated_bottom_text" />
 
                         <TextView
                             android:id="@+id/tv_each_payment"
@@ -271,7 +258,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="00₹"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/calculated_bottom_text" />
 
 
                     </LinearLayout>

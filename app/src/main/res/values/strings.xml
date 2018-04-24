@@ -9,43 +9,6 @@
     <string name="logout">Logout</string>
     <string name="history">History</string>
 
-    <string-array name="payingItems">
-
-        <item>Brush</item>
-        <item>Toothpaste</item>
-        <item>Rice</item>
-        <item>Wheat</item>
-        <item>Vegetable</item>
-        <item>Bhindi</item>
-        <item>Aaloo</item>
-        <item>Potatao</item>
-        <item>Chawal</item>
-        <item>Atta</item>
-        <item>Gas Filling</item>
-        <item>Onion</item>
-        <item>Pyaz</item>
-        <item>Intenet Recharge</item>
-        <item>Drinking Water</item>
-        <item>Pani</item>
-        <item>Tomato</item>
-        <item>Jeera</item>
-        <item>Mustard</item>
-        <item>Cumin</item>
-        <item>Green chilli</item>
-        <item>Mirchi</item>
-        <item>Vim</item>
-        <item>Machis</item>
-        <item>NewsPaper</item>
-        <item>Bucket</item>
-        <item>Meal</item>
-        <item>Hotel Dinner</item>
-        <item>Hotel Lunch</item>
-        <item>Hotel Cold Drink</item>
-        <item>Cold Drink</item>
-
-
-    </string-array>
-
 
     <string name="app_info">\n\n1.Click Button Add Roomy to add a new Roommate \n\n 2.Click Button Pay to do payment for any product. \n\n 3.Click Button View Payment to see all the payments and amount divided. \n\n 4.Click Button Roomies, to see all roommates, also to delete a Roommate.</string>
 
@@ -72,6 +35,7 @@
     <string name="room_registration">Room \n Registration</string>
     <string name="room_no">Room No</string>
     <string name="delete_all">Delete All</string>
-    <string name="transfer">Transfer</string>
     <string name="transferred_p_det">Transferred Payments will be deleted, if you delete a Roommate. Are You sure to proceed ?</string>
+    <string name="each_paid">Each Paid</string>
+    <string name="transfer">Transfer</string>
 </resources>
