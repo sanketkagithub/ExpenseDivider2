@@ -9,7 +9,7 @@
         android:id="@+id/ll_take_give"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:background="@color/white_color"
+        android:background="@color/white_color"
         android:orientation="vertical"
         android:padding="@dimen/prof_pad">
 
@@ -17,7 +17,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/lv_ll_del_roomy"
-            android:layout_margin="2dp"
             android:gravity="center|left"
             android:orientation="horizontal">
 
@@ -29,20 +28,20 @@
                 android:textColor="@color/white_color" />
             <TextView
                 android:id="@+id/tv_roomy_name_all_roomy"
-                android:layout_width="@dimen/t_200dp"
+                android:layout_width="@dimen/roomy_lv_name_wd"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:paddingLeft="@dimen/roomy_lv_lef_padd"
                 android:paddingStart="@dimen/roomy_lv_lef_padd"
                 android:text="Name"
-                android:textSize="@dimen/et_text"
+                android:textSize="@dimen/lv_text"
                 android:fontFamily="serif"
                 android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/but_del_sel_roomy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/lv_but_wd"
+                android:layout_height="@dimen/lv_but_ht"
                 android:text="Delete"
                 android:textSize="@dimen/lv_text"
                 android:fontFamily="serif"
@@ -57,7 +56,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/lv_ll_del_roomy"
-            android:layout_margin="2dp"
             android:gravity="center|left"
             android:orientation="horizontal">
 
@@ -70,11 +68,11 @@
 
             <TextView
                 android:fontFamily="serif"
-                android:paddingRight="15dp"
+                android:paddingRight="@dimen/pr_roomy_lv_mobile"
                 android:id="@+id/tv_roomy_mobile"
-                android:layout_width="@dimen/t_200dp"
-                android:textSize="@dimen/et_text"
-                android:layout_height="19dp"
+                android:layout_width="@dimen/roomy_lv_name_wd"
+                android:textSize="@dimen/lv_text"
+                android:layout_height="wrap_content"
                 android:gravity="center|left"
                 android:paddingLeft="@dimen/roomy_lv_lef_padd"
                 android:paddingStart="@dimen/roomy_lv_lef_padd"
@@ -83,8 +81,8 @@
                 android:textColor="@color/black" />
             <Button
                 android:id="@+id/but_call_roomy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/lv_but_wd"
+                android:layout_height="@dimen/lv_but_ht"
                 android:text="@string/call"
                 android:textSize="@dimen/lv_text"
                 android:fontFamily="serif"

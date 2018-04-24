@@ -53,7 +53,7 @@
     <dimen name="lv_tg_iv">55dp</dimen>
     <dimen name="del_alert_wd">170dp</dimen>
     <dimen name="del_alert_ht">300dp</dimen>
-    <dimen name="profile_lv">50dp</dimen>
+    <dimen name="profile_lv">28dp</dimen>
     <dimen name="roomy_lv_lef_padd">30dp</dimen>
     <dimen name="prof_pad">20dp</dimen>
     <dimen name="t_50dp">120dp</dimen>
@@ -64,7 +64,7 @@
     <dimen name="t_120dp">220dp</dimen>
     <dimen name="t_200dp">600dp</dimen>
     <dimen name="history_title">250dp</dimen>
-    <dimen name="lv_ll_del_roomy">100dp</dimen>
+    <dimen name="lv_ll_del_roomy">70dp</dimen>
 <!--
     <dimen name="tg_l_ht">40dp</dimen>
 =======
@@ -126,4 +126,6 @@
     <dimen name="no_rec_lv">250dp</dimen>
     <dimen name="pb_paymnt_lv0">4dp</dimen>
     <dimen name="cal_bot_item_wd">450dp</dimen>
+    <dimen name="roomy_lv_name_wd">520dp</dimen>
+    <dimen name="pr_roomy_lv_mobile">15dp</dimen>
 </resources>
