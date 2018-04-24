@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,7 +17,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.helper.RuntimePermissionsCs;
+
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.pojos.master.User;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class RoomLoginActivity extends Activity {
     Context context = RoomLoginActivity.this;
@@ -41,10 +40,7 @@ public class RoomLoginActivity extends Activity {
     private AnimationManager animationManager;
 
     SharedPreferences sp;
-    SharedPreferences.Editor spe;
 
-    RuntimePermissionsCs runtimePermissionsCs;
-    // boolean CheckInternetReceiver.isOnline(this);
     RelativeLayout rel_login_reg, rel_login, rel_register;
 
     @Override
@@ -80,7 +76,6 @@ public class RoomLoginActivity extends Activity {
     public void roomLogin(View view)
     {
 
-        animationManager.animateButton(view,context);
        String roomNoIp = et_log_room_no.getText().toString().trim();
 
        if (roomNoIp.equals(""))
@@ -115,7 +110,7 @@ public class RoomLoginActivity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         dialogEffect.cancelDialog();
-                        List<String> roomyNoList = new LinkedList();
+                        LinkedList roomyNoList = new LinkedList();
 
                         // TODO: 3/31/2018 add all roomNo from Db
                         for (DataSnapshot dataSnapshot1:
@@ -123,7 +118,8 @@ public class RoomLoginActivity extends Activity {
 
                           User user =  dataSnapshot1.getValue(User.class);
 
-                          roomyNoList.add(user.getMobile());
+                            assert user != null;
+                            roomyNoList.add(user.getMobile());
 
                         }
 

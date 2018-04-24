@@ -85,11 +85,11 @@
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lr_margin_top_two_iv">25dp</dimen>
     <dimen name="top_margin_top_two_iv">10dp</dimen>
-    <dimen name="tv_logged_roomy_name">19sp</dimen>
-    <dimen name="iv_home_room">100dp</dimen>
+    <dimen name="tv_logged_roomy_name">22sp</dimen>
+    <dimen name="iv_home_room">200dp</dimen>
     <dimen name="home_room_text">19sp</dimen>
     <dimen name="ed_home_iv">8dp</dimen>
-    <dimen name="room_no_top_mar">25dp</dimen>
+    <dimen name="room_no_top_mar">55dp</dimen>
     <dimen name="room_no_tv_ht">24dp</dimen>
     <dimen name="ed_home_ht">100dp</dimen>
     <dimen name="ed_reg_log_pad">140dp</dimen>
@@ -128,4 +128,10 @@
     <dimen name="cal_bot_item_wd">450dp</dimen>
     <dimen name="roomy_lv_name_wd">520dp</dimen>
     <dimen name="pr_roomy_lv_mobile">15dp</dimen>
+    <dimen name="bm_roomy_mob_home">5dp</dimen>
+    <dimen name="ed_text_home_wd">470dp</dimen>
+    <dimen name="bell_text_tm_home">15dp</dimen>
+    <dimen name="plate_home_wd">200dp</dimen>
+    <dimen name="plate_home_ht">180dp</dimen>
+    <dimen name="lv_but_ht">50dp</dimen>
 </resources>

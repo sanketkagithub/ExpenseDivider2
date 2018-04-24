@@ -1,11 +1,10 @@
 package com.busyprojects.roomies.roomyActivities;
 
 import android.app.Activity;
-import android.app.Dialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,10 +16,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.helper.RuntimePermissionsCs;
 import com.busyprojects.roomies.helper.SessionManager;
-import com.busyprojects.roomies.pojos.master.PayTg;
-import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.master.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,17 +31,11 @@ public class RoomRegistrationActivity extends Activity {
 
     EditText et_reg_room_no;
     TextView tv_log_reg_title;
-
     private AnimationManager animationManager;
-
     DatabaseReference db_ref;
-
     DialogEffect dialogEffect;
-
     SharedPreferences sp;
-    SharedPreferences.Editor spe;
 
-    RuntimePermissionsCs runtimePermissionsCs;
    // boolean CheckInternetReceiver.isOnline(this);
    // RelativeLayout rel_login_reg, rel_login, rel_register;
 
@@ -80,20 +70,16 @@ public class RoomRegistrationActivity extends Activity {
     }
 
 
-    void setInitialVisibility() {
+   /* void setInitialVisibility() {
 
-        /*rel_login_reg.setVisibility(View.VISIBLE);
+        *//*rel_login_reg.setVisibility(View.VISIBLE);
         rel_login.setVisibility(View.GONE);
-        rel_register.setVisibility(View.GONE);*/
-    }
-
-
-    String mobileLogin,rooomyMobile;
-
+        rel_register.setVisibility(View.GONE);*//*
+    }*/
 
 
     public void registerRoomNo(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
 if (CheckInternetReceiver.isOnline(this)) {
     final String roomNo = et_reg_room_no.getText().toString().trim();
@@ -121,6 +107,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                                 User userDb = dataSnapshot1.getValue(User.class);
 
+                                assert userDb != null;
                                 userList.add(userDb.getMobile());
 
                             }
@@ -195,13 +182,13 @@ if (CheckInternetReceiver.isOnline(this)) {
 
 
 
-    Dialog dialodDeleteTranserAlert;
+   // Dialog dialodDeleteTranserAlert;
 
 
 
 
 
-    void deleteAfterExistingTransfer(final Roomy roomy) {
+    /*void deleteAfterExistingTransfer(final Roomy roomy) {
 
         if (CheckInternetReceiver.isOnline(this)) {
 
@@ -251,7 +238,7 @@ if (CheckInternetReceiver.isOnline(this)) {
             Helper.showCheckInternet(context);
         }
     }
-
+*/
 
 
 

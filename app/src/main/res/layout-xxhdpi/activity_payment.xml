@@ -45,7 +45,7 @@
                 <Button
                     android:id="@+id/but_delete_payment"
                     android:layout_width="@dimen/lv_but_wd"
-                    android:layout_height="@dimen/image_buttons"
+                    android:layout_height="@dimen/lv_but_ht"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
@@ -121,8 +121,8 @@
 
                 <Button
                     android:id="@+id/but_transfer_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/image_buttons"
+                    android:layout_width="@dimen/lv_but_wd"
+                    android:layout_height="@dimen/lv_but_ht"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"

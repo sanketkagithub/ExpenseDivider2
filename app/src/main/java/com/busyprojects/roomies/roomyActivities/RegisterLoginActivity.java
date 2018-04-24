@@ -283,7 +283,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
 
     public void goToLoginActivity(View view) {
-        animationManager.animateButton(view, context);
+        //animationManager.animateButton(view, context);
 
         if (Build.VERSION.SDK_INT >= 23) {
             if (!RuntimePermissionsCs.hasPermissions(this, PERMISSIONS)) {
@@ -309,7 +309,7 @@ if (CheckInternetReceiver.isOnline(this)) {
     }
 
     public void goToRegisterActivity(View view) {
-        animationManager.animateButton(view, context);
+        //animationManager.animateButton(view, context);
         Intent intentLogin = new Intent(context, RoomRegistrationActivity.class);
         intentLogin.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentLogin);

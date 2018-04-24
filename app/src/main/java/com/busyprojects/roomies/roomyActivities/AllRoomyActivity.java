@@ -177,7 +177,7 @@ public class AllRoomyActivity extends Activity {
     Dialog dialogDeleteAlert;
 
     public void showRoomyDeleteListAlert(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             //animationManager.animateViewForEmptyField();
@@ -196,7 +196,7 @@ public class AllRoomyActivity extends Activity {
 
 
     public void deleteRoomy(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             deleteAllRoomy();
             isAllRoomiesDeleted = true;
@@ -244,7 +244,7 @@ public class AllRoomyActivity extends Activity {
     }
 
     public void cancelRoomyDelete(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         dialogDeleteAlert.dismiss();
     }

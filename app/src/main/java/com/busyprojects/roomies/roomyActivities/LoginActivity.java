@@ -88,7 +88,7 @@ public class LoginActivity extends Activity {
         }else {
 
 
-            animationManager.animateButton(view, context);
+            //animationManager.animateButton(view, context);
             String roomyNoIp = et_roommate_login.getText().toString().trim();
 
             if (roomyNoIp.equals("")) {
@@ -108,7 +108,7 @@ public class LoginActivity extends Activity {
         }
         }else
         {
-            animationManager.animateButton(view, context);
+            //animationManager.animateButton(view, context);
             String roomyNoIp = et_roommate_login.getText().toString().trim();
 
             if (roomyNoIp.equals("")) {

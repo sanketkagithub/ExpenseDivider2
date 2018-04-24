@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/lv_tg_name"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:inputType="textMultiLine"
+                android:inputType="textNoSuggestions"
                 android:paddingLeft="@dimen/pl_tg_name"
                 android:paddingStart="@dimen/pl_tg_name"
                 android:textSize="@dimen/lv_text"
@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/lv_text"
                 android:text="00"
+                android:inputType="text"
                 android:fontFamily="serif"
                 android:textColor="@color/black" />
 
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:textSize="@dimen/lv_text"
+                android:inputType="text"
                 android:fontFamily="serif"
                 android:textColor="@color/black" />
 
@@ -78,7 +80,8 @@
                 android:layout_height="@dimen/tv_tg_message_ht"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="Manas will take 200₹ "
+                android:inputType="textNoSuggestions"
+                android:text="@string/manas_will_take_200"
                 android:textAllCaps="false"
                 android:textColor="@color/take"
                 android:textSize="@dimen/lv_text" />

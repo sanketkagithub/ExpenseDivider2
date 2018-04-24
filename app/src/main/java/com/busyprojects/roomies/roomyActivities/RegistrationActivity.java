@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.busyprojects.roomies.helper.AnimationManager;
 import com.busyprojects.roomies.helper.CheckInternetReceiver;
 import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
-import com.busyprojects.roomies.helper.RuntimePermissionsCs;
+
 import com.busyprojects.roomies.helper.SessionManager;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
@@ -52,7 +51,7 @@ public class RegistrationActivity extends Activity {
 private AnimationManager animationManager;
     String roomNoInSession;
 
-    RuntimePermissionsCs runtimePermissionsCs;
+
    // boolean CheckInternetReceiver.isOnline(this);
    // RelativeLayout rel_login_reg, rel_login, rel_register;
 
@@ -94,7 +93,7 @@ takeRemoteIsTransfer();
 
 
 
-    String mobileLogin,rooomyMobile;
+    String mobileLogin;
 
 
 
@@ -235,7 +234,7 @@ ani
 
     public void registerRoomy(View view) {
 
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 if (CheckInternetReceiver.isOnline(this)) {
     final String roomyReg = et_reg_mob.getText().toString().trim();
     final String roomyName = et_reg_name.getText().toString().trim();
@@ -263,12 +262,13 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                                 User userDb = dataSnapshot1.getValue(User.class);
 
+                                assert userDb != null;
                                 userList.add(userDb.getMobile());
 
                             }
 
 
-                            if (userList.contains(roomNoInSession)) {
+                            if(userList.contains(roomNoInSession)) {
                                 //      Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
 
 
@@ -415,7 +415,14 @@ if (CheckInternetReceiver.isOnline(this)) {
         if (CheckInternetReceiver.isOnline(context)) {
             //animationManager.animateViewForEmptyField();
             dialodDeleteTranserAlert = new Dialog(context);
-            dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            try {
+                dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
             View v = LayoutInflater.from(context).inflate(R.layout.delete_transfer_add_alert, null);
             Button but_yes_del_transfer_t = v.findViewById(R.id.but_yes_del_transfer_t);
             final Button but_no_del_transfer_t = v.findViewById(R.id.but_no_del_transfer_t);
@@ -493,6 +500,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                             PayTg payTg = dataSnapshot1.getValue(PayTg.class);
 
+                            assert payTg != null;
                             if (payTg.getMobileLogged().equals(roomy.getMobileLogged())) {
                                 db_ref.child(Helper.AFTER_TRANSFER)
                                         .child(payTg.getPayTgId())

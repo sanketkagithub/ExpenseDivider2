@@ -148,7 +148,7 @@ public class HistoryDateActivity extends Activity {
 
     public void deleteHistoryList(View view) {
 
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         showDeleteHistoryListAlert();
 
@@ -227,7 +227,7 @@ public class HistoryDateActivity extends Activity {
 
     public void yesDeleteHistory(View view)
     {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         deleteHistory();
     }

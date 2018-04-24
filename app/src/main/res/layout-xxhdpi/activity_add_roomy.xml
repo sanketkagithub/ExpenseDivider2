@@ -24,7 +24,6 @@
                 android:id="@+id/tv_log_reg_title"
                 android:layout_width="@dimen/top_image"
                 android:layout_height="@dimen/top_image"
-                android:padding="2dp"
                 android:text="@string/add_roomy"
                 android:src="@drawable/add_roomy" />
 
@@ -166,6 +165,7 @@
                 android:fontFamily="serif"
                 android:onClick="saveRoomyNdeletePaymenPAytfIfIsTransfer"
                 android:text="save"
+                android:textSize="@dimen/lv_text"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
@@ -187,6 +187,7 @@
                 android:fontFamily="serif"
                 android:onClick="backToHome"
                 android:text="Back"
+                android:textSize="@dimen/lv_text"
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 

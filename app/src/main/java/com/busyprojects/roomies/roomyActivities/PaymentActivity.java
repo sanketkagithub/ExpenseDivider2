@@ -182,7 +182,7 @@ public class PaymentActivity extends Activity {
     Dialog dialogDeleteAlert;
 
     public void showSaveDeleteListAlert(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             //animationManager.animateViewForEmptyField();
@@ -466,7 +466,7 @@ public class PaymentActivity extends Activity {
 
 
     public void saveAndShowAfterTransferPayTgList(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         savePayTgListToAfterTransfer();
 
@@ -784,13 +784,13 @@ public class PaymentActivity extends Activity {
 
 
     public void cancelPayment(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         onBackPressed();
     }
 
     public void deletePayment(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
             saveNdelete();
             dialogDeleteAlert.dismiss();
@@ -801,7 +801,7 @@ public class PaymentActivity extends Activity {
     }
 
     public void cancelDelete(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         dialogDeleteAlert.dismiss();
     }
 

@@ -133,7 +133,7 @@ public class AddRoomyActivity extends Activity {
 
     public void saveRoomyNdeletePaymenPAytfIfIsTransfer(View view) {
 
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         saveRoommate();
 
     }
@@ -346,7 +346,7 @@ public class AddRoomyActivity extends Activity {
 
     public void backToHome(View view) {
 
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         onBackPressed();
     }
 

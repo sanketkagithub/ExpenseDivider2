@@ -102,4 +102,10 @@
     <dimen name="cal_bot_item_wd">195dp</dimen>
     <dimen name="roomy_lv_name_wd">200dp</dimen>
     <dimen name="pr_roomy_lv_mobile">15dp</dimen>
+    <dimen name="bm_roomy_mob_home">5dp</dimen>
+    <dimen name="ed_text_home_wd">300dp</dimen>
+    <dimen name="bell_text_tm_home">15dp</dimen>
+    <dimen name="plate_home_wd">200dp</dimen>
+    <dimen name="plate_home_ht">70dp</dimen>
+    <dimen name="lv_but_ht">25dp</dimen>
 </resources>

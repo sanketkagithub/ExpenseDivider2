@@ -85,11 +85,8 @@ PayNowActivity extends Activity {
 
 
     Spinner spinner_roomy;
-    FirebaseDatabase fb_db;
-    DatabaseReference db_ref, cc_ref, key_ref_cc, cc_inner_ref;        // TODO : one database ref
-
+    DatabaseReference db_ref;        // TODO : one database ref
     SharedPreferences sp;
-    SharedPreferences.Editor spe;
 
     AnimationManager animationManager;
     LinearLayout ll_paying_amount, ll_paying_item;
@@ -228,7 +225,7 @@ PayNowActivity extends Activity {
                 et_paying_item.setText(payingItemsLinkedList.get(position));
 
                 lv_items_suggestions.setVisibility(View.GONE);
-                animationManager.animateButton(view,context);
+                //animationManager.animateButton(view,context);
 
 
             }
@@ -273,7 +270,7 @@ PayNowActivity extends Activity {
 
     public void payNowhere(View view) {
 
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
 
         if (CheckInternetReceiver.isOnline(this)) {
             //getSelectedRoomy();
@@ -379,7 +376,7 @@ PayNowActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                animationManager.animateButton(view,context);
+                //animationManager.animateButton(view,context);
 
                 roomySelected = roomyList.get(i);
 
@@ -668,7 +665,7 @@ PayNowActivity extends Activity {
     }
 
     public void cancelPayment(View view) {
-        animationManager.animateButton(view,context);
+        //animationManager.animateButton(view,context);
         onBackPressed();
     }
 
@@ -703,6 +700,7 @@ PayNowActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
 
             dialogEffect.showDialog();
 
@@ -784,7 +782,6 @@ PayNowActivity extends Activity {
              dialogEffect.cancelDialog();
             Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
-            progressBarSuggImage.setVisibility(View.GONE);
             onBackPressed();
         }
 

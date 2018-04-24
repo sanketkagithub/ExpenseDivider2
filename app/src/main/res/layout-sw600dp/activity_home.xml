@@ -41,43 +41,41 @@
 
         <ImageView
             android:id="@+id/tv_log_reg_title"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/ed_text_home_wd"
             android:layout_height="@dimen/ed_home_ht"
             android:layout_centerHorizontal="true"
             android:ellipsize="end"
-            android:rotation="2.5"
             android:fontFamily="serif"
-            android:padding="@dimen/ed_home_iv"
             android:gravity="center"
-            android:src="@drawable/ed_main_home"/>
+            android:padding="@dimen/ed_home_iv"
+            android:rotation="2.5"
+            android:src="@drawable/ed_main_home" />
 
 
         <TextView
             android:id="@+id/tv_loggedRoomyName"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/lr_margin_top_two_iv"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
             android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
-            android:paddingBottom="@dimen/pad_name_b"
-            android:text="jhjhkjhjhjhhfghfghfhf"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:fontFamily="serif"
+            android:layout_above="@+id/tv_loggedRoomyMobile"
+            android:text="@string/sanket"
             android:textColor="@color/white_color"
             android:textSize="@dimen/tv_logged_roomy_name" />
 
         <TextView
             android:id="@+id/tv_loggedRoomyMobile"
-            android:layout_below="@+id/tv_roomy_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lr_margin_top_two_iv"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_below="@+id/tv_roomy_name"
             android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
-            android:text="jhjhkjhjhjhhfghfghfhf"
+            android:layout_marginStart="@dimen/lr_margin_top_two_iv"
+            android:layout_marginBottom="@dimen/bm_roomy_mob_home"
+            android:text="@string/_7058590000"
             android:textColor="@color/white_color"
             android:textSize="@dimen/tv_logged_roomy_name" />
 
@@ -102,7 +100,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_color_tg"
         android:gravity="center">
 
         <RelativeLayout
@@ -112,52 +109,54 @@
             android:layout_centerHorizontal="true">
 
 
-            <ImageView
-                android:scaleX="1.7"
-                android:scaleY="1.3"
-                android:src="@drawable/house1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/tv_login_static_message"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/room_no_tv_ht"
-                android:layout_marginTop="@dimen/room_no_top_mar"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:onClick="addRoomy"
-                android:text="Room No:"
-                android:textAllCaps="false"
-                android:textColor="@color/grey_color"
-                android:textSize="@dimen/home_room_text" />
-            <TextView
-                android:id="@+id/tv_login_message"
-                android:layout_below="@id/tv_login_static_message"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/room_no_tv_ht"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:onClick="addRoomy"
-                android:text="  7058590000"
-                android:textAllCaps="false"
-                android:textColor="@color/white_color"
-                android:textSize="@dimen/home_room_text" />
-
-
-
             <RelativeLayout
-                android:layout_marginRight="@dimen/lr_margin_top_two_iv"
-                android:layout_marginTop="@dimen/lr_margin_top_two_iv"
-                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_width="@dimen/plate_home_wd"
+                android:layout_height="@dimen/plate_home_ht"
+                android:background="@drawable/house1" >
+
+                <TextView
+                    android:id="@+id/tv_login_static_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/room_no_tv_ht"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:onClick="addRoomy"
+                    android:text="Room No:"
+                    android:textAllCaps="false"
+                    android:textColor="@color/grey_color"
+                    android:textSize="@dimen/home_room_text" />
+
+                <TextView
+                    android:id="@+id/tv_login_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/room_no_tv_ht"
+                    android:layout_below="@id/tv_login_static_message"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:onClick="addRoomy"
+                    android:text="  7058590000"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/home_room_text" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/iv_notification"
                 android:layout_width="@dimen/bell"
                 android:layout_height="@dimen/bell"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/lr_margin_top_two_iv"
+                android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+                android:layout_marginTop="@dimen/lr_margin_top_two_iv"
                 android:background="@drawable/notification"
-                android:onClick="showNotifiedData"
-                android:layout_marginEnd="@dimen/lr_margin_top_two_iv">
+                android:onClick="showNotifiedData">
 
                 <TextView
                     android:id="@+id/tv_notification_count"
@@ -165,19 +164,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="15dp"
                     android:gravity="center"
-                    android:text="00"
+                    android:text="@string/_00"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/bell_text" />
             </RelativeLayout>
 
         </RelativeLayout>
-
-
-
-
-
 
 
     </RelativeLayout>
