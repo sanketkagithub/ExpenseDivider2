@@ -84,7 +84,7 @@ public class RegisterLoginActivity extends Activity {
     String mobileLogin;
 
 
-    public void loginRoomyold(View view) {
+ /*   public void loginRoomyold(View view) {
 
         if (CheckInternetReceiver.isOnline(this)) {
             mobileLogin = et_login.getText().toString();
@@ -158,7 +158,7 @@ public class RegisterLoginActivity extends Activity {
 
         }
     }
-
+*/
 
     void saveRoomyMacAddressForNotification() {
         String macAddress = Helper.getMacAddr();
