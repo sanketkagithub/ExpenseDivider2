@@ -6,47 +6,44 @@
     android:layout_height="match_parent"
     tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
 
+
+
     <TextView
+        android:background="@color/main_app_colorp"
         android:id="@+id/tv_history_date"
         android:layout_width="match_parent"
         android:layout_height="@dimen/history_title"
         android:layout_centerHorizontal="true"
-        android:background="@color/main_app_colorp"
         android:ellipsize="end"
-        android:fontFamily="serif"
-        android:gravity="center"
         android:maxLines="1"
+        android:gravity="center"
+        android:textSize="@dimen/title"
+        android:fontFamily="serif"
         android:text="@string/history"
-        android:textColor="@color/white_color"
-        android:textSize="@dimen/title" />
+        android:textColor="@color/white_color" />
+
 
 
     <RelativeLayout
+        android:layout_below="@id/tv_history_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tv_history_date"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/lv_history_dates"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:divider="@color/lv_divider"
-            android:dividerHeight="@dimen/lv_div_ht">
+            android:dividerHeight="@dimen/lv_div_ht"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         </ListView>
-
         <ImageView
             android:id="@+id/iv_no_history_record_found"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/no_rec_lv"
+            android:layout_height="@dimen/no_rec_lv"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/no_record"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            android:src="@drawable/no_record" />
 
 
         <Button
@@ -58,14 +55,14 @@
             android:layout_marginBottom="@dimen/bottom_iv_margin"
             android:layout_marginEnd="@dimen/bottom_iv_margin"
             android:layout_marginRight="@dimen/bottom_iv_margin"
-            android:background="@drawable/buttons"
-            android:fontFamily="serif"
-            android:gravity="center"
-            android:onClick="deleteHistoryList"
             android:text="@string/delete_all"
+            android:background="@drawable/buttons"
+            android:gravity="center"
+            android:fontFamily="serif"
+            android:onClick="deleteHistoryList"
             android:textAllCaps="false"
-            android:textColor="@color/white_color"
-            android:textSize="@dimen/lv_text" />
+            android:textSize="@dimen/lv_text"
+            android:textColor="@color/white_color" />
 
 
     </RelativeLayout>

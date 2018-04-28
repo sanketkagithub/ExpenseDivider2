@@ -40,15 +40,10 @@
         </ListView>
         <ImageView
             android:id="@+id/iv_no_history_record_found"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/no_rec_lv"
+            android:layout_height="@dimen/no_rec_lv"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/no_record"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:src="@drawable/no_record" />
 
 
         <Button
