@@ -9,7 +9,7 @@
 
 
     <dimen name="lv_but_ht">25dp</dimen>
-    <dimen name="top_image">40dp</dimen>
+    <dimen name="top_image">30dp</dimen>
     <dimen name="et_left_image">20dp</dimen>
     <dimen name="ll_et_wd">220dp</dimen>
     <dimen name="et_text">12sp</dimen>
@@ -111,5 +111,7 @@
     <dimen name="bell_text_tm_home">15dp</dimen>
     <dimen name="plate_home_wd">100dp</dimen>
     <dimen name="plate_home_ht">70dp</dimen>
+    <dimen name="et_icon_rel_pad">5dp</dimen>
+    <dimen name="et_text_rel_pad">9dp</dimen>
 
 </resources>

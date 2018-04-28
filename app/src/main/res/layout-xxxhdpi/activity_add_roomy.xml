@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.busyprojects.roomies.roomyActivities.TransferActivity">
 
- <LinearLayout
-     android:layout_width="match_parent"
-       android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -24,7 +24,6 @@
                 android:id="@+id/tv_log_reg_title"
                 android:layout_width="@dimen/top_image"
                 android:layout_height="@dimen/top_image"
-                android:padding="2dp"
                 android:text="@string/add_roomy"
                 android:src="@drawable/add_roomy" />
 
@@ -51,7 +50,7 @@
                     android:layout_weight="5"
                     android:background="@drawable/et_drawable_back"
                     android:gravity="center"
-                    android:padding="5dp">
+                    android:padding="@dimen/et_icon_rel_pad">
 
                     <ImageView
                         android:id="@+id/iv_name"
@@ -66,7 +65,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingLeft="9dp">
+                    android:paddingLeft="@dimen/et_text_rel_pad">
 
                     <EditText
                         android:id="@+id/et_name"
@@ -112,7 +111,7 @@
                     android:layout_weight="5"
                     android:background="@drawable/et_drawable_back"
                     android:gravity="center"
-                    android:padding="5dp">
+                    android:padding="@dimen/et_icon_rel_pad">
 
                     <ImageView
                         android:id="@+id/iv_call"
@@ -127,7 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingLeft="9dp">
+                    android:paddingLeft="@dimen/et_text_rel_pad">
 
                     <EditText
                         android:id="@+id/et_mobile"
@@ -166,6 +165,8 @@
                 android:fontFamily="serif"
                 android:onClick="saveRoomyNdeletePaymenPAytfIfIsTransfer"
                 android:text="save"
+                android:textSize="@dimen/but_text"
+
                 android:textAllCaps="false"
                 android:textColor="@color/white_color" />
 
@@ -188,6 +189,8 @@
                 android:onClick="backToHome"
                 android:text="Back"
                 android:textAllCaps="false"
+                android:textSize="@dimen/but_text"
+
                 android:textColor="@color/white_color" />
 
         </RelativeLayout>

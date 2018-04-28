@@ -108,4 +108,6 @@
     <dimen name="plate_home_wd">200dp</dimen>
     <dimen name="plate_home_ht">70dp</dimen>
     <dimen name="lv_but_ht">25dp</dimen>
+    <dimen name="et_icon_rel_pad">5dp</dimen>
+    <dimen name="et_text_rel_pad">9dp</dimen>
 </resources>
