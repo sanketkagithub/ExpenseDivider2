@@ -6,7 +6,7 @@
     <dimen name="but_w">200dp</dimen>
     <dimen name="date">10sp</dimen>
     <dimen name="cursor_width">1dp</dimen>
-    <dimen name="top_image">40dp</dimen>
+    <dimen name="top_image">27dp</dimen>
     <dimen name="et_left_image">20dp</dimen>
     <dimen name="ll_et_wd">220dp</dimen>
     <dimen name="et_text">12sp</dimen>

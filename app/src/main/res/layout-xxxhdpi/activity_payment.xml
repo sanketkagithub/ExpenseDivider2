@@ -199,6 +199,7 @@
                             android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
                             android:text="Total"
+                            android:fontFamily="serif"
                             android:textSize="@dimen/calculated_bottom_text" />
 
                         <TextView
@@ -206,6 +207,7 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="serif"
                             android:text="00000₹"
                             android:textSize="@dimen/calculated_bottom_text" />
 
@@ -224,6 +226,7 @@
                             style="@style/payment_calculated_text"
                             android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
+                            android:fontFamily="serif"
                             android:text="Roomies "
                             android:textSize="@dimen/calculated_bottom_text" />
 
@@ -232,6 +235,7 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="serif"
                             android:text="00"
                             android:textSize="@dimen/calculated_bottom_text"/>
 
@@ -249,6 +253,7 @@
                             style="@style/payment_calculated_text"
                             android:layout_width="@dimen/cal_bot_item_wd"
                             android:layout_height="wrap_content"
+                            android:fontFamily="serif"
                             android:text="Each "
                             android:textSize="@dimen/calculated_bottom_text" />
 
@@ -257,6 +262,7 @@
                             style="@style/payment_calculated_text_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="serif"
                             android:text="00₹"
                             android:textSize="@dimen/calculated_bottom_text" />
 

@@ -96,7 +96,7 @@
     <dimen name="pl_tg_name">3dp</dimen>
     <dimen name="pad_lv_tg_back">2dp</dimen>
     <dimen name="lv_but_wd">120dp</dimen>
-    <dimen name="del_all_but_text">10sp</dimen>
+    <dimen name="del_all_but_text">13sp</dimen>
     <dimen name="ll_ht_paymnt_01">60dp</dimen>
     <dimen name="lv_ht_paymnt">200dp</dimen>
     <dimen name="scrollbar">10dp</dimen>
