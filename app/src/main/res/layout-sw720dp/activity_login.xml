@@ -18,10 +18,8 @@
 
         <TextView
             android:id="@+id/tv_log_reg_title"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             android:gravity="center"
@@ -52,7 +50,7 @@
                 android:layout_weight="5"
                 android:background="@drawable/et_drawable_back"
                 android:gravity="center"
-                android:padding="5dp">
+                android:padding="@dimen/et_icon_rel_pad">
 
                 <ImageView
                     android:layout_width="@dimen/et_left_image"
