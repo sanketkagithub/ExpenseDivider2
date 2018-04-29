@@ -113,5 +113,6 @@
     <dimen name="plate_home_ht">70dp</dimen>
     <dimen name="et_icon_rel_pad">5dp</dimen>
     <dimen name="et_text_rel_pad">9dp</dimen>
+    <dimen name="sel_roomy_spin_left_right_padding">10dp</dimen>
 
 </resources>

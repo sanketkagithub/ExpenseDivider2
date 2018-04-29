@@ -113,4 +113,5 @@
     <dimen name="lv_but_ht">35dp</dimen>
     <dimen name="et_icon_rel_pad">5dp</dimen>
     <dimen name="et_text_rel_pad">9dp</dimen>
+    <dimen name="sel_roomy_spin_left_right_padding">10dp</dimen>
 </resources>

@@ -24,22 +24,20 @@
                 android:id="@+id/tv_log_reg_title"
                 android:layout_width="@dimen/top_image"
                 android:layout_height="@dimen/top_image"
-                android:padding="2dp"
-                android:text="@string/add_roomy"
                 android:src="@drawable/pay"
-                android:textColor="@color/white_color"
-                android:textSize="30sp" />
+                android:text="@string/add_roomy"
+                android:textColor="@color/white_color" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rel_1"
-            android:layout_below="@+id/rel_iv_roomy_home"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
+            android:layout_below="@+id/rel_iv_roomy_home"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingStart="10dp">
+            android:paddingLeft="@dimen/sel_roomy_spin_left_right_padding"
+            android:paddingStart="@dimen/sel_roomy_spin_left_right_padding">
 
             <Spinner
                 android:id="@+id/spinner_roomy"
@@ -56,12 +54,12 @@
 
         <RelativeLayout
             android:id="@+id/rel_sugg"
-            android:layout_below="@id/rel_1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
+            android:layout_below="@id/rel_1"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingStart="10dp">
+            android:paddingLeft="@dimen/sel_roomy_spin_left_right_padding"
+            android:paddingStart="@dimen/sel_roomy_spin_left_right_padding">
 
             <LinearLayout
                 android:id="@+id/ll_paying_item"
@@ -76,7 +74,7 @@
                     android:layout_weight="5"
                     android:background="@drawable/et_drawable_back"
                     android:gravity="center"
-                    android:padding="5dp">
+                    android:padding="@dimen/et_icon_rel_pad">
 
                     <ImageView
                         android:id="@+id/iv_paying_item"
@@ -91,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingLeft="9dp">
+                    android:paddingLeft="@dimen/et_text_rel_pad">
 
                     <EditText
                         android:id="@+id/et_paying_item"
@@ -100,7 +98,7 @@
                         android:ems="10"
                         android:fontFamily="serif"
                         android:hint="Paying Item"
-                        android:inputType="textAutoComplete"
+                        android:inputType="textNoSuggestions"
                         android:textColor="@color/main_app_colorp"
                         android:textColorHint="@color/hint"
                         android:textSize="@dimen/et_text" />
@@ -112,11 +110,12 @@
             </LinearLayout>
 
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rel_main_paying_item_mage"
-            android:layout_below="@+id/rel_sugg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_image"
+            android:layout_below="@+id/rel_sugg"
             android:gravity="center">
 
             <ImageView
@@ -124,6 +123,7 @@
                 android:layout_width="@dimen/pay_image_iv"
                 android:layout_height="@dimen/pay_image_iv"
                 android:src="@drawable/pay" />
+
             <ProgressBar
                 android:id="@+id/progressBarSuggImage"
                 style="?android:attr/progressBarStyle"
@@ -131,11 +131,12 @@
                 android:layout_height="@dimen/pay_image_iv" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rel_2"
-            android:layout_below="@+id/rel_main_paying_item_mage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
+            android:layout_below="@+id/rel_main_paying_item_mage"
             android:gravity="center">
 
             <LinearLayout
@@ -151,7 +152,7 @@
                     android:layout_weight="5"
                     android:background="@drawable/et_drawable_back"
                     android:gravity="center"
-                    android:padding="5dp">
+                    android:padding="@dimen/et_icon_rel_pad">
 
                     <ImageView
                         android:id="@+id/iv_amount_to_pay"
@@ -166,7 +167,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingLeft="9dp">
+                    android:paddingLeft="@dimen/et_text_rel_pad">
 
                     <EditText
                         android:id="@+id/et_amount"
@@ -189,13 +190,11 @@
         </RelativeLayout>
 
 
-
-
         <RelativeLayout
             android:id="@+id/rel_pay_roomy"
-            android:layout_below="@id/rel_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
+            android:layout_below="@id/rel_2"
             android:gravity="center">
 
             <Button
@@ -206,17 +205,17 @@
                 android:fontFamily="serif"
                 android:onClick="payNowhere"
                 android:text="Pay"
-                android:textSize="@dimen/but_text"
                 android:textAllCaps="false"
-                android:textColor="@color/white_color" />
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/but_text" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rel_cancel"
-            android:layout_below="@id/rel_pay_roomy"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
+            android:layout_below="@id/rel_pay_roomy"
             android:gravity="center">
 
             <Button
@@ -225,21 +224,21 @@
                 android:layout_height="@dimen/button_ht"
                 android:background="@drawable/buttons"
                 android:fontFamily="serif"
-                android:textSize="@dimen/but_text"
                 android:onClick="cancelPayment"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textColor="@color/white_color" />
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/but_text" />
 
         </RelativeLayout>
 
 
         <ListView
-            android:visibility="gone"
             android:id="@+id/lv_items_suggestions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/rel_sugg"/>
+            android:layout_above="@+id/rel_sugg"
+            android:visibility="gone" />
 
 
     </RelativeLayout>
