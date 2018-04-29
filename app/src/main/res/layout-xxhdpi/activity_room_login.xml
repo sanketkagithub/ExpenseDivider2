@@ -20,8 +20,8 @@
 
         <TextView
             android:id="@+id/tv_log_reg_title"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_centerInParent="true"
@@ -64,18 +64,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingLeft="9dp">
+                android:paddingLeft="@dimen/et_text_rel_pad">
 
                 <EditText
                     android:id="@+id/et_log_room_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textColor="@color/white_color"
                     android:fontFamily="serif"
                     android:hint="@string/room_no"
                     android:inputType="phone"
                     android:maxLength="10"
+                    android:textColor="@color/white_color"
                     android:gravity="center"
                     android:textColorHint="@color/hint"
                     android:textSize="@dimen/et_text" />
