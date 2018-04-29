@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingLeft="9dp">
+                android:paddingLeft="@dimen/et_text_rel_pad">
 
                 <EditText
                     android:id="@+id/et_reg_room_no"
@@ -64,9 +64,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="center"
-                    android:textColor="@color/white_color"
                     android:fontFamily="serif"
                     android:hint="@string/room_no"
+                    android:textColor="@color/white_color"
                     android:inputType="phone"
                     android:maxLength="10"
                     android:textColorHint="@color/hint"

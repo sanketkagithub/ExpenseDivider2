@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingLeft="9dp">
+                android:paddingLeft="@dimen/et_text_rel_pad">
 
                 <EditText
                     android:id="@+id/et_reg_room_no"
