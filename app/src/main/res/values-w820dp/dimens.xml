@@ -111,4 +111,6 @@
     <dimen name="et_icon_rel_pad">5dp</dimen>
     <dimen name="et_text_rel_pad">9dp</dimen>
     <dimen name="sel_roomy_spin_left_right_padding">10dp</dimen>
+    <dimen name="spin_text_ht">30dp</dimen>
+    <dimen name="select_payee_spin_txt_mr">5dp</dimen>
 </resources>

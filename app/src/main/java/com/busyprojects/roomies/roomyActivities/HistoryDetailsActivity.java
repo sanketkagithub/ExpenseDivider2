@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,6 +65,12 @@ public class HistoryDetailsActivity extends Activity {
         totalRoomates = sp.getInt(SessionManager.TOTAL_ROOMMATES, 0);
         lv_payments = findViewById(R.id.lv_payments);
         lv_take_give = findViewById(R.id.lv_take_give);
+
+       ImageView iv_no_transfer_record_found = findViewById(R.id.iv_no_transfer_record_found);
+      ImageView  iv_no_payment_record_found = findViewById(R.id.iv_no_payment_record_found);
+
+      iv_no_payment_record_found.setVisibility(View.GONE);
+      iv_no_transfer_record_found.setVisibility(View.GONE);
 
         tv_total_amount = findViewById(R.id.tv_total_amount);
         TextView tv_transaction = findViewById(R.id.tv_transaction);

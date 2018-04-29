@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="@dimen/button_ht"
     android:gravity="center"
-    android:layout_margin="5dp"
     android:text="jjhbjhbjhbhj"
-    android:ellipsize="end"
-    android:maxLines="1"
+    android:fontFamily="serif"
     android:textSize="@dimen/et_text"
     android:background="@drawable/roomy_spinner_back"
     android:id="@+id/tv_spin_roomy_name"
