@@ -88,6 +88,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder = new ViewHolderTgAt();
 
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert li != null;
             convertView = li.inflate(R.layout.row_take_give_payment_at, parent, false);
             viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name_gt);
             viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount_gt);
@@ -264,6 +265,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
         Button but_transferMoney = v.findViewById(R.id.but_transferMoney);
+        but_transferMoney.setBackgroundColor(Color.parseColor(appColor));
 
 
         but_transferMoney.setOnClickListener(new View.OnClickListener() {
