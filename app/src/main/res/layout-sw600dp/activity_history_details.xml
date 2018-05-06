@@ -63,7 +63,7 @@
                 android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
                 android:src="@drawable/no_record"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -124,7 +124,7 @@
                 android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
                 android:src="@drawable/no_record"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout

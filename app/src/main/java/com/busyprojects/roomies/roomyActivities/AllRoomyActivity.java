@@ -61,6 +61,7 @@ public class AllRoomyActivity extends Activity {
     ImageView iv_no_history_record_found;
 
 
+    Button but_delete_all_roomy;
     boolean isLAstOneDelete;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -78,7 +79,7 @@ public class AllRoomyActivity extends Activity {
 
 
         lv_all_roomy = findViewById(R.id.lv_all_roomy);
-       Button but_delete_all_roomy = findViewById(R.id.but_delete_all_roomy);
+      but_delete_all_roomy  = findViewById(R.id.but_delete_all_roomy);
         tv_total_roomy_count = findViewById(R.id.tv_total_roomy_count);
         iv_no_history_record_found = findViewById(R.id.iv_no_history_record_found);
         TextView tv_roomy_title = findViewById(R.id.tv_roomy_title);
@@ -95,7 +96,7 @@ public class AllRoomyActivity extends Activity {
         setPAyingRoomyMobileListInSession();
 
         try {
-            but_delete_all_roomy.setBackgroundColor(Color.parseColor(appColor));
+          //  but_delete_all_roomy.setBackgroundColor(Color.parseColor(appColor));
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -150,6 +151,7 @@ public class AllRoomyActivity extends Activity {
                             lv_all_roomy.setAdapter(roomySpinnerAdapterr);
 
                             tv_total_roomy_count.setText("00");
+                            but_delete_all_roomy.setVisibility(View.GONE);
                         }
                         //          getSelectedRoomy();
                     }
@@ -183,7 +185,7 @@ public class AllRoomyActivity extends Activity {
             //animationManager.animateViewForEmptyField();
             dialogDeleteAlert = new Dialog(this);
             dialogDeleteAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            View v = LayoutInflater.from(context).inflate(R.layout.delete_roomy_alert, null);
+            View v = LayoutInflater.from(context).inflate(R.layout.delete_all_roomy_alert, null);
             dialogDeleteAlert.setContentView(v);
             dialogDeleteAlert.setCancelable(false);
             dialogDeleteAlert.show();

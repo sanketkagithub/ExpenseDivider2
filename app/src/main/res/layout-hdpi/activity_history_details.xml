@@ -48,7 +48,7 @@
             android:gravity="center"
             android:paddingBottom="@dimen/pb_paymnt_lv0">
 
-        <ListView
+            <ListView
                 android:id="@+id/lv_payments"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lv_ht_paymnt"
@@ -63,7 +63,7 @@
                 android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
                 android:src="@drawable/no_record"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -83,7 +83,7 @@
                 android:gravity="center">
 
 
-            <TextView
+                <TextView
                     android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/del_tran_title_back_ht"
@@ -124,7 +124,7 @@
                 android:layout_height="@dimen/no_rec_lv"
                 android:layout_centerInParent="true"
                 android:src="@drawable/no_record"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -145,7 +145,7 @@
                     android:id="@+id/ll_tot_each_roomy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                   android:background="@drawable/calculation_back"
+                    android:background="@drawable/calculation_back"
                     android:orientation="vertical">
 
 

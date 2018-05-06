@@ -118,8 +118,14 @@ public class PaymentActivity extends Activity {
         dialogEffect = new DialogEffect(this);
       //  dialogEffect.showDialog();
 
-        getIsTransferRemote();
+        try {
 
+            getIsTransferRemote();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         lv_payments = findViewById(R.id.lv_payments);
         lv_take_give = findViewById(R.id.lv_take_give);
@@ -707,6 +713,7 @@ public class PaymentActivity extends Activity {
                             } else {
 
 
+                                but_transfer_money.setVisibility(View.GONE);
                                 lv_take_give.setVisibility(View.GONE);
                                 iv_no_transfer.setVisibility(View.VISIBLE);
                                 lv_take_give.setVisibility(View.GONE);
@@ -832,10 +839,18 @@ public class PaymentActivity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         dialogEffect.cancelDialog();
-                        isTransferRemote = dataSnapshot.getValue(Boolean.class);
 
-                        checkTransferNsetPayTgList();
+                        try {
 
+                            isTransferRemote = dataSnapshot.getValue(Boolean.class);
+
+                            checkTransferNsetPayTgList();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+
+                            isTransferRemote = false;
+                        }
 
                     }
 

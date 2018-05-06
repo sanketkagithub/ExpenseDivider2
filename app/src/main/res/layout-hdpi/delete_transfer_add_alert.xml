@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
 
 
@@ -10,13 +11,12 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="@drawable/whiite_del_back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/del_alert_wd"
+        android:layout_height="@dimen/del_alert_ht">
 
     <TextView
         android:id="@+id/tv_del_sel_roomy_alert"
         android:gravity="center"
-        android:ellipsize="end"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

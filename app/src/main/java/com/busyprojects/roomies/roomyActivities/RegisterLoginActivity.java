@@ -297,7 +297,6 @@ if (CheckInternetReceiver.isOnline(this)) {
             enterRoomLogin();
         }
 
-        Toast.makeText(context, "" + RuntimePermissionsCs.hasPermissions(this, PERMISSIONS), Toast.LENGTH_SHORT).show();
     }
 
     void enterRoomLogin() {

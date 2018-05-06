@@ -16,7 +16,7 @@
     <dimen name="bell">35dp</dimen>
     <dimen name="pay_now_item_ht">85dp</dimen>
     <dimen name="pay_image">100dp</dimen>
-    <dimen name="bell_text">15sp</dimen>
+    <dimen name="bell_text">14sp</dimen>
     <dimen name="ll_et_ht">40dp</dimen>
     <dimen name="title">20sp</dimen>
     <dimen name="launcher_title">30sp</dimen>
@@ -42,7 +42,7 @@
     <dimen name="call_button_wh">50dp</dimen>
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">300dp</dimen>
-    <dimen name="del_alert_ht">100dp</dimen>
+    <dimen name="del_alert_ht">130dp</dimen>
     <dimen name="profile_lv">23dp</dimen>
     <dimen name="roomy_lv_lef_padd">13dp</dimen>
     <dimen name="prof_pad">9dp</dimen>
@@ -108,10 +108,12 @@
     <dimen name="bm_roomy_mob_home">5dp</dimen>
     <dimen name="ed_text_home_wd">300dp</dimen>
     <dimen name="bell_text_tm_home">15dp</dimen>
-    <dimen name="plate_home_wd">120dp</dimen>
-    <dimen name="plate_home_ht">70dp</dimen>
+    <dimen name="plate_home_wd">160dp</dimen>
+    <dimen name="plate_home_ht">90dp</dimen>
     <dimen name="lv_but_ht">35dp</dimen>
     <dimen name="et_icon_rel_pad">5dp</dimen>
     <dimen name="et_text_rel_pad">9dp</dimen>
     <dimen name="sel_roomy_spin_left_right_padding">10dp</dimen>
+    <dimen name="spin_text_ht">30dp</dimen>
+    <dimen name="select_payee_spin_txt_mr">5dp</dimen>
 </resources>

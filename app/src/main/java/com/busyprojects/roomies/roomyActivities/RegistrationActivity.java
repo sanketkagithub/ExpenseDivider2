@@ -22,6 +22,7 @@ import com.busyprojects.roomies.helper.DialogEffect;
 import com.busyprojects.roomies.helper.Helper;
 
 import com.busyprojects.roomies.helper.SessionManager;
+import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.helper.ToastManager;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
@@ -37,29 +38,37 @@ import java.util.List;
 public class RegistrationActivity extends Activity {
     Context context = RegistrationActivity.this;
 
-    EditText  et_reg_name,et_reg_mob;
+    EditText et_reg_name, et_reg_mob;
     TextView tv_log_reg_title;
-
+    TinyDb tinyDb;
 
 
     DatabaseReference db_ref;
 
     DialogEffect dialogEffect;
 
+    // String roomNoInSession;
+
     SharedPreferences sp;
     SharedPreferences.Editor spe;
-private AnimationManager animationManager;
+    private AnimationManager animationManager;
     String roomNoInSession;
 
 
-   // boolean CheckInternetReceiver.isOnline(this);
-   // RelativeLayout rel_login_reg, rel_login, rel_register;
+    // boolean CheckInternetReceiver.isOnline(this);
+    // RelativeLayout rel_login_reg, rel_login, rel_register;
 
+
+    ArrayList<String> roomyMobList;
     boolean isTransfer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        tinyDb = new TinyDb(context);
+        roomNoInSession = Helper.getRoomNoFromSession(context);
+        roomyMobList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
 
         roomNoInSession = Helper.getRoomNoFromSession(context);
 
@@ -78,7 +87,7 @@ private AnimationManager animationManager;
 
         tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
-takeRemoteIsTransfer();
+        takeRemoteIsTransfer();
       /*  rel_login_reg = findViewById(R.id.rel_log_reg);
         rel_login = findViewById(R.id.rel_login);
         rel_register = findViewById(R.id.rel_register);
@@ -90,244 +99,42 @@ takeRemoteIsTransfer();
     }
 
 
-
-
-
     String mobileLogin;
 
 
-
-
-/*
-    public void loginRoomyold(View view) {
-
-ani
+    public void registerRoomy(View view) {
+        //animationManager.animateButton(view,context);
         if (CheckInternetReceiver.isOnline(this)) {
-            mobileLogin = et_reg_room_no.getText().toString();
-            rooomyMobile = et_reg_mob.getText().toString();
+            final String roomyMobile = et_reg_mob.getText().toString().trim();
+            final String roomyName = et_reg_name.getText().toString().trim();
 
-            if (mobileLogin.equals("")||rooomyMobile.equals("")) {
-
+            if (roomyMobile.equals("") || roomyName.equals("")) {
                 Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
-
-
             } else {
 
-                dialogEffect.showDialog();
-                final List<String> userListMobile = new ArrayList<>();
-                // TODO: 1/28/2018 validate login mobile
-                db_ref.child(Helper.USER)
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                dialogEffect.cancelDialog();
-                                userListMobile.clear();
-
-                                for (DataSnapshot dataSnapshot1 :
-                                        dataSnapshot.getChildren()) {
-                                    User user = dataSnapshot1.getValue(User.class);
-                                    userListMobile.add(user.getMobile());
-                                }
-
-                                if (userListMobile.contains(mobileLogin)) {
-
-                                    // TODO: 1/28/2018 save main roomate (user) in session
-                                    spe = sp.edit();
-                                    spe.putString(SessionManager.MOBILE, mobileLogin);
-                                    spe.apply();
-
-                                    SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
-
-                                    spe = spUc.edit();
-                                    spe.putString(SessionManager.LOGGED_MOBILE_UC, mobileLogin);
-                                    spe.apply();
+             //   if (CheckInternetReceiver.isOnline(context)) {
 
 
-                                    saveRoomyMacAddressForNotification();
+                    registerUniqueRoomy(roomyName,roomyMobile);
 
-
-                                    startActivity(new Intent(context, HomeActivity.class));
-
-
-                                } else {
-
-                                    // TODO: 3/24/2018  open admin
-                                    if (mobileLogin.equals("0000"))
-                                    {
-
-
-
-                                    }
-                                    else {
-                                        Toast.makeText(context, "Invalid Login", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Toast.makeText(context, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+               // } else {
+                //    Helper.showCheckInternet(context);
+                //}
 
             }
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
 
         }
     }
-*/
 
 
-/*
-    void saveRoomyMacAddressForNotification() {
-        String macAddress = Helper.getMacAddr();
-
-        if (macAddress.equals("")) {
-            macAddress = "emulatorMacAdd";
-        }
-        spe = sp.edit();
-        spe.putString(SessionManager.MAC_ADDRESS, macAddress);
-        spe.apply();
-
-
-       SharedPreferences spUc = getSharedPreferences(SessionManager.FILE_UC,MODE_PRIVATE);
-        int payNotfSize = spUc.getInt(SessionManager.PNID_LIST, 0);
-
-        System.out.println(payNotfSize + " payNotfSize ");
-
-        String pnId = Helper.randomString(10);
-        PaymentNotification paymentNotification = new PaymentNotification();
-        paymentNotification.setMacAddress(macAddress);
-        paymentNotification.setMobileLogged(mobileLogin);
-        paymentNotification.setPnid(pnId);
-
-        HashMap<String, Payment> paymentMap = new HashMap<>();
-
-        // TODO: 3/1/2018  dummy Payment
-        Payment payment = new Payment();
-        payment.setPid("xdvxcvcxcv");
-        payment.setMobileLogged(mobileLogin);
-
-        for (int i = 0; i < payNotfSize; i++) {
-            paymentMap.put(i + "defaultKeys", payment);
-        }
-
-
-        paymentNotification.setPaymentList(paymentMap);
-
-        db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(macAddress)
-                .setValue(paymentNotification);
-
-
-        //getRoomsAllMacAddressListInSession();
-
-
-    }
-*/
-
-    public void registerRoomy(View view) {
-
-        //animationManager.animateButton(view,context);
-if (CheckInternetReceiver.isOnline(this)) {
-    final String roomyReg = et_reg_mob.getText().toString().trim();
-    final String roomyName = et_reg_name.getText().toString().trim();
-
-    if (roomyReg.equals("")||roomyName.equals("")) {
-        Toast.makeText(context, "Please Check Empty Fields", Toast.LENGTH_SHORT).show();
-    } else {
-
-        if (CheckInternetReceiver.isOnline(context)) {
-
-
-            dialogEffect.showDialog();
-
-            db_ref.child(Helper.USER)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            dialogEffect.cancelDialog();
-
-                            List<String> userList = new ArrayList<>();
-
-                            for (DataSnapshot dataSnapshot1 :
-                                    dataSnapshot.getChildren()) {
-
-                                User userDb = dataSnapshot1.getValue(User.class);
-
-                                assert userDb != null;
-                                userList.add(userDb.getMobile());
-
-                            }
-
-
-                            if(userList.contains(roomNoInSession)) {
-                                //      Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT).show();
-
-
-
-                            } else {
-
-                                // TODO: 2/25/2018 save room
-                                String uid = Helper.randomString(10);
-                                User user = new User();
-                                user.setUid(uid);
-                                user.setMobile(roomNoInSession);
-
-
-                                // saveRoomNo(User)
-                                db_ref.child(Helper.USER).child(uid)
-                                        .setValue(user);
-                                Toast.makeText(context, "New Room Registered Successfully", Toast.LENGTH_SHORT).show();
-
-
-
-                            }
-
-                            saveRoommate();
-
-                            Toast.makeText(context, "Roommate Registered Successfully", Toast.LENGTH_SHORT).show();
-
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-
-        }else
-        {
-            Helper.showCheckInternet(context);
-        }
-
-    }
-
-}else
-{
-    Helper.showCheckInternet(context);
-
-}
-    }
-
-
-    void saveRoommate()
-    {
+    void saveRoommate() {
 
         if (CheckInternetReceiver.isOnline(this)) {
 
-
-            dialogEffect.showDialog();
 
             String rid = Helper.randomString(10);
             String nameS = et_reg_name.getText().toString();
@@ -337,76 +144,76 @@ if (CheckInternetReceiver.isOnline(this)) {
 
             if (nameS.equals("") || mobileS.equals("")) {
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
-                if (nameS.equals(""))
-                {
+                if (nameS.equals("")) {
                     et_reg_name.setText("");
-                    animationManager.animateViewForEmptyField(et_reg_name,context);
+                    animationManager.animateViewForEmptyField(et_reg_name, context);
                 }
 
 
-                if (mobileS.equals(""))
-                {
+                if (mobileS.equals("")) {
                     et_reg_mob.setText("");
-                    animationManager.animateViewForEmptyField(et_reg_mob,context);
+                    animationManager.animateViewForEmptyField(et_reg_mob, context);
                 }
-
-
-
 
 
             } else {
-                dialogEffect.showDialog();
 
-                // TODO: 1/27/2018 save unique roomy here
-                Roomy roomy = new Roomy();
-                roomy.setMobile(mobileS);
-                roomy.setName(nameS);
-                roomy.setRid(rid);
-                roomy.setMacAddress(Helper.getMacAddr());
-                roomy.setMobileLogged(roomNoInSession);
-                roomy.setRegistrationDateTime(registrationDateTime);
+                if (!isRoomyMobileExist(mobileS)) {
 
+                    dialogEffect.showDialog();
 
-
-
-                // TODO: 3/25/2018 delete pp if isTransfered
-                if (isTransfer || isRemoteTransfer )
-                {
-
-                    showAfterTransfersDeleteAlert(roomy);
-
-                }else
-                {
-                    db_ref.child(Helper.ROOMY).child(rid)
-                            .setValue(roomy);
-                    dialogEffect.cancelDialog();
-
-                    ToastManager.showToast(context, Helper.REGISTERD);
+                    // TODO: 1/27/2018 save unique roomy here
+                    Roomy roomy = new Roomy();
+                    roomy.setMobile(mobileS);
+                    roomy.setName(nameS);
+                    roomy.setRid(rid);
+                    roomy.setMacAddress(Helper.getMacAddr());
+                    roomy.setMobileLogged(roomNoInSession);
+                    roomy.setRegistrationDateTime(registrationDateTime);
 
 
-                    et_reg_mob.setText("");
-                    et_reg_name.setText("");
-                    onBackPressed();
+                    // TODO: 3/25/2018 delete pp if isTransfered
+                    if (isTransfer || isRemoteTransfer) {
 
-                    Helper.setRoomyNameIsSession(context,nameS);
-                    Helper.setRoomyMobileIsSession(context,mobileS);
-                    startActivity(new Intent(context,HomeActivity.class));
+                        showAfterTransfersDeleteAlert(roomy);
 
+                    } else {
+                        db_ref.child(Helper.ROOMY).child(rid)
+                                .setValue(roomy);
+
+                        ToastManager.showToast(context, Helper.REGISTERD);
+
+
+                        dialogEffect.cancelDialog();
+
+                        et_reg_mob.setText("");
+                        et_reg_name.setText("");
+                        // onBackPressed();
+
+                        Helper.setRoomyNameIsSession(context, nameS);
+                        Helper.setRoomyMobileIsSession(context, mobileS);
+                        startActivity(new Intent(context, HomeActivity.class));
+
+                    }
+
+
+                } else {
+                    Toast.makeText(context, "Mobile number already exist.", Toast.LENGTH_SHORT).show();
                 }
 
+                // deletePaymentNpayTgAtIfTransfered();
 
-
-                dialogEffect.cancelDialog();
+                Helper.showCheckInternet(this);
             }
-
-            // deletePaymentNpayTgAtIfTransfered();
-        }else
-        {
-            Helper.showCheckInternet(this);
         }
-
     }
 
+
+    boolean isRoomyMobileExist(String roomyMobile) {
+
+        return roomyMobList.contains(roomyMobile);
+
+    }
 
     Dialog dialodDeleteTranserAlert;
 
@@ -418,8 +225,7 @@ if (CheckInternetReceiver.isOnline(this)) {
 
             try {
                 dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -433,13 +239,12 @@ if (CheckInternetReceiver.isOnline(this)) {
                 public void onClick(View v) {
 
 
-
                     deleteAfterExistingTransfer(roomy);
                     // TODO: 2/25/2018 reset transfer session
                     spe = sp.edit();
                     spe.putBoolean(SessionManager.IS_TRANSFER, false);
                     spe.apply();
-                    Helper.setRemoteIstransfer(roomy.getMobileLogged(),false);
+                    Helper.setRemoteIstransfer(roomy.getMobileLogged(), false);
 
 
                     // TODO: 3/31/2018 then as usual save roomy
@@ -450,10 +255,10 @@ if (CheckInternetReceiver.isOnline(this)) {
 
                     Toast.makeText(context, "Transfered payments are Deleted  and new roomy is saved", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(context,HomeActivity.class));
+                    startActivity(new Intent(context, HomeActivity.class));
 
-                   // et_mobile.setText("");
-                   // et_name.setText("");
+                    // et_mobile.setText("");
+                    // et_name.setText("");
                     //onBackPressed();
 
                 }
@@ -478,7 +283,6 @@ if (CheckInternetReceiver.isOnline(this)) {
 
         }
     }
-
 
 
     void deleteAfterExistingTransfer(final Roomy roomy) {
@@ -515,7 +319,7 @@ if (CheckInternetReceiver.isOnline(this)) {
                         spe = sp.edit();
                         spe.putBoolean(SessionManager.IS_TRANSFER, false);
                         spe.apply();
-                        Helper.setRemoteIstransfer(roomy.getMobileLogged(),false);
+                        Helper.setRemoteIstransfer(roomy.getMobileLogged(), false);
 
                         e.printStackTrace();
                     }
@@ -527,22 +331,15 @@ if (CheckInternetReceiver.isOnline(this)) {
                 }
             });
 
-        }else
-        {
+        } else {
             Helper.showCheckInternet(context);
         }
     }
 
 
-
-
-
-
-
-
     boolean isRemoteTransfer;
-    void takeRemoteIsTransfer()
-    {
+
+    void takeRemoteIsTransfer() {
         dialogEffect.showDialog();
         db_ref.child(Helper.IS_TRANSFER)
                 .child(roomNoInSession)
@@ -551,13 +348,12 @@ if (CheckInternetReceiver.isOnline(this)) {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         dialogEffect.cancelDialog();
 
-                       try {
-                           isRemoteTransfer = dataSnapshot.getValue(Boolean.class);
-                       }catch (Exception e)
-                       {
-                           e.printStackTrace();
-                           isRemoteTransfer = false;
-                       }
+                        try {
+                            isRemoteTransfer = dataSnapshot.getValue(Boolean.class);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            isRemoteTransfer = false;
+                        }
 
 
                     }
@@ -569,4 +365,94 @@ if (CheckInternetReceiver.isOnline(this)) {
                 });
     }
 
+
+    void registerUniqueRoomy(String roomyName, String roomyMobile)
+    {
+        if (roomyMobList.contains(roomyMobile)) {
+            Toast.makeText(context, roomyMobile + " already exist.", Toast.LENGTH_SHORT).show();
+        } else {
+    //        if (CheckInternetReceiver.isOnline(this)) {
+                String rid = Helper.randomString(10);
+//                String nameS = et_reg_name.getText().toString();
+//                String mobileS = et_reg_mob.getText().toString();
+                String registrationDateTime = Helper.getCurrentDateTime();
+
+
+               /* if (nameS.equals("") || mobileS.equals("")) {
+                    ToastManager.showToast(context, Helper.EMPTY_FIELD);
+                    if (nameS.equals("")) {
+                        et_reg_name.setText("");
+                        animationManager.animateViewForEmptyField(et_reg_name, context);
+                    }
+
+
+                    if (mobileS.equals("")) {
+                        et_reg_mob.setText("");
+                        animationManager.animateViewForEmptyField(et_reg_mob, context);
+                    }
+*/
+
+                // } else {
+
+                //   if (!isRoomyMobileExist(mobileS)) {
+
+                dialogEffect.showDialog();
+
+                // TODO: 1/27/2018 save unique roomy here
+                Roomy roomy = new Roomy();
+                roomy.setMobile(roomyMobile);
+                roomy.setName(roomyName);
+                roomy.setRid(rid);
+                roomy.setMacAddress(Helper.getMacAddr());
+                roomy.setMobileLogged(roomNoInSession);
+                roomy.setRegistrationDateTime(registrationDateTime);
+
+
+                // TODO: 3/25/2018 delete pp if isTransfered
+                if (isTransfer || isRemoteTransfer) {
+
+                    showAfterTransfersDeleteAlert(roomy);
+
+                } else {
+                    db_ref.child(Helper.ROOMY).child(rid)
+                            .setValue(roomy);
+
+                    ToastManager.showToast(context, Helper.REGISTERD);
+
+
+                    dialogEffect.cancelDialog();
+
+                    et_reg_mob.setText("");
+                    et_reg_name.setText("");
+                    // onBackPressed();
+
+                    Helper.setRoomyNameIsSession(context, roomyName);
+                    Helper.setRoomyMobileIsSession(context, roomyMobile);
+
+                    Intent intentHome = new Intent(context,HomeActivity.class);
+                    intentHome.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intentHome);
+
+                    //startActivity(new Intent(context, HomeActivity.class));
+
+                }
+
+
+//            } else {
+               // Toast.makeText(context, "Mobile number already exist.", Toast.LENGTH_SHORT).show();
+  //          }
+
+            // deletePaymentNpayTgAtIfTransfered();
+
+           // Helper.showCheckInternet(this);
+        }
+    }
+
+//        }
+
+
 }
+
+
+
+

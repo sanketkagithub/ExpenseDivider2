@@ -32,7 +32,7 @@
                 <TextView
                     android:id="@+id/tv_transaction"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/del_tran_title_back_ht"
+                    android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="serif"
@@ -40,7 +40,7 @@
                     android:paddingLeft="@dimen/bottom_iv_margin"
                     android:text="@string/transactions"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="@dimen/lv_text" />
+                    android:textSize="@dimen/but_text" />
 
                 <Button
                     android:id="@+id/but_delete_payment"
@@ -49,7 +49,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
-                    android:textSize="@dimen/del_all_but_text"
+                    android:textSize="@dimen/but_text"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
                     android:text="@string/delete_all"
                     android:fontFamily="serif"
@@ -68,13 +68,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white_color"
-            android:gravity="center"
-            android:paddingBottom="@dimen/pb_paymnt_lv0">
+            android:gravity="center">
 
             <ListView
                 android:id="@+id/lv_payments"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/lv_ht_paymnt"
+                android:layout_height="match_parent"
                 android:divider="@color/lv_divider"
                 android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="@dimen/scrollbar"
@@ -109,7 +108,7 @@
                 <TextView
                     android:id="@+id/tv_each_paid"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/del_tran_title_back_ht"
+                    android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="serif"
@@ -117,7 +116,7 @@
                     android:paddingLeft="@dimen/bottom_iv_margin"
                     android:text="@string/each_paid"
                     android:textColor="@color/main_app_colorp"
-                    android:textSize="@dimen/lv_text" />
+                    android:textSize="@dimen/but_text" />
 
                 <Button
                     android:id="@+id/but_transfer_money"
@@ -126,7 +125,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/bottom_iv_margin"
-                    android:textSize="@dimen/del_all_but_text"
+                    android:textSize="@dimen/but_text"
                     android:layout_marginRight="@dimen/bottom_iv_margin"
                     android:text="@string/transfer"
                     android:fontFamily="serif"
@@ -150,7 +149,7 @@
             <ListView
                 android:id="@+id/lv_take_give"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/lv_ht_paymnt"
+                android:layout_height="match_parent"
                 android:divider="@color/lv_divider"
                 android:dividerHeight="@dimen/lv_div_ht"
                 android:scrollbarSize="@dimen/scrollbar"

@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.busyprojects.roomies.roomyActivities.TransferActivity">
 
- <LinearLayout
-     android:layout_width="match_parent"
-       android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/rel_iv_roomy_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="@dimen/history_title"
             android:background="@color/main_app_colorp"
             android:gravity="center">
 

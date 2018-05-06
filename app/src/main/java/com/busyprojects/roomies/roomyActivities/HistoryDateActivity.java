@@ -77,7 +77,7 @@ public class HistoryDateActivity extends Activity {
         int deletePayment =  sp.getInt(SessionManager.IV_DELETE,R.drawable.delete_payment);
 
         tv_history_date.setBackgroundColor(Color.parseColor(appColor));
-        but_delete_payment.setBackgroundColor(Color.parseColor(appColor));
+       // but_delete_payment.setBackgroundColor(Color.parseColor(appColor));
     }
 
 

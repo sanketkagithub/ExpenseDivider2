@@ -110,7 +110,7 @@
                 <ImageView
                     android:layout_width="@dimen/et_left_image"
                     android:layout_height="@dimen/et_left_image"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/profile" />
 
             </RelativeLayout>
 

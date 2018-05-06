@@ -88,6 +88,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
             viewHolder = new ViewHolderTgAt();
 
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert li != null;
             convertView = li.inflate(R.layout.row_take_give_payment_at, parent, false);
             viewHolder.tv_roomy_name = convertView.findViewById(R.id.tv_roomy_name_gt);
             viewHolder.tv_roomy_amount = convertView.findViewById(R.id.tv_roomy_amount_gt);
@@ -264,6 +265,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
 
         Button but_transferMoney = v.findViewById(R.id.but_transferMoney);
+        but_transferMoney.setBackgroundColor(Color.parseColor(appColor));
 
 
         but_transferMoney.setOnClickListener(new View.OnClickListener() {
@@ -272,6 +274,7 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
                 // TODO: 2/25/2018 final transfer
 
+                allowToast = true;
 
                 //animationManager.animateButton(view,context);
 
@@ -417,26 +420,6 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
 
     private void getFromToAmountVar(final String fromMobile, double amountToTransfer, final String toMobile) {
 
-//        // TODO: 2/3/2018 save from  (add)
-//
-//        long updateAmountVarFrom = amountFrom + amountTransferL;
-//
-//        db_ref.child(Helper.EACH_TOTAL_PAMENT)
-//                .child(mobileLogged)
-//                .child(String.valueOf(possitionFrom))
-//                .child(Helper.AMOUNT_VARIATION)
-//                .setValue(updateAmountVarFrom);
-//
-//        // TODO: 2/3/2018 save to  to  (sub)
-//
-//        long updateAmountVarTo = amountTo - amountTransferL;
-//
-//        db_ref.child(Helper.EACH_TOTAL_PAMENT)
-//                .child(mobileLogged)
-//                .child(String.valueOf(possitionFrom))
-//                .child(Helper.AMOUNT_VARIATION)
-//                .setValue(updateAmountVarTo);
-//
 //
         System.out.println("fromMobile " + fromMobile + " \n " +
                 "toMobile " + toMobile + "\n" +
@@ -572,12 +555,21 @@ public class PaymentTakeGiveListAtAdapter extends ArrayAdapter {
                    Activity a =  (Activity) context;
             a.finish();
 
-            Toast.makeText(context, "Amount Transfered Successfully", Toast.LENGTH_SHORT).show();
+
+            if (allowToast) {
+                Toast.makeText(context, "Amount Transfered Successfully", Toast.LENGTH_SHORT).show();
+
+                allowToast = false;
+            }
+
 
         } else {
             Toast.makeText(context, "Please Select One Roomy", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    boolean allowToast;
 
 
     void setIsTransfer(boolean isTransfer)

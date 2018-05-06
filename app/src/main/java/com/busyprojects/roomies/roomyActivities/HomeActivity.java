@@ -270,24 +270,27 @@ public class HomeActivity extends Activity {
 
 
     void removeViewedPaymentNotification()
-    {  if (CheckInternetReceiver.isOnline(this)) {
-        // TODO: 3/1/2018 remove notification data
-        db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                .child(loggedRoomyMobile)
-                .child(Helper.PAYMENT_LIST)
-                .removeValue();
+    {
+
+        try {
+            // TODO: 3/1/2018 remove notification data
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .child(loggedRoomyMobile)
+                    .child(Helper.PAYMENT_LIST)
+                    .removeValue();
 
 
-        SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
+            SharedPreferences spuc = getSharedPreferences(SessionManager.FILE_UC, MODE_PRIVATE);
 
-        spe = spuc.edit();
-        spe.putInt(SessionManager.PNID_LIST, 0);
+            spe = spuc.edit();
+            spe.putInt(SessionManager.PNID_LIST, 0);
 
-        spe.apply();
+            spe.apply();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-    } else {
-        Helper.showCheckInternet(context);
-    }
     }
 
 

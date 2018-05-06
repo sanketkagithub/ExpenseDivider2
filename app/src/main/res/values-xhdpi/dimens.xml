@@ -2,7 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
 
 
-    <dimen name="button_ht">30dp</dimen>
+    <dimen name="button_ht">28dp</dimen>
     <dimen name="but_w">200dp</dimen>
     <dimen name="date">10sp</dimen>
     <dimen name="cursor_width">1dp</dimen>
@@ -41,7 +41,7 @@
     <dimen name="call_button_wh">40dp</dimen>
     <dimen name="lv_tg_iv">35dp</dimen>
     <dimen name="del_alert_wd">300dp</dimen>
-    <dimen name="del_alert_ht">100dp</dimen>
+    <dimen name="del_alert_ht">120dp</dimen>
     <dimen name="profile_lv">19dp</dimen>
     <dimen name="roomy_lv_lef_padd">13dp</dimen>
     <dimen name="prof_pad">9dp</dimen>
@@ -61,7 +61,7 @@
     <dimen name="pad_name_b">5dp</dimen>
     <dimen name="lr_margin_top_two_iv">10dp</dimen>
     <dimen name="top_margin_top_two_iv">10dp</dimen>
-    <dimen name="tv_logged_roomy_name">10sp</dimen>
+    <dimen name="tv_logged_roomy_name">14sp</dimen>
     <dimen name="iv_home_room">100dp</dimen>
     <dimen name="home_room_text">10sp</dimen>
     <dimen name="ed_home_iv">8dp</dimen>
@@ -113,4 +113,6 @@
     <dimen name="et_icon_rel_pad">5dp</dimen>
     <dimen name="et_text_rel_pad">9dp</dimen>
     <dimen name="sel_roomy_spin_left_right_padding">10dp</dimen>
+    <dimen name="spin_text_ht">30dp</dimen>
+    <dimen name="select_payee_spin_txt_mr">5dp</dimen>
 </resources>

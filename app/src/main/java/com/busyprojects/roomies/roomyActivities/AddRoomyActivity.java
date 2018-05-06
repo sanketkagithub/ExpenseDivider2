@@ -61,7 +61,7 @@ public class AddRoomyActivity extends Activity {
     Runnable runnable;
     TinyDb tinyDb;
 
-    ArrayList<String> roomyMobList ;
+    ArrayList<String> roomyMobList;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -74,7 +74,7 @@ public class AddRoomyActivity extends Activity {
         Button but_back = findViewById(R.id.but_back);
 
         tinyDb = new TinyDb(context);
- animationManager = AnimationManager.getInstance();
+        animationManager = AnimationManager.getInstance();
         //callContinuosCheckInternetToExitToHome();
 
         runnable = new Runnable() {
@@ -138,96 +138,12 @@ public class AddRoomyActivity extends Activity {
 
     }
 
-  /*  void deletePaymentNpayTgAtIfTransfered() {
 
+    boolean isRoomyMobileExist(String roomyMobile) {
 
-        // TODO: 2/5/2018 delete current Payment
-
-        dialogEffect.showDialog();
-        db_ref.child(Helper.PAYMENT).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                try {
-
-
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
-
-                        Payment payment = dataSnapshot1.getValue(Payment.class);
-
-                        if (payment.getMobileLogged().equals(mobileLogged)) {
-
-                            db_ref.child(Helper.PAYMENT)
-                                    .child(payment.getPid())
-                                    .removeValue();
-
-                        }
-
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        db_ref.child(Helper.AFTER_TRANSFER).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                dialogEffect.cancelDialog();
-                try {
-
-
-                    for (DataSnapshot dataSnapshot1 :
-                            dataSnapshot.getChildren()) {
-
-                        PayTg payTg = dataSnapshot1.getValue(PayTg.class);
-
-                        if (payTg.getMobileLogged().equals(mobileLogged)) {
-                            db_ref.child(Helper.AFTER_TRANSFER)
-                                    .child(payTg.getPayTgId())
-                                    .removeValue();
-
-                        }
-
-
-                    }
-
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        db_ref.child(Helper.IS_TRANSFER).child(mobileLogged).setValue(false);
-
-        Toast.makeText(context, "Data Cleared Successfully", Toast.LENGTH_SHORT).show();
-
+        return roomyMobList.contains(roomyMobile);
 
     }
-*/
-
-  boolean isRoomyMobileExist(String roomyMobile)
-  {
-
-      return  roomyMobList.contains(roomyMobile);
-
-  }
 
     void saveRoommate() {
 
@@ -276,8 +192,7 @@ public class AddRoomyActivity extends Activity {
                         et_name.setText("");
                         onBackPressed();
                     }
-                }else
-                {
+                } else {
                     Toast.makeText(context, "Mobile Already Exist" +
                             "", Toast.LENGTH_SHORT).show();
                 }
@@ -361,8 +276,7 @@ public class AddRoomyActivity extends Activity {
 
             try {
                 dialodDeleteTranserAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             View v = LayoutInflater.from(context).inflate(R.layout.delete_transfer_add_alert, null);

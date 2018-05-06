@@ -22,6 +22,16 @@
         android:text="@string/history"
         android:textColor="@color/white_color" />
 
+    <Button
+        android:id="@+id/but_delete_payment"
+        android:layout_width="@dimen/delete_all_ht"
+        android:layout_height="@dimen/delete_all_ht"
+        android:background="@drawable/delete_all"
+        android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
+        android:layout_marginTop="@dimen/lr_margin_top_two_iv"
+        android:layout_alignParentLeft="true"
+        android:onClick="deleteHistoryList"
+        android:layout_marginStart="@dimen/lr_margin_top_two_iv"/>
 
 
     <RelativeLayout
@@ -40,18 +50,13 @@
         </ListView>
         <ImageView
             android:id="@+id/iv_no_history_record_found"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/no_rec_lv"
+            android:layout_height="@dimen/no_rec_lv"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/no_record"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:src="@drawable/no_record" />
 
 
-        <Button
+       <!-- <Button
             android:id="@+id/but_delete_payment"
             android:layout_width="@dimen/delete_all_wid"
             android:layout_height="@dimen/delete_all_ht"
@@ -68,7 +73,7 @@
             android:textAllCaps="false"
             android:textSize="@dimen/lv_text"
             android:textColor="@color/white_color" />
-
+-->
 
     </RelativeLayout>
 

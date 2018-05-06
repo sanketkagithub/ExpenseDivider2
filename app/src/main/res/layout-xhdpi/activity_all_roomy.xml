@@ -21,13 +21,24 @@
         android:textColor="@color/white_color" />
 
 
-    <RelativeLayout
-        android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+    <Button
+        android:id="@+id/but_delete_all_roomy"
+        android:layout_width="@dimen/delete_all_ht"
+        android:layout_height="@dimen/delete_all_ht"
+        android:layout_marginLeft="@dimen/lr_margin_top_two_iv"
         android:layout_marginTop="@dimen/lr_margin_top_two_iv"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="showRoomyDeleteListAlert"
+        android:background="@drawable/delete_all"
+        android:layout_marginStart="@dimen/lr_margin_top_two_iv"/>
+
+    <RelativeLayout
         android:id="@+id/iv_notification"
         android:layout_width="@dimen/bell"
         android:layout_height="@dimen/bell"
+        android:layout_marginRight="@dimen/lr_margin_top_two_iv"
+        android:layout_marginTop="@dimen/lr_margin_top_two_iv"
+        android:layout_alignParentRight="true"
         android:background="@drawable/total_roomy"
         android:layout_marginEnd="@dimen/lr_margin_top_two_iv">
 
@@ -42,6 +53,8 @@
             android:text="00"
             android:textColor="@color/white_color"
             android:textSize="@dimen/bell_text" />
+
+
     </RelativeLayout>
 
 
@@ -72,23 +85,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <Button
-            android:id="@+id/but_delete_all_roomy"
-            android:layout_width="@dimen/delete_all_wid"
-            android:layout_height="@dimen/delete_all_ht"
-            android:fontFamily="serif"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/bottom_iv_margin"
-            android:layout_marginLeft="@dimen/bottom_iv_margin"
-            android:text="@string/delete_all"
-            android:background="@drawable/buttons"
-            android:gravity="center"
-            android:textSize="@dimen/lv_text"
-            android:layout_marginBottom="@dimen/bottom_iv_margin"
-            android:onClick="showRoomyDeleteListAlert"
-            android:textAllCaps="false"
-            android:textColor="@color/white_color" />
 
     </RelativeLayout>
 

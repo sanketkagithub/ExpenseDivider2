@@ -49,6 +49,7 @@
             android:layout_marginRight="@dimen/yes_right_mr"
             android:textAllCaps="false"/>
         <Button
+            android:id="@+id/but_no_del_all_roomy"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/del_but_ht"
             android:textSize="@dimen/et_text"

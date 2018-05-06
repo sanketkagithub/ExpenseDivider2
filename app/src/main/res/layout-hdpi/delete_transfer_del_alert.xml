@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/whiite_del_back"
+        android:layout_width="@dimen/del_alert_wd"
+        android:layout_height="@dimen/del_alert_ht"
+    android:background="@drawable/whiite_del_back"
         android:gravity="center"
         android:orientation="vertical">
 
