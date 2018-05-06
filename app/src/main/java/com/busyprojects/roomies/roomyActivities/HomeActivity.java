@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.busyprojects.roomies.R;
 import com.busyprojects.roomies.helper.AnimationManager;
@@ -38,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HomeActivity extends Activity {
@@ -50,7 +52,7 @@ public class HomeActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor spe;
 
-    TextView tv_login_message, tv_notification_count,tv_loggedRoomyName,tv_loggedRoomyMobile;
+    TextView tv_login_message, tv_notification_count, tv_loggedRoomyName, tv_loggedRoomyMobile;
     RelativeLayout iv_notification;
     AnimationManager animationManager = null;
 
@@ -62,7 +64,7 @@ public class HomeActivity extends Activity {
 
 
     String loggedRoomyMobile;
-    String mobileLogged, macAdd,loggedRoomyNameToShow;
+    String mobileLogged, macAdd, loggedRoomyNameToShow;
 
     RelativeLayout rel_iv_roomy_home;
     Button but_add_roomy;
@@ -99,7 +101,7 @@ public class HomeActivity extends Activity {
 
         //set items map
         payingItems = PayingItems.getInstance();
-  try {
+        try {
             iv_notification.setVisibility(View.GONE);
             tv_notification_count.setVisibility(View.GONE);
 
@@ -130,7 +132,7 @@ public class HomeActivity extends Activity {
         loggedRoomyNameToShow = Helper.getRoomyNameFromSession(context);
 
         tv_login_message.setText(mobileLogged);
-       // tv_login_message.setTextColor(Color.parseColor(appColor));
+        // tv_login_message.setTextColor(Color.parseColor(appColor));
 
         //  rel_iv_roomy_home.setBackgroundColor(Color.parseColor("#F5F1F1"));
 
@@ -187,8 +189,8 @@ public class HomeActivity extends Activity {
 
                         assert roomy != null;
                         if (mobileLogged.equals(roomy.getMobileLogged())) {
-                                roomysList.add(roomy.getName());
-                           }
+                            roomysList.add(roomy.getName());
+                        }
 
                     }
 
@@ -268,9 +270,7 @@ public class HomeActivity extends Activity {
     }
 
 
-
-    void removeViewedPaymentNotification()
-    {
+    void removeViewedPaymentNotification() {
 
         try {
             // TODO: 3/1/2018 remove notification data
@@ -286,21 +286,149 @@ public class HomeActivity extends Activity {
             spe.putInt(SessionManager.PNID_LIST, 0);
 
             spe.apply();
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBackPressed() {
 
-        finishAffinity();
+
+        counter = counter+1;
+//        if (isdoublePressed()) {
+//            finishAffinity();
+//        }
+
+        checkdoubleTapNexit();
     }
+
+    int counter;
+
+    boolean isdoubleTapped() {
+
+        Toast.makeText(context, "" + counter, Toast.LENGTH_SHORT).show();
+        if (counter >= 2) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    long timeInterval = 2000;
+
+
+
+    long firsttapTime,secondTapTime;
+    boolean isdoublePressed()
+    {
+        if (counter==1)
+        {
+            firsttapTime = Calendar.getInstance().getTimeInMillis();
+
+        }else if (counter==2)
+        {
+            secondTapTime = Calendar.getInstance().getTimeInMillis();
+        }
+
+
+        long diff = secondTapTime - firsttapTime;
+
+        System.out.println(" st " +secondTapTime+ " ft " + firsttapTime + " diff " + diff);
+
+       // Toast.makeText(context, " st " +secondTapTime+ " ft " + firsttapTime + " diff " + diff, Toast.LENGTH_SHORT).show();
+        if (secondTapTime!=0 && diff<=timeInterval)
+        {
+            counter=0;
+            return  true;
+       }else {
+           // counter=0;
+           if (diff>=timeInterval) {
+               Toast.makeText(context, "press double to exit", Toast.LENGTH_SHORT).show();
+           }
+            return false;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    long diff;
+    void checkdoubleTapNexit()
+    {
+        if (counter==1)
+        {
+            firsttapTime = Calendar.getInstance().getTimeInMillis();
+
+            new Handler().postDelayed(new Runnable() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void run() {
+
+                    if (secondTapTime!=0)
+                    {
+                        if (diff<=2000)
+                        {
+                           // Toast.makeText(context, "exit", Toast.LENGTH_SHORT).show();
+
+                            try {
+                                finishAffinity();
+                            }catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                finish();
+                            }
+                        }
+                    }else
+                    {
+                        counter = 0;
+                        Toast.makeText(context, "double tap to exit", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            },500);
+
+
+        }else if (counter==2)
+        {
+            secondTapTime = Calendar.getInstance().getTimeInMillis();
+        }
+
+       diff = secondTapTime - firsttapTime;
+
+
+
+      /*  if (diff<=2000  && secondTapTime!=0)
+        {
+            counter =0;
+            Toast.makeText(context, "exit", Toast.LENGTH_SHORT).show();
+        }else
+        {
+         //   counter = 0;
+
+
+            Toast.makeText(context, "double tap to exit", Toast.LENGTH_SHORT).show();
+        }*/
+
+
+    }
+
+
+
+
+
+
 
 
     public void viewHistory(View view) {
@@ -331,8 +459,7 @@ public class HomeActivity extends Activity {
         View v = LayoutInflater.from(context).inflate(R.layout.change_color_layout, null);
         try {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         dialog.setContentView(v);
@@ -519,9 +646,9 @@ public class HomeActivity extends Activity {
                                 try {
                                     Payment payment = dataSnapshot1.getValue(Payment.class);
 
-                                  //  if (payment.getMobileLogged().equals(mobileLogged)) {
-                                        paymentListNotify.add(payment.getPid());
-                                  //  }
+                                    //  if (payment.getMobileLogged().equals(mobileLogged)) {
+                                    paymentListNotify.add(payment.getPid());
+                                    //  }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -654,12 +781,10 @@ public class HomeActivity extends Activity {
     public void viewRoomy(View view) {
         //animationManager.animateButton(view,context);
 
-        if (CheckInternetReceiver.isOnline(context))
-        {
-        startActivity(new Intent(this, AllRoomyActivity.class));
-    }else
-        {
-        Helper.showCheckInternet(context);
+        if (CheckInternetReceiver.isOnline(context)) {
+            startActivity(new Intent(this, AllRoomyActivity.class));
+        } else {
+            Helper.showCheckInternet(context);
         }
     }
 
