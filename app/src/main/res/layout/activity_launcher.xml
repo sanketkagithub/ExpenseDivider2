@@ -21,16 +21,15 @@
             android:layout_weight="1">
 
 
-            <TextView
+            <ImageView
+                android:padding="@dimen/ed_reg_log_pad"
                 android:id="@+id/tv_log_reg_title"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="serif"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/white_color"
-                android:textSize="@dimen/launcher_title" />
+                android:rotation="2.5"
+                android:src="@drawable/ed_main_home" />
 
 
         </RelativeLayout>

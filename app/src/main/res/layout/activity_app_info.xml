@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
+
+
+
+    <TextView
+        android:background="@color/main_app_colorp"
+        android:id="@+id/tv_app_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/history_title"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="@dimen/title"
+        android:fontFamily="serif"
+        android:text="@string/how_to_use"
+        android:textColor="@color/white_color" />
+
+
+    <ScrollView
+        android:layout_gravity="center"
+        android:layout_width="@dimen/app_info_text_wd"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_app_info"
+            android:layout_width="@dimen/app_info_text_wd"
+            android:layout_height="wrap_content"
+            android:text="@string/app_info"
+            android:fontFamily="serif"/>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
