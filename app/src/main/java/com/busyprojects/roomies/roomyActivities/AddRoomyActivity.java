@@ -98,7 +98,7 @@ public class AddRoomyActivity extends Activity {
         sp = getSharedPreferences(SessionManager.FILE_WTC, MODE_PRIVATE);
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
         roomyMobList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
-        Helper.setRemoteIstransfer(mobileLogged, false);
+        //Helper.setRemoteIstransfer(mobileLogged, false);
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
@@ -384,6 +384,7 @@ public class AddRoomyActivity extends Activity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         dialogEffect.cancelDialog();
 
                         try {

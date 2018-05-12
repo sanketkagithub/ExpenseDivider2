@@ -57,18 +57,24 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".roomyActivities.AppInfoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".roomyActivities.LoginActivity" />
-        <activity android:name=".roomyActivities.RegistrationActivity" />
-        <activity android:name=".roomyActivities.RoomRegistrationActivity" />
-        <activity android:name=".roomyActivities.RoomLoginActivity" />
+        <activity android:name=".roomyActivities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".roomyActivities.RegistrationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".roomyActivities.RoomRegistrationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".roomyActivities.RoomLoginActivity"
+            android:screenOrientation="portrait"/>
 
-        <receiver android:name=".helper.CheckInternetReceiver">
+   <!--     <receiver android:name=".helper.CheckInternetReceiver">
             <intent-filter>
 
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 
             </intent-filter>
         </receiver>
+   -->
+
     </application>
 
 </manifest>

@@ -59,6 +59,7 @@ public class DialogEffect {
 
 
     public void cancelDialog() {
+        if (dialog!=null)
         dialog.dismiss();
     }
 

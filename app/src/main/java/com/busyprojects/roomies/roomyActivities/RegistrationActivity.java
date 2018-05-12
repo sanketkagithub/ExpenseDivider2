@@ -238,24 +238,8 @@ public class RegistrationActivity extends Activity {
                 @Override
                 public void onClick(View v) {
 
-
+                    dialodDeleteTranserAlert.dismiss();
                     deleteAfterExistingTransfer(roomy);
-                    // TODO: 2/25/2018 reset transfer session
-                    spe = sp.edit();
-                    spe.putBoolean(SessionManager.IS_TRANSFER, false);
-                    spe.apply();
-                    Helper.setRemoteIstransfer(roomy.getMobileLogged(), false);
-
-
-                    // TODO: 3/31/2018 then as usual save roomy
-                    db_ref.child(Helper.ROOMY).child(roomy.getRid())
-                            .setValue(roomy);
-
-                    ToastManager.showToast(context, Helper.REGISTERD);
-
-                    Toast.makeText(context, "Transfered payments are Deleted  and new roomy is saved", Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(context, HomeActivity.class));
 
                     // et_mobile.setText("");
                     // et_name.setText("");
@@ -287,6 +271,7 @@ public class RegistrationActivity extends Activity {
 
     void deleteAfterExistingTransfer(final Roomy roomy) {
 
+        dialogEffect = new DialogEffect(context);
         if (CheckInternetReceiver.isOnline(this)) {
 
             dialogEffect.showDialog();
@@ -314,6 +299,38 @@ public class RegistrationActivity extends Activity {
 
 
                         }
+
+
+
+
+
+
+
+
+
+
+                        // TODO: 2/25/2018 reset transfer session
+                        spe = sp.edit();
+                        spe.putBoolean(SessionManager.IS_TRANSFER, false);
+                        spe.apply();
+                        Helper.setRemoteIstransfer(roomy.getMobileLogged(), false);
+
+
+                        // TODO: 3/31/2018 then as usual save roomy
+                        db_ref.child(Helper.ROOMY).child(roomy.getRid())
+                                .setValue(roomy);
+
+                        ToastManager.showToast(context, Helper.REGISTERD);
+
+                        Toast.makeText(context, "Transfered payments are Deleted  and new roomy is saved", Toast.LENGTH_SHORT).show();
+                        Helper.setRoomyNameIsSession(context, roomy.getName());
+                        Helper.setRoomyMobileIsSession(context, roomy.getMobile());
+
+                        startActivity(new Intent(context, HomeActivity.class));
+
+
+
+
 
                     } catch (Exception e) {
                         spe = sp.edit();
@@ -369,7 +386,8 @@ public class RegistrationActivity extends Activity {
     void registerUniqueRoomy(String roomyName, String roomyMobile)
     {
         if (roomyMobList.contains(roomyMobile)) {
-            Toast.makeText(context, roomyMobile + " already exist.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Roommate with mobile no "+roomyMobile +
+                    " already exist in Room no " + roomNoInSession, Toast.LENGTH_SHORT).show();
         } else {
     //        if (CheckInternetReceiver.isOnline(this)) {
                 String rid = Helper.randomString(10);

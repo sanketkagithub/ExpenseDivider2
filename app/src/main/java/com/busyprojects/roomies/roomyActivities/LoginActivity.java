@@ -130,7 +130,7 @@ public class LoginActivity extends Activity {
     void validateRoomyMobile(final String roomyMobileIp) {
 
         db_ref.child(Helper.ROOMY)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

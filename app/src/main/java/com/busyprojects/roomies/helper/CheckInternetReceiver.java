@@ -11,13 +11,14 @@ import android.net.NetworkInfo;
  * Created by sanket on 3/10/2018.
  */
 
-public class CheckInternetReceiver extends BroadcastReceiver
+public class CheckInternetReceiver
 {
 
 
 
  public static  boolean isInternet;
 
+/*
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -47,6 +48,7 @@ public class CheckInternetReceiver extends BroadcastReceiver
 
 
     }
+*/
 
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -27,6 +27,8 @@ import com.busyprojects.roomies.helper.TinyDb;
 import com.busyprojects.roomies.pojos.master.PayTg;
 import com.busyprojects.roomies.pojos.master.Roomy;
 import com.busyprojects.roomies.pojos.transaction.Payment;
+import com.busyprojects.roomies.roomyActivities.LoginActivity;
+import com.busyprojects.roomies.roomyActivities.RegisterLoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +54,8 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
     Helper helper;
 
-    String appColor;
+    String appColor,loggedRoomyMobile;
+
 
     TinyDb tinyDb;
     ArrayList<String> payingroomyMobList;
@@ -73,6 +76,8 @@ public class AllRoomyListAdapter extends ArrayAdapter {
        payingroomyMobList = tinyDb.getListString(SessionManager.PAYING_ROOMY_LIST);
 
         mobileLogged = sp.getString(SessionManager.MOBILE, "");
+       loggedRoomyMobile = Helper.getRoomyMobileFromSession(context);
+
         isTransfer = sp.getBoolean(SessionManager.IS_TRANSFER, false);
         appColor = sp.getString(SessionManager.APP_COLOR, SessionManager.DEFAULT_APP_COLOR);
 
@@ -125,26 +130,16 @@ public class AllRoomyListAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
 
-          /*   Intent intentEditRoomy = new Intent(context, Delea.class);
 
-           SharedPreferences.Editor spe = sp.edit();
-             spe.putString(SessionManager.SELECT_ROOMY_TO_EDIT,roomyList.get(position).getName());
-             spe.putString(SessionManager.SELECT_MOBILE_TO_EDIT,roomyList.get(position).getMobile());
-             spe.putString(SessionManager.SELECT_RID_TO_EDIT,roomyList.get(position).getRid());
-             spe.apply();
-
-             intentEditRoomy.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-             context.startActivity(intentEditRoomy);
-*/
-
-                showSelectedRoomyDeleteRoomyAlert(roomyList.get(position));
-
+                    showSelectedRoomyDeleteRoomyAlert(roomyList.get(position));
             }
         });
 
 
         return convertView;
     }
+
+
 
 
     class ViewHolderTg {
@@ -174,19 +169,10 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
 
                     if (payingroomyMobList.contains(roomy.getMobile()) ) {
-
-
-                        showTransactionsDeleteAlert(roomy.getRid(),roomy.getName());
-
+                        showAllTransactionsDeleteAlert(roomy);
                      }else if (isTransfer)
                     {
-
-
                         showAfterTransfersDeleteAlert(roomy);
-
-
-
-
                     }
                      else
                     {
@@ -205,7 +191,10 @@ public class AllRoomyListAdapter extends ArrayAdapter {
                         // TODO: 3/25/2018 reset isTransfer
 
                         resetIsTransfer();
-
+                        if (isDeletingMySelf(roomy))
+                        {
+                            exitRoomy();
+                        }
                     }
 
 
@@ -331,9 +320,12 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
 
 
+boolean isDeletingMySelf(Roomy roomy)
+{
+    return  roomy.getMobile().equals(loggedRoomyMobile);
+}
 
-
-    public void showTransactionsDeleteAlert(final String rId, final String roomyName) {
+    public void showAllTransactionsDeleteAlert(final Roomy roomy) {
 
         if (CheckInternetReceiver.isOnline(context)) {
             //animationManager.animateViewForEmptyField();
@@ -350,7 +342,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
                     // TODO: 3/24/2018 delete selected roomy
                     db_ref.child(Helper.ROOMY)
-                            .child(rId)
+                            .child(roomy.getRid())
                             .removeValue();
 
                     if (roomyList.size()==1) {
@@ -361,7 +353,8 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
 
                     deletePaymentNpayTgAtIfTransfered();
-                     Toast.makeText(context, "Roomy " + roomyName + " deleted ", Toast.LENGTH_SHORT).show();
+
+                     Toast.makeText(context, "Roomy " + roomy.getName() + " deleted ", Toast.LENGTH_SHORT).show();
 
 
 
@@ -376,6 +369,11 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
                     dialodDeleteTranserAlert.dismiss();
                     dialogDeleteSelectedRoomyAlert.dismiss();
+
+                    if (isDeletingMySelf(roomy))
+                    {
+                        exitRoomy();
+                    }
 
                 }
             });
@@ -415,6 +413,7 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
     void deleteAfterExistingTransfer() {
 
+        dialogEffect = new DialogEffect(context);
         if (CheckInternetReceiver.isOnline(context)) {
 
             dialogEffect.showDialog();
@@ -500,6 +499,12 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
                     Toast.makeText(context, "Roomy " + roomy.getName() + " deleted ", Toast.LENGTH_SHORT).show();
 
+                    if (isDeletingMySelf(roomy))
+                    {
+                        exitRoomy();
+                    }
+
+
                 }
             });
 
@@ -523,6 +528,12 @@ public class AllRoomyListAdapter extends ArrayAdapter {
 
         }
     }
+
+void  exitRoomy()
+{Intent  intentExit = new Intent(context, RegisterLoginActivity.class);
+intentExit.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    context.startActivity(intentExit);
+}
 
 }
 
