@@ -49,7 +49,7 @@ public class RegisterLoginActivity extends Activity {
 
     RuntimePermissionsCs runtimePermissionsCs;
     // boolean CheckInternetReceiver.isOnline(this);
-    RelativeLayout rel_login_reg, rel_login, rel_register;
+   // RelativeLayout rel_login_reg, rel_login, rel_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +69,9 @@ public class RegisterLoginActivity extends Activity {
         //tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
         animationManager = AnimationManager.getInstance();
 
-        rel_login_reg = findViewById(R.id.rel_log_reg);
-        rel_login = findViewById(R.id.rel_login);
-        rel_register = findViewById(R.id.rel_register);
+//        rel_login_reg = findViewById(R.id.rel_log_reg);
+//        rel_login = findViewById(R.id.rel_login);
+//        rel_register = findViewById(R.id.rel_register);
 
 
         if (Build.VERSION.SDK_INT >= 23) {

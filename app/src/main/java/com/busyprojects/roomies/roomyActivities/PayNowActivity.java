@@ -286,12 +286,12 @@ PayNowActivity extends Activity {
 
                 if (amount.equals("")) {
                     animationManager.animateViewForEmptyField(ll_paying_amount, context);
-                       et_amount.setText("");
+                    et_amount.setText("");
                 }
 
                 if (payingItem.equals("")) {
                     animationManager.animateViewForEmptyField(ll_paying_item, context);
-                         et_paying_item.setText("");
+                    et_paying_item.setText("");
                 }
 
                 ToastManager.showToast(context, Helper.EMPTY_FIELD);
@@ -300,69 +300,17 @@ PayNowActivity extends Activity {
             } else {
 
                 // TODO: 3/31/2018 payAsync
-                new PayAsyncTask().execute();
 
-               /* String pid = Helper.randomString(10);
-                // TODO: 1/27/2018 save payment;
-
-                String currentDateTime = Helper.getCurrentDateTime();
-
-                Payment payment = new Payment();
-                double amtRf =  helper.getRoundedOffValue(Double.parseDouble(amount)) ;
-                payment.setAmount(amtRf);
-                payment.setPaymentDateTime(currentDateTime);
-                payment.setPid(pid);
-                payment.setMobileLogged(mobileLogged);
-                payment.setRoomy(roomySelected);
-
-                if (payingItemImageUrl == null)
-                {
-
-                    payingItemImageUrl  = defaultImageUrl;
+                if (dialogEffect==null) {
+                    dialogEffect = new DialogEffect(context);
                 }
-                payment.setPayinItemUrl(payingItemImageUrl);
+                dialogEffect.showDialog();
+                payNow();
 
-                payment.setPayingItem(payingItem);
-
-
-                db_ref.child(Helper.PAYMENT)
-                        .child(pid)
-                        .setValue(payment);
-
+                dialogEffect.cancelDialog();
                 Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
 
-                payingItemImageUrl="";
-
-                TinyDb tinyDb = new TinyDb(context);
-                ArrayList<String> macAddList = tinyDb.getListString(SessionManager.MAC_ADD_LIST);
-                ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
-
-                for (int i = 0; i < macAddList.size(); i++) {
-
-
-                    // TODO: 1/27/2018 save payment notification;
-                    db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                            .child(macAddList.get(i))
-                            .child(Helper.PAYMENT_LIST)
-                            .child(pid)
-                            .setValue(payment);
-
-
-                }
-
-
-                // TODO: 2/18/2018   change------
-                try {
-
-
-                    updateAfterTransfer();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-// TODO: 2/18/2018 do alllllllllllll below
-
                 onBackPressed();
-*/
             }
         } else {
             Helper.showCheckInternet(this);
@@ -677,8 +625,7 @@ PayNowActivity extends Activity {
         try {
 
             payingItemsLinkedList.clear();
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         if (charText.length() == 0) {
@@ -695,97 +642,65 @@ PayNowActivity extends Activity {
     }
 
 
-    class PayAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
 
-            dialogEffect.showDialog();
+    void payNow()
+    {
+        String pid = Helper.randomString(10);
+        // TODO: 1/27/2018 save payment;
 
-          /*  dialogEffect = new DialogEffect(context);
-            dialogEffect.showDialog();
-*/
+        String currentDateTime = Helper.getCurrentDateTime();
+
+        Payment payment = new Payment();
+        double amtRf = helper.getRoundedOffValue(Double.parseDouble(amount));
+        payment.setAmount(amtRf);
+        payment.setPaymentDateTime(currentDateTime);
+        payment.setPid(pid);
+        payment.setMobileLogged(mobileLogged);
+        payment.setRoomy(roomySelected);
+
+        if (payingItemImageUrl == null) {
+
+            payingItemImageUrl = defaultImageUrl;
         }
+        payment.setPayinItemUrl(payingItemImageUrl);
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-            String pid = Helper.randomString(10);
-            // TODO: 1/27/2018 save payment;
-
-            String currentDateTime = Helper.getCurrentDateTime();
-
-            Payment payment = new Payment();
-            double amtRf = helper.getRoundedOffValue(Double.parseDouble(amount));
-            payment.setAmount(amtRf);
-            payment.setPaymentDateTime(currentDateTime);
-            payment.setPid(pid);
-            payment.setMobileLogged(mobileLogged);
-            payment.setRoomy(roomySelected);
-
-            if (payingItemImageUrl == null) {
-
-                payingItemImageUrl = defaultImageUrl;
-            }
-            payment.setPayinItemUrl(payingItemImageUrl);
-
-            payment.setPayingItem(payingItem);
+        payment.setPayingItem(payingItem);
 
 
-            db_ref.child(Helper.PAYMENT)
+        db_ref.child(Helper.PAYMENT)
+                .child(pid)
+                .setValue(payment);
+
+
+        payingItemImageUrl = "";
+
+        TinyDb tinyDb = new TinyDb(context);
+        ArrayList<String> roomyMobileList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
+        ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
+
+        for (int i = 0; i < roomyMobileList.size(); i++) {
+
+
+            // TODO: 1/27/2018 save payment notification;
+            db_ref.child(Helper.PAYMENT_NOTIFICATION)
+                    .child(roomyMobileList.get(i))
+                    .child(Helper.PAYMENT_LIST)
                     .child(pid)
                     .setValue(payment);
 
 
-            payingItemImageUrl = "";
-
-            TinyDb tinyDb = new TinyDb(context);
-            ArrayList<String> roomyMobileList = tinyDb.getListString(SessionManager.ROOMY_MOBILE_LIST);
-            ArrayList<String> pnIdList = tinyDb.getListString(SessionManager.PNID_LIST);
-
-            for (int i = 0; i < roomyMobileList.size(); i++) {
-
-
-                // TODO: 1/27/2018 save payment notification;
-                db_ref.child(Helper.PAYMENT_NOTIFICATION)
-                        .child(roomyMobileList.get(i))
-                        .child(Helper.PAYMENT_LIST)
-                        .child(pid)
-                        .setValue(payment);
-
-
-            }
-
-
-            // TODO: 2/18/2018   change------
-            try {
-
-
-                updateAfterTransfer();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-// TODO: 2/18/2
-            return null;
-
-
         }
 
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-             dialogEffect.cancelDialog();
-            Toast.makeText(context, "Payment done successfully", Toast.LENGTH_SHORT).show();
-
-            onBackPressed();
+        // TODO: 2/18/2018   change------
+        try {
+            updateAfterTransfer();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
     }
+
+
 
 }

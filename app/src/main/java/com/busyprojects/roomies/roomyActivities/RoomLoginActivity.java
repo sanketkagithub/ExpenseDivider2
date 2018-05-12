@@ -41,7 +41,7 @@ public class RoomLoginActivity extends Activity {
 
     SharedPreferences sp;
 
-    RelativeLayout rel_login_reg, rel_login, rel_register;
+    //RelativeLayout rel_login_reg, rel_login, rel_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +59,9 @@ public class RoomLoginActivity extends Activity {
 
         tv_log_reg_title = findViewById(R.id.tv_log_reg_title);
 
-        rel_login_reg = findViewById(R.id.rel_log_reg);
-        rel_login = findViewById(R.id.rel_login);
-        rel_register = findViewById(R.id.rel_register);
+//        rel_login_reg = findViewById(R.id.rel_log_reg);
+//        rel_login = findViewById(R.id.rel_login);
+//        rel_register = findViewById(R.id.rel_register);
 
 
 

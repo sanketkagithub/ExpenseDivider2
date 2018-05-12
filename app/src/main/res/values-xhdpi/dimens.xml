@@ -63,7 +63,7 @@
     <dimen name="top_margin_top_two_iv">10dp</dimen>
     <dimen name="tv_logged_roomy_name">14sp</dimen>
     <dimen name="iv_home_room">100dp</dimen>
-    <dimen name="home_room_text">10sp</dimen>
+    <dimen name="home_room_text">12sp</dimen>
     <dimen name="ed_home_iv">8dp</dimen>
     <dimen name="room_no_top_mar">35dp</dimen>
     <dimen name="room_no_tv_ht">15dp</dimen>
