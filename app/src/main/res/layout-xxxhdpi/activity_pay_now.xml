@@ -212,7 +212,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rel_cancel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pay_now_item_ht"
             android:layout_below="@id/rel_pay_roomy"

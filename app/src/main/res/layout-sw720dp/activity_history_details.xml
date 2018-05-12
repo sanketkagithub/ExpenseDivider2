@@ -128,7 +128,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rel_divide_payment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.3"

@@ -103,7 +103,6 @@
         android:gravity="center">
 
         <RelativeLayout
-            android:id="@+id/rel_home_room"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/iv_home_room"
             android:layout_centerHorizontal="true">
@@ -176,7 +175,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rel_add_roomy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -220,7 +218,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/rel_view_payment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -261,7 +258,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rel_view_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

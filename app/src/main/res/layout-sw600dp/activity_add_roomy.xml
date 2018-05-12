@@ -31,7 +31,6 @@
 
         <RelativeLayout
             android:visibility="visible"
-            android:id="@+id/rel_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -92,7 +91,6 @@
 
         <RelativeLayout
             android:visibility="visible"
-            android:id="@+id/rel_mobile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -150,7 +148,6 @@
 
         <RelativeLayout
             android:visibility="visible"
-            android:id="@+id/rel_save_roomy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -173,7 +170,6 @@
 
         <RelativeLayout
             android:visibility="visible"
-            android:id="@+id/rel_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
