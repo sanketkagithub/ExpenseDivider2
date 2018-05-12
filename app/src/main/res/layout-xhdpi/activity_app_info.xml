@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.busyprojects.roomies.roomyActivities.HistoryDateActivity">
+    tools:context="com.busyprojects.roomies.roomyActivities.AppInfoActivity">
 
 
 
@@ -22,15 +22,20 @@
         android:textColor="@color/white_color" />
 
 
-
-    <TextView
+    <ScrollView
         android:layout_gravity="center"
-        android:id="@+id/tv_app_info"
         android:layout_width="@dimen/app_info_text_wd"
-        android:layout_height="match_parent"
-        android:text="@string/app_info"
-        android:fontFamily="serif"/>
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tv_app_info"
+            android:layout_width="@dimen/app_info_text_wd"
+            android:layout_height="wrap_content"
+            android:text="@string/app_info"
+            android:fontFamily="serif"/>
+
+
+    </ScrollView>
 
 
 </LinearLayout>
