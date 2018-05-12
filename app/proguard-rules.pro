@@ -1,7 +1,7 @@
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
--dontwarn info.guardianproject.netcipher.**
+#-dontwarn info.guardianproject.netcipher.**
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 #-dontwarn sun.misc.Unsafe
@@ -13,7 +13,7 @@
 #-dontwarn javax.annotation.concurrent.GuardedBy
 #-dontwarn javax.annotation.concurrent.Immutable
 #-dontwarn javax.annotation.concurrent.ThreadSafe
-#-dontwarn javax.annotation.concurrent.NotThreadSafe
+-dontwarn com.squareup.okhttp.**
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
 # class:
